@@ -44,10 +44,11 @@
 */
 // tabsize: 4
 
+
 /* MCU frequency */
 #ifndef F_CPU
 // #define F_CPU 7372800
-#define F_CPU (7372800/2)
+#define F_CPU (7372800 / 2)
 #endif
 
 /* UART Baudrate */
@@ -62,7 +63,7 @@
 //#define UART_USE_SECOND
 
 /* Device-Type:
-   For AVRProg the BOOT-option is prefered 
+   For AVRProg the BOOT-option is preferred
    which is the "correct" value for a bootloader.
    avrdude may only detect the part-code for ISP */
 #define DEVTYPE     DEVTYPE_BOOT
@@ -86,7 +87,7 @@
  * Watchdog-reset is issued at exit 
  * define the timeout-value here (see avr-libc manual)
  */
-#define EXIT_WDT_TIME   WDTO_250MS
+#define EXIT_WDT_TIME	WDTO_250MS
 
 /*
  * Select startup-mode
@@ -104,7 +105,7 @@
  *   F_CPU in BOOTICEMODE must be 7372800 Hz to be compatible
  *   with the org. JTAGICE-Firmware
  * WAIT-mode waits 1 sec for the defined character if nothing 
- *    is recived then the user prog is started.
+ *    is received then the user prog is started.
  */
 #define START_SIMPLE
 //#define START_WAIT
@@ -125,7 +126,7 @@
 //#define ENABLEREADFUSELOCK
 
 /* enable/disable write of lock-bits
- * WARNING: lock-bits can not be reseted by bootloader (as far as I know)
+ * WARNING: lock-bits can not be reseted by the bootloader (as far as I know)
  * Only protection no unprotection, "chip erase" from bootloader only
  * clears the flash but does no real "chip erase" (this is not possible
  * with a bootloader as far as I know)
@@ -165,11 +166,17 @@
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
+#include <avr/sleep.h>
+#include <avr/delay.h>
 
 #include "chipdef.h"
 
 uint8_t gBuffer[SPM_PAGESIZE];
+
+
+/*
+ * @see http://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
+ */
 
 #if defined(BOOTLOADERHASNOVECTORS)
 #warning "This Bootloader does not link interrupt vectors - see makefile"
@@ -178,12 +185,94 @@ uint8_t gBuffer[SPM_PAGESIZE];
 void __vector_default(void) { ; }
 #endif
 
+/*
+
+	Address	Labels	Code 					Comments
+	0x0000			jmp RESET 				; Reset Handler
+	0x0002			jmp EXT_INT0 			; IRQ0 Handler
+	0x0004			jmp EXT_INT1 			; IRQ1 Handler
+	0x0006			jmp PCINT0 				; PCINT0 Handler
+	0x0008			jmp PCINT1 				; PCINT1 Handler
+	0x000A			jmp PCINT2 				; PCINT2 Handler
+	0x000C			jmp WDT 				; Watchdog Timer Handler
+	0x000E			jmp TIM2_COMPA 			; Timer2 Compare A Handler
+	0x0010			jmp TIM2_COMPB 			; Timer2 Compare B Handler
+	0x0012			jmp TIM2_OVF 			; Timer2 Overflow Handler
+	0x0014			jmp TIM1_CAPT 			; Timer1 Capture Handler
+	0x0016			jmp TIM1_COMPA 			; Timer1 Compare A Handler
+	0x0018			jmp TIM1_COMPB 			; Timer1 Compare B Handler
+	0x001A			jmp TIM1_OVF 			; Timer1 Overflow Handler
+	0x001C			jmp TIM0_COMPA 			; Timer0 Compare A Handler
+	0x001E			jmp TIM0_COMPB 			; Timer0 Compare B Handler
+	0x0020			jmp TIM0_OVF 			; Timer0 Overflow Handler
+	0x0022			jmp SPI_STC 			; SPI Transfer Complete Handler
+	0x0024			jmp USART_RXC 			; USART, RX Complete Handler
+	0x0026			jmp USART_UDRE 			; USART, UDR Empty Handler
+	0x0028			jmp USART_TXC 			; USART, TX Complete Handler
+	0x002A			jmp ADC 				; ADC Conversion Complete Handler
+	0x002C			jmp EE_RDY 				; EEPROM Ready Handler
+	0x002E			jmp ANA_COMP 			; Analog Comparator Handler
+	0x0030			jmp TWI 				; 2-wire Serial Interface Handler
+	0x0032			jmp SPM_RDY 			; Store Program Memory Ready Handler
+	;
+	0x0033	RESET:	ldi r16, high(RAMEND)	; Main program start
+	0x0034			out SPH,r16 			; Set Stack Pointer to top of RAM
+
+ */
+
+//EMPTY_INTERRUPT(INT0_vect);
+//EMPTY_INTERRUPT(INT1_vect);
+//EMPTY_INTERRUPT(PCINT0_vect);
+//EMPTY_INTERRUPT(PCINT1_vect);
+//EMPTY_INTERRUPT(PCINT2_vect);
+//EMPTY_INTERRUPT(WDT_vect);
+//EMPTY_INTERRUPT(TIMER2_COMPA_vect);
+//EMPTY_INTERRUPT(TIMER2_COMPB_vect);
+//EMPTY_INTERRUPT(TIMER2_OVF_vect);
+//EMPTY_INTERRUPT(TIMER1_CAPT_vect);
+//EMPTY_INTERRUPT(TIMER1_COMPA_vect);
+//EMPTY_INTERRUPT(TIMER1_COMPB_vect);
+//EMPTY_INTERRUPT(TIMER1_OVF_vect);
+//EMPTY_INTERRUPT(TIMER0_COMPA_vect);
+//EMPTY_INTERRUPT(TIMER0_COMPB_vect);
+//EMPTY_INTERRUPT(TIMER0_OVF_vect);
+//EMPTY_INTERRUPT(SPI_STC_vect);
+//EMPTY_INTERRUPT(USART_RX_vect);
+//EMPTY_INTERRUPT(USART_UDRE_vect);
+//EMPTY_INTERRUPT(USART_TX_vect);
+//ISR(USART_TX_vect, ISR_ALIASOF(USART_RX_vect));
+//EMPTY_INTERRUPT(ADC_vect);
+//EMPTY_INTERRUPT(EE_READY_vect);
+//EMPTY_INTERRUPT(ANALOG_COMP_vect);
+//EMPTY_INTERRUPT(TWI_vect);
+//EMPTY_INTERRUPT(SPM_READY_vect);
+
 
 static void sendchar(uint8_t data)
 {
 	while (!(UART_STATUS & (1<<UART_TXREADY)));
 	UART_DATA = data;
 }
+
+static void isr_error_sleep()
+{
+	sendchar('*');
+	sendchar('E');
+	sendchar('R');
+	sendchar('R');
+	sendchar('-');
+	sendchar('9');
+	sendchar('9');
+	sendchar('*');
+
+	cli();
+	sleep_cpu();
+}
+
+ISR(INT0_vect) {
+	isr_error_sleep();
+}
+
 
 static uint8_t recvchar(void)
 {
@@ -330,12 +419,32 @@ static void send_boot(void)
 	sendchar('T');
 }
 
+static void vectortable_to_bootloader(void) {
+	asm volatile									// set active vector table into the Bootloader section
+	(
+		"ldi r24, %1\n\t"
+		"out %0, r24\n\t"
+		"ldi r24, %2\n\t"
+		"out %0, r24\n\t"
+		:
+		: "i" (_SFR_IO_ADDR(MCUCR)),
+		  "i" (1<<IVCE),
+		  "i" (1<<IVSEL)
+		: "r24"
+	);
+}
+
 static void (*jump_to_app)(void) = 0x0000;
 
 int main(void)
 {
 	uint16_t address = 0;
 	uint8_t device = 0, val;
+
+	vectortable_to_bootloader();
+
+	BLDDR  &= ~(1<<BLPNUM);							// set probe line as input
+	BLPORT |=  (1<<BLPNUM);							// and enable the pullup
 
 #ifdef DISABLE_WDT_AT_STARTUP
 #ifdef WDT_OFF_SPECIAL
@@ -352,38 +461,36 @@ int main(void)
 	uint8_t OK = 1;
 #endif
 
-	BLDDR  &= ~(1<<BLPNUM);							// set as input
-	BLPORT |= (1<<BLPNUM);							// enable pullup
-
-	// Set baud rate
-	UART_BAUD_HIGH = (UART_CALC_BAUDRATE(BAUDRATE)>>8) & 0xFF;
-	UART_BAUD_LOW = (UART_CALC_BAUDRATE(BAUDRATE) & 0xFF);
+	// set baud rate
+	UART_BAUD_HIGH = ((UART_CALC_BAUDRATE(BAUDRATE)>>8) & 0xFF);
+	UART_BAUD_LOW  = ( UART_CALC_BAUDRATE(BAUDRATE)     & 0xFF);
 
 #ifdef UART_DOUBLESPEED
-	UART_STATUS = ( 1<<UART_DOUBLE );
+	UART_STATUS = (1<<UART_DOUBLE);
 #endif
 
-	UART_CTRL = UART_CTRL_DATA;
+	UART_CTRL  = UART_CTRL_DATA;
 	UART_CTRL2 = UART_CTRL2_DATA;
 	
 #if defined(START_POWERSAVE)
 	/*
 		This is an adoption of the Butterfly Bootloader startup-sequence.
 		It may look a little strange but separating the login-loop from
-		the main parser-loop gives a lot a possibilities (timeout, sleep-modes
+		the main parser-loop gives a lot of more possibilities (timeout, sleep-modes
 	    etc.).
 	*/
 	for (;OK;) {
-		if ((BLPIN & (1<<BLPNUM))) {
+		if ((BLPIN & (1<<BLPNUM)) && (*((unsigned char*) 0x0000) != 0xff)) {
 			// jump to main app if pin is not grounded
 			BLPORT &= ~(1<<BLPNUM);					// set to default
 #ifdef UART_DOUBLESPEED
-			UART_STATUS &= ~( 1<<UART_DOUBLE );
+			UART_STATUS &= ~(1<<UART_DOUBLE);
 #endif
 			jump_to_app();							// jump to application sector
 
 		} else {
 			val = recvchar();
+
 			/* ESC */
 			if (val == 0x1B) {
 				// AVRPROG connection
@@ -398,7 +505,8 @@ int main(void)
 				sendchar('?');
 			}
 	        }
-		// Power-Save code here
+
+			// power-save code here
 	}
 
 #elif defined(START_SIMPLE)
@@ -407,7 +515,7 @@ int main(void)
 		// jump to main app if pin is not grounded
 		BLPORT &= ~(1<<BLPNUM);						// set to default
 #ifdef UART_DOUBLESPEED
-		UART_STATUS &= ~( 1<<UART_DOUBLE );
+		UART_STATUS &= ~(1<<UART_DOUBLE);
 #endif
 		jump_to_app();								// jump to application sector
 	}
