@@ -167,7 +167,7 @@
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 
 #include "chipdef.h"
 
