@@ -74,8 +74,8 @@
 		<cconfiguration id="de.innot.avreclipse.configuration.app.release.1223594858">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.release.1223594858" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<macros>
-					<stringMacro name="Bootsize" type="VALUE_TEXT" value="1024"/>
-					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7800"/>
+					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
+					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
 				</macros>
 				<externalSettings/>
 				<extensions>

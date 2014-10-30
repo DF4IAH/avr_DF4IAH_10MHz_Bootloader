@@ -73,10 +73,10 @@
  * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
  * (active low) to start the bootloader
  */
-#define BLPORT		PORTD
-#define BLDDR		DDRD
-#define BLPIN		PIND
-#define BLPNUM		PIND3
+#define BLPORT		PORTC
+#define BLDDR		DDRC
+#define BLPIN		PINC
+#define BLPNUM		PINC4
 
 /*
  * Define if Watchdog-Timer should be disable at startup
@@ -123,7 +123,7 @@
  * (AVRPROG has to detect the AVR correctly by device-code
  * to show the correct information).
  */
-//#define ENABLEREADFUSELOCK
+#define ENABLEREADFUSELOCK
 
 /* enable/disable write of lock-bits
  * WARNING: lock-bits can not be reseted by the bootloader (as far as I know)
@@ -138,7 +138,7 @@
  * define the following if the bootloader should not output
  * itself at flash read (will fake an empty boot-section)
  */
-#define READ_PROTECT_BOOTLOADER
+//#define READ_PROTECT_BOOTLOADER
 
 
 #define VERSION_HIGH '0'
@@ -511,7 +511,7 @@ int main(void)
 
 #elif defined(START_SIMPLE)
 
-	if ((BLPIN & (1<<BLPNUM)) && (*((unsigned char*) 0x0000) != 0xff)) {
+	if ((BLPIN & (1<<BLPNUM)) && (*((unsigned short*) 0x0000) == 0x0c94)) {
 		// jump to main app if pin is not grounded
 		BLPORT &= ~(1<<BLPNUM);						// set to default
 #ifdef UART_DOUBLESPEED
