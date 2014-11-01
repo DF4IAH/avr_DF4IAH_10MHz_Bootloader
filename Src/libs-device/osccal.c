@@ -19,13 +19,13 @@
 /* Calibrate the RC oscillator. Our timing reference is the Start Of Frame
  * signal (a single SE0 bit) repeating every millisecond immediately after
  * a USB RESET. We first do a binary search for the OSCCAL value and then
- * optimize this value with a neighboorhod search.
+ * optimize this value with a neighborhood search.
  */
 void    calibrateOscillator(void)
 {
-uchar       step = 128;
-uchar       trialValue = 0, optimumValue;
-int         x, optimumDev, targetValue = (unsigned)(1499 * (double)F_CPU / 10.5e6 + 0.5);
+	uchar	step = 128;
+	uchar	trialValue = 0, optimumValue;
+	int		x, optimumDev, targetValue = (unsigned)(1499 * (double)F_CPU / 10.5e6 + 0.5);
 
     /* do a binary search: */
     do{

@@ -51,32 +51,12 @@
 #define F_CPU (7372800 / 2)
 #endif
 
-/* UART Baudrate */
-// #define BAUDRATE 9600
-// #define BAUDRATE 19200
-#define BAUDRATE 115200
-
-/* use "Double Speed Operation" */
-//#define UART_DOUBLESPEED
-
-/* use second UART on mega128 / can128 / mega162 / mega324p / mega644p */
-//#define UART_USE_SECOND
-
 /* Device-Type:
    For AVRProg the BOOT-option is preferred
    which is the "correct" value for a bootloader.
    avrdude may only detect the part-code for ISP */
 #define DEVTYPE     DEVTYPE_BOOT
 // #define DEVTYPE     DEVTYPE_ISP
-
-/*
- * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
- * (active low) to start the bootloader
- */
-#define BLPORT		PORTC
-#define BLDDR		DDRC
-#define BLPIN		PINC
-#define BLPNUM		PINC4
 
 /*
  * Define if Watchdog-Timer should be disable at startup
@@ -118,13 +98,6 @@
 /* wait-time for START_WAIT mode ( t = WAIT_TIME * 10ms ) */
 #define WAIT_VALUE 100 /* here: 100*10ms = 1000ms = 1sec */
 
-/*
- * enable/disable readout of fuse and lock-bits
- * (AVRPROG has to detect the AVR correctly by device-code
- * to show the correct information).
- */
-#define ENABLEREADFUSELOCK
-
 /* enable/disable write of lock-bits
  * WARNING: lock-bits can not be reseted by the bootloader (as far as I know)
  * Only protection no unprotection, "chip erase" from bootloader only
@@ -150,29 +123,29 @@
 #define GET_EXTENDED_FUSE_BITS  0x0002
 
 
-#ifdef UART_DOUBLESPEED
-// #define UART_CALC_BAUDRATE(baudRate) (((F_CPU*10UL) / ((baudRate) *8UL) +5)/10 -1)
-#define UART_CALC_BAUDRATE(baudRate) ((uint32_t)((F_CPU) + ((uint32_t)baudRate * 4UL)) / ((uint32_t)(baudRate) * 8UL) - 1)
-#else
-// #define UART_CALC_BAUDRATE(baudRate) (((F_CPU*10UL) / ((baudRate)*16UL) +5)/10 -1)
-#define UART_CALC_BAUDRATE(baudRate) ((uint32_t)((F_CPU) + ((uint32_t)baudRate * 8UL)) / ((uint32_t)(baudRate) * 16UL) - 1)
-#endif
-
-
 #include <stdint.h>
 #include <avr/io.h>
-#include <avr/wdt.h>
-#include <avr/boot.h>
-#include <avr/pgmspace.h>
-#include <avr/eeprom.h>
 #include <avr/interrupt.h>
-#include <avr/sleep.h>
+#include <avr/wdt.h>
 #include <util/delay.h>
 
 #include "chipdef.h"
+#include "df4iah_probe.h"
+#include "df4iah_serial.h"
+#include "df4iah_usb.h"
+#include "df4iah_memory.h"
+
+
+
+// DATA SECTION
 
 uint8_t gBuffer[SPM_PAGESIZE];
+uint8_t timer0Snapshot = 0x00;
+void (*jump_to_app)(void) = 0x0000;
 
+
+
+// CODE SECTION
 
 /*
  * @see http://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
@@ -185,8 +158,8 @@ uint8_t gBuffer[SPM_PAGESIZE];
 void __vector_default(void) { ; }
 #endif
 
-/*
-
+/*  VECTOR - TABLE
+ *
 	Address	Labels	Code 					Comments
 	0x0000			jmp RESET 				; Reset Handler
 	0x0002			jmp EXT_INT0 			; IRQ0 Handler
@@ -217,8 +190,9 @@ void __vector_default(void) { ; }
 	;
 	0x0033	RESET:	ldi r16, high(RAMEND)	; Main program start
 	0x0034			out SPH,r16 			; Set Stack Pointer to top of RAM
-
+ *
  */
+
 
 //EMPTY_INTERRUPT(INT0_vect);
 //EMPTY_INTERRUPT(INT1_vect);
@@ -247,189 +221,12 @@ void __vector_default(void) { ; }
 //EMPTY_INTERRUPT(TWI_vect);
 //EMPTY_INTERRUPT(SPM_READY_vect);
 
-
-static void sendchar(uint8_t data)
-{
-	while (!(UART_STATUS & (1<<UART_TXREADY)));
-	UART_DATA = data;
-}
-
-static void isr_error_sleep()
-{
-	sendchar('*');
-	sendchar('E');
-	sendchar('R');
-	sendchar('R');
-	sendchar('-');
-	sendchar('9');
-	sendchar('9');
-	sendchar('*');
-
-	cli();
-	sleep_cpu();
-}
-
-ISR(INT0_vect) {
-	isr_error_sleep();
+ISR(INT1_vect) {
+	ser_error_msg();
 }
 
 
-static uint8_t recvchar(void)
-{
-	while (!(UART_STATUS & (1<<UART_RXREADY)));
-	return UART_DATA;
-}
-
-static inline void eraseFlash(void)
-{
-	// erase only main section (bootloader protection)
-	uint32_t addr = 0;
-	while (APP_END > addr) {
-		boot_page_erase(addr);						// perform page erase
-		boot_spm_busy_wait();						// wait until the memory is erased.
-		addr += SPM_PAGESIZE;
-	}
-	boot_rww_enable();
-}
-
-static inline void recvBuffer(pagebuf_t size)
-{
-	pagebuf_t cnt;
-	uint8_t *tmp = gBuffer;
-
-	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
-		*tmp++ = (cnt < size) ? recvchar() : 0xFF;
-	}
-}
-
-static inline uint16_t writeFlashPage(uint16_t waddr, pagebuf_t size)
-{
-	uint32_t pagestart = (uint32_t)waddr<<1;
-	uint32_t baddr = pagestart;
-	uint16_t data;
-	uint8_t *tmp = gBuffer;
-
-	do {
-		data = *tmp++;
-		data |= *tmp++ << 8;
-		boot_page_fill(baddr, data);				// call asm routine.
-
-		baddr += 2;									// select next word in memory
-		size -= 2;									// reduce number of bytes to write by two
-	} while (size);									// loop until all bytes written
-
-	boot_page_write(pagestart);
-	boot_spm_busy_wait();
-	boot_rww_enable();								// re-enable the RWW section
-
-	return baddr>>1;
-}
-
-static inline uint16_t writeEEpromPage(uint16_t address, pagebuf_t size)
-{
-	uint8_t *tmp = gBuffer;
-
-	do {
-		eeprom_write_byte( (uint8_t*)address, *tmp++ );
-		address++;									// select next byte
-		size--;										// decrease number of bytes to write
-	} while (size);									// loop until all bytes written
-
-	// eeprom_busy_wait();
-
-	return address;
-}
-
-static inline uint16_t readFlashPage(uint16_t waddr, pagebuf_t size)
-{
-	uint32_t baddr = (uint32_t)waddr<<1;
-	uint16_t data;
-
-	do {
-#ifndef READ_PROTECT_BOOTLOADER
-#warning "Bootloader not read-protected"
-#if defined(RAMPZ)
-		data = pgm_read_word_far(baddr);
-#else
-		data = pgm_read_word_near(baddr);
-#endif
-#else
-		// don't read bootloader
-		if (baddr < APP_END) {
-#if defined(RAMPZ)
-			data = pgm_read_word_far(baddr);
-#else
-			data = pgm_read_word_near(baddr);
-#endif
-		}
-		else {
-			data = 0xFFFF; 							// fake empty
-		}
-#endif
-		sendchar(data);								// send LSB
-		sendchar((data >> 8));						// send MSB
-		baddr += 2;									// select next word in memory
-		size -= 2;									// subtract two bytes from number of bytes to read
-	} while (size);									// repeat until block has been read
-
-	return baddr>>1;
-}
-
-static inline uint16_t readEEpromPage(uint16_t address, pagebuf_t size)
-{
-	do {
-		sendchar( eeprom_read_byte( (uint8_t*)address ) );
-		address++;
-		size--;										// decrease number of bytes to read
-	} while (size);									// repeat until block has been read
-
-	return address;
-}
-
-#if defined(ENABLEREADFUSELOCK)
-static uint8_t read_fuse_lock(uint16_t addr)
-{
-	uint8_t mode = (1<<BLBSET) | (1<<SELFPRGEN);
-	uint8_t retval;
-
-	asm volatile
-	(
-		"movw r30, %3\n\t"							/* Z to addr */ \
-		"sts %0, %2\n\t"							/* set mode in SPM_REG */ \
-		"lpm\n\t"									/* load fuse/lock value into r0 */ \
-		"mov %1,r0\n\t"								/* save return value */ \
-		: "=m" (SPM_REG),
-		  "=r" (retval)
-		: "r" (mode),
-		  "r" (addr)
-		: "r30", "r31", "r0"
-	);
-	return retval;
-}
-#endif
-
-static void send_boot(void)
-{
-	/*
-	sendchar('A');
-	sendchar('V');
-	sendchar('R');
-	sendchar('B');
-	sendchar('O');
-	sendchar('O');
-	sendchar('T');
-	*/
-
-	sendchar('F');
-	sendchar('D');
-	sendchar('L');
-	sendchar(' ');
-	sendchar('v');
-	sendchar(VERSION_HIGH);
-	sendchar(VERSION_LOW);
-}
-
-static void vectortable_to_bootloader(void) {
+void vectortable_to_bootloader(void) {
 	asm volatile									// set active vector table into the Bootloader section
 	(
 		"ldi r24, %1\n\t"
@@ -444,7 +241,6 @@ static void vectortable_to_bootloader(void) {
 	);
 }
 
-static void (*jump_to_app)(void) = 0x0000;
 
 int main(void)
 {
@@ -452,9 +248,8 @@ int main(void)
 	uint8_t device = 0, val;
 
 	vectortable_to_bootloader();
-
-	BLDDR  &= ~(1<<BLPNUM);							// set probe line as input
-	BLPORT |=  (1<<BLPNUM);							// and enable the pullup
+	init_probe();
+	//init_wdt();
 
 #ifdef DISABLE_WDT_AT_STARTUP
 #ifdef WDT_OFF_SPECIAL
@@ -466,6 +261,7 @@ int main(void)
 	wdt_disable();
 #endif
 #endif
+
 	
 #ifdef START_POWERSAVE
 	uint8_t OK = 1;
