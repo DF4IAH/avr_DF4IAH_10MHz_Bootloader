@@ -410,6 +410,7 @@ static uint8_t read_fuse_lock(uint16_t addr)
 
 static void send_boot(void)
 {
+	/*
 	sendchar('A');
 	sendchar('V');
 	sendchar('R');
@@ -417,6 +418,15 @@ static void send_boot(void)
 	sendchar('O');
 	sendchar('O');
 	sendchar('T');
+	*/
+
+	sendchar('F');
+	sendchar('D');
+	sendchar('L');
+	sendchar(' ');
+	sendchar('v');
+	sendchar(VERSION_HIGH);
+	sendchar(VERSION_LOW);
 }
 
 static void vectortable_to_bootloader(void) {
