@@ -389,7 +389,7 @@ static inline uint16_t readEEpromPage(uint16_t address, pagebuf_t size)
 #if defined(ENABLEREADFUSELOCK)
 static uint8_t read_fuse_lock(uint16_t addr)
 {
-	uint8_t mode = (1<<BLBSET) | (1<<SPMEN);
+	uint8_t mode = (1<<BLBSET) | (1<<SELFPRGEN);
 	uint8_t retval;
 
 	asm volatile

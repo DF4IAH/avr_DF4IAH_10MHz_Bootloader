@@ -4,8 +4,8 @@
 		<cconfiguration id="de.innot.avreclipse.configuration.app.debug.1921059252">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.debug.1921059252" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
-					<stringMacro name="Bootsize" type="VALUE_TEXT" value="1024"/>
-					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7800"/>
+					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
+					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -26,7 +26,7 @@
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.size.app.debug.138160766" name="Print Size" superClass="de.innot.avreclipse.toolchain.options.toolchain.size.app.debug"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.debug.202330142" name="AVRDude" superClass="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.debug"/>
 							<targetPlatform id="de.innot.avreclipse.targetplatform.winavr.app.debug.475138113" name="AVR Cross-Target" superClass="de.innot.avreclipse.targetplatform.winavr.app.debug"/>
-							<builder autoBuildTarget="all" buildPath="${workspace_loc:/avr_Bootloader_0v85}/Debug" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="de.innot.avreclipse.target.builder.winavr.app.debug.587229643" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="de.innot.avreclipse.target.builder.winavr.app.debug"/>
+							<builder autoBuildTarget="all" buildPath="${workspace_loc:/avr_DF4IAH_Bootloader}/Debug" cleanBuildTarget="clean" enableAutoBuild="false" enableCleanBuild="true" enabledIncrementalBuild="true" id="de.innot.avreclipse.target.builder.winavr.app.debug.587229643" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="de.innot.avreclipse.target.builder.winavr.app.debug"/>
 							<tool id="de.innot.avreclipse.tool.assembler.winavr.app.debug.1773171632" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.app.debug">
 								<option id="de.innot.avreclipse.assembler.option.debug.level.1299922026" name="Generate Debugging Info" superClass="de.innot.avreclipse.assembler.option.debug.level"/>
 								<inputType id="de.innot.avreclipse.tool.assembler.input.1803904894" superClass="de.innot.avreclipse.tool.assembler.input"/>
@@ -96,7 +96,7 @@
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.size.app.release.1034024854" name="Print Size" superClass="de.innot.avreclipse.toolchain.options.toolchain.size.app.release"/>
 							<option id="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.release.423242180" name="AVRDude" superClass="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.release"/>
 							<targetPlatform id="de.innot.avreclipse.targetplatform.winavr.app.release.1574536611" name="AVR Cross-Target" superClass="de.innot.avreclipse.targetplatform.winavr.app.release"/>
-							<builder buildPath="${workspace_loc:/avr_Bootloader_0v85}/Release" id="de.innot.avreclipse.target.builder.winavr.app.release.846658573" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="de.innot.avreclipse.target.builder.winavr.app.release"/>
+							<builder buildPath="${workspace_loc:/avr_DF4IAH_Bootloader}/Release" id="de.innot.avreclipse.target.builder.winavr.app.release.846658573" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="de.innot.avreclipse.target.builder.winavr.app.release"/>
 							<tool id="de.innot.avreclipse.tool.assembler.winavr.app.release.2057880249" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.app.release">
 								<option id="de.innot.avreclipse.assembler.option.debug.level.1251674019" name="Generate Debugging Info" superClass="de.innot.avreclipse.assembler.option.debug.level" value="de.innot.avreclipse.assembler.option.debug.level.none" valueType="enumerated"/>
 								<inputType id="de.innot.avreclipse.tool.assembler.input.2008598859" superClass="de.innot.avreclipse.tool.assembler.input"/>
@@ -143,15 +143,15 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="avr_Bootloader_0v85.de.innot.avreclipse.project.winavr.elf_2.1.0.78487551" name="AVR Cross Target Application" projectType="de.innot.avreclipse.project.winavr.elf_2.1.0"/>
+		<project id="avr_DF4IAH_Bootloader.de.innot.avreclipse.project.winavr.elf_2.1.0.78487551" name="AVR Cross Target Application" projectType="de.innot.avreclipse.project.winavr.elf_2.1.0"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
-			<resource resourceType="PROJECT" workspacePath="/avr_Bootloader_0v85"/>
+			<resource resourceType="PROJECT" workspacePath="/avr_DF4IAH_Bootloader"/>
 		</configuration>
 		<configuration configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="/avr_Bootloader_0v85"/>
+			<resource resourceType="PROJECT" workspacePath="/avr_DF4IAH_Bootloader"/>
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
