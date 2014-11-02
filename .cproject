@@ -5,10 +5,11 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.debug.1921059252" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<macros>
 					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
-					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x7f00"/>
-					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7b00"/>
+					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x7b80"/>
+					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
 					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
-					<stringMacro name="MT_Bootloader_Serial" type="VALUE_TEXT" value="0x7e00"/>
+					<stringMacro name="MT_Bootloader_Serial" type="VALUE_TEXT" value="0x7a00"/>
+					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7c00"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -38,9 +39,14 @@
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1483522201" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level"/>
 								<option id="de.innot.avreclipse.compiler.option.optimize.1236500644" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize"/>
 								<option id="de.innot.avreclipse.compiler.option.def.1092773243" name="Define Syms (-D)" superClass="de.innot.avreclipse.compiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="DEBUG"/>
 									<listOptionValue builtIn="false" value="__AVR_ATmega328P__"/>
 									<listOptionValue builtIn="false" value="BOOTSIZE=${Bootsize}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_ADDRESS=${MT_Bootloader_Address}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_MEMORY=${MT_Bootloader_Memory}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_PROBE=${MT_Bootloader_Probe}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_SERIAL=${MT_Bootloader_Serial}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_USB=${MT_Bootloader_Usb}"/>
 								</option>
 								<option id="de.innot.avreclipse.compiler.option.undef.39785463" name="Undefine Syms (-U)" superClass="de.innot.avreclipse.compiler.option.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__AVR_ATmega16__"/>
@@ -82,6 +88,7 @@
 					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
 					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
 					<stringMacro name="MT_Bootloader_Serial" type="VALUE_TEXT" value="0x7a00"/>
+					<stringMacro name="DEBUG" type="VALUE_TEXT" value="1"/>
 					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7c00"/>
 				</macros>
 				<externalSettings/>
@@ -112,6 +119,7 @@
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1845814622" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level" value="de.innot.avreclipse.compiler.option.debug.level.none" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.optimize.176652961" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize" value="de.innot.avreclipse.compiler.optimize.size" valueType="enumerated"/>
 								<option id="de.innot.avreclipse.compiler.option.def.1803194553" name="Define Syms (-D)" superClass="de.innot.avreclipse.compiler.option.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="RELEASE"/>
 									<listOptionValue builtIn="false" value="__AVR_ATmega328P__"/>
 									<listOptionValue builtIn="false" value="BOOTSIZE=${Bootsize}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_ADDRESS=${MT_Bootloader_Address}"/>
