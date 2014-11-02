@@ -17,6 +17,7 @@
 extern uint8_t gBuffer[SPM_PAGESIZE];
 
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 void init_serial()
 {
 	// set baud rate
@@ -31,18 +32,21 @@ void init_serial()
 	UART_CTRL2 = UART_CTRL2_DATA;
 }
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 void sendchar(uint8_t data)
 {
 	while (!(UART_STATUS & (1<<UART_TXREADY)));
 	UART_DATA = data;
 }
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 uint8_t recvchar(void)
 {
 	while (!(UART_STATUS & (1<<UART_RXREADY)));
 	return UART_DATA;
 }
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 void recvBuffer(pagebuf_t size)
 {
 	pagebuf_t cnt;
@@ -55,6 +59,7 @@ void recvBuffer(pagebuf_t size)
 
 // --
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 void send_boot(void)
 {
 	/*
@@ -76,6 +81,7 @@ void send_boot(void)
 	sendchar(VERSION_LOW);
 }
 
+__attribute__((section(".df4iah_serial"), aligned(2)))
 void ser_error_msg()
 {
 	sendchar('*');

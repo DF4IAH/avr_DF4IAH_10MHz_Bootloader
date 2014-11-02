@@ -16,6 +16,7 @@
 extern uint8_t gBuffer[SPM_PAGESIZE];
 
 
+__attribute__((section(".df4iah_memory"), aligned(2)))
 void eraseFlash(void)
 {
 	// erase only main section (bootloader protection)
@@ -28,6 +29,7 @@ void eraseFlash(void)
 	boot_rww_enable();
 }
 
+__attribute__((section(".df4iah_memory"), aligned(2)))
 uint16_t writeFlashPage(uint16_t waddr, pagebuf_t size)
 {
 	uint32_t pagestart = (uint32_t)waddr<<1;
@@ -51,6 +53,7 @@ uint16_t writeFlashPage(uint16_t waddr, pagebuf_t size)
 	return baddr>>1;
 }
 
+__attribute__((section(".df4iah_memory"), aligned(2)))
 uint16_t writeEEpromPage(uint16_t address, pagebuf_t size)
 {
 	uint8_t *tmp = gBuffer;
@@ -66,6 +69,7 @@ uint16_t writeEEpromPage(uint16_t address, pagebuf_t size)
 	return address;
 }
 
+__attribute__((section(".df4iah_memory"), aligned(2)))
 uint16_t readFlashPage(uint16_t waddr, pagebuf_t size)
 {
 	uint32_t baddr = (uint32_t)waddr<<1;
@@ -101,6 +105,7 @@ uint16_t readFlashPage(uint16_t waddr, pagebuf_t size)
 	return baddr>>1;
 }
 
+__attribute__((section(".df4iah_memory"), aligned(2)))
 uint16_t readEEpromPage(uint16_t address, pagebuf_t size)
 {
 	do {
@@ -113,6 +118,7 @@ uint16_t readEEpromPage(uint16_t address, pagebuf_t size)
 }
 
 #if defined(ENABLEREADFUSELOCK)
+__attribute__((section(".df4iah_memory"), aligned(2)))
 uint8_t read_fuse_lock(uint16_t addr)
 {
 	uint8_t mode = (1<<BLBSET) | (1<<SELFPRGEN);

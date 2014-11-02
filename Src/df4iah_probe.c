@@ -8,6 +8,7 @@
 #include "df4iah_probe.h"
 
 
+__attribute__((section(".df4iah_probe"), aligned(2)))
 void init_probe()
 {
 	BLDDR  &= ~(1<<BLPNUM);							// set probe line as input
