@@ -61,21 +61,6 @@
 /* wait-time for START_WAIT mode ( t = WAIT_TIME * 10ms ) */
 #define WAIT_VALUE 100 /* here: 100*10ms = 1000ms = 1sec */
 
-/* enable/disable write of lock-bits
- * WARNING: lock-bits can not be reseted by the bootloader (as far as I know)
- * Only protection no unprotection, "chip erase" from bootloader only
- * clears the flash but does no real "chip erase" (this is not possible
- * with a bootloader as far as I know)
- * Keep this undefined!
- */
-//#define WRITELOCKBITS
-
-/*
- * define the following if the bootloader should not output
- * itself at flash read (will fake an empty boot-section)
- */
-//#define READ_PROTECT_BOOTLOADER
-
 
 #define VERSION_HIGH '0'
 #define VERSION_LOW  '8'
