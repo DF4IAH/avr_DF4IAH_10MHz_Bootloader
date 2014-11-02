@@ -7,7 +7,6 @@
 
 #include <stdint.h>
 #include <avr/interrupt.h>
-#include <avr/sleep.h>
 
 #include "df4iah_serial.h"
 
@@ -37,7 +36,7 @@ void init_serial()
 #ifdef RELEASE
 __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
-void sendchar(uint8_t data)
+void sendchar_serial(uint8_t data)
 {
 	while (!(UART_STATUS & (1<<UART_TXREADY)));
 	UART_DATA = data;
@@ -46,7 +45,7 @@ void sendchar(uint8_t data)
 #ifdef RELEASE
 __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
-uint8_t recvchar(void)
+uint8_t recvchar_serial(void)
 {
 	while (!(UART_STATUS & (1<<UART_RXREADY)));
 	return UART_DATA;
@@ -55,7 +54,7 @@ uint8_t recvchar(void)
 #ifdef RELEASE
 __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
-void recvBuffer(pagebuf_t size)
+void recvBuffer_serial(pagebuf_t size)
 {
 	pagebuf_t cnt;
 	uint8_t *tmp = gBuffer;
@@ -63,48 +62,4 @@ void recvBuffer(pagebuf_t size)
 	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
 		*tmp++ = (cnt < size) ? recvchar() : 0xFF;
 	}
-}
-
-// --
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_serial"), aligned(2)))
-#endif
-void send_boot(void)
-{
-	/*
-	sendchar('A');
-	sendchar('V');
-	sendchar('R');
-	sendchar('B');
-	sendchar('O');
-	sendchar('O');
-	sendchar('T');
-	*/
-
-	sendchar('F');
-	sendchar('D');
-	sendchar('L');
-	sendchar(' ');
-	sendchar('v');
-	sendchar(VERSION_HIGH);
-	sendchar(VERSION_LOW);
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_serial"), aligned(2)))
-#endif
-void ser_error_msg()
-{
-	sendchar('*');
-	sendchar('E');
-	sendchar('R');
-	sendchar('R');
-	sendchar('-');
-	sendchar('9');
-	sendchar('9');
-	sendchar('*');
-
-	cli();
-	sleep_cpu();
 }

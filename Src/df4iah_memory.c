@@ -12,6 +12,8 @@
 #include "df4iah_memory.h"
 
 #include "df4iah_serial.h"
+#include "df4iah_usb.h"
+#include "main.h"
 
 extern uint8_t gBuffer[SPM_PAGESIZE];
 

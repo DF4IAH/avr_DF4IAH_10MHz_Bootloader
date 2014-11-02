@@ -46,9 +46,11 @@
 
 
 #include <stdint.h>
+#include <avr/pgmspace.h>   /* required by usbdrv.h */
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
+#include <avr/sleep.h>
 #include <util/delay.h>
 
 #include "chipdef.h"
@@ -68,6 +70,11 @@ uint8_t timer0Snapshot = 0x00;
 void (*jump_to_app)(void) = 0x0000;
 
 
+// STRINGS IN CODE SECTION
+PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T'};
+PROGMEM const char gcs_FDL[gcs_FDL_len] = { 'F', 'D', 'L', ' ', VERSION_HIGH, VERSION_LOW};
+PROGMEM const char gcs_E01[gcs_E01_len] = { '*', 'E', 'R', 'R', '-', '9', '9', '*'};
+
 
 // CODE SECTION
 
@@ -76,7 +83,7 @@ void (*jump_to_app)(void) = 0x0000;
  */
 
 #if defined(BOOTLOADERHASNOVECTORS)
-#warning "This Bootloader does not link interrupt vectors - see makefile"
+# warning "This Bootloader does not link interrupt vectors - see makefile"
 /* make the linker happy - it wants to see __vector_default */
 // void __vector_default(void) { ; }
 void __vector_default(void) { ; }
@@ -145,7 +152,7 @@ void __vector_default(void) { ; }
 //EMPTY_INTERRUPT(SPM_READY_vect);
 
 ISR(INT1_vect) {
-	ser_error_msg();
+	send_error_msg();
 }
 
 
@@ -252,6 +259,28 @@ static inline void wait_loop()
 #endif
 
 
+void send_boot_msg()
+{
+	for (int i = 0; i < gcs_FDL_len; ++i) {
+		sendchar(gcs_FDL[i]);
+	}
+
+//	for (int i = 0; i < gcs_AVR_len; ++i) {
+//		sendchar(gcs_AVR[i]);
+//	}
+}
+
+void send_error_msg()
+{
+	for (int i = 0; i < gcs_FDL_len; ++i) {
+		sendchar(gcs_FDL[i]);
+	}
+
+	cli();
+	sleep_cpu();
+}
+
+
 int main(void)
 {
 	uint16_t address = 0;
@@ -266,6 +295,8 @@ int main(void)
 	init_usb();
 	init_serial();
 
+    sei();							/* ENABLE interrupt */
+
 #if defined(START_POWERSAVE)
 	powersave_loop();
 
@@ -276,15 +307,13 @@ int main(void)
 	wait_loop();
 
 #elif defined(START_BOOTICE)
-#warning "BOOTICE mode - no startup-condition"
+# warning "BOOTICE mode - no startup-condition"
 
 #else
-#error "Select START_ condition for bootloader in main.c"
+# error "Select START_ condition for bootloader in main.c"
 #endif
 
 	for(;;) {
-		usbPoll();
-
 		val = recvchar();
 		// Autoincrement?
 		if (val == 'a') {
@@ -406,7 +435,7 @@ int main(void)
 
 		// Return software identifier
 		} else if (val == 'S') {
-			send_boot();
+			send_boot_msg();
 
 		// Return Software Version
 		} else if (val == 'V') {
@@ -425,6 +454,11 @@ int main(void)
 		} else if(val != 0x1b) {
 			sendchar('?');
 		}
+
+#if defined(USE_USB)
+		usbPoll();
+#endif
 	}
+
 	return 0;
 }

@@ -34,13 +34,8 @@
 
 
 void init_serial();
-void sendchar(uint8_t data);
-uint8_t recvchar(void);
-void recvBuffer(pagebuf_t size);
-
-// --
-
-void send_boot(void);
-void ser_error_msg();
+void sendchar_serial(uint8_t data);
+uint8_t recvchar_serial(void);
+void recvBuffer_serial(pagebuf_t size);
 
 #endif /* DF4IAH_SERIAL_H_ */

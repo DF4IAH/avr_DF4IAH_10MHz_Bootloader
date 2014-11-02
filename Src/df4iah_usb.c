@@ -7,6 +7,10 @@
 
 #include "df4iah_usb.h"
 
+#include <avr/pgmspace.h>   /* required by usbdrv.h */
+#include <avr/wdt.h>
+#include <util/delay.h>
+
 #include "usbdrv/usbdrv.h"
 
 
@@ -16,6 +20,15 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 void init_usb()
 {
 	usbInit();
+    usbDeviceDisconnect();			/* enforce re-enumeration, do this while interrupts are disabled! */
+
+    int i = 250;
+    while (--i) {					/* fake USB disconnect for > 250 ms */
+        wdt_reset();
+        _delay_ms(1);
+    }
+
+    usbDeviceConnect();
 }
 
 
