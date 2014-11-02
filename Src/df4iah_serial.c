@@ -17,6 +17,20 @@
 extern uint8_t gBuffer[SPM_PAGESIZE];
 
 
+void init_serial()
+{
+	// set baud rate
+	UART_BAUD_HIGH = ((UART_CALC_BAUDRATE(BAUDRATE)>>8) & 0xFF);
+	UART_BAUD_LOW  = ( UART_CALC_BAUDRATE(BAUDRATE)     & 0xFF);
+
+#ifdef UART_DOUBLESPEED
+	UART_STATUS = (1<<UART_DOUBLE);
+#endif
+
+	UART_CTRL  = UART_CTRL_DATA;
+	UART_CTRL2 = UART_CTRL2_DATA;
+}
+
 void sendchar(uint8_t data)
 {
 	while (!(UART_STATUS & (1<<UART_TXREADY)));

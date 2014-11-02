@@ -45,84 +45,6 @@
 // tabsize: 4
 
 
-/* MCU frequency */
-#ifndef F_CPU
-// #define F_CPU 7372800
-#define F_CPU (7372800 / 2)
-#endif
-
-/* Device-Type:
-   For AVRProg the BOOT-option is preferred
-   which is the "correct" value for a bootloader.
-   avrdude may only detect the part-code for ISP */
-#define DEVTYPE     DEVTYPE_BOOT
-// #define DEVTYPE     DEVTYPE_ISP
-
-/*
- * Define if Watchdog-Timer should be disable at startup
- */
-#define DISABLE_WDT_AT_STARTUP
-
-/*
- * Watchdog-reset is issued at exit 
- * define the timeout-value here (see avr-libc manual)
- */
-#define EXIT_WDT_TIME	WDTO_250MS
-
-/*
- * Select startup-mode
- * SIMPLE-Mode - Jump to bootloader main BL-loop if key is
- *   pressed (Pin grounded) "during" reset or jump to the
- *   application if the pin is not grounded. The internal
- *   pull-up resistor is enabled during the startup and
- *   gets disabled before the application is started.
- * POWERSAVE-Mode - Startup is separated in two loops
- *   which makes power-saving a little easier if no firmware
- *   is on the chip. Needs more memory
- * BOOTICE-Mode - to flash the JTAGICE upgrade.ebn file.
- *   No startup-sequence in this mode. Jump directly to the
- *   parser-loop on reset
- *   F_CPU in BOOTICEMODE must be 7372800 Hz to be compatible
- *   with the org. JTAGICE-Firmware
- * WAIT-mode waits 1 sec for the defined character if nothing 
- *    is received then the user prog is started.
- */
-#define START_SIMPLE
-//#define START_WAIT
-//#define START_POWERSAVE
-//#define START_BOOTICE
-
-/* character to start the bootloader in mode START_WAIT */
-#define START_WAIT_UARTCHAR 'S'
-
-/* wait-time for START_WAIT mode ( t = WAIT_TIME * 10ms ) */
-#define WAIT_VALUE 100 /* here: 100*10ms = 1000ms = 1sec */
-
-/* enable/disable write of lock-bits
- * WARNING: lock-bits can not be reseted by the bootloader (as far as I know)
- * Only protection no unprotection, "chip erase" from bootloader only
- * clears the flash but does no real "chip erase" (this is not possible
- * with a bootloader as far as I know)
- * Keep this undefined!
- */
-//#define WRITELOCKBITS
-
-/*
- * define the following if the bootloader should not output
- * itself at flash read (will fake an empty boot-section)
- */
-//#define READ_PROTECT_BOOTLOADER
-
-
-#define VERSION_HIGH '0'
-#define VERSION_LOW  '8'
-
-#define GET_LOCK_BITS           0x0001
-#define GET_LOW_FUSE_BITS       0x0000
-#define GET_HIGH_FUSE_BITS      0x0003
-#define GET_EXTENDED_FUSE_BITS  0x0002
-
-
 #include <stdint.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -130,6 +52,7 @@
 #include <util/delay.h>
 
 #include "chipdef.h"
+#include "main.h"
 #include "df4iah_probe.h"
 #include "df4iah_serial.h"
 #include "df4iah_usb.h"
@@ -193,7 +116,6 @@ void __vector_default(void) { ; }
  *
  */
 
-
 //EMPTY_INTERRUPT(INT0_vect);
 //EMPTY_INTERRUPT(INT1_vect);
 //EMPTY_INTERRUPT(PCINT0_vect);
@@ -226,7 +148,7 @@ ISR(INT1_vect) {
 }
 
 
-void vectortable_to_bootloader(void) {
+static inline void vectortable_to_bootloader(void) {
 	asm volatile									// set active vector table into the Bootloader section
 	(
 		"ldi r24, %1\n\t"
@@ -241,44 +163,22 @@ void vectortable_to_bootloader(void) {
 	);
 }
 
-
-int main(void)
-{
-	uint16_t address = 0;
-	uint8_t device = 0, val;
-
-	vectortable_to_bootloader();
-	init_probe();
-	//init_wdt();
-
+static inline void init_wdt() {
 #ifdef DISABLE_WDT_AT_STARTUP
-#ifdef WDT_OFF_SPECIAL
-#warning "using target specific watchdog_off"
+# ifdef WDT_OFF_SPECIAL
+#   warning "using target specific watchdog_off"
 	bootloader_wdt_off();
-#else
+# else
 	cli();
 	wdt_reset();
 	wdt_disable();
+# endif
 #endif
-#endif
+}
 
-	
-#ifdef START_POWERSAVE
-	uint8_t OK = 1;
-#endif
-
-	// set baud rate
-	UART_BAUD_HIGH = ((UART_CALC_BAUDRATE(BAUDRATE)>>8) & 0xFF);
-	UART_BAUD_LOW  = ( UART_CALC_BAUDRATE(BAUDRATE)     & 0xFF);
-
-#ifdef UART_DOUBLESPEED
-	UART_STATUS = (1<<UART_DOUBLE);
-#endif
-
-	UART_CTRL  = UART_CTRL_DATA;
-	UART_CTRL2 = UART_CTRL2_DATA;
-	
 #if defined(START_POWERSAVE)
+static void loop_powersave_loop()
+{
 	/*
 		This is an adoption of the Butterfly Bootloader startup-sequence.
 		It may look a little strange but separating the login-loop from
@@ -310,13 +210,15 @@ int main(void)
 			} else {
 				sendchar('?');
 			}
-	        }
+		}
 
 			// power-save code here
 	}
+}
 
 #elif defined(START_SIMPLE)
-
+static inline void simple_check()
+{
 	if ((BLPIN & (1<<BLPNUM)) && (*((unsigned short*) 0x0000) == 0x0c94)) {
 		// jump to main app if pin is not grounded
 		BLPORT &= ~(1<<BLPNUM);						// set to default
@@ -325,12 +227,14 @@ int main(void)
 #endif
 		jump_to_app();								// jump to application sector
 	}
+}
 
 #elif defined(START_WAIT)
-
+static inline void wait_loop()
+{
 	uint16_t cnt = 0;
 
-	while (1) {
+	for(;;) {
 		if (UART_STATUS & (1<<UART_RXREADY))
 			if (UART_DATA == START_WAIT_UARTCHAR)
 				break;
@@ -343,6 +247,31 @@ int main(void)
 		_delay_ms(10);
 	}
 	send_boot();
+}
+#endif
+
+
+int main(void)
+{
+	uint16_t address = 0;
+	uint8_t device = 0, val;
+#ifdef START_POWERSAVE
+	uint8_t OK = 1;
+#endif
+
+	vectortable_to_bootloader();
+	init_probe();
+	init_wdt();
+	init_serial();
+
+#if defined(START_POWERSAVE)
+	powersave_loop();
+
+#elif defined(START_SIMPLE)
+	simple_check();
+
+#elif defined(START_WAIT)
+	wait_loop();
 
 #elif defined(START_BOOTICE)
 #warning "BOOTICE mode - no startup-condition"

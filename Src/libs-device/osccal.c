@@ -8,6 +8,9 @@
 
 #include <avr/io.h>
 
+#include "osccal.h"
+
+
 #ifndef uchar
 #define uchar   unsigned char
 #endif

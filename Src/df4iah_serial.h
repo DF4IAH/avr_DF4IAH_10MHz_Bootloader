@@ -33,18 +33,14 @@
 #include "chipdef.h"
 
 
-
+void init_serial();
 void sendchar(uint8_t data);
-
 uint8_t recvchar(void);
-
 void recvBuffer(pagebuf_t size);
 
 // --
 
 void send_boot(void);
-
 void ser_error_msg();
-
 
 #endif /* DF4IAH_SERIAL_H_ */

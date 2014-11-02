@@ -22,9 +22,3 @@ void usbFunctionWriteOut()
 {
 
 }
-
-int usbMeasureFrameLength()
-{
-	// TODO this is a fake value for SOF metering
-	return 1;
-}

@@ -15,7 +15,5 @@ void usbFunctionWrite();
 
 void usbFunctionWriteOut();
 
-int usbMeasureFrameLength();
-
 
 #endif /* DF4IAH_USB_H_ */
