@@ -86,25 +86,6 @@
 #define GET_EXTENDED_FUSE_BITS  0x0002
 
 
-static inline void vectortable_to_bootloader(void);
-static inline void init_wdt();
-
-
-#if defined(START_POWERSAVE)
-
-static void loop_powersave_loop();
-
-#elif defined(START_SIMPLE)
-
-static inline void simple_check();
-
-#elif defined(START_WAIT)
-
-static inline void wait_loop();
-
-#endif
-
-
 int main(void);
 
 #endif /* MAIN_H_ */

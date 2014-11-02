@@ -9,11 +9,6 @@
 #define DF4IAH_USB_H_
 
 
-void usbFunctionSetup();
-
-void usbFunctionWrite();
-
-void usbFunctionWriteOut();
-
+void init_usb();
 
 #endif /* DF4IAH_USB_H_ */

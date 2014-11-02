@@ -25,11 +25,11 @@ section at the end of this file).
 
 /* ---------------------------- Hardware Config ---------------------------- */
 
-#define USB_CFG_IOPORTNAME      D
+#define USB_CFG_IOPORTNAME      C
 /* This is the port where the USB bus is connected. When you configure it to
  * "B", the registers PORTB, PINB and DDRB will be used.
  */
-#define USB_CFG_DMINUS_BIT      4
+#define USB_CFG_DMINUS_BIT      3
 /* This is the bit number in USB_CFG_IOPORT where the USB D- line is connected.
  * This may be any bit in the port.
  */
@@ -123,18 +123,18 @@ section at the end of this file).
  * The value is in milliamperes. [It will be divided by two since USB
  * communicates power requirements in units of 2 mA.]
  */
-#define USB_CFG_IMPLEMENT_FN_WRITE      0
+#define USB_CFG_IMPLEMENT_FN_WRITE      1
 /* Set this to 1 if you want usbFunctionWrite() to be called for control-out
  * transfers. Set it to 0 if you don't need it and want to save a couple of
  * bytes.
  */
-#define USB_CFG_IMPLEMENT_FN_READ       0
+#define USB_CFG_IMPLEMENT_FN_READ       1
 /* Set this to 1 if you need to send control replies which are generated
  * "on the fly" when usbFunctionRead() is called. If you only want to send
  * data from a static buffer, set it to 0 and return the data from
  * usbFunctionSetup(). This saves a couple of bytes.
  */
-#define USB_CFG_IMPLEMENT_FN_WRITEOUT   1
+#define USB_CFG_IMPLEMENT_FN_WRITEOUT   0
 /* Define this to 1 if you want to use interrupt-out (or bulk out) endpoints.
  * You must implement the function usbFunctionWriteOut() which receives all
  * interrupt/bulk data sent to any endpoint other than 0. The endpoint number
@@ -376,7 +376,7 @@ section at the end of this file).
 /* The following configurations have working defaults in usbdrv.h. You
  * usually don't need to set them explicitly. Only if you want to run
  * the driver on a device which is not yet supported or with a compiler
- * which is not fully supported (such as IAR C) or if you use a differnt
+ * which is not fully supported (such as IAR C) or if you use a different
  * interrupt than INT0, you may have to define some of these.
  */
 /* #define USB_INTR_CFG            MCUCR */

@@ -59,4 +59,7 @@ void    calibrateOscillator(void);
  */
 
 
+int usbMeasureFrameLength();  // XXX to make the compiler happy
+
+
 #endif /* __OSCCAL_H_INCLUDED__ */

@@ -57,6 +57,7 @@
 #include "df4iah_serial.h"
 #include "df4iah_usb.h"
 #include "df4iah_memory.h"
+#include "usbdrv/usbdrv.h"
 
 
 
@@ -262,6 +263,7 @@ int main(void)
 	vectortable_to_bootloader();
 	init_probe();
 	init_wdt();
+	init_usb();
 	init_serial();
 
 #if defined(START_POWERSAVE)
@@ -281,6 +283,8 @@ int main(void)
 #endif
 
 	for(;;) {
+		usbPoll();
+
 		val = recvchar();
 		// Autoincrement?
 		if (val == 'a') {
