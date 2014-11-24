@@ -6,9 +6,10 @@
 				<macros>
 					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
 					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x7b80"/>
-					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
 					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
+					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
 					<stringMacro name="MT_Bootloader_Serial" type="VALUE_TEXT" value="0x7a00"/>
+					<stringMacro name="MT_Bootloader_ClkPullPwm" type="VALUE_TEXT" value="0x7f80"/>
 					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7c00"/>
 				</macros>
 				<externalSettings/>
@@ -84,12 +85,13 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.release.1223594858" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<macros>
 					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
-					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x7b80"/>
-					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
 					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
+					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7e00"/>
+					<stringMacro name="MT_Bootloader_ClkPullPwm" type="VALUE_TEXT" value="0x7b00"/>
+					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7c00"/>
+					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x7b80"/>
 					<stringMacro name="MT_Bootloader_Serial" type="VALUE_TEXT" value="0x7a00"/>
 					<stringMacro name="DEBUG" type="VALUE_TEXT" value="1"/>
-					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7c00"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -127,6 +129,7 @@
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_PROBE=${MT_Bootloader_Probe}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_SERIAL=${MT_Bootloader_Serial}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_USB=${MT_Bootloader_Usb}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_CLKPULLPWM=${MT_Bootloader_ClkPullPwm}"/>
 								</option>
 								<option id="de.innot.avreclipse.compiler.option.undef.79460396" name="Undefine Syms (-U)" superClass="de.innot.avreclipse.compiler.option.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__AVR_ATmega16__"/>
@@ -138,7 +141,7 @@
 								<option id="de.innot.avreclipse.cppcompiler.option.optimize.134911307" name="Optimization Level" superClass="de.innot.avreclipse.cppcompiler.option.optimize" value="de.innot.avreclipse.cppcompiler.optimize.size" valueType="enumerated"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.linker.winavr.app.release.18715376" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.release">
-								<option id="de.innot.avreclipse.linker.option.otherlinkargs.932955181" name="Other Arguments" superClass="de.innot.avreclipse.linker.option.otherlinkargs" value="-Wl,--section-start=.text=${MT_Bootloader_Address}  -Wl,--section-start=.df4iah_memory=${MT_Bootloader_Memory}  -Wl,--section-start=.df4iah_probe=${MT_Bootloader_Probe}  -Wl,--section-start=.df4iah_serial=${MT_Bootloader_Serial}  -Wl,--section-start=.df4iah_usb=${MT_Bootloader_Usb}" valueType="string"/>
+								<option id="de.innot.avreclipse.linker.option.otherlinkargs.932955181" name="Other Arguments" superClass="de.innot.avreclipse.linker.option.otherlinkargs" value="-Wl,--section-start=.text=${MT_Bootloader_Address}  -Wl,--section-start=.df4iah_memory=${MT_Bootloader_Memory}  -Wl,--section-start=.df4iah_probe=${MT_Bootloader_Probe}  -Wl,--section-start=.df4iah_serial=${MT_Bootloader_Serial}  -Wl,--section-start=.df4iah_usb=${MT_Bootloader_Usb} -Wl,--section-start=.df4iah_clkpullpwm=${MT_Bootloader_ClkPullPwm}" valueType="string"/>
 								<inputType id="de.innot.avreclipse.tool.linker.input.2143390154" name="OBJ Files" superClass="de.innot.avreclipse.tool.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

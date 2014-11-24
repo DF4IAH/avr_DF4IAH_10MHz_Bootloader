@@ -62,9 +62,11 @@
 #define WAIT_VALUE 100 /* here: 100*10ms = 1000ms = 1sec */
 
 
-#define USE_SERIAL 1
-// #define USE_USB 1
-
+#if 1
+# define USE_USB 1
+#else
+# define USE_SERIAL 1
+#endif
 
 
 #if defined(USE_SERIAL)
@@ -75,7 +77,7 @@
 #elif defined(USE_USB)
 # define sendchar(x)  sendchar_usb(x)
 # define recvchar()  recvchar_usb()
-# define recvBuffer()  recvBuffer_usb()
+# define recvBuffer(x)  recvBuffer_usb(x)
 
 #else
 # error "At least one of USE_SERIAL or USE_USB has to be enabled"
@@ -85,16 +87,18 @@
 #define VERSION_HIGH '0'
 #define VERSION_LOW  '8'
 
-#define GET_LOCK_BITS           0x0001
-#define GET_LOW_FUSE_BITS       0x0000
-#define GET_HIGH_FUSE_BITS      0x0003
-#define GET_EXTENDED_FUSE_BITS  0x0002
+#ifndef GET_LOCK_BITS
+# define GET_LOCK_BITS           0x0001
+# define GET_LOW_FUSE_BITS       0x0000
+# define GET_HIGH_FUSE_BITS      0x0003
+# define GET_EXTENDED_FUSE_BITS  0x0002
+#endif
 
 
 // STRINGS IN CODE SECTION
 #define gcs_AVR_len  7
 #define gcs_FDL_len  6
-#define gcs_E01_len  8
+#define gcs_E99_len  8
 
 
 void send_boot_msg(void);

@@ -60,6 +60,6 @@ void recvBuffer_serial(pagebuf_t size)
 	uint8_t *tmp = gBuffer;
 
 	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
-		*tmp++ = (cnt < size) ? recvchar() : 0xFF;
+		*tmp++ = (cnt < size) ? recvchar_serial() : 0xFF;
 	}
 }

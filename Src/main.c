@@ -59,6 +59,7 @@
 #include "df4iah_serial.h"
 #include "df4iah_usb.h"
 #include "df4iah_memory.h"
+#include "df4iah_clkPullPwm.h"
 #include "usbdrv/usbdrv.h"
 
 
@@ -71,9 +72,9 @@ void (*jump_to_app)(void) = 0x0000;
 
 
 // STRINGS IN CODE SECTION
-PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T'};
-PROGMEM const char gcs_FDL[gcs_FDL_len] = { 'F', 'D', 'L', ' ', VERSION_HIGH, VERSION_LOW};
-PROGMEM const char gcs_E01[gcs_E01_len] = { '*', 'E', 'R', 'R', '-', '9', '9', '*'};
+PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T' };
+PROGMEM const char gcs_FDL[gcs_FDL_len] = { 'F', 'D', 'L', ' ', VERSION_HIGH, VERSION_LOW };
+PROGMEM const char gcs_E99[gcs_E99_len] = { '*', 'E', 'R', 'R', '-', '9', '9', '*' };
 
 
 // CODE SECTION
@@ -272,8 +273,8 @@ void send_boot_msg()
 
 void send_error_msg()
 {
-	for (int i = 0; i < gcs_FDL_len; ++i) {
-		sendchar(gcs_FDL[i]);
+	for (int i = 0; i < gcs_E99_len; ++i) {
+		sendchar(gcs_E99[i]);
 	}
 
 	cli();
@@ -294,6 +295,7 @@ int main(void)
 	init_wdt();
 	init_usb();
 	init_serial();
+	init_clkPullPwm();
 
     sei();							/* ENABLE interrupt */
 
@@ -315,11 +317,11 @@ int main(void)
 
 	for(;;) {
 		val = recvchar();
-		// Autoincrement?
+		// Auto-Increment?
 		if (val == 'a') {
-			sendchar('Y');							// autoincrement is quicker
+			sendchar('Y');							// auto-increment is quicker
 
-		//write address
+		// Write address
 		} else if (val == 'A') {
 			address = recvchar();					// read address 8 MSB
 			address = (address<<8) | recvchar();

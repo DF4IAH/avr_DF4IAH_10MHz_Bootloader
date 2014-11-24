@@ -7,11 +7,15 @@
 
 #include "df4iah_usb.h"
 
+#include <stdint.h>
 #include <avr/pgmspace.h>   /* required by usbdrv.h */
 #include <avr/wdt.h>
 #include <util/delay.h>
 
 #include "usbdrv/usbdrv.h"
+
+
+extern uint8_t gBuffer[SPM_PAGESIZE];
 
 
 #ifdef RELEASE
@@ -31,6 +35,35 @@ void init_usb()
     usbDeviceConnect();
 }
 
+#ifdef RELEASE
+__attribute__((section(".df4iah_usb"), aligned(2)))
+#endif
+void sendchar_usb(uint8_t data)
+{
+	// XXX TODO
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_usb"), aligned(2)))
+#endif
+uint8_t recvchar_usb(void)
+{
+
+	return 0;  // XXX TODO
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_usb"), aligned(2)))
+#endif
+void recvBuffer_usb(pagebuf_t size)
+{
+	pagebuf_t cnt;
+	uint8_t *tmp = gBuffer;
+
+	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
+		*tmp++ = (cnt < size) ? recvchar_usb() : 0xFF;
+	}
+}
 
 // -- 8< --
 
