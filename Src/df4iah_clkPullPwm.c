@@ -74,12 +74,12 @@ __attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
 void debug_endlessTogglePin()
 {
 	// set the DEBUG port to output
-	PWM_TOGGLEPIN_PORT |= (1<<PWM_TOGGLEPIN_PIN);
-	PWM_TOGGLEPIN_DDR |= (1<<PWM_TOGGLEPIN_PIN);
+	PWMTOGGLEPIN_PORT |= (1<<PWMTOGGLEPIN_PNUM);
+	PWMTOGGLEPIN_DDR |= (1<<PWMTOGGLEPIN_PNUM);
 
 	for(;;)
 	{
-		PWM_TOGGLEPIN_PIN = (1<<PWM_TOGGLEPIN_PIN);
+		PWMTOGGLEPIN_PIN = (1<<PWMTOGGLEPIN_PNUM);
 
 		_delay_ms(1);
 		wdt_reset();

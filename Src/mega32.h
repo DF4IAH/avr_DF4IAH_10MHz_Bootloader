@@ -35,14 +35,15 @@
  * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
  * (active low) to start the bootloader
  */
-#define PROBEPORT		PORTC
-#define PROBEDDR		DDRC
-#define PROBEPIN		PINC
-#define PROBEPNUM		PINC4		// JP3 BootLoader
+#define PROBE_PORT		PORTC
+#define PROBE_DDR		DDRC
+#define PROBE_PIN		PINC
+#define PROBE_PNUM		PINC4		// JP3 BootLoader
 
 /* PWM Debugging toggle pin */
-#define PWM_TOGGLEPIN_DDR	DDRD
-#define PWM_TOGGLEPIN_PORT	PORTD
-#define PWM_TOGGLEPIN_PIN	PIN3
+#define PWMTOGGLEPIN_DDR	DDRD
+#define PWMTOGGLEPIN_PORT	PORTD
+#define PWMTOGGLEPIN_PIN	PIND
+#define PWMTOGGLEPIN_PNUM	PIN3	// PD3(INT1) - Pin 5
 
 #endif // #ifndef _MEGA32_H_
