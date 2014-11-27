@@ -10,6 +10,7 @@
 #define SIG_BYTE2	0x95
 #define SIG_BYTE3	0x02
 
+/* USART */
 #define UART_BAUD_HIGH	UBRR0H
 #define UART_BAUD_LOW	UBRR0L
 #define UART_STATUS	UCSR0A
@@ -21,5 +22,13 @@
 #define UART_CTRL2	UCSR0C
 #define UART_CTRL2_DATA	((1<<UMSEL00) | (1<<UCSZ01) | (1<<UCSZ00))
 #define UART_DATA	UDR0
+
+/* Timer-n compare output */
+#define DDR_OC1A_REG	DDRB
+#define DDR_OC1A	PB1
+#define DDR_OC1B_REG	DDRB
+#define DDR_OC1B	PB2
+#define DDR_OC2_REG	DDRB
+#define DDR_OC2	PB3
 
 #endif // #ifndef _MEGA32_H_
