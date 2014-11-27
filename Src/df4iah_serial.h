@@ -32,7 +32,7 @@
 //#define UART_CALC_BAUDRATE(baudRate) ((uint32_t)((F_CPU) + ((uint32_t)baudRate * 8UL)) / ((uint32_t)(baudRate) * 16UL) - 1)
 
 // DF4IAH  @see page 178ff
-#define UART_CALC_BAUDRATE(baudRate) (((((uint32_t)(F_CPU)) >> 4 + ((uint32_t)baudRate >> 1)) / ((uint32_t)baudRate)) - 1)
+#define UART_CALC_BAUDRATE(baudRate) ((((((uint32_t)(F_CPU)) >> 4) + ((uint32_t)baudRate >> 1)) / ((uint32_t)baudRate)) - 1)
 #endif
 
 
