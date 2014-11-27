@@ -7,6 +7,8 @@
 
 
 #include <avr/io.h>
+#include <avr/wdt.h>
+#include <util/delay.h>
 
 #include "chipdef.h"
 #include "df4iah_clkPullPwm.h"
@@ -43,5 +45,43 @@ void init_clkPullPwm()
 
 	// set the timer-1 PWM-A compare output: setting data port for output
 	DDR_OC1A_REG |= (1<<DDR_OC1A);
+}
 
+#ifdef RELEASE
+__attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
+#endif
+void close_clkPullPwm()
+{
+	// reset timer-1 PWM-A compare output port
+	DDR_OC1A_REG &= ~(1<<DDR_OC1A);
+
+	// stop timer-1
+	TCCR1B = (0b00<<WGM12) | (0b000<<CS10);
+
+	// stop timer-1 compare output
+	TCCR1A = (0b00<<COM1A0) | (0b00<<WGM10);
+
+	// set the timer-1 compare-A value to zero.
+	OCR1AL = OCR1AH = 0x00;
+
+	// set the timer-1 counter to zero.
+	TCNT1L = TCNT1H = 0x00;
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
+#endif
+void debug_endlessTogglePin()
+{
+	// set the DEBUG port to output
+	PWM_TOGGLEPIN_PORT |= (1<<PWM_TOGGLEPIN_PIN);
+	PWM_TOGGLEPIN_DDR |= (1<<PWM_TOGGLEPIN_PIN);
+
+	for(;;)
+	{
+		PWM_TOGGLEPIN_PIN = (1<<PWM_TOGGLEPIN_PIN);
+
+		_delay_ms(1);
+		wdt_reset();
+	}
 }

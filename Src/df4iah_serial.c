@@ -36,6 +36,16 @@ void init_serial()
 #ifdef RELEASE
 __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
+void close_serial()
+{
+#ifdef UART_DOUBLESPEED
+		UART_STATUS &= ~(1<<UART_DOUBLE);
+#endif
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_serial"), aligned(2)))
+#endif
 void sendchar_serial(uint8_t data)
 {
 	while (!(UART_STATUS & (1<<UART_TXREADY)));

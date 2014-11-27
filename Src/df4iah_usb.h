@@ -13,6 +13,7 @@
 
 
 void init_usb();
+void close_usb();
 void sendchar_usb(uint8_t data);
 uint8_t recvchar_usb(void);
 void recvBuffer_usb(pagebuf_t size);

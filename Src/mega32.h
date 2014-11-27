@@ -31,4 +31,18 @@
 #define DDR_OC2_REG	DDRB
 #define DDR_OC2	PB3
 
+/*
+ * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
+ * (active low) to start the bootloader
+ */
+#define PROBEPORT		PORTC
+#define PROBEDDR		DDRC
+#define PROBEPIN		PINC
+#define PROBEPNUM		PINC4		// JP3 BootLoader
+
+/* PWM Debugging toggle pin */
+#define PWM_TOGGLEPIN_DDR	DDRD
+#define PWM_TOGGLEPIN_PORT	PORTD
+#define PWM_TOGGLEPIN_PIN	PIN3
+
 #endif // #ifndef _MEGA32_H_

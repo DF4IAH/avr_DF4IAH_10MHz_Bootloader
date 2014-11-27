@@ -26,13 +26,21 @@ void init_usb()
 	usbInit();
     usbDeviceDisconnect();			/* enforce re-enumeration, do this while interrupts are disabled! */
 
-    int i = 250;
+    uint8_t i = 250;
     while (--i) {					/* fake USB disconnect for > 250 ms */
         wdt_reset();
         _delay_ms(1);
     }
 
     usbDeviceConnect();
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_usb"), aligned(2)))
+#endif
+void close_usb()
+{
+	usbDeviceDisconnect();
 }
 
 #ifdef RELEASE

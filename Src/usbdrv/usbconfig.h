@@ -219,7 +219,7 @@ section at the end of this file).
 /* -------------------------- Device Description --------------------------- */
 
 //#define  USB_CFG_VENDOR_ID       0xc0, 0x16 /* = 0x16c0 = 5824 = voti.nl */
-#define  USB_CFG_VENDOR_ID       0x03, 0x04
+#define  USB_CFG_VENDOR_ID       0x03, 0x04 /* = 0x0403 = 1027 */
 /* USB vendor ID for the device, low byte first. If you have registered your
  * own Vendor ID, define it here. Otherwise you may use one of obdev's free
  * shared VID/PID pairs. Be sure to read USB-IDs-for-free.txt for rules!
@@ -229,7 +229,7 @@ section at the end of this file).
  * the implications!
  */
 //#define  USB_CFG_DEVICE_ID       0xdc, 0x05 /* = 0x05dc = 1500 */
-#define  USB_CFG_DEVICE_ID       0x01, 0x60
+#define  USB_CFG_DEVICE_ID       0x01, 0x60  /* = 0x6001 = 24577 */
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
  * or if you have licensed a PID from somebody else, define it here. Otherwise

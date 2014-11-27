@@ -86,7 +86,6 @@ PROGMEM const char gcs_E99[gcs_E99_len] = { '*', 'E', 'R', 'R', '-', '9', '9', '
 #if defined(BOOTLOADERHASNOVECTORS)
 # warning "This Bootloader does not link interrupt vectors - see makefile"
 /* make the linker happy - it wants to see __vector_default */
-// void __vector_default(void) { ; }
 void __vector_default(void) { ; }
 #endif
 
@@ -152,9 +151,9 @@ void __vector_default(void) { ; }
 //EMPTY_INTERRUPT(TWI_vect);
 //EMPTY_INTERRUPT(SPM_READY_vect);
 
-ISR(INT1_vect) {
-	send_error_msg();
-}
+//ISR(INT1_vect) {
+//	send_error_msg();
+//}
 
 
 static inline void vectortable_to_bootloader(void) {
@@ -179,6 +178,7 @@ static inline void init_wdt() {
 	bootloader_wdt_off();
 # else
 	cli();
+
 	wdt_reset();
 	wdt_disable();
 # endif
@@ -195,12 +195,9 @@ static void loop_powersave_loop()
 	    etc.).
 	*/
 	for (;OK;) {
-		if ((BLPIN & (1<<BLPNUM)) && (*((unsigned char*) 0x0000) != 0xff)) {
-			// jump to main app if pin is not grounded
-			BLPORT &= ~(1<<BLPNUM);					// set to default
-#ifdef UART_DOUBLESPEED
-			UART_STATUS &= ~(1<<UART_DOUBLE);
-#endif
+		if ((check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
+			close_serial();
+			close_probe();
 			jump_to_app();							// jump to application sector
 
 		} else {
@@ -228,12 +225,13 @@ static void loop_powersave_loop()
 #elif defined(START_SIMPLE)
 static inline void simple_check()
 {
-	if ((BLPIN & (1<<BLPNUM)) && (*((unsigned short*) 0x0000) == 0x0c94)) {
-		// jump to main app if pin is not grounded
-		BLPORT &= ~(1<<BLPNUM);						// set to default
-#ifdef UART_DOUBLESPEED
-		UART_STATUS &= ~(1<<UART_DOUBLE);
-#endif
+	// check for jumper-setting and for a valid jump-table entry
+	if ((check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
+		close_serial();
+		close_clkPullPwm();
+		close_probe();
+		close_usb();
+
 		jump_to_app();								// jump to application sector
 	}
 }
@@ -262,18 +260,18 @@ static inline void wait_loop()
 
 void send_boot_msg()
 {
-	for (int i = 0; i < gcs_FDL_len; ++i) {
+	for (uint8_t i = 0; i < gcs_FDL_len; ++i) {
 		sendchar(gcs_FDL[i]);
 	}
 
-//	for (int i = 0; i < gcs_AVR_len; ++i) {
+//	for (uint8_t i = 0; i < gcs_AVR_len; ++i) {
 //		sendchar(gcs_AVR[i]);
 //	}
 }
 
 void send_error_msg()
 {
-	for (int i = 0; i < gcs_E99_len; ++i) {
+	for (uint8_t i = 0; i < gcs_E99_len; ++i) {
 		sendchar(gcs_E99[i]);
 	}
 
@@ -284,20 +282,20 @@ void send_error_msg()
 
 int main(void)
 {
-	uint16_t address = 0;
-	uint8_t device = 0, val;
+//	uint16_t address = 0;
+//	uint8_t device = 0, val;
 #ifdef START_POWERSAVE
 	uint8_t OK = 1;
 #endif
 
 	vectortable_to_bootloader();
-	init_probe();
 	init_wdt();
 	init_usb();
-	init_serial();
+	init_probe();
 	init_clkPullPwm();
+	init_serial();
 
-    sei();							/* ENABLE interrupt */
+    sei();											// ENABLE interrupt
 
 #if defined(START_POWERSAVE)
 	powersave_loop();
@@ -315,6 +313,8 @@ int main(void)
 # error "Select START_ condition for bootloader in main.c"
 #endif
 
+	debug_endlessTogglePin();						// XXX BLOCKING call for ever
+#if 0  // XXX enable after DEBUGGING
 	for(;;) {
 		val = recvchar();
 		// Auto-Increment?
@@ -461,6 +461,7 @@ int main(void)
 		usbPoll();
 #endif
 	}
+#endif  // XXX enable after DEBUGGING
 
 	return 0;
 }

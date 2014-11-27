@@ -11,17 +11,8 @@
 #include "chipdef.h"
 
 
-/*
- * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
- * (active low) to start the bootloader
- */
-#define BLPORT		PORTC
-#define BLDDR		DDRC
-#define BLPIN		PINC
-#define BLPNUM		PINC4
-
-
 void init_probe();
-
+void close_probe();
+uint8_t check_jumper();
 
 #endif /* DF4IAH_PROBE_H_ */
