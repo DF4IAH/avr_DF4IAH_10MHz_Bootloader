@@ -18,11 +18,11 @@ void init_probe()
 {
 	MCUCR &= ~(1<<PUD);								// PullUp Disable off
 
-	PROBE_DDR  &= ~(1<<PROBE_PNUM);							// set probe line as input
-	PROBE_PORT |=  (1<<PROBE_PNUM);							// and enable the pullup
+	PROBE_DDR  &= ~(1<<PROBE_PNUM);					// set probe line as input
+	PROBE_PORT |=  (1<<PROBE_PNUM);					// and enable the pullup
 
-	uint8_t dlyCnt = 250;
-	while (--dlyCnt) {								// delay for reliable detection
+	uint8_t dlyCnt = 10;
+	while (--dlyCnt) {								// delay for a reliable detection
         wdt_reset();
         _delay_ms(1);
     }
