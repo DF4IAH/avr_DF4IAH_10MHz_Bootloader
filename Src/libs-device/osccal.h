@@ -50,16 +50,14 @@ deviation! All other frequency modules require at least 0.2% precision.
 #ifndef __OSCCAL_H_INCLUDED__
 #define __OSCCAL_H_INCLUDED__
 
-void    calibrateOscillator(void);
+#ifdef USB_CFG_HAVE_MEASURE_FRAME_LENGTH
+void calibrateOscillator(void);
+#endif
 /* This function calibrates the RC oscillator so that the CPU runs at F_CPU.
  * It MUST be called immediately after the end of a USB RESET condition!
  * Disable all interrupts during the call!
  * It is recommended that you store the resulting value in EEPROM so that a
  * good guess value is available after the next reset.
  */
-
-
-int usbMeasureFrameLength();  // XXX to make the compiler happy
-
 
 #endif /* __OSCCAL_H_INCLUDED__ */

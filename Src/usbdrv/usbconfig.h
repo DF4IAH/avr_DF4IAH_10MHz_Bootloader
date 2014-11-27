@@ -95,11 +95,11 @@ section at the end of this file).
  * Since the token is toggled BEFORE sending any data, the first packet is
  * sent with the opposite value of this configuration!
  */
-#define USB_CFG_IMPLEMENT_HALT          0
+#define USB_CFG_IMPLEMENT_HALT          1
 /* Define this to 1 if you also want to implement the ENDPOINT_HALT feature
  * for endpoint 1 (interrupt endpoint). Although you may not need this feature,
  * it is required by the standard. We have made it a config option because it
- * bloats the code considerably.
+ * bloats the code considerably.   DF4IAH: by 230 bytes
  */
 #define USB_CFG_SUPPRESS_INTR_CODE      0
 /* Define this to 1 if you want to declare interrupt-in endpoints, but don't
@@ -203,11 +203,11 @@ section at the end of this file).
  * usbFunctionWrite(). Use the global usbCurrentDataToken and a static variable
  * for each control- and out-endpoint to check for duplicate packets.
  */
-#define USB_CFG_HAVE_MEASURE_FRAME_LENGTH   1
+// #define USB_CFG_HAVE_MEASURE_FRAME_LENGTH   1
 /* define this macro to 1 if you want the function usbMeasureFrameLength()
  * compiled in. This function can be used to calibrate the AVR's RC oscillator.
  */
-#define USB_USE_FAST_CRC                0
+#define USB_USE_FAST_CRC                1
 /* The assembler module has two implementations for the CRC algorithm. One is
  * faster, the other is smaller. This CRC routine is only used for transmitted
  * messages where timing is not critical. The faster routine needs 31 cycles
@@ -218,8 +218,8 @@ section at the end of this file).
 
 /* -------------------------- Device Description --------------------------- */
 
-//#define  USB_CFG_VENDOR_ID       0xc0, 0x16 /* = 0x16c0 = 5824 = voti.nl */
-#define  USB_CFG_VENDOR_ID       0x03, 0x04 /* = 0x0403 = 1027 */
+//#define  USB_CFG_VENDOR_ID       0xc0, 0x16 /* = 0x16c0 = 5824 = Van Ooijen Technische Informatica  (voti.nl) */
+#define  USB_CFG_VENDOR_ID       0x03, 0x04   /* = 0x0403 = 1027 = Future Technology Devices International, Ltd */
 /* USB vendor ID for the device, low byte first. If you have registered your
  * own Vendor ID, define it here. Otherwise you may use one of obdev's free
  * shared VID/PID pairs. Be sure to read USB-IDs-for-free.txt for rules!
@@ -228,8 +228,8 @@ section at the end of this file).
  * with libusb: 0x16c0/0x5dc.  Use this VID/PID pair ONLY if you understand
  * the implications!
  */
-//#define  USB_CFG_DEVICE_ID       0xdc, 0x05 /* = 0x05dc = 1500 */
-#define  USB_CFG_DEVICE_ID       0x01, 0x60  /* = 0x6001 = 24577 */
+//#define  USB_CFG_DEVICE_ID       0xdc, 0x05 /* = 0x05dc = 1500  = shared ID for use with libusb */
+#define  USB_CFG_DEVICE_ID       0x01, 0x60   /* = 0x6001 = 24577 = FT232 USB-Serial (UART) IC */
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
  * or if you have licensed a PID from somebody else, define it here. Otherwise

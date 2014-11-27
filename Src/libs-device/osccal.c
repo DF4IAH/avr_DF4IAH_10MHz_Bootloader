@@ -24,6 +24,7 @@
  * a USB RESET. We first do a binary search for the OSCCAL value and then
  * optimize this value with a neighborhood search.
  */
+#ifdef USB_CFG_HAVE_MEASURE_FRAME_LENGTH
 void    calibrateOscillator(void)
 {
 	uchar	step = 128;
@@ -53,6 +54,7 @@ void    calibrateOscillator(void)
     }
     OSCCAL = optimumValue;
 }
+#endif
 /*
 Note: This calibration algorithm may try OSCCAL values of up to 192 even if
 the optimum value is far below 192. It may therefore exceed the allowed clock

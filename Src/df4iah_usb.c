@@ -24,7 +24,8 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 void init_usb()
 {
 	usbInit();
-    usbDeviceDisconnect();			/* enforce re-enumeration, do this while interrupts are disabled! */
+	USB_INTR_ENABLE &= ~(_BV(USB_INTR_ENABLE_BIT));
+	usbDeviceDisconnect();			/* enforce re-enumeration, do this while interrupts are disabled! */
 
     uint8_t i = 250;
     while (--i) {					/* fake USB disconnect for > 250 ms */
@@ -33,6 +34,7 @@ void init_usb()
     }
 
     usbDeviceConnect();
+	USB_INTR_ENABLE |= _BV(USB_INTR_ENABLE_BIT);
 }
 
 #ifdef RELEASE
@@ -40,6 +42,7 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 #endif
 void close_usb()
 {
+	USB_INTR_ENABLE &= ~(_BV(USB_INTR_ENABLE_BIT));
 	usbDeviceDisconnect();
 }
 
