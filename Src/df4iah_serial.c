@@ -39,7 +39,7 @@ __attribute__((section(".df4iah_serial"), aligned(2)))
 void close_serial()
 {
 #ifdef UART_DOUBLESPEED
-		UART_STATUS &= ~(1<<UART_DOUBLE);
+		UART_STATUS &= ~(_BV(UART_DOUBLE));
 #endif
 }
 
@@ -48,7 +48,7 @@ __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
 void sendchar_serial(uint8_t data)
 {
-	while (!(UART_STATUS & (1<<UART_TXREADY)));
+	while (!(UART_STATUS & _BV(UART_TXREADY)));
 	UART_DATA = data;
 }
 
@@ -57,7 +57,7 @@ __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
 uint8_t recvchar_serial(void)
 {
-	while (!(UART_STATUS & (1<<UART_RXREADY)));
+	while (!(UART_STATUS & _BV(UART_RXREADY)));
 	return UART_DATA;
 }
 

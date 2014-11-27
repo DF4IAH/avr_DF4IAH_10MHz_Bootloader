@@ -290,8 +290,9 @@ int main(void)
 
 	vectortable_to_bootloader();
 	init_wdt();
-	init_usb();
-	init_probe();
+	debug_endlessTogglePin();						// XXX BLOCKING call forever, starts 327ms after power-up
+	init_usb();										// ends at 315 ms after power-up
+	init_probe();									// ends at 325 ms after power-up
 	init_clkPullPwm();
 	init_serial();
 
@@ -313,7 +314,6 @@ int main(void)
 # error "Select START_ condition for bootloader in main.c"
 #endif
 
-	debug_endlessTogglePin();						// XXX BLOCKING call for ever
 #if 0  // XXX enable after DEBUGGING
 	for(;;) {
 		val = recvchar();
