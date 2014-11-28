@@ -19,7 +19,7 @@ void init_probe()
 	MCUCR &= ~(1<<PUD);								// PullUp Disable off
 
 	PROBE_DDR  &= ~(_BV(PROBE_PNUM));				// set probe line as input
-	PROBE_PORT |=  _BV(PROBE_PNUM);					// and enable the pullup
+	PROBE_PORT |=  _BV(PROBE_PNUM);					// and enable the PullUp
 
 	uint8_t dlyCnt = 10;
 	while (--dlyCnt) {								// delay for a reliable detection
@@ -39,11 +39,11 @@ void close_probe()
 #ifdef RELEASE
 __attribute__((section(".df4iah_probe"), aligned(2)))
 #endif
-uint8_t check_jumper()
+inline uint8_t check_jumper()
 {
 	if (PROBE_PIN & _BV(PROBE_PNUM)) {
-		// pin is not grounded
-		return 1;
+		// pin is not grounded - JUMPER open
+		return 0;
 	}
-	return 0;
+	return 1;  // JUMPER closed
 }

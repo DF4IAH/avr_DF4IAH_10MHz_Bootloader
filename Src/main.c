@@ -178,7 +178,7 @@ static inline void init_wdt() {
 static inline void app_startup_check()
 {
 	// check for jumper-setting and for a valid jump-table entry
-	if ((check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
+	if ((!check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
 		close_probe();
 		jump_to_app();								// jump to application sector
 	}
@@ -187,23 +187,23 @@ static inline void app_startup_check()
 
 int main(void)
 {
-//	uint16_t address = 0;
-//	uint8_t device = 0, val;
-
 	vectortable_to_bootloader();
 	init_wdt();
 	init_probe();
 	app_startup_check();
 
-	init_clkPullPwm();
-	init_serial();
 	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
 
-//	debug_endlessTogglePin();						// XXX BLOCKING call forever, starts 327ms after power-up
+    init_clkPullPwm();
+	init_serial();
+
     for(;;) {
 		usbPoll();
 		debug_togglePin();							// XXX DEBUGGING
+
+		_delay_ms(1);
+        wdt_reset();
     }
 
 	return 0;

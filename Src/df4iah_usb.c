@@ -21,7 +21,6 @@ static uchar replyBuffer[8];
 
 static uchar prog_connected = PROG_UNCONNECTED;
 static uchar prog_state = PROG_STATE_IDLE;
-// static uchar prog_sck = USBASP_ISP_SCK_AUTO;
 
 static uchar prog_address_newmode = 0;
 static unsigned long prog_address;
@@ -42,8 +41,8 @@ void init_usb()
 
     uint8_t i = 250;
     while (--i) {					/* fake USB disconnect for > 250 ms */
-        wdt_reset();
         _delay_ms(1);
+        wdt_reset();
     }
 
     usbDeviceConnect();
