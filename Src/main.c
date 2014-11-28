@@ -34,14 +34,6 @@
 *  bootloader-section. 
 *
 ****************************************************************************/
-/*
-	TODOs:
-	- check lock-bits set
-	- __bad_interrupt still linked even with modified 
-	  linker-scripts which needs a default-handler,
-	  "wasted": 3 words for AVR5 (>8kB), 2 words for AVR4
-	- Check watchdog-disable-function in avr-libc.
-*/
 // tabsize: 4
 
 
@@ -186,98 +178,13 @@ static inline void init_wdt() {
 #endif
 }
 
-#if defined(START_POWERSAVE)
-static void loop_powersave_loop()
-{
-	/*
-		This is an adoption of the Butterfly Bootloader startup-sequence.
-		It may look a little strange but separating the login-loop from
-		the main parser-loop gives a lot of more possibilities (timeout, sleep-modes
-	    etc.).
-	*/
-	for (;OK;) {
-		if ((check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
-			close_serial();
-			close_probe();
-			jump_to_app();							// jump to application sector
-
-		} else {
-			val = recvchar();
-
-			/* ESC */
-			if (val == 0x1B) {
-				// AVRPROG connection
-				// wait for signon
-				while (val != 'S')
-					val = recvchar();
-
-				send_boot();						// report signon
-				OK = 0;
-
-			} else {
-				sendchar('?');
-			}
-		}
-
-			// power-save code here
-	}
-}
-
-#elif defined(START_SIMPLE)
-static inline void simple_check()
+static inline void app_startup_check()
 {
 	// check for jumper-setting and for a valid jump-table entry
 	if ((check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
-		close_serial();
-		close_clkPullPwm();
 		close_probe();
-		close_usb();
-
 		jump_to_app();								// jump to application sector
 	}
-}
-
-#elif defined(START_WAIT)
-static inline void wait_loop()
-{
-	uint16_t cnt = 0;
-
-	for(;;) {
-		if (UART_STATUS & (1<<UART_RXREADY))
-			if (UART_DATA == START_WAIT_UARTCHAR)
-				break;
-
-		if (cnt++ >= WAIT_VALUE) {
-			BLPORT &= ~(1<<BLPNUM);					// set to default
-			jump_to_app();							// jump to application sector
-		}
-
-		_delay_ms(10);
-	}
-	send_boot();
-}
-#endif
-
-
-void send_boot_msg()
-{
-	for (uint8_t i = 0; i < gcs_FDL_len; ++i) {
-		sendchar(gcs_FDL[i]);
-	}
-
-//	for (uint8_t i = 0; i < gcs_AVR_len; ++i) {
-//		sendchar(gcs_AVR[i]);
-//	}
-}
-
-void send_error_msg()
-{
-	for (uint8_t i = 0; i < gcs_E99_len; ++i) {
-		sendchar(gcs_E99[i]);
-	}
-
-	cli();
-	sleep_cpu();
 }
 
 
@@ -285,184 +192,21 @@ int main(void)
 {
 //	uint16_t address = 0;
 //	uint8_t device = 0, val;
-#ifdef START_POWERSAVE
-	uint8_t OK = 1;
-#endif
 
 	vectortable_to_bootloader();
 	init_wdt();
-	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
-	init_probe();									// ends at 325 ms after power-up
+	init_probe();
+	app_startup_check();
+
 	init_clkPullPwm();
 	init_serial();
-
+	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
 
-#if defined(START_POWERSAVE)
-	powersave_loop();
-
-#elif defined(START_SIMPLE)
-	simple_check();
-
-#elif defined(START_WAIT)
-	wait_loop();
-
-#elif defined(START_BOOTICE)
-# warning "BOOTICE mode - no startup-condition"
-
-#else
-# error "Select START_ condition for bootloader in main.c"
-#endif
-
-	debug_endlessTogglePin();						// XXX BLOCKING call forever, starts 327ms after power-up
-#if 0  // XXX enable after DEBUGGING
-	for(;;) {
-		val = recvchar();
-		// Auto-Increment?
-		if (val == 'a') {
-			sendchar('Y');							// auto-increment is quicker
-
-		// Write address
-		} else if (val == 'A') {
-			address = recvchar();					// read address 8 MSB
-			address = (address<<8) | recvchar();
-			sendchar('\r');
-
-		// Buffer load support
-		} else if (val == 'b') {
-			sendchar('Y');							// report buffer load supported
-			sendchar((sizeof(gBuffer) >> 8) & 0xFF);	// report buffer size in bytes
-			sendchar(sizeof(gBuffer) & 0xFF);
-
-		// Start buffer load
-		} else if (val == 'B') {
-			pagebuf_t size;
-			size = recvchar() << 8;					// load high byte of buffersize
-			size |= recvchar();						// load low byte of buffersize
-			val = recvchar();						// load memory type ('E' or 'F')
-			recvBuffer(size);
-
-			if (device == DEVTYPE) {
-				if (val == 'F') {
-					address = writeFlashPage(address, size);
-				} else if (val == 'E') {
-					address = writeEEpromPage(address, size);
-				}
-				sendchar('\r');
-			} else {
-				sendchar(0);
-			}
-
-		// Block read
-		} else if (val == 'g') {
-			pagebuf_t size;
-			size = recvchar() << 8;					// load high byte of buffersize
-			size |= recvchar();						// load low byte of buffersize
-			val = recvchar();						// get memtype
-
-			if (val == 'F') {
-				address = readFlashPage(address, size);
-			} else if (val == 'E') {
-				address = readEEpromPage(address, size);
-			}
-
-		// Chip erase
- 		} else if (val == 'e') {
-			if (device == DEVTYPE) {
-				eraseFlash();
-			}
-			sendchar('\r');
-
-		// Exit upgrade
-		} else if (val == 'E') {
-			wdt_enable(EXIT_WDT_TIME); 				// enable watchdog timer to give reset
-			sendchar('\r');
-
-#ifdef WRITELOCKBITS
-#warning "Extension 'WriteLockBits' enabled"
-		// TODO: does not work reliably
-		// write lockbits
-		} else if (val == 'l') {
-			if (device == DEVTYPE) {
-				// write_lock_bits(recvchar());
-				boot_lock_bits_set(recvchar());		// boot.h takes care of mask
-				boot_spm_busy_wait();
-			}
-			sendchar('\r');
-#endif
-		// Enter programming mode
-		} else if (val == 'P') {
-			sendchar('\r');
-
-		// Leave programming mode
-		} else if (val == 'L') {
-			sendchar('\r');
-
-		// return programmer type
-		} else if (val == 'p') {
-			sendchar('S');							// always serial programmer
-
-#ifdef ENABLEREADFUSELOCK
-#warning "Extension 'ReadFuseLock' enabled"
-		// read "low" fuse bits
-		} else if (val == 'F') {
-			sendchar(read_fuse_lock(GET_LOW_FUSE_BITS));
-
-		// read lock bits
-		} else if (val == 'r') {
-			sendchar(read_fuse_lock(GET_LOCK_BITS));
-
-		// read high fuse bits
-		} else if (val == 'N') {
-			sendchar(read_fuse_lock(GET_HIGH_FUSE_BITS));
-
-		// read extended fuse bits
-		} else if (val == 'Q') {
-			sendchar(read_fuse_lock(GET_EXTENDED_FUSE_BITS));
-#endif
-
-		// Return device type
-		} else if (val == 't') {
-			sendchar(DEVTYPE);
-			sendchar(0);
-
-		// clear and set LED ignored
-		} else if ((val == 'x') || (val == 'y')) {
-			recvchar();
-			sendchar('\r');
-
-		// set device
-		} else if (val == 'T') {
-			device = recvchar();
-			sendchar('\r');
-
-		// Return software identifier
-		} else if (val == 'S') {
-			send_boot_msg();
-
-		// Return Software Version
-		} else if (val == 'V') {
-			sendchar(VERSION_HIGH);
-			sendchar(VERSION_LOW);
-
-		// return Signature Bytes (it seems that
-		// AVRProg expects the "Atmel-byte" 0x1E last
-		// but shows it first in the dialog-window)
-		} else if (val == 's') {
-			sendchar(SIG_BYTE3);
-			sendchar(SIG_BYTE2);
-			sendchar(SIG_BYTE1);
-
-		/* ESC */
-		} else if(val != 0x1b) {
-			sendchar('?');
-		}
-
-#if defined(USE_USB)
+//	debug_endlessTogglePin();						// XXX BLOCKING call forever, starts 327ms after power-up
+    for(;;) {
 		usbPoll();
-#endif
-	}
-#endif  // XXX enable after DEBUGGING
+    }
 
 	return 0;
 }

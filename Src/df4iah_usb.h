@@ -14,8 +14,9 @@
 
 void init_usb();
 void close_usb();
-void sendchar_usb(uint8_t data);
 uint8_t recvchar_usb(void);
-void recvBuffer_usb(pagebuf_t size);
+void sendchar_usb(uint8_t data);
+void recvBuffer_usb(uint16_t addr, uint8_t* dptr, uint8_t len);
+void sendBuffer_usb(uint16_t addr, const uint8_t* sptr, uint8_t len);
 
 #endif /* DF4IAH_USB_H_ */

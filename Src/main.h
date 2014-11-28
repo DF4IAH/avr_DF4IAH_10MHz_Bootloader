@@ -70,14 +70,14 @@
 
 
 #if defined(USE_SERIAL)
-# define sendchar(x)  sendchar_serial(x)
-# define recvchar()  recvchar_serial()
-# define recvBuffer(x)  recvBuffer_serial(x)
+# define sendchar(x)	sendchar_serial(x)
+# define recvchar()		recvchar_serial()
+# define recvBuffer(x)	recvBuffer_serial(x)
 
 #elif defined(USE_USB)
-# define sendchar(x)  sendchar_usb(x)
-# define recvchar()  recvchar_usb()
-# define recvBuffer(x)  recvBuffer_usb(x)
+# define sendchar(x)	sendchar_usb(x)
+# define recvchar()		recvchar_usb()
+# define recvBuffer(x)	recvBuffer_usb(x)
 
 #else
 # error "At least one of USE_SERIAL or USE_USB has to be enabled"
@@ -100,9 +100,6 @@
 #define gcs_FDL_len  6
 #define gcs_E99_len  8
 
-
-void send_boot_msg(void);
-void send_error_msg();
 
 int main(void);
 
