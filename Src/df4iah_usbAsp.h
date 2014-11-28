@@ -35,6 +35,11 @@
 #define USBASP_CAP_0_TPI    0x01
 #define USBASP_CAP_0_LOC    0x02
 
+/* connected state */
+#define PROG_UNCONNECTED		0
+#define PROG_CONNECTED			1
+#define PROG_PROGENABLED		2
+
 /* programming state */
 #define PROG_STATE_IDLE         0
 #define PROG_STATE_WRITEFLASH   1
@@ -62,15 +67,5 @@
 #define USBASP_ISP_SCK_375    10  /* 375 kHz   */
 #define USBASP_ISP_SCK_750    11  /* 750 kHz   */
 #define USBASP_ISP_SCK_1500   12  /* 1.5 MHz   */
-
-/* macros for gpio functions */
-// #define ledRedOn()    PORTC &= ~(1 << PC1)
-// #define ledRedOff()   PORTC |= (1 << PC1)
-// #define ledGreenOn()  PORTC &= ~(1 << PC0)
-// #define ledGreenOff() PORTC |= (1 << PC0)
-#define ledRedOn()    { }
-#define ledRedOff()   { }
-#define ledGreenOn()  { }
-#define ledGreenOff() { }
 
 #endif /* DF4IAH_USBASP_H_ */

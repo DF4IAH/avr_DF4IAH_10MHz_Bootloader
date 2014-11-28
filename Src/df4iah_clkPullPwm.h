@@ -11,6 +11,7 @@
 
 void init_clkPullPwm();
 void close_clkPullPwm();
+void debug_togglePin();
 void debug_endlessTogglePin();
 
 #endif /* DF4IAH_CLKPULLPWM_H_ */

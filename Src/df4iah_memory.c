@@ -15,8 +15,6 @@
 #include "df4iah_usb.h"
 #include "main.h"
 
-extern uint8_t gBuffer[SPM_PAGESIZE];
-
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_memory"), aligned(2)))
@@ -25,7 +23,7 @@ void eraseFlash(void)
 {
 	// erase only main section (bootloader protection)
 	uint32_t addr = 0;
-	while (APP_END > addr) {
+	while (APP_END >= addr) {
 		boot_page_erase(addr);						// perform page erase
 		boot_spm_busy_wait();						// wait until the memory is erased.
 		addr += SPM_PAGESIZE;
@@ -36,66 +34,18 @@ void eraseFlash(void)
 #ifdef RELEASE
 __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
-uint16_t writeFlashPage(uint16_t waddr, pagebuf_t size)
+void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 {
-	uint32_t pagestart = (uint32_t)waddr<<1;
-	uint32_t baddr = pagestart;
 	uint16_t data;
-	uint8_t *tmp = gBuffer;
+	uint8_t idx = 0;
 
-	do {
-		data = *tmp++;
-		data |= *tmp++ << 8;
-		boot_page_fill(baddr, data);				// call asm routine.
-
-		baddr += 2;									// select next word in memory
-		size -= 2;									// reduce number of bytes to write by two
-	} while (size);									// loop until all bytes written
-
-	boot_page_write(pagestart);
-	boot_spm_busy_wait();
-	boot_rww_enable();								// re-enable the RWW section
-
-	return baddr>>1;
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_memory"), aligned(2)))
-#endif
-uint16_t writeEEpromPage(uint16_t address, pagebuf_t size)
-{
-	uint8_t *tmp = gBuffer;
-
-	do {
-		eeprom_write_byte( (uint8_t*)address, *tmp++ );
-		address++;									// select next byte
-		size--;										// decrease number of bytes to write
-	} while (size);									// loop until all bytes written
-
-	// eeprom_busy_wait();
-
-	return address;
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_memory"), aligned(2)))
-#endif
-uint16_t readFlashPage(uint16_t waddr, pagebuf_t size)
-{
-	uint32_t baddr = (uint32_t)waddr<<1;
-	uint16_t data;
-
-	do {
+	while (size) {
 #ifndef READ_PROTECT_BOOTLOADER
-#warning "Bootloader not read-protected"
-#if defined(RAMPZ)
-		data = pgm_read_word_far(baddr);
-#else
-		data = pgm_read_word_near(baddr);
-#endif
+# warning "Bootloader not read-protected"
+		if (true) {
 #else
 		// don't read bootloader
-		if (baddr < APP_END) {
+		if (baddr <= APP_END) {
 #if defined(RAMPZ)
 			data = pgm_read_word_far(baddr);
 #else
@@ -106,27 +56,66 @@ uint16_t readFlashPage(uint16_t waddr, pagebuf_t size)
 			data = 0xFFFF; 							// fake empty
 		}
 #endif
-		sendchar(data);								// send LSB
-		sendchar((data >> 8));						// send MSB
-		baddr += 2;									// select next word in memory
-		size -= 2;									// subtract two bytes from number of bytes to read
-	} while (size);									// repeat until block has been read
-
-	return baddr>>1;
+		target[idx++] = data & 0xff;				// store LSB
+		if (--size) {
+			target[idx++] = data >> 8;				// store MSB
+			baddr += 2;								// select next word in memory
+			--size;									// subtract two bytes from number of bytes to read
+		}
+	}												// repeat until block has been read
 }
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
-uint16_t readEEpromPage(uint16_t address, pagebuf_t size)
+void readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr)
 {
-	do {
-		sendchar( eeprom_read_byte( (uint8_t*)address ) );
-		address++;
-		size--;										// decrease number of bytes to read
-	} while (size);									// repeat until block has been read
+	uint8_t idx = 0;
 
-	return address;
+	while (size) {
+		target[idx++] = eeprom_read_byte((uint8_t*) baddr++);
+		--size;										// decrease number of bytes to read, repeat until block has been read
+	}
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_memory"), aligned(2)))
+#endif
+void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
+{
+	uint32_t pagestart = baddr = baddr & 0xfffffffeUL;
+	uint16_t data;
+	uint8_t idx = 0;
+
+	while (size) {
+		data = source[idx++];
+		if (--size) {
+			data |= source[idx++] << 8;
+			--size;									// reduce number of bytes to write by two
+		}
+		boot_page_fill(baddr, data);				// call asm routine
+		baddr += 2;									// select next word in memory
+	}												// loop until all bytes are written
+
+	boot_page_write(pagestart);
+	boot_spm_busy_wait();
+	boot_rww_enable();								// re-enable the RWW section
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_memory"), aligned(2)))
+#endif
+void writeEEpromPage(uint8_t source[], pagebuf_t size, uint16_t baddr)
+{
+	uint8_t idx = 0;
+
+	while (size) {
+		eeprom_write_byte((uint8_t*) baddr, source[idx]);
+		baddr++;									// select next byte
+		size--;										// decrease number of bytes to write
+	}												// loop until all bytes written
+
+	// eeprom_busy_wait();
 }
 
 #if defined(ENABLEREADFUSELOCK)

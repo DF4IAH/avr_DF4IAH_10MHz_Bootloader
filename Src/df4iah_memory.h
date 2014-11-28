@@ -37,16 +37,12 @@
 #include "chipdef.h"
 
 
-
 void eraseFlash(void);
 
-uint16_t writeFlashPage(uint16_t waddr, pagebuf_t size);
-
-uint16_t writeEEpromPage(uint16_t address, pagebuf_t size);
-
-uint16_t readFlashPage(uint16_t waddr, pagebuf_t size);
-
-uint16_t readEEpromPage(uint16_t address, pagebuf_t size);
+void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr);
+void readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr);
+void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr);
+void writeEEpromPage(uint8_t source[], pagebuf_t size, uint16_t baddr);
 
 #if defined(ENABLEREADFUSELOCK)
 uint8_t read_fuse_lock(uint16_t addr);

@@ -12,17 +12,16 @@
 
 #include "usbdrv/usbdrv.h"
 
-#include "df4iah_usb.h"
+#include "df4iah_memory.h"
 #include "df4iah_usbAsp.h"
-
-
-extern uint8_t gBuffer[SPM_PAGESIZE];
+#include "df4iah_usb.h"
 
 
 static uchar replyBuffer[8];
 
+static uchar prog_connected = PROG_UNCONNECTED;
 static uchar prog_state = PROG_STATE_IDLE;
-static uchar prog_sck = USBASP_ISP_SCK_AUTO;
+// static uchar prog_sck = USBASP_ISP_SCK_AUTO;
 
 static uchar prog_address_newmode = 0;
 static unsigned long prog_address;
@@ -60,6 +59,7 @@ void close_usb()
 	usbDeviceDisconnect();
 }
 
+#if 0
 #ifdef RELEASE
 __attribute__((section(".df4iah_usb"), aligned(2)))
 #endif
@@ -98,6 +98,7 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 void sendBuffer_usb(uint16_t addr, const uint8_t* sptr, uint8_t len)
 {
 }
+#endif
 
 // -- 8< --
 
@@ -109,36 +110,19 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 {
 	uchar len = 0;
 
-	if (data[1] == USBASP_FUNC_CONNECT) {
+	// serve for LOCal programming only
+	if (data[0] != USBASP_CAP_0_LOC) {
+		return len;
+	}
 
-#if 0
-		/* set SCK speed */
-#ifdef SLOW_SERIAL_CLOCK_SELECTION
-		if ((PINC & (1 << PC2)) == 0) {
-			ispSetSCKOption(USBASP_ISP_SCK_8);
-		} else {
-#endif
-			ispSetSCKOption(prog_sck);
-#ifdef SLOW_SERIAL_CLOCK_SELECTION
-		}
-#endif
-#else
-#endif
+	if (data[1] == USBASP_FUNC_CONNECT) {
+		prog_connected = PROG_CONNECTED;
 
 		/* set compatibility mode of address delivering */
 		prog_address_newmode = 0;
 
-#if 0
-		ledRedOn();
-		ispConnect();
-#endif
-
 	} else if (data[1] == USBASP_FUNC_DISCONNECT) {
-#if 0
-		ispDisconnect();
-		ledRedOff();
-#else
-#endif
+		prog_connected = PROG_UNCONNECTED;
 
 	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
 #if 0
@@ -147,70 +131,70 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		replyBuffer[2] = ispTransmit(data[4]);
 		replyBuffer[3] = ispTransmit(data[5]);
 #else
+		/* LOC does not implement that */
+		replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
 #endif
 		len = 4;
 
-	} else if (data[1] == USBASP_FUNC_READFLASH) {
-		if (!prog_address_newmode) {
-			prog_address = (data[3] << 8) | data[2];
+	} else if ((data[1] == USBASP_FUNC_READFLASH) || (data[1] == USBASP_FUNC_READEEPROM)) {
+		if (prog_connected > PROG_UNCONNECTED) {
+			if (!prog_address_newmode) {
+				prog_address = (data[3] << 8) | data[2];
+			}
+
+			prog_nbytes = (data[7] << 8) | data[6];
+			prog_state = (data[1] == USBASP_FUNC_READFLASH) ?  PROG_STATE_READFLASH : PROG_STATE_READEEPROM;
+			len = 0xff; /* multiple in */
 		}
-
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_READFLASH;
-		len = 0xff; /* multiple in */
-
-	} else if (data[1] == USBASP_FUNC_READEEPROM) {
-		if (!prog_address_newmode) {
-			prog_address = (data[3] << 8) | data[2];
-		}
-
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_READEEPROM;
-		len = 0xff; /* multiple in */
 
 	} else if (data[1] == USBASP_FUNC_ENABLEPROG) {
 #if 0
 		replyBuffer[0] = ispEnterProgrammingMode();
 #else
+		if (prog_connected == PROG_CONNECTED) {
+			prog_connected = PROG_PROGENABLED;
+			len = 1;
+		}
 #endif
-		len = 1;
 
-	} else if (data[1] == USBASP_FUNC_WRITEFLASH) {
-		if (!prog_address_newmode) {
-			prog_address = (data[3] << 8) | data[2];
+	} else if ((data[1] == USBASP_FUNC_WRITEFLASH) || (data[1] == USBASP_FUNC_WRITEEEPROM)) {
+		if (prog_connected == PROG_PROGENABLED) {
+			if (!prog_address_newmode) {
+				prog_address = (data[3] << 8) | data[2];
+			}
+
+			if (data[1] == USBASP_FUNC_WRITEFLASH) {
+				prog_blockflags = data[5] & 0x0F;
+				prog_pagesize |= (((unsigned int) data[5] & 0xF0) << 4) | data[4];
+				if (prog_blockflags & PROG_BLOCKFLAG_FIRST) {
+					prog_pagecounter = prog_pagesize;
+				}
+				prog_state = PROG_STATE_WRITEFLASH;
+
+			} else {
+				prog_pagesize = 0;
+				prog_blockflags = 0;
+				prog_state = PROG_STATE_WRITEEEPROM;
+			}
+
+			prog_nbytes = (data[7] << 8) | data[6];
+			len = 0xff; /* multiple out */
 		}
-
-		prog_pagesize = data[4];
-		prog_blockflags = data[5] & 0x0F;
-		prog_pagesize |= (((unsigned int) data[5] & 0xF0) << 4);
-		if (prog_blockflags & PROG_BLOCKFLAG_FIRST) {
-			prog_pagecounter = prog_pagesize;
-		}
-
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_WRITEFLASH;
-		len = 0xff; /* multiple out */
-
-	} else if (data[1] == USBASP_FUNC_WRITEEEPROM) {
-		if (!prog_address_newmode) {
-			prog_address = (data[3] << 8) | data[2];
-		}
-
-		prog_pagesize = 0;
-		prog_blockflags = 0;
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_WRITEEEPROM;
-		len = 0xff; /* multiple out */
 
 	} else if (data[1] == USBASP_FUNC_SETLONGADDRESS) {
-		/* set new mode of address delivering (ignore address delivered in commands) */
-		prog_address_newmode = 1;
-		/* set new address */
-		prog_address = *((unsigned long*) &data[2]);
+		if (prog_connected > PROG_UNCONNECTED) {
+			/* set new mode of address delivering (ignore address delivered in commands) */
+			prog_address_newmode = 1;
+			/* set new address */
+			prog_address = *((unsigned long*) &data[2]);
+		}
 
 	} else if (data[1] == USBASP_FUNC_SETISPSCK) {
 		/* set sck option */
+#if 0
 		prog_sck = data[2];
+#endif
+		/* LOC does not implement that */
 		replyBuffer[0] = 0;
 		len = 1;
 
@@ -226,11 +210,11 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 
 		/* RST low */
 		ISP_OUT &= ~(1 << ISP_RST);
-		ledRedOn();
 
 		clockWait(16);
 		tpi_init();
 #else
+		/* LOC does not implement that */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_DISCONNECT) {
@@ -250,15 +234,16 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		ISP_DDR &= ~((1 << ISP_RST) | (1 << ISP_SCK) | (1 << ISP_MOSI));
 		/* switch pullups off */
 		ISP_OUT &= ~((1 << ISP_RST) | (1 << ISP_SCK) | (1 << ISP_MOSI));
-
-		ledRedOff();
 #else
+		/* LOC does not implement that */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_RAWREAD) {
 #if 0
 		replyBuffer[0] = tpi_recv_byte();
 #else
+		/* LOC does not implement that */
+		replyBuffer[0] = 0;
 #endif
 		len = 1;
 
@@ -266,6 +251,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 #if 0
 		tpi_send_byte(data[2]);
 #else
+		/* LOC does not implement that */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_READBLOCK) {
@@ -274,6 +260,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_nbytes = (data[7] << 8) | data[6];
 		prog_state = PROG_STATE_TPI_READ;
 #else
+		/* LOC does not implement that */
 #endif
 		len = 0xff; /* multiple in */
 
@@ -283,6 +270,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_nbytes = (data[7] << 8) | data[6];
 		prog_state = PROG_STATE_TPI_WRITE;
 #else
+		/* LOC does not implement that */
 #endif
 		len = 0xff; /* multiple out */
 
@@ -295,7 +283,6 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 	}
 
 	usbMsgPtr = (usbMsgPtr_t) replyBuffer;
-
 	return len;
 }
 
@@ -304,8 +291,6 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 #endif
 USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 {
-	uchar i;
-
 	/* check if programmer is in correct read state */
 	if ((prog_state != PROG_STATE_READFLASH) &&
 		(prog_state	!= PROG_STATE_READEEPROM) &&
@@ -314,26 +299,24 @@ USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 	}
 
 	/* fill packet TPI mode */
-	if (prog_state == PROG_STATE_TPI_READ) {
-#if 0
-		tpi_read_block(prog_address, data, len);
-#else
-#endif
-		prog_address += len;
-		return len;
+	if ((prog_state == PROG_STATE_TPI_READ) ||
+		(prog_state == PROG_STATE_READFLASH)) {
+		readFlashPage(data, len, prog_address);
+	} else {
+		readEEpromPage(data, len, prog_address);
 	}
+	prog_address += len;
 
+#if 0
 	/* fill packet ISP mode */
 	for (i = 0; i < len; i++) {
 		if (prog_state == PROG_STATE_READFLASH) {
 #if 0
 			data[i] = ispReadFlash(prog_address);
-#else
 #endif
 		} else {
 #if 0
 			data[i] = ispReadEEPROM(prog_address);
-#else
 #endif
 		}
 		prog_address++;
@@ -343,6 +326,7 @@ USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 	if (len < 8) {
 		prog_state = PROG_STATE_IDLE;
 	}
+#endif
 
 	return len;
 }
@@ -353,7 +337,6 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 {
 	uchar retVal = 0;
-	uchar i;
 
 	/* check if programmer is in correct write state */
 	if ((prog_state != PROG_STATE_WRITEFLASH) &&
@@ -362,19 +345,21 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 		return 0xff;
 	}
 
-	if (prog_state == PROG_STATE_TPI_WRITE) {
-#if 0
-		tpi_write_block(prog_address, data, len);
-#endif
-		prog_address += len;
-		prog_nbytes -= len;
-		if (prog_nbytes <= 0) {
-			prog_state = PROG_STATE_IDLE;
-			return 1;
-		}
-		return 0;
+	if ((prog_state == PROG_STATE_TPI_WRITE) ||
+		(prog_state == PROG_STATE_WRITEFLASH)) {
+		writeFlashPage(data, len, prog_address);
+	} else {
+		writeEEpromPage(data, len, prog_address);
+	}
+	prog_address += len;
+
+	prog_nbytes -= len;
+	if (prog_nbytes <= 0) {
+		prog_state = PROG_STATE_IDLE;
+		return 1;
 	}
 
+#if 0
 	for (i = 0; i < len; i++) {
 		if (prog_state == PROG_STATE_WRITEFLASH) {
 			/* Flash */
@@ -426,6 +411,7 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 
 		prog_address++;
 	}
+#endif
 
 	return retVal;
 }

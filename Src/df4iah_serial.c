@@ -13,9 +13,6 @@
 #include "main.h"
 
 
-extern uint8_t gBuffer[SPM_PAGESIZE];
-
-
 #ifdef RELEASE
 __attribute__((section(".df4iah_serial"), aligned(2)))
 #endif
@@ -59,17 +56,4 @@ uint8_t recvchar_serial(void)
 {
 	while (!(UART_STATUS & _BV(UART_RXREADY)));
 	return UART_DATA;
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_serial"), aligned(2)))
-#endif
-void recvBuffer_serial(pagebuf_t size)
-{
-	pagebuf_t cnt;
-	uint8_t *tmp = gBuffer;
-
-	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
-		*tmp++ = (cnt < size) ? recvchar_serial() : 0xFF;
-	}
 }

@@ -45,6 +45,10 @@ void init_clkPullPwm()
 
 	// set the timer-1 PWM-A compare output: setting data port for output
 	DDR_OC1A_REG |= _BV(DDR_OC1A);
+
+	// set the DEBUG port to output
+	PWMTOGGLEPIN_PORT |= _BV(PWMTOGGLEPIN_PNUM);
+	PWMTOGGLEPIN_DDR  |= _BV(PWMTOGGLEPIN_PNUM);
 }
 
 #ifdef RELEASE
@@ -68,19 +72,18 @@ void close_clkPullPwm()
 	TCNT1L = TCNT1H = 0x00;
 }
 
+inline void debug_togglePin()
+{
+	PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
+}
+
 #ifdef RELEASE
 __attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
 #endif
 void debug_endlessTogglePin()
 {
-	// set the DEBUG port to output
-	PWMTOGGLEPIN_PORT |= _BV(PWMTOGGLEPIN_PNUM);
-	PWMTOGGLEPIN_DDR  |= _BV(PWMTOGGLEPIN_PNUM);
-
-	for(;;)
-	{
-		PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
-
+	for(;;)	{
+		debug_togglePin();
 		_delay_ms(1);
 		wdt_reset();
 	}

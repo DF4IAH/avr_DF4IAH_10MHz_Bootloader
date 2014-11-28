@@ -58,16 +58,13 @@
 
 // DATA SECTION
 
-uint8_t gBuffer[SPM_PAGESIZE];
 uint8_t timer0Snapshot = 0x00;
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 void (*jump_to_app)(void) = 0x0000;
 
 
 // STRINGS IN CODE SECTION
-PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T' };
-PROGMEM const char gcs_FDL[gcs_FDL_len] = { 'F', 'D', 'L', ' ', VERSION_HIGH, VERSION_LOW };
-PROGMEM const char gcs_E99[gcs_E99_len] = { '*', 'E', 'R', 'R', '-', '9', '9', '*' };
+// PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T' };
 
 
 // CODE SECTION
@@ -206,6 +203,7 @@ int main(void)
 //	debug_endlessTogglePin();						// XXX BLOCKING call forever, starts 327ms after power-up
     for(;;) {
 		usbPoll();
+		debug_togglePin();							// XXX DEBUGGING
     }
 
 	return 0;
