@@ -74,7 +74,7 @@ section at the end of this file).
 
 /* --------------------------- Functional Range ---------------------------- */
 
-#define USB_CFG_HAVE_INTRIN_ENDPOINT    1
+#define USB_CFG_HAVE_INTRIN_ENDPOINT    0
 /* Define this to 1 if you want to compile a version with two endpoints: The
  * default control endpoint 0 and an interrupt-in endpoint (any other endpoint
  * number).
@@ -123,18 +123,18 @@ section at the end of this file).
  * The value is in milliamperes. [It will be divided by two since USB
  * communicates power requirements in units of 2 mA.]
  */
-#define USB_CFG_IMPLEMENT_FN_WRITE      0
+#define USB_CFG_IMPLEMENT_FN_WRITE      1
 /* Set this to 1 if you want usbFunctionWrite() to be called for control-out
  * transfers. Set it to 0 if you don't need it and want to save a couple of
  * bytes.
  */
-#define USB_CFG_IMPLEMENT_FN_READ       0
+#define USB_CFG_IMPLEMENT_FN_READ       1
 /* Set this to 1 if you need to send control replies which are generated
  * "on the fly" when usbFunctionRead() is called. If you only want to send
  * data from a static buffer, set it to 0 and return the data from
  * usbFunctionSetup(). This saves a couple of bytes.
  */
-#define USB_CFG_IMPLEMENT_FN_WRITEOUT   1
+#define USB_CFG_IMPLEMENT_FN_WRITEOUT   0
 /* Define this to 1 if you want to use interrupt-out (or bulk out) endpoints.
  * You must implement the function usbFunctionWriteOut() which receives all
  * interrupt/bulk data sent to any endpoint other than 0. The endpoint number
@@ -240,7 +240,7 @@ section at the end of this file).
  * with libusb: 0x16c0/0x5dc.  Use this VID/PID pair ONLY if you understand
  * the implications!
  */
-#define USB_CFG_DEVICE_VERSION  0x0a, 0x01
+#define USB_CFG_DEVICE_VERSION  0x04, 0x01
 /* Version number of the device: Minor number first, then major number.
  */
 #define USB_CFG_VENDOR_NAME     'D', 'F', '4', 'I', 'A', 'H'
@@ -271,7 +271,7 @@ section at the end of this file).
  */
 #define USB_CFG_DEVICE_CLASS        0xff    /* set to 0 if deferred to interface */
 #define USB_CFG_DEVICE_SUBCLASS     0
-#define USB_CFG_DEVICE_PROTOCOL     0
+//#define USB_CFG_DEVICE_PROTOCOL     0
 /* See USB specification if you want to conform to an existing device class.
  * Class 0xff is "vendor specific".
  */
@@ -285,6 +285,7 @@ section at the end of this file).
  * CDC class is 2, use subclass 2 and protocol 1 for ACM
  */
 /* #define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH    42 */
+#define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH	0
 /* Define this to the length of the HID report descriptor, if you implement
  * an HID device. Otherwise don't define it or define it to 0.
  * If you use this define, you must add a PROGMEM character array named

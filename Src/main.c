@@ -68,6 +68,7 @@
 
 uint8_t gBuffer[SPM_PAGESIZE];
 uint8_t timer0Snapshot = 0x00;
+usbTxStatus_t usbTxStatus1, usbTxStatus3;
 void (*jump_to_app)(void) = 0x0000;
 
 
