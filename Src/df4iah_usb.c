@@ -14,8 +14,6 @@
 
 #include "df4iah_usb.h"
 #include "df4iah_usbAsp.h"
-#include "df4iah_usbTpiDefs.h"
-#include "df4iah_usbIsp.h"
 
 
 extern uint8_t gBuffer[SPM_PAGESIZE];
@@ -405,7 +403,10 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 
 		} else {
 			/* EEPROM */
+#if 0
 			ispWriteEEPROM(prog_address, data[i]);
+#else
+#endif
 		}
 
 		prog_nbytes--;
