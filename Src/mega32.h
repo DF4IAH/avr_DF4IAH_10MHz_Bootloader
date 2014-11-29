@@ -20,7 +20,7 @@
 #define UART_CTRL	UCSR0B
 #define UART_CTRL_DATA	((1<<TXEN0) | (1<<RXEN0))
 #define UART_CTRL2	UCSR0C
-#define UART_CTRL2_DATA	((1<<UMSEL00) | (1<<UCSZ01) | (1<<UCSZ00))
+#define UART_CTRL2_DATA	((1<<UCSZ01) | (1<<UCSZ00))
 #define UART_DATA	UDR0
 
 /* Timer-n compare output */

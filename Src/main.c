@@ -196,7 +196,7 @@ int main(void)
     sei();											// ENABLE interrupt
 
 	init_clkPullPwm();
-//	init_serial();
+	init_serial();
 
     for(;;) {
 		usbPoll();
