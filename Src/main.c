@@ -188,21 +188,19 @@ static inline void app_startup_check()
 int main(void)
 {
 	vectortable_to_bootloader();
-	init_wdt();
-	init_probe();
-	app_startup_check();
+//	init_wdt();
+//	init_probe();
+//	app_startup_check();
 
 	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
 
-    init_clkPullPwm();
-	init_serial();
+//	init_clkPullPwm();
+//	init_serial();
 
     for(;;) {
 		usbPoll();
-		debug_togglePin();							// XXX DEBUGGING
-
-		_delay_ms(1);
+//		debug_togglePin();							// XXX DEBUGGING
         wdt_reset();
     }
 

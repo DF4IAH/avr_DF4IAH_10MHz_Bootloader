@@ -85,7 +85,7 @@ section at the end of this file).
  * configured below) and a catch-all default interrupt-in endpoint as above.
  * You must also define USB_CFG_HAVE_INTRIN_ENDPOINT to 1 for this feature.
  */
-#define USB_CFG_EP3_NUMBER              3
+// #define USB_CFG_EP3_NUMBER              3
 /* If the so-called endpoint 3 is used, it can now be configured to any other
  * endpoint number (except 0) with this macro. Default if undefined is 3.
  */
@@ -95,7 +95,7 @@ section at the end of this file).
  * Since the token is toggled BEFORE sending any data, the first packet is
  * sent with the opposite value of this configuration!
  */
-#define USB_CFG_IMPLEMENT_HALT          1
+#define USB_CFG_IMPLEMENT_HALT          0
 /* Define this to 1 if you also want to implement the ENDPOINT_HALT feature
  * for endpoint 1 (interrupt endpoint). Although you may not need this feature,
  * it is required by the standard. We have made it a config option because it
@@ -207,7 +207,7 @@ section at the end of this file).
 /* define this macro to 1 if you want the function usbMeasureFrameLength()
  * compiled in. This function can be used to calibrate the AVR's RC oscillator.
  */
-#define USB_USE_FAST_CRC                1
+#define USB_USE_FAST_CRC                0
 /* The assembler module has two implementations for the CRC algorithm. One is
  * faster, the other is smaller. This CRC routine is only used for transmitted
  * messages where timing is not critical. The faster routine needs 31 cycles
@@ -253,15 +253,17 @@ section at the end of this file).
  * obdev's free shared VID/PID pair. See the file USB-IDs-for-free.txt for
  * details.
  */
-#define USB_CFG_DEVICE_NAME     'A', 'V', 'R', '-', 'B', 'o', 'o', 't', 'l', 'o', 'a', 'd', 'e', 'r', ' ', 'f', 'o', 'r', ' ', \
-								'D', 'F', '4', 'I', 'A', 'H', '-', '1', '0', 'M', 'H', 'z', '-', 'R', 'e', 'f', '-', 'O', 's', 'c'
-#define USB_CFG_DEVICE_NAME_LEN 39
+#define USB_CFG_DEVICE_NAME     'B', 'o', 'o', 't', 'l', 'o', 'a', 'd', 'e', 'r'
+     //, ' ', 'f', 'o', 'r', ' ',
+	 //							'D', 'F', '4', 'I', 'A', 'H', '-', '1', '0', 'M', 'H', 'z', '-', 'R', 'e', 'f', '-', 'O', 's', 'c'
+#define USB_CFG_DEVICE_NAME_LEN 10
+     //39
 /* Same as above for the device name. If you don't want a device name, undefine
  * the macros. See the file USB-IDs-for-free.txt before you assign a name if
  * you use a shared VID/PID.
  */
-#define USB_CFG_SERIAL_NUMBER   'P', 'r', 'o', 't', 'o', '-', '1'
-#define USB_CFG_SERIAL_NUMBER_LEN   7
+//#define USB_CFG_SERIAL_NUMBER   'P', 'r', 'o', 't', 'o', '-', '1'
+//#define USB_CFG_SERIAL_NUMBER_LEN   7
 /* Same as above for the serial number. If you don't want a serial number,
  * undefine the macros.
  * It may be useful to provide the serial number through other means than at
