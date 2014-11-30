@@ -124,7 +124,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 			replyBuffer[0] = data[2];
 			replyBuffer[1] = data[3];
 			replyBuffer[2] = data[4];
-			switch (data[5]) {
+			switch (data[4]) {
 			case 0x00:
 			default:	replyBuffer[3] = 0x1E;
 				break;
