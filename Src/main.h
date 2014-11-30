@@ -101,6 +101,8 @@
 #define gcs_E99_len  8
 
 
+void give_away(void);
+
 int main(void);
 
 #endif /* MAIN_H_ */

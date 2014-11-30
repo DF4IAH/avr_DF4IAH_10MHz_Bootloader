@@ -291,7 +291,7 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 		return 0xff;
 	}
 
-	if (prog_state == PROG_STATE_WRITEFLASH) {
+	if (prog_state == PROG_STATE_WRITEFLASH) {	// TODO create a job list and copy the data and return here fast
 		writeFlashPage(data, len, prog_address);
 	} else {
 		writeEEpromPage(data, len, prog_address);

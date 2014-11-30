@@ -184,6 +184,13 @@ static inline void app_startup_check()
 	}
 }
 
+void give_away(void)
+{
+    wdt_reset();
+	usbPoll();
+	debug_togglePin();							// XXX DEBUGGING
+}
+
 
 int main(void)
 {
@@ -199,9 +206,7 @@ int main(void)
 	init_serial();
 
     for(;;) {
-		usbPoll();
-		debug_togglePin();							// XXX DEBUGGING
-        wdt_reset();
+    	give_away();
     }
 
 	return 0;
