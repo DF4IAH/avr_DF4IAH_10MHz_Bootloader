@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <avr/pgmspace.h>   /* required by usbdrv.h */
 #include <avr/wdt.h>
+#include <avr/boot.h>
 #include <util/delay.h>
 
 #include "df4iah_memory.h"
@@ -131,42 +132,33 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 
 	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
 		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 3)) {
-			// mimic Signature Bytes of the ATmega 328P
+			// signature bytes
 			replyContent(replyBuffer, data);
-			switch (data[4]) {
-			case 0x00:	replyBuffer[3] = 0x1E;
-				break;
-
-			case 0x01:	replyBuffer[3] = 0x95;
-				break;
-
-			case 0x02:	replyBuffer[3] = 0x0F;
-				break;
-			}
+			replyBuffer[3] = boot_signature_byte_get(data[4] << 1);
 			len = 4;
 
 		} else if ((data[2] == 0x50) && (data[3] == 0x00)) {
 			// lfuse bits - @see page 271f
 			replyContent(replyBuffer, data);
-			replyBuffer[3] = read_fuse_lock(0);
+			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOW_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x58) && (data[3] == 0x08)) {
 			// hfuse bits
 			replyContent(replyBuffer, data);
-			replyBuffer[3] = read_fuse_lock(3);
+			replyBuffer[3] = boot_lock_fuse_bits_get(GET_HIGH_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x50) && (data[3] == 0x08)) {
 			// efuse bits
 			replyContent(replyBuffer, data);
-			replyBuffer[3] = read_fuse_lock(2);
+			replyBuffer[3] = boot_lock_fuse_bits_get(GET_EXTENDED_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x58) && (data[3] == 0x00)) {
 			// lock bits
 			replyContent(replyBuffer, data);
-			replyBuffer[3] = read_fuse_lock(1);
+			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOCK_BITS);
 			len = 4;
 		}
 
@@ -204,7 +196,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 				}
 				prog_state = PROG_STATE_WRITEFLASH;
 
-			} else {
+			} else {  /* data[1] == USBASP_FUNC_WRITEEEPROM */
 				prog_pagesize = 0;
 				prog_blockflags = 0;
 				prog_state = PROG_STATE_WRITEEEPROM;
