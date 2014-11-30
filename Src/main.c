@@ -64,7 +64,7 @@ void (*jump_to_app)(void) = 0x0000;
 
 
 // STRINGS IN CODE SECTION
-// PROGMEM const char gcs_AVR[gcs_AVR_len] = { 'A', 'V', 'R', 'B', 'O', 'O', 'T' };
+// PROGMEM const char VENDOR[VENDOR_len] = { 'D', 'F', '4', 'I', 'A', 'H' };
 
 
 // CODE SECTION

@@ -83,9 +83,14 @@ __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
 void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 {
-	uint32_t pagestart = baddr = baddr & 0xfffffffeUL;
+	uint32_t pagestart = baddr - (baddr % SPM_PAGESIZE);
 	uint16_t data;
 	uint8_t idx = 0;
+
+	if ((size == SPM_PAGESIZE) && (pagestart == baddr)) {	// clear flash page only if data block is complete and starting at the bottom of the page
+		boot_page_erase(pagestart);					// perform page erase
+		boot_spm_busy_wait();						// wait until the memory is erased.
+	}
 
 	while (size--) {
 		data = source[idx++];
