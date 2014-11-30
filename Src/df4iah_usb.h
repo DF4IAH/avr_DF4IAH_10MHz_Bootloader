@@ -10,10 +10,14 @@
 
 
 #include "chipdef.h"
+#include "usbdrv/usbdrv.h"
 
+
+void replyContent(uchar replyBuffer[], uchar data[]);
 
 void init_usb();
 void close_usb();
+
 #if 0
 uint8_t recvchar_usb(void);
 void sendchar_usb(uint8_t data);

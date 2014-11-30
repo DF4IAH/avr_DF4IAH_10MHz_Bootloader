@@ -10,8 +10,6 @@
 #include <avr/wdt.h>
 #include <util/delay.h>
 
-#include "usbdrv/usbdrv.h"
-
 #include "df4iah_memory.h"
 #include "df4iah_usbAsp.h"
 #include "df4iah_usb.h"
@@ -29,6 +27,17 @@ static unsigned int prog_pagesize;
 static uchar prog_blockflags;
 static uchar prog_pagecounter;
 
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_usb"), aligned(2)))
+#endif
+void replyContent(uchar replyBuffer[], uchar data[])
+{
+	replyBuffer[0] = data[2];
+	replyBuffer[1] = data[3];
+	replyBuffer[2] = data[4];
+	// replyBuffer[3] = 0;
+}
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_usb"), aligned(2)))
@@ -109,6 +118,8 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 {
 	uchar len = 0;
 
+	replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
+
 	if (data[1] == USBASP_FUNC_CONNECT) {
 		prog_connected = PROG_CONNECTED;
 
@@ -119,14 +130,11 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_connected = PROG_UNCONNECTED;
 
 	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
-		// mimic Signature Bytes of the ATmega 328P
-		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 4)) {
-			replyBuffer[0] = data[2];
-			replyBuffer[1] = data[3];
-			replyBuffer[2] = data[4];
+		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 3)) {
+			// mimic Signature Bytes of the ATmega 328P
+			replyContent(replyBuffer, data);
 			switch (data[4]) {
-			case 0x00:
-			default:	replyBuffer[3] = 0x1E;
+			case 0x00:	replyBuffer[3] = 0x1E;
 				break;
 
 			case 0x01:	replyBuffer[3] = 0x95;
@@ -135,10 +143,31 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 			case 0x02:	replyBuffer[3] = 0x0F;
 				break;
 			}
-
 			len = 4;
-		} else {
-			replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
+
+		} else if ((data[2] == 0x50) && (data[3] == 0x00)) {
+			// lfuse bits - @see page 271f
+			replyContent(replyBuffer, data);
+			replyBuffer[3] = read_fuse_lock(0);
+			len = 4;
+
+		} else if ((data[2] == 0x58) && (data[3] == 0x08)) {
+			// hfuse bits
+			replyContent(replyBuffer, data);
+			replyBuffer[3] = read_fuse_lock(3);
+			len = 4;
+
+		} else if ((data[2] == 0x50) && (data[3] == 0x08)) {
+			// efuse bits
+			replyContent(replyBuffer, data);
+			replyBuffer[3] = read_fuse_lock(2);
+			len = 4;
+
+		} else if ((data[2] == 0x58) && (data[3] == 0x00)) {
+			// lock bits
+			replyContent(replyBuffer, data);
+			replyBuffer[3] = read_fuse_lock(1);
+			len = 4;
 		}
 
 	} else if ((data[1] == USBASP_FUNC_READFLASH) || (data[1] == USBASP_FUNC_READEEPROM)) {
@@ -153,14 +182,13 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		}
 
 	} else if (data[1] == USBASP_FUNC_ENABLEPROG) {
-#if 0
-		replyBuffer[0] = ispEnterProgrammingMode();
-#else
 		if (prog_connected == PROG_CONNECTED) {
 			prog_connected = PROG_PROGENABLED;
-			len = 1;
+			replyBuffer[0] = 0;
+		} else {
+			replyBuffer[0] = 1;
 		}
-#endif
+		len = 1;
 
 	} else if ((data[1] == USBASP_FUNC_WRITEFLASH) || (data[1] == USBASP_FUNC_WRITEEEPROM)) {
 		if (prog_connected == PROG_PROGENABLED) {
@@ -195,88 +223,30 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		}
 
 	} else if (data[1] == USBASP_FUNC_SETISPSCK) {
-		/* set sck option */
-#if 0
-		prog_sck = data[2];
-#endif
 		/* LOC does not implement that */
 		replyBuffer[0] = 0;
 		len = 1;
 
 	} else if (data[1] == USBASP_FUNC_TPI_CONNECT) {
-#if 0
-		tpi_dly_cnt = data[2] | (data[3] << 8);
-
-		/* RST high */
-		ISP_OUT |= (1 << ISP_RST);
-		ISP_DDR |= (1 << ISP_RST);
-
-		clockWait(3);
-
-		/* RST low */
-		ISP_OUT &= ~(1 << ISP_RST);
-
-		clockWait(16);
-		tpi_init();
-#else
 		/* Tiny Programming Interface is not supported */
-#endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_DISCONNECT) {
-#if 0
-		tpi_send_byte(TPI_OP_SSTCS(TPISR));
-		tpi_send_byte(0);
-
-		clockWait(10);
-
-		/* pulse RST */
-		ISP_OUT |= (1 << ISP_RST);
-		clockWait(5);
-		ISP_OUT &= ~(1 << ISP_RST);
-		clockWait(5);
-
-		/* set all ISP pins inputs */
-		ISP_DDR &= ~((1 << ISP_RST) | (1 << ISP_SCK) | (1 << ISP_MOSI));
-		/* switch pullups off */
-		ISP_OUT &= ~((1 << ISP_RST) | (1 << ISP_SCK) | (1 << ISP_MOSI));
-#else
 		/* Tiny Programming Interface is not supported */
-#endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_RAWREAD) {
-#if 0
-		replyBuffer[0] = tpi_recv_byte();
-#else
 		/* Tiny Programming Interface is not supported */
 		replyBuffer[0] = 0;
-#endif
 		len = 1;
 
 	} else if (data[1] == USBASP_FUNC_TPI_RAWWRITE) {
-#if 0
-		tpi_send_byte(data[2]);
-#else
 		/* Tiny Programming Interface is not supported */
-#endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_READBLOCK) {
-#if 0
-		prog_address = (data[3] << 8) | data[2];
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_TPI_READ;
-#else
 		/* Tiny Programming Interface is not supported */
-#endif
 		len = 0xff; /* multiple in */
 
 	} else if (data[1] == USBASP_FUNC_TPI_WRITEBLOCK) {
-#if 0
-		prog_address = (data[3] << 8) | data[2];
-		prog_nbytes = (data[7] << 8) | data[6];
-		prog_state = PROG_STATE_TPI_WRITE;
-#else
 		/* Tiny Programming Interface is not supported */
-#endif
 		len = 0xff; /* multiple out */
 
 	} else if (data[1] == USBASP_FUNC_GETCAPABILITIES) {
@@ -299,40 +269,21 @@ USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 {
 	/* check if programmer is in correct read state */
 	if ((prog_state != PROG_STATE_READFLASH) &&
-		(prog_state	!= PROG_STATE_READEEPROM) &&
-		(prog_state != PROG_STATE_TPI_READ)) {
+		(prog_state	!= PROG_STATE_READEEPROM)) {
 		return 0xff;
 	}
 
-	/* fill packet TPI mode */
-	if ((prog_state == PROG_STATE_TPI_READ) ||
-		(prog_state == PROG_STATE_READFLASH)) {
+	if (prog_state == PROG_STATE_READFLASH) {
 		readFlashPage(data, len, prog_address);
 	} else {
 		readEEpromPage(data, len, prog_address);
 	}
 	prog_address += len;
 
-#if 0
-	/* fill packet ISP mode */
-	for (i = 0; i < len; i++) {
-		if (prog_state == PROG_STATE_READFLASH) {
-#if 0
-			data[i] = ispReadFlash(prog_address);
-#endif
-		} else {
-#if 0
-			data[i] = ispReadEEPROM(prog_address);
-#endif
-		}
-		prog_address++;
-	}
-
 	/* last packet? */
 	if (len < 8) {
 		prog_state = PROG_STATE_IDLE;
 	}
-#endif
 
 	return len;
 }
@@ -342,17 +293,13 @@ __attribute__((section(".df4iah_usb"), aligned(2)))
 #endif
 USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 {
-	uchar retVal = 0;
-
 	/* check if programmer is in correct write state */
 	if ((prog_state != PROG_STATE_WRITEFLASH) &&
-		(prog_state	!= PROG_STATE_WRITEEEPROM) &&
-		(prog_state != PROG_STATE_TPI_WRITE)) {
+		(prog_state	!= PROG_STATE_WRITEEEPROM)) {
 		return 0xff;
 	}
 
-	if ((prog_state == PROG_STATE_TPI_WRITE) ||
-		(prog_state == PROG_STATE_WRITEFLASH)) {
+	if (prog_state == PROG_STATE_WRITEFLASH) {
 		writeFlashPage(data, len, prog_address);
 	} else {
 		writeEEpromPage(data, len, prog_address);
@@ -365,61 +312,7 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 		return 1;
 	}
 
-#if 0
-	for (i = 0; i < len; i++) {
-		if (prog_state == PROG_STATE_WRITEFLASH) {
-			/* Flash */
-
-			if (prog_pagesize == 0) {
-				/* not paged */
-#if 0
-				ispWriteFlash(prog_address, data[i], 1);
-#else
-#endif
-			} else {
-				/* paged */
-#if 0
-				ispWriteFlash(prog_address, data[i], 0);
-#else
-#endif
-				prog_pagecounter--;
-				if (prog_pagecounter == 0) {
-#if 0
-					ispFlushPage(prog_address, data[i]);
-#else
-#endif
-					prog_pagecounter = prog_pagesize;
-				}
-			}
-
-		} else {
-			/* EEPROM */
-#if 0
-			ispWriteEEPROM(prog_address, data[i]);
-#else
-#endif
-		}
-
-		prog_nbytes--;
-
-		if (prog_nbytes == 0) {
-			prog_state = PROG_STATE_IDLE;
-			if ((prog_blockflags & PROG_BLOCKFLAG_LAST) &&
-				(prog_pagecounter != prog_pagesize)) {
-#if 0
-				/* last block and page flush pending, so flush it now */
-				ispFlushPage(prog_address, data[i]);
-#else
-#endif
-			}
-			retVal = 1; // Need to return 1 when no more data is to be received
-		}
-
-		prog_address++;
-	}
-#endif
-
-	return retVal;
+	return 0;
 }
 
 #if USB_CFG_IMPLEMENT_FN_WRITEOUT

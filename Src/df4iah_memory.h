@@ -29,7 +29,7 @@
  * (AVRPROG has to detect the AVR correctly by device-code
  * to show the correct information).
  */
-//#define ENABLEREADFUSELOCK
+#define ENABLEREADFUSELOCK
 
 
 #include <stdint.h>
