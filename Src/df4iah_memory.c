@@ -45,7 +45,7 @@ void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 		if (true) {
 #else
 		// don't read bootloader
-		if (baddr <= APP_END) {
+		if (baddr < APP_END) {
 #if defined(RAMPZ)
 			data = pgm_read_word_far(baddr);
 #else
@@ -83,16 +83,24 @@ __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
 void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 {
-	uint32_t pagestart = baddr - (baddr % SPM_PAGESIZE);
+	const uint32_t C_unused = 0xFFFFFFFFUL;
+	uint32_t pagestart = C_unused, pagestartprev;
 	uint16_t data;
 	uint8_t idx = 0;
 
-	if ((size == SPM_PAGESIZE) && (pagestart == baddr)) {	// clear flash page only if data block is complete and starting at the bottom of the page
-		boot_page_erase(pagestart);					// perform page erase
-		boot_spm_busy_wait();						// wait until the memory is erased.
-	}
+	while (size-- && (baddr < APP_END)) {
+		pagestartprev = pagestart;
+		pagestart = baddr - (baddr % SPM_PAGESIZE);
+		if (!(baddr % SPM_PAGESIZE)) {				// check at every page border
+			if (pagestartprev != C_unused) {
+				boot_page_write(pagestartprev);
+				boot_spm_busy_wait();
+			}
 
-	while (size--) {
+			boot_page_erase(pagestart);				// perform page erase
+			boot_spm_busy_wait();					// wait until the memory is erased.
+		}
+
 		data = source[idx++];
 		if (size) {
 			data |= source[idx++] << 8;
@@ -102,9 +110,11 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 		baddr += 2;									// select next word in memory
 	}												// loop until all bytes are written
 
-	boot_page_write(pagestart);
-	boot_spm_busy_wait();
-	boot_rww_enable();								// re-enable the RWW section
+	if (pagestart != C_unused) {
+		boot_page_write(pagestart);
+		boot_spm_busy_wait();
+		boot_rww_enable();							// re-enable the RWW section
+	}
 }
 
 #ifdef RELEASE
