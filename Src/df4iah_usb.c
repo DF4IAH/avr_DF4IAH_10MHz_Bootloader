@@ -109,11 +109,6 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 {
 	uchar len = 0;
 
-	// serve for LOCal programming only
-	if (data[0] != USBASP_CAP_0_LOC) {
-		return len;
-	}
-
 	if (data[1] == USBASP_FUNC_CONNECT) {
 		prog_connected = PROG_CONNECTED;
 
@@ -124,16 +119,27 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_connected = PROG_UNCONNECTED;
 
 	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
-#if 0
-		replyBuffer[0] = ispTransmit(data[2]);
-		replyBuffer[1] = ispTransmit(data[3]);
-		replyBuffer[2] = ispTransmit(data[4]);
-		replyBuffer[3] = ispTransmit(data[5]);
-#else
-		/* LOC does not implement that */
-		replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
-#endif
-		len = 4;
+		// mimic Signature Bytes of the ATmega 328P
+		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 4)) {
+			replyBuffer[0] = data[2];
+			replyBuffer[1] = data[3];
+			replyBuffer[2] = data[4];
+			switch (data[5]) {
+			case 0x00:
+			default:	replyBuffer[3] = 0x1E;
+				break;
+
+			case 0x01:	replyBuffer[3] = 0x95;
+				break;
+
+			case 0x02:	replyBuffer[3] = 0x0F;
+				break;
+			}
+
+			len = 4;
+		} else {
+			replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
+		}
 
 	} else if ((data[1] == USBASP_FUNC_READFLASH) || (data[1] == USBASP_FUNC_READEEPROM)) {
 		if (prog_connected > PROG_UNCONNECTED) {
@@ -213,7 +219,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		clockWait(16);
 		tpi_init();
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_DISCONNECT) {
@@ -234,14 +240,14 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		/* switch pullups off */
 		ISP_OUT &= ~((1 << ISP_RST) | (1 << ISP_SCK) | (1 << ISP_MOSI));
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_RAWREAD) {
 #if 0
 		replyBuffer[0] = tpi_recv_byte();
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 		replyBuffer[0] = 0;
 #endif
 		len = 1;
@@ -250,7 +256,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 #if 0
 		tpi_send_byte(data[2]);
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 #endif
 
 	} else if (data[1] == USBASP_FUNC_TPI_READBLOCK) {
@@ -259,7 +265,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_nbytes = (data[7] << 8) | data[6];
 		prog_state = PROG_STATE_TPI_READ;
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 #endif
 		len = 0xff; /* multiple in */
 
@@ -269,12 +275,13 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		prog_nbytes = (data[7] << 8) | data[6];
 		prog_state = PROG_STATE_TPI_WRITE;
 #else
-		/* LOC does not implement that */
+		/* Tiny Programming Interface is not supported */
 #endif
 		len = 0xff; /* multiple out */
 
 	} else if (data[1] == USBASP_FUNC_GETCAPABILITIES) {
-		replyBuffer[0] = USBASP_CAP_0_LOC;
+		/* Tiny Programming Interface is not supported */
+		replyBuffer[0] = 0;  // USBASP_CAP_0_TPI;
 		replyBuffer[1] = 0;
 		replyBuffer[2] = 0;
 		replyBuffer[3] = 0;

@@ -33,7 +33,6 @@
 
 /* USBASP capabilities */
 #define USBASP_CAP_0_TPI    0x01
-#define USBASP_CAP_0_LOC    0x02
 
 /* connected state */
 #define PROG_UNCONNECTED		0
