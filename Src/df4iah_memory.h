@@ -21,6 +21,17 @@
 #include "chipdef.h"
 
 
+typedef struct eeprom_layout {
+	uint16_t		rc_cal;
+	uint16_t		reserved[7];
+
+	uint16_t		crc_df4iah;
+	uint16_t		pwm_pull_avg;
+
+	uint16_t		reserved_df4iah[512 - 8 - 2];
+} eeprom_layout_t;
+
+
 void eraseFlash(void);
 
 void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr);
