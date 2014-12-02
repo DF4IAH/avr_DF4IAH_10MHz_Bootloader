@@ -8,6 +8,7 @@
 #include <avr/boot.h>
 #include <avr/pgmspace.h>
 #include <avr/eeprom.h>
+#include <avr/interrupt.h>
 
 #include "df4iah_memory.h"
 
@@ -88,17 +89,14 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 	uint16_t data;
 	uint8_t idx = 0;
 
-	while (size-- && (baddr < APP_END)) {
+    while (size-- && (baddr < APP_END)) {
 		pagestartprev = pagestart;
 		pagestart = baddr - (baddr % SPM_PAGESIZE);
 		if (!(baddr % SPM_PAGESIZE)) {				// check at every page border
 			if (pagestartprev != C_unused) {
-				boot_page_write(pagestartprev);
-				boot_spm_busy_wait();
+				boot_page_write_safe(pagestartprev);
 			}
-
-			boot_page_erase(pagestart);				// perform page erase
-			boot_spm_busy_wait();					// wait until the memory is erased.
+			boot_page_erase_safe(pagestart);		// perform page erase
 		}
 
 		data = source[idx++];
@@ -106,14 +104,13 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 			data |= source[idx++] << 8;
 			size--;									// reduce number of bytes to write
 		}
-		boot_page_fill(baddr, data);				// call asm routine
+		boot_page_fill_safe(baddr, data);			// call asm routine
 		baddr += 2;									// select next word in memory
 	}												// loop until all bytes are written
 
 	if (pagestart != C_unused) {
-		boot_page_write(pagestart);
-		boot_spm_busy_wait();
-		boot_rww_enable();							// re-enable the RWW section
+		boot_page_write_safe(pagestart);
+		boot_rww_enable_safe();						// re-enable the RWW section
 	}
 }
 

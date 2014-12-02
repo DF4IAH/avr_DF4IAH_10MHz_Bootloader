@@ -26,9 +26,10 @@ typedef struct eeprom_layout {
 	uint16_t		reserved[7];
 
 	uint16_t		crc_df4iah;
+	uint16_t		version;
 	uint16_t		pwm_pull_avg;
 
-	uint16_t		reserved_df4iah[512 - 8 - 2];
+	uint16_t		reserved_df4iah[512 - 8 - 3];
 } eeprom_layout_t;
 
 
