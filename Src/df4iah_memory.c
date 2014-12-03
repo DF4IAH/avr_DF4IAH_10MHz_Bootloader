@@ -16,6 +16,8 @@
 #include "df4iah_usb.h"
 #include "main.h"
 
+#define min(a,b) (a) < (b) ?  (a) : (b)
+
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_memory"), aligned(2)))
@@ -84,33 +86,86 @@ __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
 void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 {
-	const uint32_t C_unused = 0xFFFFFFFFUL;
-	uint32_t pagestart = C_unused, pagestartprev;
-	uint16_t data;
-	uint8_t idx = 0;
+	pagebuf_t sourceIdx = 0;
 
-    while (size-- && (baddr < APP_END)) {
-		pagestartprev = pagestart;
-		pagestart = baddr - (baddr % SPM_PAGESIZE);
-		if (!(baddr % SPM_PAGESIZE)) {				// check at every page border
-			if (pagestartprev != C_unused) {
-				boot_page_write_safe(pagestartprev);
-			}
+	while (size) {
+		/* calculate */
+		uint8_t  pageoffs  = baddr % SPM_PAGESIZE;
+		uint32_t pagestart = baddr - pageoffs;
+		uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, APP_END - baddr));
+		uint8_t  trailer   = SPM_PAGESIZE - len;
+		uint8_t  verifyCnt = 5;
+
+		/* on each new page erase it first */
+		if (!pageoffs) {
 			boot_page_erase_safe(pagestart);		// perform page erase
 		}
 
-		data = source[idx++];
-		if (size) {
-			data |= source[idx++] << 8;
-			size--;									// reduce number of bytes to write
-		}
-		boot_page_fill_safe(baddr, data);			// call asm routine
-		baddr += 2;									// select next word in memory
-	}												// loop until all bytes are written
+		while (--verifyCnt) {
+			uint16_t data;
 
-	if (pagestart != C_unused) {
-		boot_page_write_safe(pagestart);
-		boot_rww_enable_safe();						// re-enable the RWW section
+			/* fill buffer between pagestart and baddr first */
+			for (uint8_t idx = 0; idx < pageoffs; ++idx) {
+				uint16_t ptraddr = pagestart + idx;
+				uint8_t bdata = *((uint8_t*) ptraddr);
+				data = (idx % 1) ?  ((data & 0x00ff) | (bdata << 8))
+										  : (0xff00  |  bdata);
+				if (idx % 1) {
+					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+				}
+			}
+
+			/* fill buffer with content */
+			for (uint8_t idx = 0; idx < len; ++idx) {
+				uint16_t ptraddr = baddr + idx;
+				data = (ptraddr % 1) ?  ((data & 0x00ff) | (source[sourceIdx + idx] << 8))
+											: (0xff00  |  source[sourceIdx + idx]);
+				if (ptraddr % 1) {
+					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+				}
+			}
+
+			/* fill buffer with trailing space */
+			for (uint8_t idx = 0; idx < trailer; ++idx) {
+				uint16_t ptraddr = baddr + len + idx;
+				data = (ptraddr % 1) ?  ((data & 0x00ff) | 0xff00)
+											: (0xff00  |   0xff);
+				if (ptraddr % 1) {
+					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+				}
+
+				if (((idx + 1) == trailer) && (ptraddr % 1)) {
+					boot_page_fill_safe((ptraddr + 2) & 0xfffffffe, data);	// call asm routine
+				}
+			}
+
+			/* write the page */
+			boot_page_write_safe(pagestart);
+
+			/* verify data */
+			uint8_t isValid = 1;
+			for (uint8_t idx = 0; idx < len; ++idx) {
+				uint16_t ptraddr = baddr + idx;
+				if (*((uint8_t*) ptraddr) != source[sourceIdx + idx]) {
+					isValid = 0;
+					break;
+				}
+			}
+			if (isValid) {
+				if (!verifyCnt) {
+					++verifyCnt;
+				}
+				break;
+			}
+		}
+		if (!verifyCnt) {
+			return;									// abort to write this page again
+		}
+
+		/* move pointers ahead */
+		baddr     += len;
+		size      -= len;
+		sourceIdx += len;
 	}
 }
 
