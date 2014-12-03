@@ -24,9 +24,11 @@ __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
 void eraseFlash(void)
 {
-	// erase only main section (bootloader protection)
+	const uint32_t C_app_end = APP_END;
 	uint32_t addr = 0;
-	while (APP_END >= addr) {
+
+	// erase only main section (bootloader protection)
+	while (C_app_end >= addr) {
 		boot_page_erase(addr);						// perform page erase
 		boot_spm_busy_wait();						// wait until the memory is erased.
 		addr += SPM_PAGESIZE;
@@ -39,6 +41,7 @@ __attribute__((section(".df4iah_memory"), aligned(2)))
 #endif
 void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 {
+	const uint32_t C_app_end = APP_END;
 	uint16_t data;
 	uint8_t idx = 0;
 
@@ -48,7 +51,7 @@ void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 		if (true) {
 #else
 		// don't read bootloader
-		if (baddr < APP_END) {
+		if (baddr < C_app_end) {
 #if defined(RAMPZ)
 			data = pgm_read_word_far(baddr);
 #else
@@ -90,10 +93,11 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 
 	while (size) {
 		/* calculate */
-		uint8_t  pageoffs  = baddr % SPM_PAGESIZE;
-		uint32_t pagestart = baddr - pageoffs;
-		uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, APP_END - baddr));
-		uint8_t  trailer   = SPM_PAGESIZE - len;
+		const uint32_t C_app_end = APP_END;
+		const uint8_t  pageoffs  = baddr % SPM_PAGESIZE;
+		const uint32_t pagestart = baddr - pageoffs;
+		const uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, C_app_end - baddr));
+		const uint8_t  trailer   = SPM_PAGESIZE - len;
 		uint8_t  verifyCnt = 5;
 
 		/* on each new page erase it first */
@@ -101,41 +105,43 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 			boot_page_erase_safe(pagestart);		// perform page erase
 		}
 
+		/* after erasing write up to 5 times the content of data that should '0' the bits */
 		while (--verifyCnt) {
+			const uint32_t C_word_mask = 0xfffffffe;
 			uint16_t data;
 
 			/* fill buffer between pagestart and baddr first */
 			for (uint8_t idx = 0; idx < pageoffs; ++idx) {
-				uint16_t ptraddr = pagestart + idx;
-				uint8_t bdata = *((uint8_t*) ptraddr);
-				data = (idx % 1) ?  ((data & 0x00ff) | (bdata << 8))
-										  : (0xff00  |  bdata);
+				const uint16_t ptraddr = pagestart + idx;
+				const uint8_t bdata = *((uint8_t*) ptraddr);
+				data = (idx % 1) ?  ((data & 0x00ff) | (bdata << 8))	// MSB
+										:   (0xff00  |  bdata);			// LSB
 				if (idx % 1) {
-					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
 				}
 			}
 
 			/* fill buffer with content */
 			for (uint8_t idx = 0; idx < len; ++idx) {
-				uint16_t ptraddr = baddr + idx;
+				const uint16_t ptraddr = baddr + idx;
 				data = (ptraddr % 1) ?  ((data & 0x00ff) | (source[sourceIdx + idx] << 8))
-											: (0xff00  |  source[sourceIdx + idx]);
+											:   (0xff00  |  source[sourceIdx + idx]);
 				if (ptraddr % 1) {
-					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
 				}
 			}
 
 			/* fill buffer with trailing space */
 			for (uint8_t idx = 0; idx < trailer; ++idx) {
-				uint16_t ptraddr = baddr + len + idx;
-				data = (ptraddr % 1) ?  ((data & 0x00ff) | 0xff00)
-											: (0xff00  |   0xff);
+				const uint16_t ptraddr = baddr + len + idx;
+				data = (ptraddr % 1) ?  ((data & 0x00ff) | 0xff00)		// MSB
+											:    0xffff;				// LSB
 				if (ptraddr % 1) {
-					boot_page_fill_safe(ptraddr & 0xfffffffe, data);	// call asm routine
+					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
 				}
 
 				if (((idx + 1) == trailer) && (ptraddr % 1)) {
-					boot_page_fill_safe((ptraddr + 2) & 0xfffffffe, data);	// call asm routine
+					boot_page_fill_safe((ptraddr + 2) & C_word_mask, data);	// call asm routine
 				}
 			}
 
@@ -145,17 +151,16 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 			/* verify data */
 			uint8_t isValid = 1;
 			for (uint8_t idx = 0; idx < len; ++idx) {
-				uint16_t ptraddr = baddr + idx;
+				const uint16_t ptraddr = baddr + idx;
+
 				if (*((uint8_t*) ptraddr) != source[sourceIdx + idx]) {
 					isValid = 0;
-					break;
+					break;							// test failed
 				}
 			}
 			if (isValid) {
-				if (!verifyCnt) {
-					++verifyCnt;
-				}
-				break;
+				++verifyCnt;
+				break;								// verify OK
 			}
 		}
 		if (!verifyCnt) {
