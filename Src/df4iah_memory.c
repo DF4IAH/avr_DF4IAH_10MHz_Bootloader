@@ -12,7 +12,6 @@
 
 #include "df4iah_memory.h"
 
-#include "df4iah_serial.h"
 #include "df4iah_usb.h"
 #include "main.h"
 
@@ -97,62 +96,39 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 		const uint8_t  pageoffs  = baddr % SPM_PAGESIZE;
 		const uint32_t pagestart = baddr - pageoffs;
 		const uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, C_app_end - baddr));
-		const uint8_t  trailer   = SPM_PAGESIZE - len;
-		uint8_t  verifyCnt = 5;
+		uint8_t  verifyCnt = 9;
 
 		/* on each new page erase it first */
 		if (!pageoffs) {
-			boot_page_erase_safe(pagestart);		// perform page erase
+			boot_page_erase(pagestart);				// perform page erase
+			boot_spm_busy_wait();
 		}
 
 		/* after erasing write up to 5 times the content of data that should '0' the bits */
-		while (--verifyCnt) {
+		while (verifyCnt--) {
 			const uint32_t C_word_mask = 0xfffffffe;
-			uint16_t data;
-
-			/* fill buffer between pagestart and baddr first */
-			for (uint8_t idx = 0; idx < pageoffs; ++idx) {
-				const uint16_t ptraddr = pagestart + idx;
-				const uint8_t bdata = *((uint8_t*) ptraddr);
-				data = (idx % 1) ?  ((data & 0x00ff) | (bdata << 8))	// MSB
-										:   (0xff00  |  bdata);			// LSB
-				if (idx % 1) {
-					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
-				}
-			}
+			uint16_t data = 0xffff;
 
 			/* fill buffer with content */
 			for (uint8_t idx = 0; idx < len; ++idx) {
 				const uint16_t ptraddr = baddr + idx;
-				data = (ptraddr % 1) ?  ((data & 0x00ff) | (source[sourceIdx + idx] << 8))
-											:   (0xff00  |  source[sourceIdx + idx]);
-				if (ptraddr % 1) {
-					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
-				}
-			}
-
-			/* fill buffer with trailing space */
-			for (uint8_t idx = 0; idx < trailer; ++idx) {
-				const uint16_t ptraddr = baddr + len + idx;
-				data = (ptraddr % 1) ?  ((data & 0x00ff) | 0xff00)		// MSB
-											:    0xffff;				// LSB
-				if (ptraddr % 1) {
-					boot_page_fill_safe(ptraddr & C_word_mask, data);	// call asm routine
-				}
-
-				if (((idx + 1) == trailer) && (ptraddr % 1)) {
-					boot_page_fill_safe((ptraddr + 2) & C_word_mask, data);	// call asm routine
+				data = (ptraddr & 1) ?  ((data & 0x00ff) | (((uint16_t) source[sourceIdx + idx]) << 8))
+											:   (0xff00  |  ((uint16_t) source[sourceIdx + idx]));
+				if (ptraddr & 1) {
+					boot_page_fill(ptraddr & C_word_mask, data);	// call asm routine
 				}
 			}
 
 			/* write the page */
-			boot_page_write_safe(pagestart);
+			boot_page_write(pagestart);
+			boot_spm_busy_wait();
+			boot_rww_enable();						// re-enable the RWW section
 
-			/* verify data */
+			/* verify data, compare source data segment only */
 			uint8_t isValid = 1;
 			for (uint8_t idx = 0; idx < len; ++idx) {
 				const uint16_t ptraddr = baddr + idx;
-
+				//pgm_read_word_near(baddr)
 				if (*((uint8_t*) ptraddr) != source[sourceIdx + idx]) {
 					isValid = 0;
 					break;							// test failed

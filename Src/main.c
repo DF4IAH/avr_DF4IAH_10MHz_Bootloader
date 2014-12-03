@@ -48,7 +48,6 @@
 #include "chipdef.h"
 #include "main.h"
 #include "df4iah_probe.h"
-#include "df4iah_serial.h"
 #include "df4iah_usb.h"
 #include "df4iah_memory.h"
 #include "df4iah_clkPullPwm.h"
@@ -203,7 +202,6 @@ int main(void)
     sei();											// ENABLE interrupt
 
 	init_clkPullPwm();
-	init_serial();
 
     for(;;) {
     	give_away();
