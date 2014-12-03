@@ -96,7 +96,7 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 		const uint8_t  pageoffs  = baddr % SPM_PAGESIZE;
 		const uint32_t pagestart = baddr - pageoffs;
 		const uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, C_app_end - baddr));
-		uint8_t  verifyCnt = 9;
+		uint8_t  verifyCnt = 5;
 
 		/* on each new page erase it first */
 		if (!pageoffs) {
@@ -127,9 +127,8 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 			/* verify data, compare source data segment only */
 			uint8_t isValid = 1;
 			for (uint8_t idx = 0; idx < len; ++idx) {
-				const uint16_t ptraddr = baddr + idx;
-				//pgm_read_word_near(baddr)
-				if (*((uint8_t*) ptraddr) != source[sourceIdx + idx]) {
+				const uint8_t ptrdata = (pgm_read_word_near((baddr + idx) & 0xfffe) >> (((baddr + idx) & 1) ?  8 : 0));
+				if (ptrdata != source[sourceIdx + idx]) {
 					isValid = 0;
 					break;							// test failed
 				}
