@@ -68,49 +68,6 @@ void close_usb()
 	usbDeviceDisconnect();
 }
 
-#if 0
-#ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
-#endif
-uint8_t recvchar_usb(void)
-{
-	return 0;  // XXX TODO
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
-#endif
-void sendchar_usb(uint8_t data)
-{
-	// XXX TODO
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
-#endif
-void recvBuffer_usb(uint16_t addr, uint8_t* dptr, uint8_t len)
-{
-#if 0
-	pagebuf_t cnt;
-	uint8_t *tmp = gBuffer;
-
-	for (cnt = 0; cnt < sizeof(gBuffer); cnt++) {
-		*tmp++ = (cnt < size) ? recvchar_usb() : 0xFF;
-	}
-#else
-#endif
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
-#endif
-void sendBuffer_usb(uint16_t addr, const uint8_t* sptr, uint8_t len)
-{
-}
-#endif
-
-// -- 8< --
-
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_usb"), aligned(2)))
