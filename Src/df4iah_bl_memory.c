@@ -98,13 +98,17 @@ void memory_bl_writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 		const uint8_t  len       = min(SPM_PAGESIZE - pageoffs, min(size, C_app_end - baddr));
 		uint8_t  verifyCnt = 5;
 
+		if (baddr >= C_app_end) {
+			return;										// short-cut
+		}
+
 		/* on each new page erase it first */
 		if (!pageoffs) {
 			boot_page_erase(pagestart);				// perform page erase
 			boot_spm_busy_wait();
 		}
 
-		/* after erasing write up to 5 times the content of data that should '0' the bits */
+		/* after erasing - write up to 5 times the content of data that should '0'ing the bits */
 		while (verifyCnt--) {
 			const uint32_t C_word_mask = 0xfffffffe;
 			uint16_t data = 0xffff;
