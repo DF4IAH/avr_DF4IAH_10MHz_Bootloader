@@ -5,13 +5,16 @@
  *      Author: espero
  */
 
-#ifndef DF4IAH_CLKPULLPWM_H_
-#define DF4IAH_CLKPULLPWM_H_
+#ifndef DF4IAH_BL_CLKPULLPWM_H_
+#define DF4IAH_BL_CLKPULLPWM_H_
 
 
-void init_bl_clkPullPwm();
-void close_bl_clkPullPwm();
-void debug_bl_togglePin();
-void debug_bl_endlessTogglePin();
+void clkPullPwm_bl_init();
+void clkPullPwm_bl_close();
 
-#endif /* DF4IAH_CLKPULLPWM_H_ */
+void clkPullPwm_bl_setRatio(uint16_t ratio);
+
+void clkPullPwm_bl_togglePin();
+void clkPullPwm_bl_endlessTogglePin();
+
+#endif /* DF4IAH_BL_CLKPULLPWM_H_ */

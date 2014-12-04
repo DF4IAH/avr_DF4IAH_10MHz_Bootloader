@@ -5,17 +5,17 @@
  *      Author: espero
  */
 
-#ifndef DF4IAH_USB_H_
-#define DF4IAH_USB_H_
+#ifndef DF4IAH_BL_USB_H_
+#define DF4IAH_BL_USB_H_
 
 
 #include "chipdef.h"
 #include "usbdrv_bl/usbdrv.h"
 
 
-void replyContent(uchar replyBuffer[], uchar data[]);
+void usb_bl_replyContent(uchar replyBuffer[], uchar data[]);
 
-void init_usb();
-void close_usb();
+void usb_bl_init();
+void usb_bl_close();
 
-#endif /* DF4IAH_USB_H_ */
+#endif /* DF4IAH_BL_USB_H_ */

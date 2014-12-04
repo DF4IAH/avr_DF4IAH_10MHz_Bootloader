@@ -176,9 +176,12 @@ static inline void init_wdt() {
 
 static inline void app_startup_check()
 {
+	uint8_t code[2] = { 0 };
+
 	// check for jumper-setting and for a valid jump-table entry
-	if ((!check_jumper()) && (*((unsigned short*) 0x0000) == 0x0c94)) {
-		close_probe();
+	memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
+	if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {
+		probe_bl_close();
 		jump_to_app();								// jump to application sector
 	}
 }
@@ -187,7 +190,7 @@ void give_away(void)
 {
     wdt_reset();
 	usbPoll();
-	debug_bl_togglePin();							// XXX DEBUGGING
+	clkPullPwm_bl_togglePin();
 }
 
 
@@ -195,13 +198,13 @@ int main(void)
 {
 	vectortable_to_bootloader();
 	init_wdt();
-	init_probe();
+	probe_bl_init();
  	app_startup_check();
 
-	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
+	usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
 
-	init_bl_clkPullPwm();
+    clkPullPwm_bl_init();
 
     for(;;) {
     	give_away();

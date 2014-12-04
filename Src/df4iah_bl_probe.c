@@ -14,7 +14,7 @@
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
-void init_probe()
+void probe_bl_init()
 {
 	MCUCR &= ~(1<<PUD);								// PullUp Disable off
 
@@ -31,7 +31,7 @@ void init_probe()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
-void close_probe()
+void probe_bl_close()
 {
 	PROBE_PORT &= ~(_BV(PROBE_PNUM));				// clear PULLUP to default
 }
@@ -39,7 +39,7 @@ void close_probe()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
-inline uint8_t check_jumper()
+inline uint8_t probe_bl_checkJumper()
 {
 	if (PROBE_PIN & _BV(PROBE_PNUM)) {
 		// pin is not grounded - JUMPER open

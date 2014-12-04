@@ -21,7 +21,7 @@
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_memory"), aligned(2)))
 #endif
-void eraseFlash(void)
+void memory_bl_eraseFlash(void)
 {
 	const uint32_t C_app_end = APP_END;
 	uint32_t addr = 0;
@@ -38,7 +38,7 @@ void eraseFlash(void)
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_memory"), aligned(2)))
 #endif
-void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
+void memory_bl_readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 {
 	const uint32_t C_app_end = APP_END;
 	uint16_t data;
@@ -73,7 +73,7 @@ void readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_memory"), aligned(2)))
 #endif
-void readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr)
+void memory_bl_readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr)
 {
 	uint8_t idx = 0;
 
@@ -86,7 +86,7 @@ void readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr)
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_memory"), aligned(2)))
 #endif
-void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
+void memory_bl_writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 {
 	pagebuf_t sourceIdx = 0;
 
@@ -152,7 +152,7 @@ void writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_memory"), aligned(2)))
 #endif
-void writeEEpromPage(uint8_t source[], pagebuf_t size, uint16_t baddr)
+void memory_bl_writeEEpromPage(uint8_t source[], pagebuf_t size, uint16_t baddr)
 {
 	uint8_t idx = 0;
 

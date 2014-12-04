@@ -16,23 +16,23 @@
 #include "df4iah_bl_usb.h"
 
 
-static uchar replyBuffer[8];
+uchar replyBuffer[8];
 
-static uchar prog_connected = PROG_UNCONNECTED;
-static uchar prog_state = PROG_STATE_IDLE;
+uchar prog_connected = PROG_UNCONNECTED;
+uchar prog_state = PROG_STATE_IDLE;
 
-static uchar prog_address_newmode = 0;
-static unsigned long prog_address;
-static unsigned int prog_nbytes = 0;
-static unsigned int prog_pagesize;
-static uchar prog_blockflags;
-static uchar prog_pagecounter;
+uchar prog_address_newmode = 0;
+unsigned long prog_address;
+unsigned int prog_nbytes = 0;
+unsigned int prog_pagesize;
+uchar prog_blockflags;
+uchar prog_pagecounter;
 
 
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
-void replyContent(uchar replyBuffer[], uchar data[])
+void usb_bl_replyContent(uchar replyBuffer[], uchar data[])
 {
 	replyBuffer[0] = data[2];
 	replyBuffer[1] = data[3];
@@ -43,7 +43,7 @@ void replyContent(uchar replyBuffer[], uchar data[])
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
-void init_usb()
+void usb_bl_init()
 {
 	usbInit();
 	USB_INTR_ENABLE &= ~(_BV(USB_INTR_ENABLE_BIT));
@@ -62,11 +62,13 @@ void init_usb()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
-void close_usb()
+void usb_bl_close()
 {
 	USB_INTR_ENABLE &= ~(_BV(USB_INTR_ENABLE_BIT));
 	usbDeviceDisconnect();
 }
+
+/*  -- 8< -- */
 
 
 #ifdef RELEASE
@@ -90,31 +92,31 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
 		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 3)) {
 			// signature bytes
-			replyContent(replyBuffer, data);
+			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_signature_byte_get(data[4] << 1);
 			len = 4;
 
 		} else if ((data[2] == 0x50) && (data[3] == 0x00)) {
 			// lfuse bits - @see page 271f
-			replyContent(replyBuffer, data);
+			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOW_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x58) && (data[3] == 0x08)) {
 			// hfuse bits
-			replyContent(replyBuffer, data);
+			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_HIGH_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x50) && (data[3] == 0x08)) {
 			// efuse bits
-			replyContent(replyBuffer, data);
+			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_EXTENDED_FUSE_BITS);
 			len = 4;
 
 		} else if ((data[2] == 0x58) && (data[3] == 0x00)) {
 			// lock bits
-			replyContent(replyBuffer, data);
+			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOCK_BITS);
 			len = 4;
 		}
@@ -223,9 +225,9 @@ USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 	}
 
 	if (prog_state == PROG_STATE_READFLASH) {
-		readFlashPage(data, len, prog_address);
+		memory_bl_readFlashPage(data, len, prog_address);
 	} else {
-		readEEpromPage(data, len, prog_address);
+		memory_bl_readEEpromPage(data, len, prog_address);
 	}
 	prog_address += len;
 
@@ -248,10 +250,10 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 		return 0xff;
 	}
 
-	if (prog_state == PROG_STATE_WRITEFLASH) {	// TODO create a job list and copy the data and return here fast
-		writeFlashPage(data, len, prog_address);
+	if (prog_state == PROG_STATE_WRITEFLASH) {
+		memory_bl_writeFlashPage(data, len, prog_address);
 	} else {
-		writeEEpromPage(data, len, prog_address);
+		memory_bl_writeEEpromPage(data, len, prog_address);
 	}
 	prog_address += len;
 

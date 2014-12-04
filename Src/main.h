@@ -5,8 +5,8 @@
  *      Author: espero
  */
 
-#ifndef MAIN_H_
-#define MAIN_H_
+#ifndef BL_MAIN_H_
+#define BL_MAIN_H_
 
 /* MCU frequency */
 #ifndef F_CPU
@@ -57,4 +57,4 @@ void give_away(void);
 
 int main(void);
 
-#endif /* MAIN_H_ */
+#endif /* BL_MAIN_H_ */

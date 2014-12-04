@@ -5,14 +5,14 @@
  *      Author: espero
  */
 
-#ifndef DF4IAH_PROBE_H_
-#define DF4IAH_PROBE_H_
+#ifndef DF4IAH_BL_PROBE_H_
+#define DF4IAH_BL_PROBE_H_
 
 #include "chipdef.h"
 
 
-void init_probe();
-void close_probe();
-uint8_t check_jumper();
+void probe_bl_init();
+void probe_bl_close();
+uint8_t probe_bl_checkJumper();
 
-#endif /* DF4IAH_PROBE_H_ */
+#endif /* DF4IAH_BL_PROBE_H_ */

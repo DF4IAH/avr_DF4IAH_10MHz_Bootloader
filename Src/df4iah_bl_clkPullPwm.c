@@ -20,7 +20,7 @@
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void init_bl_clkPullPwm()
+void clkPullPwm_bl_init()
 {
 	// set the timer-1 counter to zero.
 	TCNT1L = TCNT1H = 0x00;
@@ -29,8 +29,7 @@ void init_bl_clkPullPwm()
 	ICR1L = ICR1H = 0xff;
 
 	// set the timer-1 PWM-A compare register - high byte first
-	OCR1AH = (DEFAULT_PWM_COUNT>>8);
-	OCR1AL = (DEFAULT_PWM_COUNT & 0xff);
+	clkPullPwm_bl_setRatio(DEFAULT_PWM_COUNT);
 
 	// set the timer-1 mode of operation: 0xe = Fast PWM, counting up, TOP := ICR1 [. . WGM11 WGM10]
 	// set the timer-1 compare-A waveform generator to: PWM, 1 at >= match, 0 else
@@ -54,7 +53,7 @@ void init_bl_clkPullPwm()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void close_bl_clkPullPwm()
+void clkPullPwm_bl_close()
 {
 	// reset timer-1 PWM-A compare output port
 	DDR_OC1A_REG &= ~(_BV(DDR_OC1A));
@@ -75,7 +74,16 @@ void close_bl_clkPullPwm()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-inline void debug_bl_togglePin()
+void clkPullPwm_bl_setRatio(uint16_t ratio)
+{
+	OCR1AH = (ratio >> 8);
+	OCR1AL = (ratio & 0xff);
+}
+
+#ifdef RELEASE
+__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
+#endif
+inline void clkPullPwm_bl_togglePin()
 {
 	PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
 }
@@ -83,10 +91,10 @@ inline void debug_bl_togglePin()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void debug_bl_endlessTogglePin()
+void clkPullPwm_bl_endlessTogglePin()
 {
 	for(;;)	{
-		debug_bl_togglePin();
+		clkPullPwm_bl_togglePin();
 		_delay_ms(1);
 		wdt_reset();
 	}

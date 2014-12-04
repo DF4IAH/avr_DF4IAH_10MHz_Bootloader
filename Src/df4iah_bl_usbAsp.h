@@ -9,8 +9,8 @@
  * Last change....: 2014-11-28
  */
 
-#ifndef DF4IAH_USBASP_H_
-#define DF4IAH_USBASP_H_
+#ifndef DF4IAH_BL_USBASP_H_
+#define DF4IAH_BL_USBASP_H_
 
 /* USB function call identifiers */
 #define USBASP_FUNC_CONNECT     1
@@ -67,4 +67,4 @@
 #define USBASP_ISP_SCK_750    11  /* 750 kHz   */
 #define USBASP_ISP_SCK_1500   12  /* 1.5 MHz   */
 
-#endif /* DF4IAH_USBASP_H_ */
+#endif /* DF4IAH_BL_USBASP_H_ */
