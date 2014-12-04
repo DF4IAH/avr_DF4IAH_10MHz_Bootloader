@@ -18,7 +18,7 @@
 
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
+__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
 void init_clkPullPwm()
 {
@@ -52,7 +52,7 @@ void init_clkPullPwm()
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
+__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
 void close_clkPullPwm()
 {
@@ -78,7 +78,7 @@ inline void debug_togglePin()
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_clkpullpwm"), aligned(2)))
+__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
 void debug_endlessTogglePin()
 {

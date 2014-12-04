@@ -12,7 +12,7 @@
 
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_probe"), aligned(2)))
+__attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
 void init_probe()
 {
@@ -29,7 +29,7 @@ void init_probe()
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_probe"), aligned(2)))
+__attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
 void close_probe()
 {
@@ -37,7 +37,7 @@ void close_probe()
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_probe"), aligned(2)))
+__attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
 inline uint8_t check_jumper()
 {

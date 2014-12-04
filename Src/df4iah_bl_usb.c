@@ -30,7 +30,7 @@ static uchar prog_pagecounter;
 
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 void replyContent(uchar replyBuffer[], uchar data[])
 {
@@ -41,7 +41,7 @@ void replyContent(uchar replyBuffer[], uchar data[])
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 void init_usb()
 {
@@ -60,7 +60,7 @@ void init_usb()
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 void close_usb()
 {
@@ -70,7 +70,7 @@ void close_usb()
 
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 {
@@ -212,7 +212,7 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 {
@@ -238,7 +238,7 @@ USB_PUBLIC uchar usbFunctionRead(uchar *data, uchar len)
 }
 
 #ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 {
@@ -266,7 +266,7 @@ USB_PUBLIC uchar usbFunctionWrite(uchar *data, uchar len)
 
 #if USB_CFG_IMPLEMENT_FN_WRITEOUT
 # ifdef RELEASE
-__attribute__((section(".df4iah_usb"), aligned(2)))
+__attribute__((section(".df4iah_bl_usb"), aligned(2)))
 # endif
 USB_PUBLIC void usbFunctionWriteOut(uchar *data, uchar len)
 {
