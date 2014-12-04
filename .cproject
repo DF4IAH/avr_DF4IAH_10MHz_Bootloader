@@ -44,9 +44,9 @@
 									<listOptionValue builtIn="false" value="__AVR_ATmega328P__"/>
 									<listOptionValue builtIn="false" value="BOOTSIZE=${Bootsize}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_ADDRESS=${MT_Bootloader_Address}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_CLKPULLPWM=${MT_Bootloader_ClkPullPwm}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_MEMORY=${MT_Bootloader_Memory}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_PROBE=${MT_Bootloader_Probe}"/>
-									<listOptionValue builtIn="false" value="MT_BOOTLOADER_SERIAL=${MT_Bootloader_Serial}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_USB=${MT_Bootloader_Usb}"/>
 								</option>
 								<option id="de.innot.avreclipse.compiler.option.undef.39785463" name="Undefine Syms (-U)" superClass="de.innot.avreclipse.compiler.option.undef" valueType="undefDefinedSymbols">
@@ -124,11 +124,10 @@
 									<listOptionValue builtIn="false" value="__AVR_ATmega328P__"/>
 									<listOptionValue builtIn="false" value="BOOTSIZE=${Bootsize}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_ADDRESS=${MT_Bootloader_Address}"/>
+									<listOptionValue builtIn="false" value="MT_BOOTLOADER_CLKPULLPWM=${MT_Bootloader_ClkPullPwm}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_MEMORY=${MT_Bootloader_Memory}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_PROBE=${MT_Bootloader_Probe}"/>
-									<listOptionValue builtIn="false" value="MT_BOOTLOADER_SERIAL=${MT_Bootloader_Serial}"/>
 									<listOptionValue builtIn="false" value="MT_BOOTLOADER_USB=${MT_Bootloader_Usb}"/>
-									<listOptionValue builtIn="false" value="MT_BOOTLOADER_CLKPULLPWM=${MT_Bootloader_ClkPullPwm}"/>
 								</option>
 								<option id="de.innot.avreclipse.compiler.option.undef.79460396" name="Undefine Syms (-U)" superClass="de.innot.avreclipse.compiler.option.undef" valueType="undefDefinedSymbols">
 									<listOptionValue builtIn="false" value="__AVR_ATmega16__"/>

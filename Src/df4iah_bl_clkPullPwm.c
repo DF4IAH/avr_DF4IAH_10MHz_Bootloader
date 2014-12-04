@@ -72,6 +72,9 @@ void close_clkPullPwm()
 	TCNT1L = TCNT1H = 0x00;
 }
 
+#ifdef RELEASE
+__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
+#endif
 inline void debug_togglePin()
 {
 	PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
