@@ -20,7 +20,7 @@
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void init_clkPullPwm()
+void init_bl_clkPullPwm()
 {
 	// set the timer-1 counter to zero.
 	TCNT1L = TCNT1H = 0x00;
@@ -54,7 +54,7 @@ void init_clkPullPwm()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void close_clkPullPwm()
+void close_bl_clkPullPwm()
 {
 	// reset timer-1 PWM-A compare output port
 	DDR_OC1A_REG &= ~(_BV(DDR_OC1A));
@@ -75,7 +75,7 @@ void close_clkPullPwm()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-inline void debug_togglePin()
+inline void debug_bl_togglePin()
 {
 	PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
 }
@@ -83,10 +83,10 @@ inline void debug_togglePin()
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
-void debug_endlessTogglePin()
+void debug_bl_endlessTogglePin()
 {
 	for(;;)	{
-		debug_togglePin();
+		debug_bl_togglePin();
 		_delay_ms(1);
 		wdt_reset();
 	}

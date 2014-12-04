@@ -81,35 +81,35 @@ void __vector_default(void) { ; }
 /*  VECTOR - TABLE
  *
 	Address	Labels	Code 					Comments
-	0x0000			jmp RESET 				; Reset Handler
-	0x0002			jmp EXT_INT0 			; IRQ0 Handler
-	0x0004			jmp EXT_INT1 			; IRQ1 Handler
-	0x0006			jmp PCINT0 				; PCINT0 Handler
-	0x0008			jmp PCINT1 				; PCINT1 Handler
-	0x000A			jmp PCINT2 				; PCINT2 Handler
-	0x000C			jmp WDT 				; Watchdog Timer Handler
-	0x000E			jmp TIM2_COMPA 			; Timer2 Compare A Handler
-	0x0010			jmp TIM2_COMPB 			; Timer2 Compare B Handler
-	0x0012			jmp TIM2_OVF 			; Timer2 Overflow Handler
-	0x0014			jmp TIM1_CAPT 			; Timer1 Capture Handler
-	0x0016			jmp TIM1_COMPA 			; Timer1 Compare A Handler
-	0x0018			jmp TIM1_COMPB 			; Timer1 Compare B Handler
-	0x001A			jmp TIM1_OVF 			; Timer1 Overflow Handler
-	0x001C			jmp TIM0_COMPA 			; Timer0 Compare A Handler
-	0x001E			jmp TIM0_COMPB 			; Timer0 Compare B Handler
-	0x0020			jmp TIM0_OVF 			; Timer0 Overflow Handler
-	0x0022			jmp SPI_STC 			; SPI Transfer Complete Handler
-	0x0024			jmp USART_RXC 			; USART, RX Complete Handler
-	0x0026			jmp USART_UDRE 			; USART, UDR Empty Handler
-	0x0028			jmp USART_TXC 			; USART, TX Complete Handler
-	0x002A			jmp ADC 				; ADC Conversion Complete Handler
-	0x002C			jmp EE_RDY 				; EEPROM Ready Handler
-	0x002E			jmp ANA_COMP 			; Analog Comparator Handler
-	0x0030			jmp TWI 				; 2-wire Serial Interface Handler
-	0x0032			jmp SPM_RDY 			; Store Program Memory Ready Handler
+	0x7000			jmp RESET 				; Reset Handler
+	0x7002			jmp EXT_INT0 			; IRQ0 Handler
+	0x7004			jmp EXT_INT1 			; IRQ1 Handler
+	0x7006			jmp PCINT0 				; PCINT0 Handler
+	0x7008			jmp PCINT1 				; PCINT1 Handler
+	0x700A			jmp PCINT2 				; PCINT2 Handler
+	0x700C			jmp WDT 				; Watchdog Timer Handler
+	0x700E			jmp TIM2_COMPA 			; Timer2 Compare A Handler
+	0x7010			jmp TIM2_COMPB 			; Timer2 Compare B Handler
+	0x7012			jmp TIM2_OVF 			; Timer2 Overflow Handler
+	0x7014			jmp TIM1_CAPT 			; Timer1 Capture Handler
+	0x7016			jmp TIM1_COMPA 			; Timer1 Compare A Handler
+	0x7018			jmp TIM1_COMPB 			; Timer1 Compare B Handler
+	0x701A			jmp TIM1_OVF 			; Timer1 Overflow Handler
+	0x701C			jmp TIM0_COMPA 			; Timer0 Compare A Handler
+	0x701E			jmp TIM0_COMPB 			; Timer0 Compare B Handler
+	0x7020			jmp TIM0_OVF 			; Timer0 Overflow Handler
+	0x7022			jmp SPI_STC 			; SPI Transfer Complete Handler
+	0x7024			jmp USART_RXC 			; USART, RX Complete Handler
+	0x7026			jmp USART_UDRE 			; USART, UDR Empty Handler
+	0x7028			jmp USART_TXC 			; USART, TX Complete Handler
+	0x702A			jmp ADC 				; ADC Conversion Complete Handler
+	0x702C			jmp EE_RDY 				; EEPROM Ready Handler
+	0x702E			jmp ANA_COMP 			; Analog Comparator Handler
+	0x7030			jmp TWI 				; 2-wire Serial Interface Handler
+	0x7032			jmp SPM_RDY 			; Store Program Memory Ready Handler
 	;
-	0x0033	RESET:	ldi r16, high(RAMEND)	; Main program start
-	0x0034			out SPH,r16 			; Set Stack Pointer to top of RAM
+	0x7033	RESET:	ldi r16, high(RAMEND)	; Main program start
+	0x7034			out SPH,r16 			; Set Stack Pointer to top of RAM
  *
  */
 
@@ -187,7 +187,7 @@ void give_away(void)
 {
     wdt_reset();
 	usbPoll();
-	debug_togglePin();							// XXX DEBUGGING
+	debug_bl_togglePin();							// XXX DEBUGGING
 }
 
 
@@ -201,7 +201,7 @@ int main(void)
 	init_usb();										// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
 
-	init_clkPullPwm();
+	init_bl_clkPullPwm();
 
     for(;;) {
     	give_away();
