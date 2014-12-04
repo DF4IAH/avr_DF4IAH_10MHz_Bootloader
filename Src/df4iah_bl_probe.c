@@ -8,7 +8,7 @@
 #include <avr/wdt.h>
 #include <util/delay.h>
 
-#include "df4iah_probe.h"
+#include "df4iah_bl_probe.h"
 
 
 #ifdef RELEASE

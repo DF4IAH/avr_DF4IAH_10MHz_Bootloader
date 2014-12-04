@@ -10,7 +10,7 @@
 
 
 #include "chipdef.h"
-#include "usbdrv/usbdrv.h"
+#include "usbdrv_bl/usbdrv.h"
 
 
 void replyContent(uchar replyBuffer[], uchar data[]);

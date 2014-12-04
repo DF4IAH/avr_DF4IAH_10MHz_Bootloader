@@ -11,9 +11,9 @@
 #include <avr/boot.h>
 #include <util/delay.h>
 
-#include "df4iah_memory.h"
-#include "df4iah_usbAsp.h"
-#include "df4iah_usb.h"
+#include "df4iah_bl_memory.h"
+#include "df4iah_bl_usbAsp.h"
+#include "df4iah_bl_usb.h"
 
 
 static uchar replyBuffer[8];

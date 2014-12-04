@@ -47,11 +47,11 @@
 
 #include "chipdef.h"
 #include "main.h"
-#include "df4iah_probe.h"
-#include "df4iah_usb.h"
-#include "df4iah_memory.h"
-#include "df4iah_clkPullPwm.h"
-#include "usbdrv/usbdrv.h"
+#include "df4iah_bl_probe.h"
+#include "df4iah_bl_usb.h"
+#include "df4iah_bl_memory.h"
+#include "df4iah_bl_clkPullPwm.h"
+#include "usbdrv_bl/usbdrv.h"
 
 
 
