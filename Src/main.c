@@ -182,7 +182,8 @@ static inline void app_startup_check()
 	memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
 	if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {
 		probe_bl_close();
-		jump_to_app();								// jump to application sector
+		cli();
+		jump_to_app();								// jump to firmware section
 	}
 }
 
@@ -210,5 +211,7 @@ int main(void)
     	give_away();
     }
 
+    cli();
+    usb_fw_close();
 	return 0;
 }
