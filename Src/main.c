@@ -202,16 +202,16 @@ int main(void)
 	probe_bl_init();
  	app_startup_check();
 
+    clkPullPwm_bl_init();
+
 	usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
     sei();											// ENABLE interrupt
-
-    clkPullPwm_bl_init();
 
     for(;;) {
     	give_away();
     }
 
     cli();
-    usb_fw_close();
+    usb_bl_close();
 	return 0;
 }
