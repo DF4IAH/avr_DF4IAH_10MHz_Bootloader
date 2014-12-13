@@ -76,63 +76,62 @@ __attribute__((section(".df4iah_bl_usb"), aligned(2)))
 #endif
 USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 {
+	const usbRequest_t* rq = (usbRequest_t*) data;
 	uchar len = 0;
 
-	replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;
-
-	if (data[1] == USBASP_FUNC_CONNECT) {
+	if (rq->bRequest == USBASP_FUNC_CONNECT) {
 		prog_connected = PROG_CONNECTED;
 
 		/* set compatibility mode of address delivering */
 		prog_address_newmode = 0;
 
-	} else if (data[1] == USBASP_FUNC_DISCONNECT) {
+	} else if (rq->bRequest == USBASP_FUNC_DISCONNECT) {
 		prog_connected = PROG_UNCONNECTED;
 
-	} else if (data[1] == USBASP_FUNC_TRANSMIT) {
-		if ((data[2] == 0x30) && (data[3] == 0x00) && (data[4] < 3)) {
+	} else if (rq->bRequest == USBASP_FUNC_TRANSMIT) {
+		if ((rq->wValue.word == 0x0030) && (rq->wIndex.bytes[0] < 3)) {
 			// signature bytes
 			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_signature_byte_get(data[4] << 1);
 			len = 4;
 
-		} else if ((data[2] == 0x50) && (data[3] == 0x00)) {
+		} else if (rq->wValue.word == 0x0050) {
 			// lfuse bits - @see page 271f
 			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOW_FUSE_BITS);
 			len = 4;
 
-		} else if ((data[2] == 0x58) && (data[3] == 0x08)) {
+		} else if (rq->wValue.word == 0x0858) {
 			// hfuse bits
 			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_HIGH_FUSE_BITS);
 			len = 4;
 
-		} else if ((data[2] == 0x50) && (data[3] == 0x08)) {
+		} else if (rq->wValue.word == 0x0850) {
 			// efuse bits
 			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_EXTENDED_FUSE_BITS);
 			len = 4;
 
-		} else if ((data[2] == 0x58) && (data[3] == 0x00)) {
+		} else if (rq->wValue.word == 0x0058) {
 			// lock bits
 			usb_bl_replyContent(replyBuffer, data);
 			replyBuffer[3] = boot_lock_fuse_bits_get(GET_LOCK_BITS);
 			len = 4;
 		}
 
-	} else if ((data[1] == USBASP_FUNC_READFLASH) || (data[1] == USBASP_FUNC_READEEPROM)) {
+	} else if ((rq->bRequest == USBASP_FUNC_READFLASH) || (rq->bRequest == USBASP_FUNC_READEEPROM)) {
 		if (prog_connected > PROG_UNCONNECTED) {
 			if (!prog_address_newmode) {
-				prog_address = (data[3] << 8) | data[2];
+				prog_address = rq->wValue.word;
 			}
 
-			prog_nbytes = (data[7] << 8) | data[6];
-			prog_state = (data[1] == USBASP_FUNC_READFLASH) ?  PROG_STATE_READFLASH : PROG_STATE_READEEPROM;
+			prog_nbytes = rq->wLength.word;
+			prog_state = (rq->bRequest == USBASP_FUNC_READFLASH) ?  PROG_STATE_READFLASH : PROG_STATE_READEEPROM;
 			len = 0xff; /* multiple in */
 		}
 
-	} else if (data[1] == USBASP_FUNC_ENABLEPROG) {
+	} else if (rq->bRequest == USBASP_FUNC_ENABLEPROG) {
 		if (prog_connected == PROG_CONNECTED) {
 			prog_connected = PROG_PROGENABLED;
 			replyBuffer[0] = 0;
@@ -141,13 +140,13 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 		}
 		len = 1;
 
-	} else if ((data[1] == USBASP_FUNC_WRITEFLASH) || (data[1] == USBASP_FUNC_WRITEEEPROM)) {
+	} else if ((rq->bRequest == USBASP_FUNC_WRITEFLASH) || (rq->bRequest == USBASP_FUNC_WRITEEEPROM)) {
 		if (prog_connected == PROG_PROGENABLED) {
 			if (!prog_address_newmode) {
-				prog_address = (data[3] << 8) | data[2];
+				prog_address = rq->wValue.word;
 			}
 
-			if (data[1] == USBASP_FUNC_WRITEFLASH) {
+			if (rq->bRequest == USBASP_FUNC_WRITEFLASH) {
 				prog_blockflags = data[5] & 0x0F;
 				prog_pagesize |= (((unsigned int) data[5] & 0xF0) << 4) | data[4];
 				if (prog_blockflags & PROG_BLOCKFLAG_FIRST) {
@@ -161,51 +160,48 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 				prog_state = PROG_STATE_WRITEEEPROM;
 			}
 
-			prog_nbytes = (data[7] << 8) | data[6];
+			prog_nbytes = rq->wLength.word;
 			len = 0xff; /* multiple out */
 		}
 
-	} else if (data[1] == USBASP_FUNC_SETLONGADDRESS) {
+	} else if (rq->bRequest == USBASP_FUNC_SETLONGADDRESS) {
 		if (prog_connected > PROG_UNCONNECTED) {
 			/* set new mode of address delivering (ignore address delivered in commands) */
 			prog_address_newmode = 1;
 			/* set new address */
-			prog_address = *((unsigned long*) &data[2]);
+			prog_address = rq->wValue.word;
 		}
 
-	} else if (data[1] == USBASP_FUNC_SETISPSCK) {
+	} else if (rq->bRequest == USBASP_FUNC_SETISPSCK) {
 		/* LOC does not implement that */
 		replyBuffer[0] = 0;
 		len = 1;
 
-	} else if (data[1] == USBASP_FUNC_TPI_CONNECT) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_CONNECT) {
 		/* Tiny Programming Interface is not supported */
 
-	} else if (data[1] == USBASP_FUNC_TPI_DISCONNECT) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_DISCONNECT) {
 		/* Tiny Programming Interface is not supported */
 
-	} else if (data[1] == USBASP_FUNC_TPI_RAWREAD) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_RAWREAD) {
 		/* Tiny Programming Interface is not supported */
 		replyBuffer[0] = 0;
 		len = 1;
 
-	} else if (data[1] == USBASP_FUNC_TPI_RAWWRITE) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_RAWWRITE) {
 		/* Tiny Programming Interface is not supported */
 
-	} else if (data[1] == USBASP_FUNC_TPI_READBLOCK) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_READBLOCK) {
 		/* Tiny Programming Interface is not supported */
 		len = 0xff; /* multiple in */
 
-	} else if (data[1] == USBASP_FUNC_TPI_WRITEBLOCK) {
+	} else if (rq->bRequest == USBASP_FUNC_TPI_WRITEBLOCK) {
 		/* Tiny Programming Interface is not supported */
 		len = 0xff; /* multiple out */
 
-	} else if (data[1] == USBASP_FUNC_GETCAPABILITIES) {
+	} else if (rq->bRequest == USBASP_FUNC_GETCAPABILITIES) {
 		/* Tiny Programming Interface is not supported */
-		replyBuffer[0] = 0;  // USBASP_CAP_0_TPI;
-		replyBuffer[1] = 0;
-		replyBuffer[2] = 0;
-		replyBuffer[3] = 0;
+		replyBuffer[3] = replyBuffer[2] = replyBuffer[1] = replyBuffer[0] = 0;  // USBASP_CAP_0_TPI;
 		len = 4;
 	}
 
