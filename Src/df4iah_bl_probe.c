@@ -11,6 +11,9 @@
 #include "df4iah_bl_probe.h"
 
 
+extern uint8_t jumperBlSet;
+
+
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
@@ -26,6 +29,7 @@ void probe_bl_init()
         wdt_reset();
         _delay_ms(1);
     }
+	jumperBlSet = probe_bl_checkJumper();
 }
 
 #ifdef RELEASE

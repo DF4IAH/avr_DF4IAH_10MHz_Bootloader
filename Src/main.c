@@ -65,6 +65,7 @@
 /* main */
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
+uint8_t jumperBlSet											= false;
 volatile uint8_t stopAvr 									= false;
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 
@@ -176,23 +177,21 @@ static inline void wdt_init() {
 
 static inline void app_startup_check()
 {
-	// look for a BOOT marker and do not jump to app when found
+	// look for a BOOT marker in the EEPROM and do not jump to the Firmware when it is found at its place
 	uint16_t tokenVal;  // = BOOT_TOKEN;
 	memory_bl_readEEpromPage((uint8_t*) &tokenVal, sizeof(tokenVal), BOOT_TOKEN_EE_ADR);
-
 	if (tokenVal != BOOT_TOKEN) {
-		uint8_t code[2] = { 0 };
-
 		// check for jumper-setting and for a valid jump-table entry
-		memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
-		if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {	// JMP instruction
+		uint16_t code =  0;
+		memory_bl_readFlashPage((uint8_t*) &code, sizeof(code), 0x0000);
+		if ((!jumperBlSet) && (code == 0x940c)) {		// JMP instruction
 			probe_bl_close();
 			cli();
 			jump_to_app();								// jump to firmware section
 		}
 
 	} else {
-		/* INHIBIT of jump_to_app() accepted - eat token */
+		/* INHIBIT jump_to_app() - remove one time token */
 		uint16_t clearVal = 0xffff;
 		memory_bl_writeEEpromPage((uint8_t*) &clearVal, sizeof(clearVal), BOOT_TOKEN_EE_ADR);
 	}
