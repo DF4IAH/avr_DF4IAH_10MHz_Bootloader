@@ -60,7 +60,7 @@
 /* main */
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
-volatile uint8_t stopAvr 									= true;
+volatile uint8_t stopAvr 									= false;
 
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 
@@ -178,7 +178,7 @@ static inline void app_startup_check()
 	if ((BOOT_TOKEN_LO_REG != BOOT_TOKEN_LO) || (BOOT_TOKEN_HI_REG != BOOT_TOKEN_HI)) {
 		// check for jumper-setting and for a valid jump-table entry
 		memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
-		if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {
+		if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {	// JMP instruction
 			probe_bl_close();
 			cli();
 			jump_to_app();								// jump to firmware section
@@ -202,15 +202,16 @@ void give_away(void)
 int main(void)
 {
 	vectortable_to_bootloader();
-	wdt_init();
-	probe_bl_init();
 
 	for (;;) {
+		wdt_init();
+		probe_bl_init();
 		app_startup_check();							// try to start the application FIRMWARE
 
 		clkPullPwm_bl_init();
 		usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
 
+		stopAvr = false;
 		sei();											// ENABLE interrupt
 		while(!stopAvr) {								// falls out when DISCONNECT message is received
 			give_away();
@@ -219,10 +220,9 @@ int main(void)
 
 		usb_bl_close();
 		clkPullPwm_bl_close();
+		//	probe_bl_close();
+		//	wdt_close();
 	}
-
-//	probe_bl_close();
-//	wdt_close();
 
 	return 0;
 }
