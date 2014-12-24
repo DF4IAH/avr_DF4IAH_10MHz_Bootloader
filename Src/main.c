@@ -178,7 +178,7 @@ static inline void wdt_init() {
 static inline void app_startup_check()
 {
 	// look for a BOOT marker in the EEPROM and do not jump to the Firmware when it is found at its place
-	uint16_t tokenVal;  // = BOOT_TOKEN;
+	uint16_t tokenVal = 0;
 	memory_bl_readEEpromPage((uint8_t*) &tokenVal, sizeof(tokenVal), BOOT_TOKEN_EE_ADR);
 	if (tokenVal != BOOT_TOKEN) {
 		// check for jumper-setting and for a valid jump-table entry
