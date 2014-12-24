@@ -23,7 +23,7 @@
 * - Initial versions have been based on the Butterfly bootloader-code
 *   by Atmel Corporation (Authors: BBrandal, PKastnes, ARodland, LHM)
 *
-****************************************************************************
+******************************************************************************
 *
 *  See the makefile and readme.txt for information on how to adapt 
 *  the linker-settings to the selected Boot Size (BOOTSIZE=xxxx) and 
@@ -33,7 +33,7 @@
 *  this bootloader has should fit into a a 512 word (1024, 0x400 bytes) 
 *  bootloader-section. 
 *
-****************************************************************************/
+******************************************************************************/
 // tabsize: 4
 
 
@@ -54,6 +54,13 @@
 #include "usbdrv_bl/usbdrv.h"
 
 
+#ifndef BOOT_TOKEN_LO										// should be included from chipdef.h --> mega32.h
+# define BOOT_TOKEN_LO										0xb0
+# define BOOT_TOKEN_LO_REG									GPIOR1
+# define BOOT_TOKEN_HI										0x0f
+# define BOOT_TOKEN_HI_REG									GPIOR2
+#endif
+
 
 // DATA SECTION
 
@@ -61,7 +68,8 @@
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
 volatile uint8_t stopAvr 									= false;
-
+uint8_t bootTokenLo											= 0;
+uint8_t bootTokenHi											= 0;
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 
 
@@ -164,6 +172,11 @@ static inline void vectortable_to_bootloader(void) {
 	);
 }
 
+static inline void secure_boot_token() {
+	bootTokenLo = BOOT_TOKEN_LO_REG;
+	bootTokenHi = BOOT_TOKEN_HI_REG;
+}
+
 static inline void wdt_init() {
 	cli();
 	wdt_reset();
@@ -172,10 +185,11 @@ static inline void wdt_init() {
 
 static inline void app_startup_check()
 {
-	uint8_t code[2] = { 0 };
-
 	// look for a BOOT marker and do not jump to app when found
-	if ((BOOT_TOKEN_LO_REG != BOOT_TOKEN_LO) || (BOOT_TOKEN_HI_REG != BOOT_TOKEN_HI)) {
+	if ((bootTokenLo != BOOT_TOKEN_LO) ||
+		(bootTokenHi != BOOT_TOKEN_HI)) {
+		uint8_t code[2] = { 0 };
+
 		// check for jumper-setting and for a valid jump-table entry
 		memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
 		if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {	// JMP instruction
@@ -185,9 +199,12 @@ static inline void app_startup_check()
 		}
 
 	} else {
-		/* jump to app inhibit - done - eat token */
-		BOOT_TOKEN_LO_REG = 0;
-		BOOT_TOKEN_HI_REG = 0;
+		/* INHIBIT of jump_to_app() accepted - eat token */
+		if ((BOOT_TOKEN_LO_REG == BOOT_TOKEN_LO) &&
+			(BOOT_TOKEN_HI_REG == BOOT_TOKEN_HI)) {
+			BOOT_TOKEN_LO_REG = 0;
+			BOOT_TOKEN_HI_REG = 0;
+		}
 	}
 }
 
@@ -202,6 +219,7 @@ void give_away(void)
 int main(void)
 {
 	vectortable_to_bootloader();
+	secure_boot_token();
 
 	for (;;) {
 		wdt_init();
