@@ -8,6 +8,14 @@
 #ifndef BL_MAIN_H_
 #define BL_MAIN_H_
 
+#ifndef false
+# define false					0
+#endif
+#ifndef true
+# define true					1
+#endif
+
+
 /* MCU frequency */
 #ifndef F_CPU
 // #define F_CPU 7372800
@@ -36,14 +44,14 @@
 #define WAIT_VALUE 100 /* here: 100*10ms = 1000ms = 1sec */
 
 
-#define VERSION_HIGH '141'
-#define VERSION_LOW  '204'
+//#define VERSION_HIGH 			141
+//#define VERSION_LOW  			224
 
 #ifndef GET_LOCK_BITS
-# define GET_LOCK_BITS           0x0001
-# define GET_LOW_FUSE_BITS       0x0000
-# define GET_HIGH_FUSE_BITS      0x0003
-# define GET_EXTENDED_FUSE_BITS  0x0002
+# define GET_LOCK_BITS			0x0001
+# define GET_LOW_FUSE_BITS		0x0000
+# define GET_HIGH_FUSE_BITS		0x0003
+# define GET_EXTENDED_FUSE_BITS	0x0002
 #endif
 
 

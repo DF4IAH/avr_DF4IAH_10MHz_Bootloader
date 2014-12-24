@@ -57,9 +57,12 @@
 
 // DATA SECTION
 
-uint8_t timer0Snapshot = 0x00;
+/* main */
+void (*jump_to_app)(void) 									= (void*) 0x0000;
+volatile uint8_t timer0Snapshot 							= 0x00;
+volatile uint8_t stopAvr 									= true;
+
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
-void (*jump_to_app)(void) = 0x0000;
 
 
 // STRINGS IN CODE SECTION
@@ -146,6 +149,7 @@ void __vector_default(void) { ; }
 
 
 static inline void vectortable_to_bootloader(void) {
+	cli();
 	asm volatile									// set active vector table into the Bootloader section
 	(
 		"ldi r24, %1\n\t"
@@ -160,36 +164,36 @@ static inline void vectortable_to_bootloader(void) {
 	);
 }
 
-static inline void init_wdt() {
-#ifdef DISABLE_WDT_AT_STARTUP
-# ifdef WDT_OFF_SPECIAL
-#   warning "using target specific watchdog_off"
-	bootloader_wdt_off();
-# else
+static inline void wdt_init() {
 	cli();
-
 	wdt_reset();
 	wdt_disable();
-# endif
-#endif
 }
 
 static inline void app_startup_check()
 {
 	uint8_t code[2] = { 0 };
 
-	// check for jumper-setting and for a valid jump-table entry
-	memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
-	if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {
-		probe_bl_close();
-		cli();
-		jump_to_app();								// jump to firmware section
+	// look for a BOOT marker and do not jump to app when found
+	if ((BOOT_TOKEN_LO_REG != BOOT_TOKEN_LO) || (BOOT_TOKEN_HI_REG != BOOT_TOKEN_HI)) {
+		// check for jumper-setting and for a valid jump-table entry
+		memory_bl_readFlashPage(&(code[0]), sizeof(code), 0x0000);
+		if ((!probe_bl_checkJumper()) && ((code[0] | (code[1] << 8)) == 0x940c)) {
+			probe_bl_close();
+			cli();
+			jump_to_app();								// jump to firmware section
+		}
+
+	} else {
+		/* jump to app inhibit - done - eat token */
+		BOOT_TOKEN_LO_REG = 0;
+		BOOT_TOKEN_HI_REG = 0;
 	}
 }
 
 void give_away(void)
 {
-    wdt_reset();
+	wdt_reset();
 	usbPoll();
 	clkPullPwm_bl_togglePin();
 }
@@ -198,20 +202,27 @@ void give_away(void)
 int main(void)
 {
 	vectortable_to_bootloader();
-	init_wdt();
+	wdt_init();
 	probe_bl_init();
- 	app_startup_check();
 
-    clkPullPwm_bl_init();
+	for (;;) {
+		app_startup_check();							// try to start the application FIRMWARE
 
-	usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
-    sei();											// ENABLE interrupt
+		clkPullPwm_bl_init();
+		usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
 
-    for(;;) {
-    	give_away();
-    }
+		sei();											// ENABLE interrupt
+		while(!stopAvr) {								// falls out when DISCONNECT message is received
+			give_away();
+		}
+		cli();											// DISABLE interrupt
 
-    cli();
-    usb_bl_close();
+		usb_bl_close();
+		clkPullPwm_bl_close();
+	}
+
+//	probe_bl_close();
+//	wdt_close();
+
 	return 0;
 }

@@ -16,10 +16,10 @@ __attribute__((section(".df4iah_bl_probe"), aligned(2)))
 #endif
 void probe_bl_init()
 {
-	MCUCR &= ~(1<<PUD);								// PullUp Disable off
+	MCUCR &= ~(_BV(PUD));							// PullUp Disable off
 
 	PROBE_DDR  &= ~(_BV(PROBE_PNUM));				// set probe line as input
-	PROBE_PORT |=  _BV(PROBE_PNUM);					// and enable the PullUp
+	PROBE_PORT |=   _BV(PROBE_PNUM);				// and enable the PullUp
 
 	uint8_t dlyCnt = 10;
 	while (--dlyCnt) {								// delay for a reliable detection

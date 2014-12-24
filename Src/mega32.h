@@ -52,4 +52,10 @@
 #define PWMTOGGLEPIN_PIN	PIND
 #define PWMTOGGLEPIN_PNUM	PIN3		// PD3(INT1) - Pin 5
 
+/* BOOT token and place of BOOT token as offset before RAMEND */
+#define BOOT_TOKEN_LO		0xb0
+#define BOOT_TOKEN_LO_REG	GPIOR1
+#define BOOT_TOKEN_HI		0x0f
+#define BOOT_TOKEN_HI_REG	GPIOR2
+
 #endif // #ifndef _MEGA32_H_
