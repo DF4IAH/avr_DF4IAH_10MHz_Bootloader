@@ -54,14 +54,20 @@ void usb_bl_init()
 	USB_INTR_ENABLE &= ~(_BV(USB_INTR_ENABLE_BIT));
 	usbDeviceDisconnect();			/* enforce re-enumeration, do this while interrupts are disabled! */
 
-    uint16_t i = 500;
-    while (--i) {					/* fake USB disconnect for > 500 ms */
+    uint16_t i = 1000;
+    while (--i) {											// fake USB disconnect for > 1000 ms
         _delay_ms(1);
         wdt_reset();
     }
 
     usbDeviceConnect();
 	USB_INTR_ENABLE |= _BV(USB_INTR_ENABLE_BIT);
+
+	i = 250;
+    while (--i) {											// let the enumeration process work in silence
+        _delay_ms(1);
+        wdt_reset();
+    }
 }
 
 #ifdef RELEASE
