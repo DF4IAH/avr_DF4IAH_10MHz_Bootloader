@@ -123,6 +123,7 @@ void __vector_default(void) { ; }
 
 //EMPTY_INTERRUPT(INT0_vect);
 //EMPTY_INTERRUPT(INT1_vect);
+//ISR(INT1_vect, ISR_ALIASOF(INT0_vect));
 //EMPTY_INTERRUPT(PCINT0_vect);
 //EMPTY_INTERRUPT(PCINT1_vect);
 //EMPTY_INTERRUPT(PCINT2_vect);
@@ -141,7 +142,6 @@ void __vector_default(void) { ; }
 //EMPTY_INTERRUPT(USART_RX_vect);
 //EMPTY_INTERRUPT(USART_UDRE_vect);
 //EMPTY_INTERRUPT(USART_TX_vect);
-//ISR(USART_TX_vect, ISR_ALIASOF(USART_RX_vect));
 //EMPTY_INTERRUPT(ADC_vect);
 //EMPTY_INTERRUPT(EE_READY_vect);
 //EMPTY_INTERRUPT(ANALOG_COMP_vect);
