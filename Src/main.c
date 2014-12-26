@@ -210,6 +210,10 @@ int main(void)
 	cli();
 	vectortable_to_bootloader();
 
+	PRR    = 0xEF;										// disable all modules within the Power Reduction Register
+	ACSR  |= _BV(ACD);									// switch on Analog Comparator Disable
+	DIDR1 |= (0b11 << AIN0D);							// disable digital input buffers on AIN0 and AIN1
+
 	for (;;) {
 		wdt_init();
 		probe_bl_init();
