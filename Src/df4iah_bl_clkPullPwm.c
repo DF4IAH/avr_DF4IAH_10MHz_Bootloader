@@ -14,9 +14,6 @@
 #include "df4iah_bl_clkPullPwm.h"
 
 
-#define DEFAULT_PWM_COUNT  0x7A00
-
-
 #ifdef RELEASE
 __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
