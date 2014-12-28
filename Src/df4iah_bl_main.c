@@ -164,8 +164,6 @@ static inline void vectortable_to_bootloader(void) {
 }
 
 static inline void wdt_init() {
-	cli();
-	wdt_reset();
 	wdt_disable();
 }
 
@@ -207,6 +205,9 @@ int main(void)
 	PRR    = 0xEF;										// disable all modules within the Power Reduction Register
 	ACSR  |= _BV(ACD);									// switch on Analog Comparator Disable
 	DIDR1 |= (0b11 << AIN0D);							// disable digital input buffers on AIN0 and AIN1
+
+	// switch off Pull-Up Disable
+	MCUCR &= ~(_BV(PUD));
 
 	for (;;) {
 		wdt_init();
