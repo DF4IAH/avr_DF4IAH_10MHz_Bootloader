@@ -54,12 +54,6 @@
 #include "usbdrv_bl/usbdrv.h"
 
 
-#ifndef BOOT_TOKEN											// should be included from chipdef.h --> mega32.h
-# define BOOT_TOKEN											0xb00f
-# define BOOT_TOKEN_EE_ADR									0x3fe
-#endif
-
-
 // DATA SECTION
 
 /* df4iah_bl_main */
