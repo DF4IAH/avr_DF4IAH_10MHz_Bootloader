@@ -10,10 +10,12 @@
 #include <avr/eeprom.h>
 #include <avr/interrupt.h>
 
+#include "chipdef.h"
+#include "df4iah_bl_usb.h"
+#include "df4iah_bl_main.h"
+
 #include "df4iah_bl_memory.h"
 
-#include "df4iah_bl_usb.h"
-#include "main.h"
 
 #define min(a,b) (a) < (b) ?  (a) : (b)
 

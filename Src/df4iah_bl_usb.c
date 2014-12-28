@@ -11,7 +11,7 @@
 #include <avr/boot.h>
 #include <util/delay.h>
 
-#include "main.h"
+#include "df4iah_bl_main.h"
 #include "df4iah_bl_memory.h"
 #include "df4iah_bl_usbAsp.h"
 

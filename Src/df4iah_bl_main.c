@@ -46,7 +46,7 @@
 #include <util/delay.h>
 
 #include "chipdef.h"
-#include "main.h"
+#include "df4iah_bl_main.h"
 #include "df4iah_bl_probe.h"
 #include "df4iah_bl_usb.h"
 #include "df4iah_bl_memory.h"
@@ -62,7 +62,7 @@
 
 // DATA SECTION
 
-/* main */
+/* df4iah_bl_main */
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
 uint8_t jumperBlSet											= false;

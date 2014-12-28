@@ -1,12 +1,12 @@
 /*
- * main.h
+ * df4iah_bl_main.h
  *
  *  Created on: 01.11.2014
  *      Author: espero
  */
 
-#ifndef BL_MAIN_H_
-#define BL_MAIN_H_
+#ifndef DF4IAH_BL_MAIN_H_
+#define DF4IAH_BL_MAIN_H_
 
 #ifndef false
 # define false					0
@@ -65,4 +65,4 @@ void give_away(void);
 
 int main(void);
 
-#endif /* BL_MAIN_H_ */
+#endif /* DF4IAH_BL_MAIN_H_ */
