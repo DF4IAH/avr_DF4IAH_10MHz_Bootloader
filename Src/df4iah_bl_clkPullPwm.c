@@ -82,11 +82,7 @@ __attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
 #endif
 inline void clkPullPwm_bl_togglePin()
 {
-	if (PWMTOGGLEPIN_PIN & _BV(PWMTOGGLEPIN_PNUM)) {
-		PWMTOGGLEPIN_PIN &= ~(_BV(PWMTOGGLEPIN_PNUM));
-	} else {
-		PWMTOGGLEPIN_PIN |= _BV(PWMTOGGLEPIN_PNUM);
-	}
+	PWMTOGGLEPIN_PIN = _BV(PWMTOGGLEPIN_PNUM);
 }
 
 #ifdef RELEASE
