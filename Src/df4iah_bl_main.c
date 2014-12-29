@@ -60,7 +60,7 @@
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
 uint8_t mainIsJumperBlSet									= false;
-volatile uint8_t mainStopAvr 								= false;
+uint8_t mainStopAvr 										= false;
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 
 
