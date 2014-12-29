@@ -54,6 +54,6 @@
 
 /* BOOT token and place of BOOT token as offset before RAMEND */
 # define BOOT_TOKEN			0xb00f
-# define BOOT_TOKEN_EE_ADR	0x3fe
+# define BOOT_TOKEN_EE_ADR	0x3fa		// @see df4iah_fw_memory.h
 
 #endif // #ifndef _MEGA32_H_

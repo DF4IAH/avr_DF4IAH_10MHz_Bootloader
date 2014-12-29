@@ -18,8 +18,8 @@
 #include "df4iah_bl_usb.h"
 
 
-extern uint8_t jumperBlSet;
-extern uint8_t stopAvr;
+extern uint8_t mainIsJumperBlSet;
+extern uint8_t mainStopAvr;
 
 uchar replyBuffer[8];
 
@@ -92,8 +92,8 @@ USB_PUBLIC usbMsgLen_t usbFunctionSetup(uchar data[8])
 
 	} else if (rq->bRequest == USBASP_FUNC_DISCONNECT) {
 		prog_connected = PROG_UNCONNECTED;
-		if (!jumperBlSet) {
-			stopAvr = true;
+		if (!mainIsJumperBlSet) {
+			mainStopAvr = true;
 		}
 
 	} else if (rq->bRequest == USBASP_FUNC_TRANSMIT) {

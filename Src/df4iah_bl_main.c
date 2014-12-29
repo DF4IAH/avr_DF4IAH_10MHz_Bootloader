@@ -59,8 +59,8 @@
 /* df4iah_bl_main */
 void (*jump_to_app)(void) 									= (void*) 0x0000;
 volatile uint8_t timer0Snapshot 							= 0x00;
-uint8_t jumperBlSet											= false;
-volatile uint8_t stopAvr 									= false;
+uint8_t mainIsJumperBlSet									= false;
+volatile uint8_t mainStopAvr 								= false;
 usbTxStatus_t usbTxStatus1, usbTxStatus3;
 
 
@@ -149,7 +149,7 @@ void __vector_default(void) { ; }
 
 static inline void vectortable_to_bootloader(void) {
 	cli();
-	asm volatile									// set active vector table into the Bootloader section
+	asm volatile											// set active vector table into the Bootloader section
 	(
 		"ldi r24, %1\n\t"
 		"out %0, r24\n\t"
@@ -176,10 +176,10 @@ static inline void app_startup_check()
 		// check for jumper-setting and for a valid jump-table entry
 		uint16_t code =  0;
 		memory_bl_readFlashPage((uint8_t*) &code, sizeof(code), 0x0000);
-		if ((!jumperBlSet) && (code == 0x940c)) {		// JMP instruction
+		if ((!mainIsJumperBlSet) && (code == 0x940c)) {		// JMP instruction
 			probe_bl_close();
 			cli();
-			jump_to_app();								// jump to firmware section
+			jump_to_app();									// jump to firmware section
 		}
 
 	} else {
@@ -202,9 +202,9 @@ int main(void)
 	cli();
 	vectortable_to_bootloader();
 
-	PRR    = 0xEF;										// disable all modules within the Power Reduction Register
-	ACSR  |= _BV(ACD);									// switch on Analog Comparator Disable
-	DIDR1 |= (0b11 << AIN0D);							// disable digital input buffers on AIN0 and AIN1
+	PRR    = 0xEF;											// disable all modules within the Power Reduction Register
+	ACSR  |= _BV(ACD);										// switch on Analog Comparator Disable
+	DIDR1 |= (0b11 << AIN0D);								// disable digital input buffers on AIN0 and AIN1
 
 	// switch off Pull-Up Disable
 	MCUCR &= ~(_BV(PUD));
@@ -212,17 +212,17 @@ int main(void)
 	for (;;) {
 		wdt_init();
 		probe_bl_init();
-		app_startup_check();							// try to start the application FIRMWARE
+		app_startup_check();								// try to jump to the application FIRMWARE, else return
 
 		clkPullPwm_bl_init();
-		usb_bl_init();									// starts at 67 ms after power-up, ends at 316 ms after power-up
+		usb_bl_init();										// starts at 67 ms after power-up, ends at 316 ms after power-up
 
-		stopAvr = false;
-		sei();											// ENABLE interrupt
-		while(!stopAvr) {								// falls out when DISCONNECT message is received
+		mainStopAvr = false;
+		sei();												// ENABLE interrupt
+		while(!mainStopAvr) {								// falls out when DISCONNECT message is received
 			give_away();
 		}
-		cli();											// DISABLE interrupt
+		cli();												// DISABLE interrupt
 
 		usb_bl_close();
 		clkPullPwm_bl_close();
