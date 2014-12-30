@@ -30,12 +30,18 @@
 #define UART_RX_PNUM		PIN0						// PIN number for RX pin
 
 /* Timer-n compare output */
+#define DDR_OC0A_REG		DDRD
+#define DDR_OC0A			PD6
+#define DDR_OC0B_REG		DDRD
+#define DDR_OC0B			PD5
 #define DDR_OC1A_REG		DDRB
 #define DDR_OC1A			PB1
 #define DDR_OC1B_REG		DDRB
 #define DDR_OC1B			PB2
-#define DDR_OC2_REG			DDRB
-#define DDR_OC2				PB3
+#define DDR_OC2A_REG		DDRB
+#define DDR_OC2A			PB3
+#define DDR_OC2B_REG		DDRD
+#define DDR_OC2B			PD3
 
 /*
  * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded

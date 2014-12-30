@@ -9,13 +9,13 @@
 #define DF4IAH_BL_CLKPULLPWM_H_
 
 
-#define DEFAULT_PWM_COUNT  									0xB800
+#define DEFAULT_PWM_COUNT  									0xB0
 
 
 void clkPullPwm_bl_init();
 void clkPullPwm_bl_close();
 
-void clkPullPwm_bl_setRatio(uint16_t ratio);
+void clkPullPwm_bl_setRatio(uint8_t ratio);
 
 void clkPullPwm_bl_togglePin();
 void clkPullPwm_bl_endlessTogglePin();
