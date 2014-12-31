@@ -30,8 +30,8 @@ void memory_bl_eraseFlash(void)
 
 	// erase only main section (bootloader protection)
 	while (C_app_end >= addr) {
-		boot_page_erase(addr);						// perform page erase
-		boot_spm_busy_wait();						// wait until the memory is erased.
+		boot_page_erase(addr);								// perform page erase
+		boot_spm_busy_wait();								// wait until the memory is erased.
 		addr += SPM_PAGESIZE;
 	}
 	boot_rww_enable();
@@ -60,16 +60,16 @@ void memory_bl_readFlashPage(uint8_t target[], pagebuf_t size, uint32_t baddr)
 #endif
 		}
 		else {
-			data = 0xFFFF; 							// fake empty
+			data = 0xFFFF; 									// fake empty, no access to the bootloader
 		}
 #endif
-		target[idx++] = data & 0xff;				// store LSB
+		target[idx++] = data & 0xff;						// store LSB
 		if (--size) {
-			target[idx++] = data >> 8;				// store MSB
-			baddr += 2;								// select next word in memory
-			--size;									// subtract two bytes from number of bytes to read
+			target[idx++] = data >> 8;						// store MSB
+			baddr += 2;										// select next word in memory
+			--size;											// subtract two bytes from number of bytes to read
 		}
-	}												// repeat until block has been read
+	}														// repeat until block has been read
 }
 
 #ifdef RELEASE
@@ -81,7 +81,7 @@ void memory_bl_readEEpromPage(uint8_t target[], pagebuf_t size, uint16_t baddr)
 
 	while (size) {
 		target[idx++] = eeprom_read_byte((uint8_t*) baddr++);
-		--size;										// decrease number of bytes to read, repeat until block has been read
+		--size;												// decrease number of bytes to read, repeat until block has been read
 	}
 }
 
@@ -101,12 +101,12 @@ void memory_bl_writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 		uint8_t  verifyCnt = 5;
 
 		if (baddr >= C_app_end) {
-			return;										// short-cut
+			return;											// short-cut
 		}
 
 		/* on each new page erase it first */
 		if (!pageoffs) {
-			boot_page_erase(pagestart);				// perform page erase
+			boot_page_erase(pagestart);						// perform page erase
 			boot_spm_busy_wait();
 		}
 
@@ -128,7 +128,7 @@ void memory_bl_writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 			/* write the page */
 			boot_page_write(pagestart);
 			boot_spm_busy_wait();
-			boot_rww_enable();						// re-enable the RWW section
+			boot_rww_enable();								// re-enable the RWW section
 
 			/* verify data, compare source data segment only */
 			uint8_t isValid = 1;
@@ -136,16 +136,16 @@ void memory_bl_writeFlashPage(uint8_t source[], pagebuf_t size, uint32_t baddr)
 				const uint8_t ptrdata = (pgm_read_word_near((baddr + idx) & 0xfffe) >> (((baddr + idx) & 1) ?  8 : 0));
 				if (ptrdata != source[sourceIdx + idx]) {
 					isValid = 0;
-					break;							// test failed
+					break;									// test failed
 				}
 			}
 			if (isValid) {
 				++verifyCnt;
-				break;								// verify OK
+				break;										// verify OK
 			}
 		}
 		if (!verifyCnt) {
-			return;									// abort to write this page again
+			return;											// abort to write this page again
 		}
 
 		/* move pointers ahead */
@@ -162,10 +162,10 @@ void memory_bl_writeEEpromPage(uint8_t source[], pagebuf_t size, uint16_t baddr)
 {
 	uint8_t idx = 0;
 
-	while (size--) {								// decrease number of bytes to write
+	while (size--) {										// decrease number of bytes to write
 		eeprom_write_byte((uint8_t*) baddr, source[idx++]);
-		baddr++;									// select next byte
-	}												// loop until all bytes written
+		baddr++;											// select next byte
+	}														// loop until all bytes written
 
 	// eeprom_busy_wait();
 }

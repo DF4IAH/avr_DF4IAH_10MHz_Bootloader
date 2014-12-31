@@ -16,6 +16,10 @@
 #endif
 
 
+#define VERSION_HIGH 			141
+#define VERSION_LOW  			231
+
+
 /* MCU frequency */
 #ifndef F_CPU
 // #define F_CPU 				7372800
@@ -42,10 +46,6 @@
 
 /* wait-time for START_WAIT mode ( t = WAIT_TIME * 10ms ) */
 #define WAIT_VALUE 				100 /* here: 100*10ms = 1000ms = 1sec */
-
-
-//#define VERSION_HIGH 			141
-//#define VERSION_LOW  			231
 
 #ifndef GET_LOCK_BITS
 # define GET_LOCK_BITS			0x0001
