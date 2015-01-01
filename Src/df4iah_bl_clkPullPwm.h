@@ -9,7 +9,7 @@
 #define DF4IAH_BL_CLKPULLPWM_H_
 
 
-#define DEFAULT_PWM_COUNT  									179
+#define DEFAULT_PWM_COUNT  									186
 
 
 void clkPullPwm_bl_init();
