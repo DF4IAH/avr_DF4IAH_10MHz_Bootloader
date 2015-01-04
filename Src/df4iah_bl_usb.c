@@ -18,6 +18,11 @@
 #include "df4iah_bl_usb.h"
 
 
+#ifndef SIGRD
+# define SIGRD 5
+#endif
+
+
 extern uint8_t mainIsJumperBlSet;
 extern uint8_t mainStopAvr;
 
