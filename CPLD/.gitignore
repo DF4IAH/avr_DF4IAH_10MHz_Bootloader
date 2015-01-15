@@ -71,3 +71,12 @@ synwork
 *.env
 *.bl1
 *.jhd
+work
+*.do
+*.udo
+*.fado
+*.tado
+*.slg
+*.vafd
+*.vatd
+*.vtd

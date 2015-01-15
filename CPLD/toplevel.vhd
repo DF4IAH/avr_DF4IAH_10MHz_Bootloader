@@ -52,9 +52,9 @@ architecture structural of top_lev is
 	component capture  -- component declaration for capture
 		port (
 			RESET:	  in  std_logic;
---			C_2MHZ5:  in  std_logic;
+			C_2MHZ5:  in  std_logic;
 			C_10KHZ:  in  std_logic;
---			C_PPS:	  in  std_logic;
+			C_PPS:	  in  std_logic;
 			Sync:	  in  std_logic;
 			GateTrig: out std_logic;
 			Gate: 	  in  std_logic;
@@ -77,9 +77,8 @@ begin  --  structural description begins
 	capture_0: capture
 		port map (
 			RESET => RESET,
---			C_2MHZ5 => C_2MHZ5_local,
 			C_10KHZ => C_10KHZ,
---			C_PPS => C_PPS,
+			C_PPS => C_PPS,
 			Sync => Sync,
 			GateTrig => GateTrig,
 			Gate => Gate,
@@ -139,9 +138,8 @@ use ieee.numeric_std.ALL;
 entity capture is
 	port (
 		RESET:	  in  std_logic;
---		C_2MHZ5:  in  std_logic;
 		C_10KHZ:  in  std_logic;
---		C_PPS:	  in  std_logic;
+		C_PPS:	  in  std_logic;
 		Sync:	  in  std_logic;
 		GateTrig: out std_logic;
 		Gate: 	  in  std_logic;
@@ -151,26 +149,30 @@ end capture;
 
 architecture BEHAVIORAL of capture is
 signal PhaseJKFF:	std_logic;
+signal GPS:		std_logic;
 
 begin
+	-- async
+	GPS <= C_PPS or C_10KHZ;  -- any high active GPS reference signal is welcome here
+
 	-- Monoflop activation
-	process (C_10KHZ, RESET)
+	process (GPS, RESET)
 	begin
 	    if RESET = '1' then
 		GateTrig <= '0';
 
 	    else
-		GateTrig <= C_10KHZ;
+		GateTrig <= GPS;
 	    end if;
 	end process;
 
 	-- Phase determination
-	process (C_10KHZ, Sync)
+	process (GPS, Sync)
 	begin
 	    if Sync = '0' then
 		PhaseJKFF <= '0';
 
-	    elsif rising_edge(C_10KHZ) then
+	    elsif rising_edge(GPS) then
 		PhaseJKFF <= '1';
 	    end if;
 	end process;
