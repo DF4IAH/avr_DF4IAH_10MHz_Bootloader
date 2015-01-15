@@ -52,10 +52,11 @@ architecture structural of top_lev is
 	component capture  -- component declaration for capture
 		port (
 			RESET:	  in  std_logic;
-			C_2MHZ5:  in  std_logic;
+			C_10MHZ:  in  std_logic;
+--			C_2MHZ5:  in  std_logic;
 			C_10KHZ:  in  std_logic;
 			C_PPS:	  in  std_logic;
-			Sync:	  in  std_logic;
+--			Sync:	  in  std_logic;
 			GateTrig: out std_logic;
 			Gate: 	  in  std_logic;
 			Phase:	  out std_logic
@@ -63,6 +64,7 @@ architecture structural of top_lev is
 	end component;
 
 -- Declaration of top_lev signals
+signal C_10MHZ_local: std_logic;
 signal C_2MHZ5_local: std_logic;
 
 begin  --  structural description begins
@@ -70,21 +72,24 @@ begin  --  structural description begins
 		port map (
 			RESET => RESET,
 			C_20MHZ => C_20MHZ, 
-			C_10MHZ => C_10MHZ, 
+			C_10MHZ => C_10MHZ_local, 
 			C_2MHZ5 => C_2MHZ5_local 
 		);
 
 	capture_0: capture
 		port map (
 			RESET => RESET,
+			C_10MHZ => C_10MHZ_local,
+--			C_2MHZ5 => C_2MHZ5,
 			C_10KHZ => C_10KHZ,
 			C_PPS => C_PPS,
-			Sync => Sync,
+--			Sync => Sync,
 			GateTrig => GateTrig,
 			Gate => Gate,
 			Phase => Phase
 		);
 
+	C_10MHZ <= C_10MHZ_local;
 	C_2MHZ5 <= C_2MHZ5_local;
 end structural;
 
@@ -138,9 +143,11 @@ use ieee.numeric_std.ALL;
 entity capture is
 	port (
 		RESET:	  in  std_logic;
+		C_10MHZ:  in  std_logic;
+--		C_2MHZ5:  in  std_logic;
 		C_10KHZ:  in  std_logic;
 		C_PPS:	  in  std_logic;
-		Sync:	  in  std_logic;
+--		Sync:	  in  std_logic;
 		GateTrig: out std_logic;
 		Gate: 	  in  std_logic;
 		Phase:	  out std_logic
@@ -155,7 +162,7 @@ begin
 	-- async
 	GPS <= C_PPS or C_10KHZ;  -- any high active GPS reference signal is welcome here
 
-	-- Monoflop activation
+	-- Monoflop trigger for Gate signal @ 10 MHz
 	process (GPS, RESET)
 	begin
 	    if RESET = '1' then
@@ -167,9 +174,9 @@ begin
 	end process;
 
 	-- Phase determination
-	process (GPS, Sync)
+	process (GPS, C_10MHZ)
 	begin
-	    if Sync = '0' then
+	    if C_10MHZ = '0' then
 		PhaseJKFF <= '0';
 
 	    elsif rising_edge(GPS) then
@@ -188,4 +195,3 @@ begin
 	    end if;
 	end process;
 end BEHAVIORAL;
-

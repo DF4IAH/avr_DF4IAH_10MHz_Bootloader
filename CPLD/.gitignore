@@ -46,6 +46,7 @@ synwork
 *.l0
 *.lco
 *.lct
+*.log
 *.mod
 *.nrp
 *.ppn
