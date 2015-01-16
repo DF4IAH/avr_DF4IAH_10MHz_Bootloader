@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 01/15/2015;
-TIME = 21:31:52;
+DATE = 01/16/2015;
+TIME = 20:06:04;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -38,11 +38,18 @@ C_20MHZ = Pin, 39, -, -, -;
 RESET = Pin, 44, -, A, 4;
 C_2MHZ5 = Pin, 38, -, B, 15;
 C_10MHZ = Pin, 40, -, A, 0;
-Phase = Pin, 35, -, B, 12;
-GateTrig = Pin, 31, -, B, 10;
 C_10KHZ = Pin, 17, -, -, -;
-Gate = Pin, 36, -, B, 13;
-Sync = Pin, 37, -, B, 14;
+C_PPS = Pin, 16, -, A, 15;
+GATE_TRIG = Pin, 31, -, B, 10;
+GPS_TXD = Pin, 7, -, A, 8;
+ISP_RXD = Pin, 3, -, A, 6;
+MCU_RXD = Pin, 8, -, A, 9;
+PHASE = Pin, 35, -, B, 12;
+GATE = Pin, 36, -, B, 13;
+GPS_RXD = Pin, 4, -, A, 7;
+ISP_TXD = Pin, 2, -, A, 5;
+MCU_TXD = Pin, 9, -, A, 10;
+SER_GPS = Pin, 13, -, A, 12;
 
 [Group Assignments]
 layer = OFF;
@@ -57,7 +64,7 @@ layer = OFF;
 [Source Constraint Option]
 
 [Fast Bypass]
-NONE = C_2MHZ5, GateTrig;
+NONE = C_2MHZ5, MCU_RXD;
 
 [OSM Bypass]
 
@@ -69,19 +76,26 @@ NONE = C_10KHZ;
 [IO Types]
 layer = OFF;
 C_2MHZ5 = LVCMOS33, PIN, 1, -;
+C_10KHZ = LVCMOS33_5V, PIN, 1, -;
+C_10MHZ = LVCMOS33, PIN, 0, -;
 C_20MHZ = LVCMOS33_5V, PIN, 0, -;
 RESET = LVCMOS33_5V, PIN, 0, -;
-C_10MHZ = LVCMOS33, PIN, 0, -;
-Phase = LVCMOS33_OD, PIN, 1, -;
-GateTrig = LVCMOS33, PIN, 1, -;
-C_10KHZ = LVCMOS33_5V, PIN, 1, -;
-Gate = LVCMOS33_5V, PIN, 1, -;
-Sync = LVCMOS33_5V, PIN, 1, -;
+C_PPS = LVCMOS33_5V, PIN, 0, -;
+GPS_TXD = LVCMOS33, PIN, 0, -;
+ISP_RXD = LVCMOS33_OD, PIN, 0, -;
+MCU_RXD = -, PIN, 0, -;
+PHASE = LVCMOS33_OD, PIN, 1, -;
+GATE = LVCMOS33_5V, PIN, 1, -;
+GPS_RXD = LVCMOS33_5V, PIN, 0, -;
+ISP_TXD = LVCMOS33_5V, PIN, 0, -;
+MCU_TXD = LVCMOS33_5V, PIN, 0, -;
+SER_GPS = LVCMOS33_5V, PIN, 0, -;
 
 [Pullup]
 
 [Slewrate]
-FAST = C_2MHZ5;
+SLOW = GPS_TXD, ISP_RXD, MCU_RXD;
+FAST = C_2MHZ5, PHASE;
 
 [Region]
 
@@ -114,12 +128,14 @@ fMAX_2 = 100000.0000, C_10KHZ, C_10KHZ;
 [Timing Analyzer]
 
 [ORP Bypass]
-NONE = C_2MHZ5, GateTrig, Phase;
+NONE = C_2MHZ5, MCU_RXD;
 
 [PLL Assignments]
 
 [Register Powerup]
-RESET = C_2MHZ5, GateTrig, C_10MHZ;
+NONE = PHASE;
+RESET = C_2MHZ5, C_10MHZ, GATE_TRIG;
+SET = GPS_TXD, MCU_RXD;
 
 [global constraints list]
 

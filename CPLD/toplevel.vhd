@@ -32,10 +32,19 @@ entity top_lev is
 		
 		-- Phase Error Determination
 		PPS		: in  std_logic;
-		Sync  		: in  std_logic;
-		GateTrig 	: out std_logic;
-		Gate  		: in  std_logic;
-		Phase 		: out std_logic
+		SYNC  		: in  std_logic;
+		GATE_TRIG 	: out std_logic;
+		GATE  		: in  std_logic;
+		PHASE 		: out std_logic;
+
+		-- Serial Communications
+		SER_GPS		: in  std_logic;
+		ISP_TXD		: in  std_logic;
+		ISP_RXD		: out std_logic;
+		GPS_RXD		: in  std_logic;
+		GPS_TXD		: out std_logic;
+		MCU_TXD		: in  std_logic;
+		MCU_RXD		: out std_logic
 	);
 end;
 
@@ -56,10 +65,22 @@ architecture structural of top_lev is
 --			C_2MHZ5:  in  std_logic;
 			C_10KHZ:  in  std_logic;
 			C_PPS:	  in  std_logic;
---			Sync:	  in  std_logic;
-			GateTrig: out std_logic;
-			Gate: 	  in  std_logic;
-			Phase:	  out std_logic
+--			SYNC:	  in  std_logic;
+			GATE_TRIG: out std_logic;
+			GATE: 	  in  std_logic;
+			PHASE:	  out std_logic
+		);
+	end component;
+
+	component sercom  -- component declaration for sercom
+		port (
+			SER_GPS:  in  std_logic;
+			ISP_TXD:  in  std_logic;
+			ISP_RXD:  out std_logic;
+			GPS_RXD:  in  std_logic;
+			GPS_TXD:  out std_logic;
+			MCU_TXD:  in  std_logic;
+			MCU_RXD:  out std_logic
 		);
 	end component;
 
@@ -83,10 +104,21 @@ begin  --  structural description begins
 --			C_2MHZ5 => C_2MHZ5,
 			C_10KHZ => C_10KHZ,
 			C_PPS => C_PPS,
---			Sync => Sync,
-			GateTrig => GateTrig,
-			Gate => Gate,
-			Phase => Phase
+--			SYNC => SYNC,
+			GATE_TRIG => GATE_TRIG,
+			GATE => GATE,
+			PHASE => PHASE
+		);
+
+	sercom_0 : sercom
+		port map (
+			SER_GPS => SER_GPS,
+			ISP_TXD => ISP_TXD,
+			ISP_RXD => ISP_RXD,
+			GPS_RXD => GPS_RXD,
+			GPS_TXD => GPS_TXD,
+			MCU_TXD => MCU_TXD,
+			MCU_RXD => MCU_RXD
 		);
 
 	C_10MHZ <= C_10MHZ_local;
@@ -112,23 +144,23 @@ entity clock_div is
 end clock_div;
 
 architecture BEHAVIORAL of clock_div is
-	signal Q: 	unsigned(2 downto 0);
-	signal count:	std_logic_vector(2 downto 0);
+	signal UINT: 	unsigned(2 downto 0);
+	signal LOGCTR:	std_logic_vector(2 downto 0);
 
 begin 
 	process (C_20MHZ, RESET)
 	begin
 	    if RESET = '1' then
-	        Q <= "000";
+	        UINT <= "000";
 
 	    elsif rising_edge(C_20MHZ) then
-	        Q <= Q + 1;
+	        UINT <= UINT + 1;
 	    end if;
 	end process;
 
-	count <= std_logic_vector(Q); -- type conversion
-	C_10MHZ <= count(0);
-	C_2MHZ5 <= count(2);
+	LOGCTR <= std_logic_vector(UINT); -- type conversion
+	C_10MHZ <= LOGCTR(0);
+	C_2MHZ5 <= LOGCTR(2);
 end BEHAVIORAL;
 
 
@@ -147,15 +179,15 @@ entity capture is
 --		C_2MHZ5:  in  std_logic;
 		C_10KHZ:  in  std_logic;
 		C_PPS:	  in  std_logic;
---		Sync:	  in  std_logic;
-		GateTrig: out std_logic;
-		Gate: 	  in  std_logic;
-		Phase:	  out std_logic
+--		SYNC:	  in  std_logic;
+		GATE_TRIG: out std_logic;
+		GATE: 	  in  std_logic;
+		PHASE:	  out std_logic
 	);
 end capture;
 
 architecture BEHAVIORAL of capture is
-signal PhaseJKFF:	std_logic;
+signal PHASE_JKFF:	std_logic;
 signal GPS:		std_logic;
 
 begin
@@ -166,10 +198,10 @@ begin
 	process (GPS, RESET)
 	begin
 	    if RESET = '1' then
-		GateTrig <= '0';
+		GATE_TRIG <= '0';
 
 	    else
-		GateTrig <= GPS;
+		GATE_TRIG <= GPS;
 	    end if;
 	end process;
 
@@ -177,21 +209,57 @@ begin
 	process (GPS, C_10MHZ)
 	begin
 	    if C_10MHZ = '0' then
-		PhaseJKFF <= '0';
+		PHASE_JKFF <= '0';
 
 	    elsif rising_edge(GPS) then
-		PhaseJKFF <= '1';
+		PHASE_JKFF <= '1';
 	    end if;
 	end process;
 
 	-- Output Enable
-	process (PhaseJKFF, Gate)
+	process (PHASE_JKFF, GATE)
 	begin
-	    if Gate = '1' then
-		Phase <= PhaseJKFF;
+	    if GATE = '1' then
+		PHASE <= PHASE_JKFF;
 
 	    else
-		Phase <= 'Z';
+		PHASE <= 'Z';
 	    end if;
 	end process;
 end BEHAVIORAL;
+
+
+--	-- 8< --
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+
+entity sercom is
+	port (
+		SER_GPS:  in  std_logic;
+		ISP_TXD:  in  std_logic;
+		ISP_RXD:  out std_logic;
+		GPS_RXD:  in  std_logic;
+		GPS_TXD:  out std_logic;
+		MCU_TXD:  in  std_logic;
+		MCU_RXD:  out std_logic
+	);
+end sercom;
+
+architecture BEHAVIORAL of sercom is
+begin
+	process (SER_GPS, GPS_RXD, MCU_TXD)
+	begin
+		if SER_GPS = '1' then
+			MCU_RXD <= GPS_RXD;
+			GPS_TXD <= MCU_TXD;
+			ISP_RXD <= 'Z';
+		else
+			MCU_RXD <= ISP_TXD;
+			ISP_RXD <= MCU_TXD;
+			GPS_TXD <= '1';
+		end if;
+	end process;
+end BEHAVIORAL;
+
