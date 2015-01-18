@@ -15163,106 +15163,6 @@ Based on the following sources:
 </deviceset>
 </devicesets>
 </library>
-<library name="con-coax">
-<description>&lt;b&gt;Coax Connectors&lt;/b&gt;&lt;p&gt;
-Radiall  and M/A COM.&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="AMP_227161">
-<description>&lt;b&gt;JACK,  RIGHT ANGLE, 50 OHM, PCB, BNC&lt;/b&gt;&lt;p&gt;
-Source: amp_227161.pdf</description>
-<wire x1="-7.275" y1="-6.875" x2="7.275" y2="-6.875" width="0.2032" layer="21"/>
-<wire x1="7.275" y1="-6.875" x2="7.275" y2="7.275" width="0.2032" layer="21"/>
-<wire x1="7.275" y1="7.275" x2="-7.275" y2="7.275" width="0.2032" layer="21"/>
-<wire x1="-7.275" y1="7.275" x2="-7.275" y2="-6.875" width="0.2032" layer="21"/>
-<wire x1="-6.4" y1="7.375" x2="-6.4" y2="16.025" width="0.2032" layer="21"/>
-<wire x1="-6.4" y1="16.025" x2="6.4" y2="16.025" width="0.2032" layer="21"/>
-<wire x1="6.4" y1="16.025" x2="6.4" y2="7.35" width="0.2032" layer="21"/>
-<wire x1="-4.9" y1="16.15" x2="-4.9" y2="28.475" width="0.2032" layer="21"/>
-<wire x1="-4.9" y1="28.475" x2="4.9" y2="28.475" width="0.2032" layer="21"/>
-<wire x1="4.9" y1="28.475" x2="4.9" y2="16.125" width="0.2032" layer="21"/>
-<circle x="0" y="23.94" radius="1.26" width="0" layer="21"/>
-<pad name="1" x="0" y="-5.08" drill="0.9" diameter="1.27"/>
-<pad name="2" x="-2.54" y="-5.08" drill="0.9" diameter="1.27"/>
-<text x="-6.985" y="-8.89" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.635" y="-8.89" size="1.27" layer="27">&gt;VALUE</text>
-<hole x="-5.08" y="0" drill="2"/>
-<hole x="5.08" y="0" drill="2"/>
-</package>
-</packages>
-<symbols>
-<symbol name="BU-BNC">
-<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="0.254" layer="94" curve="-180" cap="flat"/>
-<wire x1="0" y1="-2.54" x2="-0.762" y2="-1.778" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-0.508" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="0.254" x2="-0.762" y2="0.254" width="0.254" layer="94"/>
-<wire x1="-0.762" y1="0.254" x2="-0.508" y2="0" width="0.254" layer="94"/>
-<wire x1="-0.508" y1="0" x2="-0.762" y2="-0.254" width="0.254" layer="94"/>
-<wire x1="-0.762" y1="-0.254" x2="-2.54" y2="-0.254" width="0.254" layer="94"/>
-<text x="-2.54" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<text x="-2.54" y="3.302" size="1.778" layer="95">&gt;NAME</text>
-<pin name="1" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
-<pin name="2" x="2.54" y="-2.54" visible="off" length="short" direction="pas" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="?227161*" prefix="X">
-<description>&lt;b&gt;JACK,  RIGHT ANGLE, 50 OHM, PCB, BNC&lt;/b&gt;&lt;p&gt;
-Source: amp_227161.pdf</description>
-<gates>
-<gate name="G$1" symbol="BU-BNC" x="0" y="0"/>
-</gates>
-<devices>
-<device name="1-" package="AMP_227161">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="-0">
-<attribute name="MF" value="TYCO ELECTRONICS" constant="no"/>
-<attribute name="MPN" value="1-227161" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="33B3200" constant="no"/>
-</technology>
-<technology name="-2">
-<attribute name="MF" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="unknown" constant="no"/>
-</technology>
-<technology name="-6">
-<attribute name="MF" value="TYCO ELECTRONICS" constant="no"/>
-<attribute name="MPN" value="1-227161-6" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="09H7854" constant="no"/>
-</technology>
-<technology name="-7">
-<attribute name="MF" value="TYCO ELECTRONICS" constant="no"/>
-<attribute name="MPN" value="1-227161-7" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="09H7855" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="" package="AMP_227161">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="-8">
-<attribute name="MF" value="" constant="no"/>
-<attribute name="MPN" value="" constant="no"/>
-<attribute name="OC_FARNELL" value="unknown" constant="no"/>
-<attribute name="OC_NEWARK" value="unknown" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="df4iah">
 <description>&lt;b&gt;DF4IAH Library&lt;/b&gt;&lt;p&gt;</description>
 <packages>
@@ -19753,6 +19653,91 @@ MANUFACTURER: SAMTEC</description>
 <rectangle x1="-0.508" y1="-2.54" x2="0.508" y2="-0.8128" layer="41"/>
 <rectangle x1="2.032" y1="-2.54" x2="3.048" y2="-0.8128" layer="41"/>
 </package>
+<package name="MOLEX_BNC-JACK-50R_SD-73100-0105">
+<description>&lt;b&gt;MOLEX BNC-Jack 50 Ohm&lt;/b&gt;&lt;p&gt;
+SD-73100-0102</description>
+<wire x1="10.9" y1="4.825" x2="-10.9" y2="4.825" width="0.2032" layer="51"/>
+<wire x1="-10.9" y1="4.825" x2="-10.9" y2="-4.825" width="0.2032" layer="51"/>
+<wire x1="-10.9" y1="-4.825" x2="10.9" y2="-4.825" width="0.2032" layer="51"/>
+<wire x1="10.9" y1="-4.825" x2="10.9" y2="4.825" width="0.2032" layer="51"/>
+<circle x="-7" y="0" radius="1" width="0.127" layer="51"/>
+<text x="-1" y="-2" size="1.27" layer="51" rot="R90">MXT</text>
+<wire x1="2.1" y1="-4.825" x2="10.9" y2="-4.825" width="0.2032" layer="21"/>
+<wire x1="2.1" y1="4.825" x2="10.9" y2="4.825" width="0.2032" layer="21"/>
+<wire x1="10.9" y1="4.825" x2="10.9" y2="1" width="0.2032" layer="21"/>
+<pad name="2" x="4.6" y="3.8" drill="0.9"/>
+<pad name="3" x="4.6" y="-3.8" drill="0.9"/>
+<pad name="1" x="12.4" y="0" drill="0.46"/>
+<wire x1="10.9" y1="1" x2="10.9" y2="-1" width="0.2032" layer="21"/>
+<wire x1="10.9" y1="-1" x2="10.9" y2="-4.825" width="0.2032" layer="21"/>
+<wire x1="10.9" y1="1" x2="11.7" y2="1" width="0.2032" layer="21"/>
+<wire x1="11.7" y1="1" x2="11.7" y2="-1" width="0.2032" layer="21"/>
+<wire x1="11.7" y1="-1" x2="10.9" y2="-1" width="0.2032" layer="21"/>
+<wire x1="12.4" y1="-0.55" x2="11.7" y2="-0.55" width="0.2032" layer="51"/>
+<wire x1="12.4" y1="0.55" x2="11.7" y2="0.55" width="0.2032" layer="51"/>
+<wire x1="12.327453125" y1="0.597965625" x2="12.4" y2="0.55" width="0.127" layer="51"/>
+<wire x1="12.4" y1="0.55" x2="12.4" y2="-0.55" width="0.2032" layer="51"/>
+<text x="-11" y="6" size="1.27" layer="25">&gt;NAME</text>
+<text x="-11" y="-7" size="1.27" layer="27">&gt;VALUE</text>
+</package>
+<package name="TYCO-AMP_USB-A_SMT">
+<description>USB Series A Surface Mounted</description>
+<wire x1="-9.5" y1="-7.65" x2="9.5" y2="-7.65" width="0.2032" layer="51"/>
+<wire x1="9.5" y1="-7.65" x2="9.5" y2="6.75" width="0.2032" layer="51"/>
+<wire x1="9.5" y1="6.75" x2="-9.5" y2="6.75" width="0.2032" layer="51"/>
+<wire x1="-9.5" y1="6.75" x2="-9.5" y2="-7.65" width="0.2032" layer="51"/>
+<wire x1="-7.4" y1="-0.4" x2="-7.5" y2="-0.3" width="0.127" layer="22"/>
+<wire x1="7.4" y1="3" x2="7.5" y2="2.9" width="0.127" layer="22"/>
+<smd name="0B" x="-7.8" y="0" dx="6.2" dy="4.1" layer="1" rot="R90"/>
+<smd name="0A" x="7.8" y="0" dx="6.2" dy="4.1" layer="1" rot="R90"/>
+<smd name="4" x="-3.5" y="5.5" dx="2.5" dy="1.2" layer="1" rot="R90"/>
+<smd name="3" x="-1" y="5.5" dx="2.5" dy="1.2" layer="1" rot="R90"/>
+<smd name="2" x="1" y="5.5" dx="2.5" dy="1.2" layer="1" rot="R90"/>
+<smd name="1" x="3.5" y="5.5" dx="2.5" dy="1.2" layer="1" rot="R90"/>
+<text x="-10.795" y="-7.62" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<hole x="-6.45" y="0" drill="1"/>
+<hole x="6.45" y="0" drill="1"/>
+<hole x="-6.65" y="5.5" drill="1.1"/>
+<hole x="6.65" y="5.5" drill="1.5"/>
+<wire x1="9.3748" y1="6.77314375" x2="9.5" y2="6.75" width="0.127" layer="21"/>
+<wire x1="9.5" y1="6.75" x2="9.5" y2="-7.65" width="0.2032" layer="21"/>
+<wire x1="-9.5" y1="-7.65" x2="-9.5" y2="6.75" width="0.2032" layer="21"/>
+<wire x1="-9.50235" y1="6.77314375" x2="-6" y2="6.77314375" width="0.127" layer="21"/>
+<wire x1="-6" y1="6.77314375" x2="-5.803446875" y2="6.83704375" width="0.127" layer="21"/>
+<wire x1="9.50235" y1="6.83704375" x2="6" y2="6.83704375" width="0.127" layer="21"/>
+<wire x1="-3.81" y1="0" x2="-3.443803125" y2="-6.9648375" width="0.127" layer="21"/>
+<wire x1="-3.443803125" y1="-6.9648375" x2="-3.061159375" y2="-6.9648375" width="0.127" layer="21"/>
+<wire x1="-3.061159375" y1="-6.9648375" x2="-2.550965625" y2="0" width="0.127" layer="21"/>
+<wire x1="2.54" y1="0" x2="2.906196875" y2="-6.9648375" width="0.127" layer="21"/>
+<wire x1="2.906196875" y1="-6.9648375" x2="3.288840625" y2="-6.9648375" width="0.127" layer="21"/>
+<wire x1="3.288840625" y1="-6.9648375" x2="3.799034375" y2="0" width="0.127" layer="21"/>
+<text x="12.7" y="-7.62" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+</package>
+<package name="TYCO-AMP_USB-B_SMT">
+<description>USB Series B Surface Mounted&lt;p&gt;
+TYCO Part No. 1734346</description>
+<wire x1="-1.04" y1="7.4" x2="-0.94" y2="7.5" width="0.127" layer="22"/>
+<smd name="0B" x="0" y="-6.92" dx="6.04" dy="3.4" layer="1" rot="R180"/>
+<smd name="0A" x="0" y="6.92" dx="6.04" dy="3.4" layer="1" rot="R180"/>
+<smd name="3" x="-6.42" y="-1.87" dx="3" dy="0.7" layer="1" rot="R180"/>
+<smd name="2" x="-6.42" y="-0.62" dx="3" dy="0.7" layer="1" rot="R180"/>
+<smd name="4" x="-6.42" y="0.62" dx="3" dy="0.7" layer="1" rot="R180"/>
+<smd name="1" x="-6.42" y="1.87" dx="3" dy="0.7" layer="1" rot="R180"/>
+<text x="-3.12" y="10.795" size="1.27" layer="25">&gt;NAME</text>
+<hole x="0.58" y="-2.75" drill="1.4"/>
+<hole x="0.58" y="2.75" drill="1.4"/>
+<text x="-3.12" y="-12.7" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="9.58" y1="6.02" x2="-6.42" y2="6.02" width="0.127" layer="51"/>
+<wire x1="-6.42" y1="6.02" x2="-6.42" y2="-6.02" width="0.2032" layer="51"/>
+<wire x1="-6.42" y1="-6.02" x2="9.58" y2="-6.02" width="0.127" layer="51"/>
+<wire x1="9.58" y1="-6.02" x2="9.58" y2="6.02" width="0.2032" layer="51"/>
+<wire x1="-6.93" y1="-3.81" x2="-6.93" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="-6.93" y1="6.35" x2="-6.93" y2="3.81" width="0.127" layer="21"/>
+<wire x1="-6.93" y1="-6.35" x2="-4.39" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="4.5" y1="-6.35" x2="9.58" y2="-6.35" width="0.127" layer="21"/>
+<wire x1="9.58" y1="6.35" x2="4.5" y2="6.35" width="0.127" layer="21"/>
+<wire x1="-4.39" y1="6.35" x2="-6.93" y2="6.35" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="R-TRIM">
@@ -20064,6 +20049,32 @@ data entry: 2015-01-11 by DF4IAH.</description>
 <pin name="2" x="5.08" y="2.54" visible="pad" length="short" direction="pas" rot="R180"/>
 <pin name="5" x="-5.08" y="-2.54" visible="pad" length="short" direction="pas"/>
 <pin name="4" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+</symbol>
+<symbol name="MOLEX_BNC-JACK-50R_SD-73100-0105">
+<description>BNC-Connector, 50 Ohm</description>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="-2.54" width="0.254" layer="94" curve="-180" cap="flat"/>
+<wire x1="0" y1="-2.54" x2="-0.762" y2="-1.778" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-0.508" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0.254" x2="-0.762" y2="0.254" width="0.254" layer="94"/>
+<wire x1="-0.762" y1="0.254" x2="-0.508" y2="0" width="0.254" layer="94"/>
+<wire x1="-0.508" y1="0" x2="-0.762" y2="-0.254" width="0.254" layer="94"/>
+<wire x1="-0.762" y1="-0.254" x2="-2.54" y2="-0.254" width="0.254" layer="94"/>
+<text x="-2.54" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<text x="-2.54" y="3.302" size="1.778" layer="95">&gt;NAME</text>
+<pin name="1" x="2.54" y="0" visible="off" length="short" direction="pas" rot="R180"/>
+<pin name="3" x="2.54" y="-2.54" visible="off" length="short" direction="pas" rot="R180"/>
+<pin name="2" x="2.54" y="-2.54" visible="off" length="short" direction="pas" rot="R180"/>
+</symbol>
+<symbol name="USB">
+<wire x1="5.08" y1="8.89" x2="0" y2="8.89" width="0.254" layer="94"/>
+<wire x1="0" y1="8.89" x2="0" y2="-1.27" width="0.254" layer="94"/>
+<wire x1="0" y1="-1.27" x2="5.08" y2="-1.27" width="0.254" layer="94"/>
+<text x="3.81" y="0" size="2.54" layer="94" rot="R90">USB</text>
+<text x="0" y="-5.08" size="1.27" layer="95">&gt;NAME</text>
+<pin name="D+" x="-2.54" y="7.62" visible="pad" length="short"/>
+<pin name="D-" x="-2.54" y="5.08" visible="pad" length="short"/>
+<pin name="VBUS" x="-2.54" y="2.54" visible="pad" length="short"/>
+<pin name="GND" x="-2.54" y="0" visible="pad" length="short"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -22171,6 +22182,72 @@ Radiall&lt;p&gt;</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="MOLEX_BNC-JACK-50R_SD-73100-0105" uservalue="yes">
+<description>&lt;b&gt;MOLEX BNC-Jack 50 Ohm&lt;/b&gt;&lt;p&gt;
+SD-73100-0102</description>
+<gates>
+<gate name="G$1" symbol="MOLEX_BNC-JACK-50R_SD-73100-0105" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="MOLEX_BNC-JACK-50R_SD-73100-0105">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="3" pad="3"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="MOLEX"/>
+<attribute name="MPN" value="SD-73100-0105"/>
+<attribute name="OC_FARNELL" value="1909203"/>
+<attribute name="OC_NEWARK" value="-" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="TYCO-AMP_USB">
+<description>&lt;b&gt;TYCO-AMP USB-Connectors&lt;/b&gt;&lt;p&gt;
+From Catalog 7-1773422-0&lt;br&gt;
+Issued 03-06</description>
+<gates>
+<gate name="G$1" symbol="USB" x="-2.54" y="-2.54"/>
+</gates>
+<devices>
+<device name="USB-A_SMT" package="TYCO-AMP_USB-A_SMT">
+<connects>
+<connect gate="G$1" pin="D+" pad="3"/>
+<connect gate="G$1" pin="D-" pad="2"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="VBUS" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="TYCO-AMP"/>
+<attribute name="MPN" value="5353929-1"/>
+<attribute name="OC_FARNELL" value="" constant="no"/>
+<attribute name="OC_NEWARK" value=""/>
+</technology>
+</technologies>
+</device>
+<device name="USB-B_SMT" package="TYCO-AMP_USB-B_SMT">
+<connects>
+<connect gate="G$1" pin="D+" pad="3"/>
+<connect gate="G$1" pin="D-" pad="2"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="VBUS" pad="1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="MF" value="TYCO-AMP"/>
+<attribute name="MPN" value="1734346"/>
+<attribute name="OC_FARNELL" value="1321918"/>
+<attribute name="OC_NEWARK" value=""/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 <library name="atmel-1">
@@ -22808,339 +22885,6 @@ Based on the following sources:&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
-<library name="con-usb-3">
-<description>&lt;b&gt;USB Connectors&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by Erik Christiansson (erik@alphafish.com)&lt;/author&gt;&lt;p&gt;
-Based on the datasheets for the following products.&lt;br&gt;
-&lt;table&gt;
-&lt;tr&gt;&lt;td&gt;Manufacturer&lt;/td&gt;&lt;td&gt;Part No.&lt;/td&gt;&lt;td&gt;Type&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C8317-04AFDXX0&lt;/td&gt;&lt;td&gt;Series A Surface Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C8317-04AFHSW0&lt;/td&gt;&lt;td&gt;Series A Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C3817-04AFVSW0&lt;/td&gt;&lt;td&gt;Series A Hole Mounted Up-Right&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C8317-04BFHSW0&lt;/td&gt;&lt;td&gt;Series B Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C8320-05BFDSB0&lt;/td&gt;&lt;td&gt;Series Mini-B Surface Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Hsuan Mao&lt;/td&gt;&lt;td&gt;C8320-05BFRSB0&lt;/td&gt;&lt;td&gt;Series Mini-B Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Amp&lt;/td&gt;&lt;td&gt;787616-*&lt;/td&gt;&lt;td&gt;Series A Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Amp&lt;/td&gt;&lt;td&gt;787780-1&lt;/td&gt;&lt;td&gt;Series B Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;ACON&lt;/td&gt;&lt;td&gt;UAR80-4****0&lt;/td&gt;&lt;td&gt;Series A Hole Mounted Up-Right&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;ACON&lt;/td&gt;&lt;td&gt;MNC20-5K5*1*&lt;/td&gt;&lt;td&gt;Series Mini-B Surface Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;tr&gt;&lt;td&gt;Molex&lt;/td&gt;&lt;td&gt;67068-****&lt;/td&gt;&lt;td&gt;Series B Hole Mounted&lt;/td&gt;&lt;tr&gt;
-&lt;/table&gt;</description>
-<packages>
-<package name="USB-MB-S">
-<description>&lt;b&gt;USB Series Mini-B Surface Mounted&lt;/b&gt;</description>
-<wire x1="-5.95" y1="3.85" x2="-5.95" y2="-3.85" width="0.127" layer="22"/>
-<wire x1="-5.95" y1="3.85" x2="3.3" y2="3.85" width="0.127" layer="22"/>
-<wire x1="3.3" y1="3.85" x2="3.3" y2="-3.85" width="0.127" layer="22"/>
-<wire x1="3.3" y1="-3.85" x2="-5.95" y2="-3.85" width="0.127" layer="22"/>
-<wire x1="-4.615" y1="1.27" x2="-1.44" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-1.44" y1="0.635" x2="-1.44" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-1.44" y1="-0.635" x2="-4.615" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-2.075" y1="-3.175" x2="-4.615" y2="-2.8575" width="0.127" layer="21"/>
-<wire x1="-4.615" y1="-2.8575" x2="-4.615" y2="-2.2225" width="0.127" layer="21"/>
-<wire x1="-4.615" y1="-2.2225" x2="-2.075" y2="-1.905" width="0.127" layer="21"/>
-<wire x1="-2.075" y1="3.175" x2="-4.615" y2="2.8575" width="0.127" layer="21"/>
-<wire x1="-4.615" y1="2.8575" x2="-4.615" y2="2.2225" width="0.127" layer="21"/>
-<wire x1="-4.615" y1="2.2225" x2="-2.075" y2="1.905" width="0.127" layer="21"/>
-<pad name="P$5" x="0" y="2.2" drill="0.9"/>
-<pad name="P$6" x="0" y="-2.2" drill="0.9"/>
-<smd name="P$1" x="-3" y="-4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="P$2" x="-3" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="P$3" x="2.5" y="-4.4" dx="2.5" dy="2" layer="1"/>
-<smd name="P$4" x="2.5" y="4.5" dx="2.5" dy="2" layer="1"/>
-<smd name="D+" x="2.5" y="0" dx="2.5" dy="0.5" layer="1"/>
-<smd name="D-" x="2.5" y="0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="VBUS" x="2.5" y="1.6" dx="2.5" dy="0.5" layer="1"/>
-<smd name="ID" x="2.5" y="-0.8" dx="2.5" dy="0.5" layer="1"/>
-<smd name="GND" x="2.5" y="-1.6" dx="2.5" dy="0.5" layer="1"/>
-<text x="5.2275" y="1.5875" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-</package>
-<package name="USB-A-H">
-<description>&lt;b&gt;USB Series A Hole Mounted&lt;/b&gt;</description>
-<wire x1="3.6957" y1="6.5659" x2="-10.287" y2="6.5659" width="0.127" layer="21"/>
-<wire x1="3.6957" y1="-6.5659" x2="-10.287" y2="-6.5659" width="0.127" layer="21"/>
-<wire x1="-10.287" y1="6.477" x2="-10.287" y2="-6.477" width="0.127" layer="21"/>
-<wire x1="3.7084" y1="6.5024" x2="3.7084" y2="-6.5024" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-5.08" x2="-8.89" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-4.445" x2="-8.89" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-1.27" x2="-2.54" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="5.08" x2="-8.89" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="4.445" x2="-8.89" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="1.27" x2="-2.54" y2="0.635" width="0.127" layer="21"/>
-<pad name="VBUS" x="2.7178" y="3.4925" drill="0.9144" rot="R270"/>
-<pad name="D-" x="2.7178" y="1.0033" drill="0.9144" rot="R270"/>
-<pad name="D+" x="2.7178" y="-1.0033" drill="0.9144" rot="R270"/>
-<pad name="GND" x="2.7178" y="-3.4925" drill="0.9144" rot="R270"/>
-<pad name="P$5" x="0" y="-6.5659" drill="2.3114" rot="R270"/>
-<pad name="P$6" x="0" y="6.5659" drill="2.3114" rot="R270"/>
-<text x="5.715" y="3.81" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-</package>
-<package name="USB-B-H">
-<description>&lt;b&gt;USB Series B Hole Mounted&lt;/b&gt;</description>
-<wire x1="-12.486" y1="6.0144" x2="-12.486" y2="-5.9998" width="0.127" layer="21"/>
-<wire x1="3.2366" y1="6.0144" x2="3.2366" y2="-5.9998" width="0.127" layer="21"/>
-<wire x1="3.2312" y1="6.0198" x2="-12.466" y2="6.0198" width="0.127" layer="21"/>
-<wire x1="3.2058" y1="-6.0198" x2="-12.4406" y2="-6.0198" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="5.08" x2="-11.43" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-11.43" y1="4.445" x2="-11.43" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-11.43" y1="1.27" x2="-5.08" y2="0.635" width="0.127" layer="21"/>
-<wire x1="-5.08" y1="-5.08" x2="-11.43" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-11.43" y1="-4.445" x2="-11.43" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-11.43" y1="-1.27" x2="-5.08" y2="-0.635" width="0.127" layer="21"/>
-<pad name="VBUS" x="1.9812" y="-1.25" drill="0.9144" rot="R90"/>
-<pad name="D-" x="1.9812" y="1.25" drill="0.9144" rot="R90"/>
-<pad name="D+" x="0" y="1.25" drill="0.9144" rot="R270"/>
-<pad name="GND" x="0" y="-1.25" drill="0.9144" rot="R270"/>
-<pad name="P$1" x="-2.7178" y="-6.0198" drill="2.286"/>
-<pad name="P$2" x="-2.7178" y="6.0198" drill="2.286"/>
-<text x="5.06" y="3.175" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-</package>
-<package name="USB-A-S">
-<description>&lt;b&gt;USB Series A Surface Mounted&lt;/b&gt;</description>
-<wire x1="3.6957" y1="6.5659" x2="-10.287" y2="6.5659" width="0.127" layer="21"/>
-<wire x1="3.6957" y1="-6.5659" x2="-10.287" y2="-6.5659" width="0.127" layer="21"/>
-<wire x1="-10.287" y1="6.477" x2="-10.287" y2="-6.477" width="0.127" layer="21"/>
-<wire x1="3.7084" y1="6.5024" x2="3.7084" y2="-6.5024" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="-5.08" x2="-8.89" y2="-4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-4.445" x2="-8.89" y2="-1.27" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="-1.27" x2="-2.54" y2="-0.635" width="0.127" layer="21"/>
-<wire x1="-2.54" y1="5.08" x2="-8.89" y2="4.445" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="4.445" x2="-8.89" y2="1.27" width="0.127" layer="21"/>
-<wire x1="-8.89" y1="1.27" x2="-2.54" y2="0.635" width="0.127" layer="21"/>
-<pad name="P$5" x="0" y="-6.5659" drill="2.3114" rot="R270"/>
-<pad name="P$6" x="0" y="6.5659" drill="2.3114" rot="R270"/>
-<smd name="D-" x="3.45" y="1" dx="3" dy="0.9" layer="1"/>
-<smd name="VBUS" x="3.45" y="3" dx="3" dy="0.9" layer="1"/>
-<smd name="D+" x="3.45" y="-1" dx="3" dy="0.9" layer="1"/>
-<smd name="GND" x="3.45" y="-3" dx="3" dy="0.9" layer="1"/>
-<text x="5.715" y="3.81" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-</package>
-<package name="USB-MB-H">
-<description>&lt;b&gt;USB Series Mini-B Hole Mounted&lt;/b&gt;</description>
-<wire x1="-3.75" y1="3.9" x2="-3.75" y2="-3.9" width="0.127" layer="22"/>
-<wire x1="5.25" y1="3.9" x2="5.25" y2="-3.9" width="0.127" layer="22"/>
-<wire x1="-3.75" y1="3.9" x2="5.25" y2="3.9" width="0.127" layer="22"/>
-<wire x1="-3.75" y1="-3.9" x2="5.25" y2="-3.9" width="0.127" layer="22"/>
-<wire x1="0.75" y1="3.5" x2="-3.25" y2="3" width="0.127" layer="22"/>
-<wire x1="-3.25" y1="3" x2="-3.25" y2="2" width="0.127" layer="22"/>
-<wire x1="-3.25" y1="2" x2="0.75" y2="1.5" width="0.127" layer="22"/>
-<wire x1="1.25" y1="-3.5" x2="-3.25" y2="-3" width="0.127" layer="22"/>
-<wire x1="-3.25" y1="-3" x2="-3.25" y2="-2" width="0.127" layer="22"/>
-<wire x1="-3.25" y1="-2" x2="1.25" y2="-1.5" width="0.127" layer="22"/>
-<wire x1="-3.25" y1="1.25" x2="1.75" y2="0.75" width="0.127" layer="22"/>
-<wire x1="1.75" y1="0.75" x2="1.75" y2="-0.75" width="0.127" layer="22"/>
-<wire x1="1.75" y1="-0.75" x2="-3.25" y2="-1.25" width="0.127" layer="22"/>
-<pad name="VBUS" x="5.1" y="1.6" drill="0.8"/>
-<pad name="D+" x="5.1" y="0" drill="0.8"/>
-<pad name="GND" x="5.1" y="-1.6" drill="0.8"/>
-<pad name="D-" x="3.9" y="0.8" drill="0.8"/>
-<pad name="ID" x="3.9" y="-0.8" drill="0.8"/>
-<pad name="P$6" x="0" y="-3.65" drill="1.9"/>
-<pad name="P$7" x="0" y="3.65" drill="1.9"/>
-<text x="7.25" y="1.5" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-<rectangle x1="3.25" y1="3" x2="5.75" y2="4.4" layer="43"/>
-<rectangle x1="3.25" y1="-4.4" x2="5.75" y2="-3" layer="43"/>
-<rectangle x1="-3.75" y1="-3.1" x2="-1.425" y2="3.1" layer="43"/>
-<rectangle x1="-1.425" y1="-2.325" x2="-0.65" y2="2.325" layer="43"/>
-</package>
-<package name="USB-A-HU">
-<description>&lt;b&gt;USB Series A Hole Mounted Up-Right&lt;/b&gt;</description>
-<wire x1="-11.6" y1="2.6" x2="-11.6" y2="-2.6" width="0.127" layer="21"/>
-<wire x1="7.7" y1="2.6" x2="7.7" y2="-2.6" width="0.127" layer="21"/>
-<wire x1="-11.6" y1="2.6" x2="7.7" y2="2.6" width="0.127" layer="21"/>
-<wire x1="-11.6" y1="-2.6" x2="7.7" y2="-2.6" width="0.127" layer="21"/>
-<pad name="GND" x="0.73" y="0" drill="0.9"/>
-<pad name="D+" x="2.73" y="0" drill="0.9"/>
-<pad name="D-" x="4.73" y="0" drill="0.9"/>
-<pad name="VBUS" x="6.73" y="0" drill="0.9"/>
-<pad name="P$5" x="0" y="2.72" drill="1.5"/>
-<pad name="P$6" x="0" y="-2.72" drill="1.5"/>
-<pad name="P$7" x="7" y="2.72" drill="1.5"/>
-<pad name="P$8" x="7" y="-2.72" drill="1.5"/>
-<text x="10" y="1" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-</package>
-<package name="USB-B-SMT">
-<description>USB Series B Surface Mounted</description>
-<wire x1="-9" y1="6" x2="-9" y2="-6" width="0.127" layer="21"/>
-<wire x1="-9" y1="-6" x2="-1" y2="-6" width="0.127" layer="21"/>
-<wire x1="-1" y1="-6" x2="2.4" y2="-6" width="0.127" layer="21"/>
-<wire x1="2.4" y1="-6" x2="7" y2="-6" width="0.127" layer="21"/>
-<wire x1="7" y1="-6" x2="7" y2="6" width="0.127" layer="21"/>
-<wire x1="7" y1="6" x2="2.4" y2="6" width="0.127" layer="21"/>
-<wire x1="2.4" y1="6" x2="-1" y2="6" width="0.127" layer="21"/>
-<wire x1="-1" y1="6" x2="-9" y2="6" width="0.127" layer="21"/>
-<wire x1="2.4" y1="6" x2="2.4" y2="7.3" width="0.127" layer="21"/>
-<wire x1="2.4" y1="7.3" x2="2.2" y2="7.5" width="0.127" layer="21"/>
-<wire x1="2.2" y1="7.5" x2="1.9" y2="7.5" width="0.127" layer="21"/>
-<wire x1="1.9" y1="7.5" x2="1.4" y2="7" width="0.127" layer="21"/>
-<wire x1="-1" y1="6" x2="-1" y2="7.3" width="0.127" layer="21"/>
-<wire x1="-0.4" y1="7.4" x2="-0.3" y2="7.5" width="0.127" layer="22"/>
-<wire x1="-0.8" y1="7.5" x2="-0.5" y2="7.5" width="0.127" layer="21"/>
-<wire x1="-0.5" y1="7.5" x2="0" y2="7" width="0.127" layer="21"/>
-<wire x1="0" y1="7" x2="1.4" y2="7" width="0.127" layer="21"/>
-<wire x1="-1" y1="-6" x2="-1" y2="-7.3" width="0.127" layer="21"/>
-<wire x1="-1" y1="-7.3" x2="-0.8" y2="-7.5" width="0.127" layer="21"/>
-<wire x1="-0.8" y1="-7.5" x2="-0.5" y2="-7.5" width="0.127" layer="21"/>
-<wire x1="-0.5" y1="-7.5" x2="0" y2="-7" width="0.127" layer="21"/>
-<wire x1="3" y1="-7.4" x2="2.9" y2="-7.5" width="0.127" layer="22"/>
-<wire x1="1.9" y1="-7.5" x2="1.4" y2="-7" width="0.127" layer="21"/>
-<wire x1="1.4" y1="-7" x2="0" y2="-7" width="0.127" layer="21"/>
-<wire x1="-1" y1="7.3" x2="-0.8" y2="7.5" width="0.127" layer="21"/>
-<wire x1="2.2" y1="-7.5" x2="1.9" y2="-7.5" width="0.127" layer="21"/>
-<wire x1="2.2" y1="-7.5" x2="2.4" y2="-7.3" width="0.127" layer="21"/>
-<wire x1="2.4" y1="-6" x2="2.4" y2="-7.3" width="0.127" layer="21"/>
-<wire x1="6" y1="0.5" x2="5" y2="0.5" width="0.0504" layer="21"/>
-<wire x1="5" y1="0.5" x2="5" y2="-0.5" width="0.127" layer="21"/>
-<wire x1="5" y1="-0.5" x2="6" y2="-0.5" width="0.0504" layer="21"/>
-<smd name="5" x="0.58" y="6.8" dx="6.04" dy="3.4" layer="1"/>
-<smd name="6" x="0.58" y="-6.8" dx="6.04" dy="3.4" layer="1"/>
-<smd name="D+" x="7" y="1.875" dx="3" dy="0.7" layer="1"/>
-<smd name="D-" x="7" y="0.625" dx="3" dy="0.7" layer="1"/>
-<smd name="GND" x="7" y="-0.625" dx="3" dy="0.7" layer="1"/>
-<smd name="VUSB" x="7" y="-1.875" dx="3" dy="0.7" layer="1"/>
-<text x="9.525" y="6.35" size="1.27" layer="25" rot="R270">&gt;NAME</text>
-<hole x="0" y="2.25" drill="1.4"/>
-<hole x="0" y="-2.25" drill="1.4"/>
-</package>
-<package name="USB-BV2">
-<wire x1="6" y1="5.4" x2="-6" y2="5.4" width="0.127" layer="21"/>
-<wire x1="-6" y1="5.4" x2="-6" y2="-1.3" width="0.127" layer="21"/>
-<wire x1="-6" y1="-1.3" x2="-6" y2="-5.7" width="0.127" layer="21"/>
-<wire x1="-6" y1="-5.7" x2="0" y2="-5.7" width="0.127" layer="21"/>
-<wire x1="0" y1="-5.7" x2="6" y2="-5.7" width="0.127" layer="21"/>
-<wire x1="6" y1="-5.7" x2="6" y2="5.4" width="0.127" layer="21"/>
-<wire x1="-4.2" y1="-3.9" x2="4.2" y2="-3.9" width="0.127" layer="21"/>
-<wire x1="4.2" y1="-3.9" x2="4.2" y2="2" width="0.127" layer="21"/>
-<wire x1="4.2" y1="2" x2="2.3" y2="3.9" width="0.127" layer="21"/>
-<wire x1="2.3" y1="3.9" x2="-2.3" y2="3.9" width="0.127" layer="21"/>
-<wire x1="-2.3" y1="3.9" x2="-4.2" y2="2" width="0.127" layer="21"/>
-<wire x1="-4.2" y1="2" x2="-4.2" y2="-3.9" width="0.127" layer="21"/>
-<wire x1="-2.8" y1="-1.4" x2="2.8" y2="-1.4" width="0.127" layer="21"/>
-<wire x1="2.8" y1="-1.4" x2="2.8" y2="1.4" width="0.127" layer="21"/>
-<wire x1="-2.8" y1="1.4" x2="-2.8" y2="-1.4" width="0.127" layer="21"/>
-<wire x1="-2.8" y1="1.4" x2="2.8" y2="1.4" width="0.127" layer="21"/>
-<pad name="P$1" x="0" y="-5.65" drill="2.4"/>
-<pad name="P$2" x="-6.02" y="-1.34" drill="2.4"/>
-<pad name="P$3" x="6.02" y="-1.34" drill="2.4"/>
-<pad name="P$4" x="0" y="5.35" drill="2.4"/>
-<pad name="GND" x="1.25" y="-1.8" drill="0.9144" rot="R90"/>
-<pad name="VBUS" x="1.25" y="1.4" drill="0.9144" rot="R90"/>
-<pad name="D-" x="-1.25" y="1.4" drill="0.9144" rot="R270"/>
-<pad name="D+" x="-1.25" y="-1.8" drill="0.9144" rot="R270"/>
-</package>
-</packages>
-<symbols>
-<symbol name="USB">
-<wire x1="5.08" y1="8.89" x2="0" y2="8.89" width="0.254" layer="94"/>
-<wire x1="0" y1="8.89" x2="0" y2="-1.27" width="0.254" layer="94"/>
-<wire x1="0" y1="-1.27" x2="5.08" y2="-1.27" width="0.254" layer="94"/>
-<text x="3.81" y="0" size="2.54" layer="94" rot="R90">USB</text>
-<text x="0" y="-5.08" size="1.27" layer="95">&gt;NAME</text>
-<pin name="D+" x="-2.54" y="7.62" visible="pad" length="short"/>
-<pin name="D-" x="-2.54" y="5.08" visible="pad" length="short"/>
-<pin name="VBUS" x="-2.54" y="2.54" visible="pad" length="short"/>
-<pin name="GND" x="-2.54" y="0" visible="pad" length="short"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="USB" prefix="X" uservalue="yes">
-<description>&lt;b&gt;USB Connectors&lt;/b&gt;&lt;p&gt;</description>
-<gates>
-<gate name="G$1" symbol="USB" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-MB-S" package="USB-MB-S">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-A-H" package="USB-A-H">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-B-H" package="USB-B-H">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-A-S" package="USB-A-S">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-MB-H" package="USB-MB-H">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-A-HU" package="USB-A-HU">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-B-S" package="USB-B-SMT">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VUSB"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="-B-V" package="USB-BV2">
-<connects>
-<connect gate="G$1" pin="D+" pad="D+"/>
-<connect gate="G$1" pin="D-" pad="D-"/>
-<connect gate="G$1" pin="GND" pad="GND"/>
-<connect gate="G$1" pin="VBUS" pad="VBUS"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="e-elektro-zeichnungsrahmen">
 <description>&lt;b&gt;Rahmen für Elektropläne&lt;/b&gt;&lt;p&gt;
 Die vordefinierten Rahmen eignen sich für &lt;u&gt;Kontakt- und Signalreferenzen&lt;/u&gt;, die ab Version 5.0 möglich sind.&lt;p&gt;
@@ -23206,7 +22950,6 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="GND14" library="supply1" deviceset="GND" device=""/>
 <part name="GND15" library="supply1" deviceset="GND" device=""/>
 <part name="P+9" library="supply1" deviceset="VCC" device=""/>
-<part name="CON3" library="con-coax" deviceset="?227161*" device="1-" technology="-0"/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="GND18" library="supply1" deviceset="GND" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
@@ -23245,7 +22988,6 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="IC5" library="df4iah" deviceset="LMH6645MF" device=""/>
 <part name="GND21" library="supply1" deviceset="GND" device=""/>
 <part name="P+7" library="supply1" deviceset="VCC" device=""/>
-<part name="CON1" library="con-usb-3" deviceset="USB" device="-B-S"/>
 <part name="RAHMEN1" library="e-elektro-zeichnungsrahmen" deviceset="RAHMEN_A4_8Z-19S_OHNE_DOKUMENTENFELD" device=""/>
 <part name="IC11" library="df4iah" deviceset="712-RXM-GNSS-TM-B" device=""/>
 <part name="GND22" library="df4iah" deviceset="GND" device=""/>
@@ -23306,6 +23048,8 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="IC4" library="df4iah" deviceset="CFPT-141" device=""/>
 <part name="CON6" library="df4iah" deviceset="HEADER-2X3" device="SMD"/>
 <part name="P+8" library="supply1" deviceset="VCC" device=""/>
+<part name="CON3" library="df4iah" deviceset="MOLEX_BNC-JACK-50R_SD-73100-0105" device="" value="SD-73100-0105"/>
+<part name="CON1" library="df4iah" deviceset="TYCO-AMP_USB" device="USB-B_SMT"/>
 </parts>
 <sheets>
 <sheet>
@@ -23313,7 +23057,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <plain>
 <text x="205.74" y="170.18" size="1.778" layer="97">VTarget</text>
 <text x="96.52" y="194.31" size="1.778" layer="97">debugWIRE</text>
-<text x="15.24" y="78.74" size="1.778" layer="94">USB-B</text>
+<text x="15.494" y="82.042" size="1.778" layer="94">USB-B</text>
 <text x="248.92" y="170.18" size="1.27" layer="96" font="fixed">AVR - PINs:
 
 - PB0  20 MHz Clock Out             (ICP)
@@ -23344,7 +23088,7 @@ Out</text>
 <text x="185.42" y="170.18" size="1.778" layer="97">Bootloader</text>
 <text x="286.258" y="94.742" size="1.778" layer="97">Phase-Error</text>
 <text x="305.308" y="141.986" size="1.778" layer="97">Gate</text>
-<text x="204.47" y="204.978" size="1.778" layer="97">GPS-Module</text>
+<text x="204.47" y="204.978" size="1.778" layer="94">GPS-Module</text>
 <text x="204.47" y="229.362" size="1.27" layer="96" font="fixed">GPS - PINs:
 
  1 GND
@@ -23408,7 +23152,7 @@ V 2.0</text>
  4 SDA
  5 3.3V
  6 GND</text>
-<text x="133.604" y="239.268" size="1.778" layer="97">I2C</text>
+<text x="133.604" y="239.268" size="1.778" layer="94">I2C</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="93.98" y="157.48" smashed="yes">
@@ -23432,10 +23176,6 @@ V 2.0</text>
 <instance part="GND14" gate="1" x="340.36" y="71.12"/>
 <instance part="GND15" gate="1" x="287.02" y="215.9"/>
 <instance part="P+9" gate="VCC" x="287.02" y="241.3"/>
-<instance part="CON3" gate="G$1" x="129.54" y="220.98" smashed="yes" rot="R270">
-<attribute name="VALUE" x="134.62" y="213.36" size="1.778" layer="96" rot="R90"/>
-<attribute name="NAME" x="119.126" y="221.996" size="1.778" layer="95"/>
-</instance>
 <instance part="GND9" gate="1" x="127" y="213.36"/>
 <instance part="GND18" gate="1" x="200.66" y="198.12"/>
 <instance part="GND8" gate="1" x="147.32" y="149.86"/>
@@ -23491,7 +23231,6 @@ V 2.0</text>
 <instance part="IC5" gate="A" x="317.5" y="180.34" rot="MR0"/>
 <instance part="GND21" gate="1" x="335.28" y="165.1"/>
 <instance part="P+7" gate="VCC" x="335.28" y="190.5"/>
-<instance part="CON1" gate="G$1" x="22.86" y="93.98" rot="R180"/>
 <instance part="+3V5" gate="G$1" x="198.12" y="228.6"/>
 <instance part="+3V6" gate="G$1" x="236.22" y="228.6"/>
 <instance part="SJ21" gate="1" x="154.94" y="30.48" rot="R90"/>
@@ -23560,6 +23299,13 @@ V 2.0</text>
 <instance part="IC4" gate="&gt;NAME" x="96.52" y="215.9"/>
 <instance part="CON6" gate="G$1" x="139.7" y="246.38"/>
 <instance part="P+8" gate="VCC" x="127" y="254"/>
+<instance part="CON3" gate="G$1" x="129.54" y="220.98" smashed="yes" rot="R270">
+<attribute name="VALUE" x="134.112" y="223.774" size="1.778" layer="96" rot="R270"/>
+<attribute name="NAME" x="116.078" y="221.742" size="1.778" layer="95"/>
+</instance>
+<instance part="CON1" gate="G$1" x="22.86" y="93.98" smashed="yes" rot="R180">
+<attribute name="NAME" x="16.51" y="96.52" size="1.778" layer="95"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -23626,9 +23372,11 @@ V 2.0</text>
 <pinref part="C951" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<pinref part="CON3" gate="G$1" pin="2"/>
 <pinref part="GND9" gate="1" pin="GND"/>
 <wire x1="127" y1="218.44" x2="127" y2="215.9" width="0.1524" layer="91"/>
+<pinref part="CON3" gate="G$1" pin="3"/>
+<pinref part="CON3" gate="G$1" pin="2"/>
+<junction x="127" y="218.44"/>
 </segment>
 <segment>
 <pinref part="GND18" gate="1" pin="GND"/>
@@ -23703,12 +23451,12 @@ V 2.0</text>
 <pinref part="C1" gate="G$1" pin="-"/>
 <pinref part="D1" gate="G$1" pin="A"/>
 <pinref part="D2" gate="G$1" pin="A"/>
-<pinref part="CON1" gate="G$1" pin="GND"/>
 <wire x1="27.94" y1="71.12" x2="27.94" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="27.94" y1="93.98" x2="25.4" y2="93.98" width="0.1524" layer="91"/>
 <junction x="27.94" y="71.12"/>
 <pinref part="R4" gate="G$1" pin="1"/>
 <pinref part="C2" gate="G$1" pin="2"/>
+<pinref part="CON1" gate="G$1" pin="GND"/>
 </segment>
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
@@ -23931,10 +23679,10 @@ V 2.0</text>
 <junction x="33.02" y="88.9"/>
 <pinref part="D1" gate="G$1" pin="C"/>
 <wire x1="33.02" y1="88.9" x2="25.4" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="CON1" gate="G$1" pin="D-"/>
 <pinref part="R1" gate="G$1" pin="1"/>
 <pinref part="R3" gate="G$1" pin="1"/>
 <junction x="63.5" y="88.9"/>
+<pinref part="CON1" gate="G$1" pin="D-"/>
 </segment>
 </net>
 <net name="USB_D_PLS" class="0">
@@ -23946,10 +23694,10 @@ V 2.0</text>
 <junction x="63.5" y="86.36"/>
 <pinref part="D2" gate="G$1" pin="C"/>
 <wire x1="50.8" y1="86.36" x2="25.4" y2="86.36" width="0.1524" layer="91"/>
-<pinref part="CON1" gate="G$1" pin="D+"/>
 <junction x="50.8" y="86.36"/>
 <pinref part="R2" gate="G$1" pin="1"/>
 <pinref part="R4" gate="G$1" pin="2"/>
+<pinref part="CON1" gate="G$1" pin="D+"/>
 </segment>
 </net>
 <net name="N_USB_DMNS" class="0">
@@ -24217,9 +23965,9 @@ V 2.0</text>
 </net>
 <net name="N$42" class="0">
 <segment>
-<pinref part="CON3" gate="G$1" pin="1"/>
 <wire x1="129.54" y1="218.44" x2="129.54" y2="210.82" width="0.1524" layer="91"/>
 <pinref part="R61" gate="G$1" pin="2"/>
+<pinref part="CON3" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$44" class="0">
@@ -24316,9 +24064,9 @@ V 2.0</text>
 <net name="USB_PWR" class="0">
 <segment>
 <pinref part="RPOLY1" gate="G$1" pin="1"/>
-<pinref part="CON1" gate="G$1" pin="VBUS"/>
 <wire x1="30.48" y1="96.52" x2="30.48" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="91.44" x2="25.4" y2="91.44" width="0.1524" layer="91"/>
+<pinref part="CON1" gate="G$1" pin="VBUS"/>
 </segment>
 </net>
 <net name="ISP_MISO" class="0">
@@ -24692,7 +24440,9 @@ V 2.0</text>
 </plain>
 <instances>
 <instance part="RAHMEN1" gate="G$1" x="0" y="7.62"/>
-<instance part="IC11" gate="G$1" x="152.4" y="101.6"/>
+<instance part="IC11" gate="G$1" x="152.4" y="101.6" smashed="yes">
+<attribute name="NAME" x="149.606" y="125.984" size="2.032" layer="95"/>
+</instance>
 <instance part="GND22" gate="1" x="124.46" y="66.04"/>
 <instance part="+3V3" gate="G$1" x="124.46" y="91.44"/>
 <instance part="C111" gate="G$1" x="124.46" y="78.74" smashed="yes">
@@ -24817,7 +24567,6 @@ V 2.0</text>
 <approved hash="113,1,99.06,199.636,JP1,,,,,"/>
 <approved hash="113,1,201.684,172.72,JP2,,,,,"/>
 <approved hash="113,1,181.364,172.72,JP3,,,,,"/>
-<approved hash="113,1,23.5469,92.0242,CON1,,,,,"/>
 <approved hash="113,1,153.424,30.48,SJ21,,,,,"/>
 <approved hash="113,1,148.344,73.66,SJ22,,,,,"/>
 </errors>
