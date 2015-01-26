@@ -20579,7 +20579,6 @@ DIN A4, landscape with location and doc. field</description>
 <part name="GND14" library="supply1" deviceset="GND" device=""/>
 <part name="GND15" library="supply1" deviceset="GND" device=""/>
 <part name="P+9" library="supply1" deviceset="VCC" device=""/>
-<part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="GND18" library="supply1" deviceset="GND" device=""/>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
@@ -20614,7 +20613,6 @@ DIN A4, landscape with location and doc. field</description>
 <part name="SJ22" library="jumper" deviceset="SJ" device=""/>
 <part name="R81" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="R41" library="rcl" deviceset="R-EU_" device="R0805" value="12k"/>
-<part name="R61" library="rcl" deviceset="R-EU_" device="R0805" value="51"/>
 <part name="R51" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="R52" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="R71" library="rcl" deviceset="R-EU_" device="R0805" value="1.5k"/>
@@ -20641,7 +20639,6 @@ DIN A4, landscape with location and doc. field</description>
 <part name="IC4" library="df4iah" deviceset="CFPT-141" device=""/>
 <part name="CON6" library="df4iah" deviceset="HEADER-2X3" device="SMD"/>
 <part name="P+8" library="supply1" deviceset="VCC" device=""/>
-<part name="CON3" library="df4iah" deviceset="MOLEX_BNC-JACK-50R_SD-73100-0105" device="" value="SD-73100-0105"/>
 <part name="CON4" library="atmel-1" deviceset="AVR-ISP-6" device="SMD"/>
 <part name="FRAME1" library="frames" deviceset="A4L-LOC" device=""/>
 <part name="FRAME2" library="frames" deviceset="A4L-LOC" device=""/>
@@ -20664,9 +20661,14 @@ DIN A4, landscape with location and doc. field</description>
 <part name="FRAME9" library="frames" deviceset="A4L-LOC" device=""/>
 <part name="FRAME7" library="frames" deviceset="A4L-LOC" device=""/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
-<part name="CON1" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
 <part name="FRAME11" library="frames" deviceset="A4L-LOC" device=""/>
 <part name="CON7" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
+<part name="CON1" library="df4iah" deviceset="MOLEX_BNC-JACK-50R_SD-73100-0105" device="" value="SD-73100-0105"/>
+<part name="CON3" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
+<part name="CON8" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
+<part name="CON9" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
+<part name="CON10" library="df4iah" deviceset="MCX-J-P-X-RA-SM1" device=""/>
+<part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="51"/>
 </parts>
 <sheets>
 <sheet>
@@ -20727,8 +20729,11 @@ DIN A4, landscape with location and doc. field</description>
 <segment>
 <wire x1="132.08" y1="111.76" x2="137.16" y2="111.76" width="0.1524" layer="92"/>
 <wire x1="137.16" y1="111.76" x2="137.16" y2="58.42" width="0.1524" layer="92"/>
-<wire x1="137.16" y1="58.42" x2="233.68" y2="58.42" width="0.1524" layer="92"/>
+<wire x1="137.16" y1="58.42" x2="215.9" y2="58.42" width="0.1524" layer="92"/>
 <label x="231.14" y="60.96" size="1.778" layer="95" rot="R180"/>
+<wire x1="215.9" y1="58.42" x2="233.68" y2="58.42" width="0.1524" layer="92"/>
+<wire x1="215.9" y1="58.42" x2="215.9" y2="111.76" width="0.1524" layer="92"/>
+<wire x1="215.9" y1="111.76" x2="210.82" y2="111.76" width="0.1524" layer="92"/>
 </segment>
 </bus>
 <bus name="MMU_BUS">
@@ -20821,12 +20826,6 @@ DIN A4, landscape with location and doc. field</description>
 <label x="73.66" y="129.54" size="1.778" layer="95" rot="R180"/>
 </segment>
 </net>
-<net name="GPS_HF" class="4">
-<segment>
-<wire x1="210.82" y1="119.38" x2="233.68" y2="119.38" width="0.1524" layer="91"/>
-<label x="220.98" y="121.92" size="1.778" layer="95" rot="R180"/>
-</segment>
-</net>
 <net name="PWR_BACKUP_GPS" class="1">
 <segment>
 <wire x1="198.12" y1="99.06" x2="200.66" y2="101.6" width="0.1524" layer="91"/>
@@ -20854,6 +20853,7 @@ DIN A4, landscape with location and doc. field</description>
 </plain>
 <instances>
 <instance part="FRAME3" gate="G$1" x="0" y="7.62"/>
+<instance part="R10" gate="G$1" x="231.14" y="109.22" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -20875,7 +20875,6 @@ DIN A4, landscape with location and doc. field</description>
 </instance>
 <instance part="LFP111" gate="G$1" x="165.1" y="91.44"/>
 <instance part="FRAME4" gate="G$1" x="0" y="7.62"/>
-<instance part="CON1" gate="G$1" x="220.98" y="119.38" rot="MR0"/>
 </instances>
 <busses>
 <bus name="GPS_BUS">
@@ -21174,14 +21173,153 @@ DIN A4, landscape with location and doc. field</description>
 <sheet>
 <description>REAR</description>
 <plain>
+<text x="247.904" y="119.634" size="1.778" layer="97">10 MHz
+RefClk
+Out</text>
+<text x="247.904" y="147.574" size="1.778" layer="97">GPS
+Ant
+In</text>
+<text x="247.904" y="91.694" size="1.778" layer="97">CH0
+I
+Out</text>
+<text x="247.904" y="76.454" size="1.778" layer="97">CH0
+Q
+Out</text>
+<text x="247.904" y="61.214" size="1.778" layer="97">CH1
+I
+Out</text>
+<text x="247.904" y="45.974" size="1.778" layer="97">CH1
+Q
+Out</text>
 </plain>
 <instances>
 <instance part="FRAME11" gate="G$1" x="0" y="7.62"/>
-<instance part="CON7" gate="G$1" x="220.98" y="119.38" rot="MR0"/>
+<instance part="CON7" gate="G$1" x="231.14" y="149.86" rot="MR0"/>
+<instance part="CON1" gate="G$1" x="231.14" y="121.92" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="218.186" y="117.348" size="1.778" layer="96" rot="MR180"/>
+<attribute name="NAME" x="227.838" y="126.238" size="1.778" layer="95" rot="MR180"/>
+</instance>
+<instance part="CON3" gate="G$1" x="231.14" y="93.98" rot="MR0"/>
+<instance part="CON8" gate="G$1" x="231.14" y="78.74" rot="MR0"/>
+<instance part="CON9" gate="G$1" x="231.14" y="63.5" rot="MR0"/>
+<instance part="CON10" gate="G$1" x="231.14" y="48.26" rot="MR0"/>
 </instances>
 <busses>
+<bus name="REAR_BUS">
+<segment>
+<wire x1="38.1" y1="162.56" x2="38.1" y2="48.26" width="0.1524" layer="92"/>
+<label x="38.1" y="165.1" size="1.778" layer="95" rot="R90"/>
+</segment>
+</bus>
 </busses>
 <nets>
+<net name="GPS_HF" class="4">
+<segment>
+<pinref part="CON7" gate="G$1" pin="1"/>
+<wire x1="228.6" y1="149.86" x2="40.64" y2="149.86" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="149.86" x2="38.1" y2="152.4" width="0.1524" layer="91"/>
+<label x="38.1" y="152.4" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="REFC_10MHZ" class="0">
+<segment>
+<label x="38.1" y="124.46" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="40.64" y1="121.92" x2="38.1" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="121.92" x2="228.6" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="CON1" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="GND" class="3">
+<segment>
+<pinref part="CON1" gate="G$1" pin="3"/>
+<pinref part="CON1" gate="G$1" pin="2"/>
+<wire x1="228.6" y1="119.38" x2="40.64" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="119.38" x2="38.1" y2="121.92" width="0.1524" layer="91"/>
+<label x="38.1" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="CON7" gate="G$1" pin="2"/>
+<wire x1="228.6" y1="147.32" x2="40.64" y2="147.32" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="147.32" x2="38.1" y2="149.86" width="0.1524" layer="91"/>
+<label x="38.1" y="147.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON7" gate="G$1" pin="3"/>
+<junction x="228.6" y="147.32"/>
+<pinref part="CON7" gate="G$1" pin="4"/>
+<pinref part="CON7" gate="G$1" pin="5"/>
+</segment>
+<segment>
+<wire x1="228.6" y1="45.72" x2="40.64" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="45.72" x2="38.1" y2="48.26" width="0.1524" layer="91"/>
+<label x="38.1" y="45.72" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON10" gate="G$1" pin="2"/>
+<pinref part="CON10" gate="G$1" pin="3"/>
+<junction x="228.6" y="45.72"/>
+<pinref part="CON10" gate="G$1" pin="4"/>
+<pinref part="CON10" gate="G$1" pin="5"/>
+</segment>
+<segment>
+<wire x1="228.6" y1="60.96" x2="40.64" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="60.96" x2="38.1" y2="63.5" width="0.1524" layer="91"/>
+<label x="38.1" y="60.96" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON9" gate="G$1" pin="2"/>
+<pinref part="CON9" gate="G$1" pin="3"/>
+<junction x="228.6" y="60.96"/>
+<pinref part="CON9" gate="G$1" pin="4"/>
+<pinref part="CON9" gate="G$1" pin="5"/>
+</segment>
+<segment>
+<wire x1="228.6" y1="76.2" x2="40.64" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="76.2" x2="38.1" y2="78.74" width="0.1524" layer="91"/>
+<label x="38.1" y="76.2" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON8" gate="G$1" pin="2"/>
+<pinref part="CON8" gate="G$1" pin="3"/>
+<junction x="228.6" y="76.2"/>
+<pinref part="CON8" gate="G$1" pin="4"/>
+<pinref part="CON8" gate="G$1" pin="5"/>
+</segment>
+<segment>
+<wire x1="228.6" y1="91.44" x2="40.64" y2="91.44" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="91.44" x2="38.1" y2="93.98" width="0.1524" layer="91"/>
+<label x="38.1" y="91.44" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON3" gate="G$1" pin="2"/>
+<pinref part="CON3" gate="G$1" pin="3"/>
+<junction x="228.6" y="91.44"/>
+<pinref part="CON3" gate="G$1" pin="4"/>
+<pinref part="CON3" gate="G$1" pin="5"/>
+</segment>
+</net>
+<net name="SIG_CH0_I" class="0">
+<segment>
+<wire x1="228.6" y1="93.98" x2="40.64" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="93.98" x2="38.1" y2="96.52" width="0.1524" layer="91"/>
+<label x="38.1" y="96.52" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON3" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="SIG_CH0_Q" class="0">
+<segment>
+<wire x1="228.6" y1="78.74" x2="40.64" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="78.74" x2="38.1" y2="81.28" width="0.1524" layer="91"/>
+<label x="38.1" y="81.28" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON8" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="SIG_CH1_I" class="0">
+<segment>
+<wire x1="228.6" y1="63.5" x2="40.64" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="63.5" x2="38.1" y2="66.04" width="0.1524" layer="91"/>
+<label x="38.1" y="66.04" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON9" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="SIG_CH1_Q" class="0">
+<segment>
+<wire x1="228.6" y1="48.26" x2="40.64" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="48.26" x2="38.1" y2="50.8" width="0.1524" layer="91"/>
+<label x="38.1" y="50.8" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CON10" gate="G$1" pin="1"/>
+</segment>
+</net>
 </nets>
 </sheet>
 <sheet>
@@ -21213,9 +21351,6 @@ DIN A4, landscape with location and doc. field</description>
 - PD5  PWM Pull for Ref.-Osc.       (OC0B)
 - PD6  +  Comparator for RefClk In  (AIN0)
 - PD7  -  Comparator for RefClk In  (AIN1)</text>
-<text x="115.824" y="211.074" size="1.778" layer="97">10 MHz
-RefClk
-Out</text>
 <text x="185.42" y="170.18" size="1.778" layer="97">Bootloader</text>
 <text x="286.258" y="94.742" size="1.778" layer="97">Phase-Error</text>
 <text x="305.308" y="141.986" size="1.778" layer="97">Gate</text>
@@ -21286,7 +21421,6 @@ V 2.0</text>
 <instance part="GND14" gate="1" x="340.36" y="71.12"/>
 <instance part="GND15" gate="1" x="287.02" y="215.9"/>
 <instance part="P+9" gate="VCC" x="287.02" y="241.3"/>
-<instance part="GND9" gate="1" x="127" y="213.36"/>
 <instance part="GND18" gate="1" x="200.66" y="198.12"/>
 <instance part="GND8" gate="1" x="147.32" y="149.86"/>
 <instance part="GND17" gate="1" x="17.78" y="203.2"/>
@@ -21327,7 +21461,6 @@ V 2.0</text>
 <instance part="SJ22" gate="1" x="149.86" y="73.66" rot="R90"/>
 <instance part="R81" gate="G$1" x="111.76" y="60.96"/>
 <instance part="R41" gate="G$1" x="48.26" y="198.12"/>
-<instance part="R61" gate="G$1" x="129.54" y="205.74" rot="R90"/>
 <instance part="R51" gate="G$1" x="330.2" y="93.98"/>
 <instance part="R52" gate="G$1" x="170.18" y="172.72" rot="R90"/>
 <instance part="R71" gate="G$1" x="213.36" y="137.16" rot="R90"/>
@@ -21363,10 +21496,6 @@ V 2.0</text>
 <instance part="IC4" gate="&gt;NAME" x="96.52" y="215.9"/>
 <instance part="CON6" gate="G$1" x="139.7" y="246.38"/>
 <instance part="P+8" gate="VCC" x="127" y="254"/>
-<instance part="CON3" gate="G$1" x="129.54" y="220.98" smashed="yes" rot="R270">
-<attribute name="VALUE" x="134.112" y="223.774" size="1.778" layer="96" rot="R270"/>
-<attribute name="NAME" x="116.078" y="221.742" size="1.778" layer="95"/>
-</instance>
 <instance part="CON4" gate="G$1" x="187.96" y="124.46"/>
 </instances>
 <busses>
@@ -21414,13 +21543,6 @@ V 2.0</text>
 <pinref part="C911" gate="G$1" pin="2"/>
 <pinref part="C931" gate="G$1" pin="2"/>
 <pinref part="C951" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="GND9" gate="1" pin="GND"/>
-<wire x1="127" y1="218.44" x2="127" y2="215.9" width="0.1524" layer="91"/>
-<pinref part="CON3" gate="G$1" pin="3"/>
-<pinref part="CON3" gate="G$1" pin="2"/>
-<junction x="127" y="218.44"/>
 </segment>
 <segment>
 <pinref part="GND18" gate="1" pin="GND"/>
@@ -21786,7 +21908,6 @@ V 2.0</text>
 <wire x1="139.7" y1="185.42" x2="139.7" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="93.98" x2="198.12" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="93.98" x2="198.12" y2="88.9" width="0.1524" layer="91"/>
-<pinref part="R61" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="TOSC1" class="0">
@@ -21796,13 +21917,6 @@ V 2.0</text>
 <wire x1="68.58" y1="167.64" x2="71.12" y2="167.64" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="190.5" x2="68.58" y2="167.64" width="0.1524" layer="91"/>
 <pinref part="IC4" gate="&gt;NAME" pin="OUT"/>
-</segment>
-</net>
-<net name="N$42" class="0">
-<segment>
-<wire x1="129.54" y1="218.44" x2="129.54" y2="210.82" width="0.1524" layer="91"/>
-<pinref part="R61" gate="G$1" pin="2"/>
-<pinref part="CON3" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="N$44" class="0">
