@@ -47,19 +47,19 @@
  * Pin "STARTPIN" on port "STARTPORT" in this port has to grounded
  * (active low) to start the bootloader
  */
-#define PROBE_PORT			PORTD
 #define PROBE_DDR			DDRD
+#define PROBE_PORT			PORTD
 #define PROBE_PIN			PIND
-#define PROBE_PNUM			PIND3		// JP3 BootLoader
+#define PROBE_PNUM			PIN3						// JP3 BootLoader
 
-/* PWM Debugging toggle pin */
+/* Debugging toggle pin */
 #define PWMTOGGLEPIN_DDR	DDRC
 #define PWMTOGGLEPIN_PORT	PORTC
 #define PWMTOGGLEPIN_PIN	PINC
-#define PWMTOGGLEPIN_PNUM	PINC5		// PC5(ADC5/SCL) - Pin 28
+#define PWMTOGGLEPIN_PNUM	PIN5						// PC5(ADC5/SCL) - Pin 28
 
 /* BOOT token and place of BOOT token as offset before RAMEND */
 # define BOOT_TOKEN			0xb00f
-# define BOOT_TOKEN_EE_ADR	0x3fa		// @see df4iah_fw_memory.h
+# define BOOT_TOKEN_EE_ADR	0x3fa						// @see df4iah_fw_memory.h
 
 #endif // #ifndef _MEGA32_H_
