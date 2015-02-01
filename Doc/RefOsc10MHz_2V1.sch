@@ -22851,7 +22851,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="R2" library="rcl" deviceset="R-EU_" device="R0805" value="68"/>
 <part name="R3" library="rcl" deviceset="R-EU_" device="R0805" value="1.5k"/>
 <part name="R4" library="rcl" deviceset="R-EU_" device="R0805" value="1M"/>
-<part name="R81" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
+<part name="R81" library="rcl" deviceset="R-EU_" device="R0805" value="150"/>
 <part name="R13" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R41" library="rcl" deviceset="R-EU_" device="R0805" value="12k"/>
 <part name="R61" library="rcl" deviceset="R-EU_" device="R0805" value="51"/>
@@ -22875,7 +22875,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="C931" library="rcl" deviceset="C-EU" device="C0805" value="10n"/>
 <part name="C951" library="rcl" deviceset="C-EU" device="C0805" value="10n"/>
 <part name="C22" library="rcl" deviceset="CPOL-EU" device="B" value="10uF"/>
-<part name="R211" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R211" library="rcl" deviceset="R-EU_" device="R0805" value="45.3k"/>
 <part name="R212" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
 <part name="R213" library="rcl" deviceset="R-EU_" device="R0805" value="100k"/>
 <part name="C212" library="rcl" deviceset="CPOL-EU" device="A/3216-18W" value="22uF"/>
@@ -22887,8 +22887,6 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="L31" library="rcl" deviceset="L-EU" device="L1812" value="10uH"/>
 <part name="IC6" library="df4iah" deviceset="LM2831" device="" technology="YMF" value="LM2831YMF"/>
 <part name="R25" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
-<part name="R221" library="rcl" deviceset="R-EU_" device="R0805" value="56"/>
-<part name="D221" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V0"/>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
 <part name="C221" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="IC4" library="df4iah" deviceset="CFPT-141" device=""/>
@@ -22908,6 +22906,8 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="C81" library="rcl" deviceset="CPOL-EU" device="140CLH-1010" value="0.22F"/>
 <part name="D211" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS80"/>
 <part name="D82" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS80"/>
+<part name="D221" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V0"/>
+<part name="R221" library="rcl" deviceset="R-EU_" device="R0805" value="56"/>
 </parts>
 <sheets>
 <sheet>
@@ -23128,18 +23128,10 @@ V 2.1</text>
 <instance part="L31" gate="G$1" x="38.1" y="175.26" rot="R270"/>
 <instance part="IC6" gate="A" x="35.56" y="238.76"/>
 <instance part="R25" gate="G$1" x="111.76" y="22.86"/>
-<instance part="R221" gate="G$1" x="86.36" y="241.3" smashed="yes" rot="R270">
-<attribute name="NAME" x="83.0326" y="244.602" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="87.884" y="241.3" size="1.778" layer="96" rot="R270"/>
-</instance>
-<instance part="D221" gate="G$1" x="104.14" y="246.38" smashed="yes" rot="R180">
-<attribute name="NAME" x="107.188" y="250.571" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="109.982" y="243.713" size="1.778" layer="96" rot="R180"/>
-</instance>
 <instance part="GND12" gate="1" x="111.76" y="236.22"/>
-<instance part="C221" gate="G$1" x="101.6" y="238.76" smashed="yes" rot="R90">
-<attribute name="NAME" x="106.68" y="236.22" size="1.778" layer="95" rot="R180"/>
-<attribute name="VALUE" x="106.68" y="233.68" size="1.778" layer="96" rot="R180"/>
+<instance part="C221" gate="G$1" x="96.52" y="238.76" smashed="yes" rot="R90">
+<attribute name="NAME" x="101.6" y="236.22" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="101.6" y="233.68" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="IC4" gate="&gt;NAME" x="96.52" y="215.9"/>
 <instance part="CON6" gate="G$1" x="139.7" y="246.38"/>
@@ -23163,6 +23155,11 @@ V 2.1</text>
 <instance part="C81" gate="G$1" x="241.3" y="190.5"/>
 <instance part="D211" gate="G$1" x="53.34" y="223.52" rot="R90"/>
 <instance part="D82" gate="G$1" x="236.22" y="203.2" rot="R270"/>
+<instance part="D221" gate="G$1" x="99.06" y="246.38" smashed="yes" rot="R180">
+<attribute name="NAME" x="97.282" y="248.285" size="1.778" layer="95"/>
+<attribute name="VALUE" x="89.662" y="242.951" size="1.778" layer="96"/>
+</instance>
+<instance part="R221" gate="G$1" x="81.28" y="246.38"/>
 </instances>
 <busses>
 </busses>
@@ -23359,10 +23356,9 @@ V 2.1</text>
 <segment>
 <pinref part="GND12" gate="1" pin="GND"/>
 <wire x1="111.76" y1="238.76" x2="111.76" y2="246.38" width="0.1524" layer="91"/>
-<pinref part="D221" gate="G$1" pin="A"/>
-<wire x1="111.76" y1="246.38" x2="106.68" y2="246.38" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="246.38" x2="101.6" y2="246.38" width="0.1524" layer="91"/>
 <pinref part="C221" gate="G$1" pin="2"/>
-<wire x1="111.76" y1="238.76" x2="106.68" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="238.76" x2="101.6" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="111.76" y1="238.76" x2="119.38" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="238.76" x2="149.86" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="149.86" y1="238.76" x2="149.86" y2="243.84" width="0.1524" layer="91"/>
@@ -23373,6 +23369,7 @@ V 2.1</text>
 <wire x1="119.38" y1="238.76" x2="119.38" y2="248.92" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="248.92" x2="134.62" y2="248.92" width="0.1524" layer="91"/>
 <junction x="119.38" y="238.76"/>
+<pinref part="D221" gate="G$1" pin="A"/>
 </segment>
 <segment>
 <pinref part="GND19" gate="1" pin="GND"/>
@@ -24095,8 +24092,7 @@ V 2.1</text>
 <wire x1="127" y1="231.14" x2="170.18" y2="231.14" width="0.1524" layer="91"/>
 <wire x1="170.18" y1="231.14" x2="170.18" y2="233.68" width="0.1524" layer="91"/>
 <label x="170.18" y="233.68" size="1.778" layer="95" rot="R90" xref="yes"/>
-<pinref part="R221" gate="G$1" pin="1"/>
-<wire x1="86.36" y1="246.38" x2="73.66" y2="246.38" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="246.38" x2="73.66" y2="246.38" width="0.1524" layer="91"/>
 <junction x="73.66" y="246.38"/>
 <pinref part="D202" gate="G$1" pin="C"/>
 <wire x1="27.94" y1="213.36" x2="27.94" y2="218.44" width="0.1524" layer="91"/>
@@ -24106,6 +24102,7 @@ V 2.1</text>
 <wire x1="127" y1="231.14" x2="127" y2="243.84" width="0.1524" layer="91"/>
 <wire x1="127" y1="243.84" x2="134.62" y2="243.84" width="0.1524" layer="91"/>
 <junction x="127" y="231.14"/>
+<pinref part="R221" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="GND_SJ1" class="0">
@@ -24248,18 +24245,16 @@ V 2.1</text>
 </net>
 <net name="+3V0" class="1">
 <segment>
+<wire x1="96.52" y1="246.38" x2="86.36" y2="246.38" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="218.44" x2="86.36" y2="238.76" width="0.1524" layer="91"/>
+<wire x1="86.36" y1="238.76" x2="86.36" y2="246.38" width="0.1524" layer="91"/>
+<pinref part="C221" gate="G$1" pin="1"/>
+<wire x1="86.36" y1="238.76" x2="93.98" y2="238.76" width="0.1524" layer="91"/>
+<pinref part="IC4" gate="&gt;NAME" pin="VCC_3V0"/>
+<junction x="86.36" y="238.76"/>
 <pinref part="D221" gate="G$1" pin="C"/>
 <pinref part="R221" gate="G$1" pin="2"/>
-<wire x1="101.6" y1="246.38" x2="93.98" y2="246.38" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="218.44" x2="86.36" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="236.22" x2="93.98" y2="236.22" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="236.22" x2="93.98" y2="238.76" width="0.1524" layer="91"/>
-<wire x1="93.98" y1="238.76" x2="93.98" y2="246.38" width="0.1524" layer="91"/>
-<pinref part="C221" gate="G$1" pin="1"/>
-<wire x1="93.98" y1="238.76" x2="99.06" y2="238.76" width="0.1524" layer="91"/>
-<pinref part="IC4" gate="&gt;NAME" pin="VCC_3V0"/>
-<junction x="93.98" y="238.76"/>
-<junction x="86.36" y="236.22"/>
+<junction x="86.36" y="246.38"/>
 </segment>
 </net>
 <net name="N$1" class="0">
