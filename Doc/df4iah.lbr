@@ -13866,7 +13866,7 @@ Source: AVX .. aphvc.pdf</description>
 <text x="-3.4544" y="2.54" size="2.0828" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-3.4544" y="-4.445" size="2.0828" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
 </package>
-<package name="712-RXM-GNSS-TM-B">
+<package name="LINX-RXM-GNSS-TM">
 <description>&lt;b&gt;Linx TM-Series 712-RXM-GNSS-TM-B&lt;/b&gt;&lt;p&gt;
 Linx Technologies&lt;br/&gt;
 TM Series&lt;br/&gt;
@@ -16133,8 +16133,8 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <text x="-4.5466" y="7.1882" size="2.0828" layer="95" ratio="10" rot="SR0">&gt;NAME</text>
 <text x="-5.7658" y="-15.748" size="2.0828" layer="96" ratio="10" rot="SR0">&gt;VALUE</text>
 </symbol>
-<symbol name="712-RXM-GNSS-TM-B">
-<description>&lt;b&gt;Linx TM-Series 712-RXM-GNSS-TM-B&lt;/b&gt;&lt;p&gt;
+<symbol name="LINX-RXM-GNSS-TM">
+<description>&lt;b&gt;Linx TM-Series RXM-GNSS-TM&lt;/b&gt;&lt;p&gt;
 Linx Technologies&lt;br/&gt;
 TM Series&lt;br/&gt;
 GNSS Receiver Module&lt;p&gt;
@@ -16144,19 +16144,19 @@ data entry: 2015-01-11 by DF4IAH.</description>
 <pin name="3" x="-20.32" y="10.16" length="middle" direction="out"/>
 <pin name="2" x="-20.32" y="15.24" length="middle" direction="in"/>
 <pin name="6" x="-20.32" y="-5.08" length="middle" direction="pwr"/>
-<pin name="7" x="-20.32" y="-10.16" length="middle"/>
+<pin name="7" x="-20.32" y="-10.16" length="middle" direction="nc"/>
 <pin name="8" x="-20.32" y="-15.24" length="middle" direction="pwr"/>
 <pin name="9" x="-20.32" y="-20.32" length="middle" direction="nc"/>
-<pin name="1" x="-20.32" y="20.32" length="middle" direction="pwr"/>
-<pin name="14" x="20.32" y="0" length="middle" direction="sup" rot="R180"/>
+<pin name="1" x="-20.32" y="20.32" length="middle" direction="pas"/>
+<pin name="14" x="20.32" y="0" length="middle" direction="out" rot="R180"/>
 <pin name="15" x="20.32" y="5.08" length="middle" direction="nc" rot="R180"/>
 <pin name="16" x="20.32" y="10.16" length="middle" direction="nc" rot="R180"/>
 <pin name="17" x="20.32" y="15.24" length="middle" direction="nc" rot="R180"/>
 <pin name="18" x="20.32" y="20.32" length="middle" direction="nc" rot="R180"/>
 <pin name="13" x="20.32" y="-5.08" length="middle" direction="nc" rot="R180"/>
-<pin name="12" x="20.32" y="-10.16" length="middle" direction="pwr" rot="R180"/>
+<pin name="12" x="20.32" y="-10.16" length="middle" direction="pas" rot="R180"/>
 <pin name="11" x="20.32" y="-15.24" length="middle" direction="in" rot="R180"/>
-<pin name="10" x="20.32" y="-20.32" length="middle" direction="pwr" rot="R180"/>
+<pin name="10" x="20.32" y="-20.32" length="middle" direction="pas" rot="R180"/>
 <wire x1="-15.24" y1="22.86" x2="15.24" y2="22.86" width="0.254" layer="94"/>
 <wire x1="15.24" y1="22.86" x2="15.24" y2="-22.86" width="0.254" layer="94"/>
 <wire x1="15.24" y1="-22.86" x2="-15.24" y2="-22.86" width="0.254" layer="94"/>
@@ -16185,7 +16185,7 @@ data entry: 2015-01-11 by DF4IAH.</description>
 <text x="4.826" y="14.478" size="1.6764" layer="94">NC</text>
 <text x="4.826" y="19.558" size="1.6764" layer="94">NC</text>
 <text x="-4.826" y="24.384" size="2.032" layer="95">&gt;NAME</text>
-<text x="-15.24" y="-25.908" size="1.778" layer="94">Linx  712-RXM-GNSS-TM-B</text>
+<text x="-15.24" y="-25.908" size="1.778" layer="94">Linx  RXM-GNSS-TM</text>
 </symbol>
 <symbol name="LM2831">
 <description>The &lt;b&gt;LM2831&lt;/b&gt; comes in many switching frequencies:&lt;br/&gt;
@@ -23695,17 +23695,17 @@ Created by: DF4IAH</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="712-RXM-GNSS-TM-B" prefix="IC">
-<description>&lt;b&gt;Linx TM-Series 712-RXM-GNSS-TM-B&lt;/b&gt;&lt;p&gt;
+<deviceset name="LINX-RXM-GNSS-TM" prefix="IC">
+<description>&lt;b&gt;Linx TM-Series RXM-GNSS-TM&lt;/b&gt;&lt;p&gt;
 Linx Technologies&lt;br/&gt;
 TM Series&lt;br/&gt;
 GNSS Receiver Module&lt;p&gt;
 data entry: 2015-01-11 by DF4IAH.</description>
 <gates>
-<gate name="G$1" symbol="712-RXM-GNSS-TM-B" x="0" y="0"/>
+<gate name="G$1" symbol="LINX-RXM-GNSS-TM" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="712-RXM-GNSS-TM-B">
+<device name="" package="LINX-RXM-GNSS-TM">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="10" pad="10"/>
