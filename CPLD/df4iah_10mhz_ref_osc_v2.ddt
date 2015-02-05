@@ -1,0 +1,18 @@
+[Deployment Project]
+version=Lattice Diamond 3.4.0.80
+EncryptionVer=1.0
+functionIdx=1
+typeIdx=4
+isRequiredXCFFile=0
+xcfFileName=
+optionList=Operation;Write Header and Comments;Rev D Standard SVF;RUNTEST from Rev C;For Erase, Program, and Verify Operations, Skip Verify;Include RESET at the End of the SVF File;Set Maximum Data Size per Row;Maximum Data Size per Row (Kbits)
+valueList=Erase,Program,Verify;On;Off;Off;Off;Off;Off;64
+
+[Input File Info]
+inputFileList=//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.isc
+familyList=ispMACH4000
+deviceList=LC4032V(B)
+outputFileList=//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.svf
+
+[Command Line]
+Command="C:/lscc/Programmer/3.4_x64/bin/nt64/ddtcmd" -oft -svfsingle -if "//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.isc" -dev LC4032V(B) -op "Erase,Program,Verify" -of "//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.svf"

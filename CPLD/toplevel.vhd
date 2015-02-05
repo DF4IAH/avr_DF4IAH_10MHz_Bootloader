@@ -21,7 +21,7 @@ entity top_lev is
 
 
 		-- GLOBAL
-		RESET 		: in  std_logic;
+		RESETn 		: in  std_logic;
 
 		-- Clock Divider
 		C_20MHZ 	: in  std_logic;
@@ -51,7 +51,7 @@ end;
 architecture structural of top_lev is
 	component clock_div  -- component declaration for clock_div
 		port (
-			RESET:	 in  std_logic;
+			RESETn:	 in  std_logic;
 			C_20MHZ: in  std_logic;
 			C_10MHZ: out std_logic;
 			C_2MHZ5: out std_logic
@@ -60,7 +60,7 @@ architecture structural of top_lev is
 
 	component capture  -- component declaration for capture
 		port (
-			RESET:	  in  std_logic;
+			RESETn:	  in  std_logic;
 			C_10MHZ:  in  std_logic;
 --			C_2MHZ5:  in  std_logic;
 			C_10KHZ:  in  std_logic;
@@ -91,7 +91,7 @@ signal C_2MHZ5_local: std_logic;
 begin  --  structural description begins
 	clock_div_0: clock_div 
 		port map (
-			RESET => RESET,
+			RESETn => RESETn,
 			C_20MHZ => C_20MHZ, 
 			C_10MHZ => C_10MHZ_local, 
 			C_2MHZ5 => C_2MHZ5_local 
@@ -99,7 +99,7 @@ begin  --  structural description begins
 
 	capture_0: capture
 		port map (
-			RESET => RESET,
+			RESETn => RESETn,
 			C_10MHZ => C_10MHZ_local,
 --			C_2MHZ5 => C_2MHZ5,
 			C_10KHZ => C_10KHZ,
@@ -136,7 +136,7 @@ use ieee.numeric_std.ALL;
 
 entity clock_div is
 	port (
-		RESET:	 in  std_logic;
+		RESETn:	 in  std_logic;
 		C_20MHZ: in  std_logic;
 		C_10MHZ: out std_logic;
 		C_2MHZ5: out std_logic
@@ -148,9 +148,9 @@ architecture BEHAVIORAL of clock_div is
 	signal LOGCTR:	std_logic_vector(2 downto 0);
 
 begin 
-	process (C_20MHZ, RESET)
+	process (C_20MHZ, RESETn)
 	begin
-	    if RESET = '1' then
+	    if RESETn = '0' then
 	        UINT <= "000";
 
 	    elsif rising_edge(C_20MHZ) then
@@ -174,7 +174,7 @@ use ieee.numeric_std.ALL;
 
 entity capture is
 	port (
-		RESET:	  in  std_logic;
+		RESETn:	  in  std_logic;
 		C_10MHZ:  in  std_logic;
 --		C_2MHZ5:  in  std_logic;
 		C_10KHZ:  in  std_logic;
@@ -195,9 +195,9 @@ begin
 	GPS <= C_PPS or C_10KHZ;  -- any high active GPS reference signal is welcome here
 
 	-- Monoflop trigger for Gate signal @ 10 MHz
-	process (GPS, RESET)
+	process (GPS, RESETn)
 	begin
-	    if RESET = '1' then
+	    if RESETn = '0' then
 		GATE_TRIG <= '0';
 
 	    else
