@@ -20,8 +20,8 @@
 				<BScanVal>0</BScanVal>
 			</Bypass>
 			<File>//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.jed</File>
-			<FileTime>02/04/15 22:21:13</FileTime>
-			<JedecChecksum>0x276B</JedecChecksum>
+			<FileTime>02/05/15 22:16:05</FileTime>
+			<JedecChecksum>0x159C</JedecChecksum>
 			<Operation>Erase,Program,Verify</Operation>
 			<Option>
 				<SVFVendor>JTAG STANDARD</SVFVendor>

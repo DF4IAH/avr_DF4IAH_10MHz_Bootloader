@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 02/04/2015;
-TIME = 22:19:43;
+DATE = 02/05/2015;
+TIME = 23:23:05;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -39,7 +39,7 @@ C_2MHZ5 = Pin, 38, -, B, 15;
 C_10MHZ = Pin, 40, -, A, 0;
 C_10KHZ = Pin, 17, -, -, -;
 C_PPS = Pin, 16, -, A, 15;
-GATE_TRIG = Pin, 31, -, B, 10;
+GATE_TRIG = Pin, 29, -, B, 8;
 GPS_TXD = Pin, 7, -, A, 8;
 ISP_RXD = Pin, 3, -, A, 6;
 MCU_RXD = Pin, 8, -, A, 9;
@@ -50,6 +50,10 @@ ISP_TXD = Pin, 2, -, A, 5;
 MCU_TXD = Pin, 9, -, A, 10;
 SER_GPS = Pin, 13, -, A, 12;
 RESETn = Pin, 44, -, A, 4;
+PHASE_RSFF = Pin, 26, -, B, 7;
+SYNC = Pin, 37, -, B, 14;
+GPS_REG = Pin, 30, -, B, 9;
+RSFF_CLK = Pin, 31, -, B, 10;
 
 [Group Assignments]
 layer = OFF;
@@ -65,6 +69,7 @@ layer = OFF;
 
 [Fast Bypass]
 NONE = MCU_RXD, C_2MHZ5;
+FORCED = PHASE;
 
 [OSM Bypass]
 
@@ -75,22 +80,25 @@ NONE = C_10KHZ, C_20MHZ, C_PPS, RESETn, GATE, GPS_RXD, ISP_TXD, MCU_TXD, SER_GPS
 
 [IO Types]
 layer = OFF;
-C_2MHZ5 = LVCMOS33, PIN, 1, -;
-C_10KHZ = LVCMOS33_5V, PIN, 1, -;
-C_10MHZ = LVCMOS33, PIN, 0, -;
-C_20MHZ = LVCMOS33_5V, PIN, 0, -;
-C_PPS = LVCMOS33_5V, PIN, 0, -;
 GPS_TXD = LVCMOS33, PIN, 0, -;
 ISP_RXD = LVCMOS33_OD, PIN, 0, -;
 MCU_RXD = -, PIN, 0, -;
+C_2MHZ5 = LVCMOS33, PIN, 1, -;
 PHASE = LVCMOS33_OD, PIN, 1, -;
+C_10KHZ = LVCMOS33_5V, PIN, 1, -;
+C_20MHZ = LVCMOS33_5V, PIN, 0, -;
+C_PPS = LVCMOS33_5V, PIN, 0, -;
+RESETn = LVCMOS33_5V, PIN, 0, -;
 GATE = LVCMOS33_5V, PIN, 1, -;
 GPS_RXD = LVCMOS33_5V, PIN, 0, -;
 ISP_TXD = LVCMOS33_5V, PIN, 0, -;
 MCU_TXD = LVCMOS33_5V, PIN, 0, -;
 SER_GPS = LVCMOS33_5V, PIN, 0, -;
+C_10MHZ = LVCMOS33, PIN, 0, -;
+SYNC = LVCMOS33_5V, PIN, 1, -;
 
 [Pullup]
+Default = UP;
 
 [Slewrate]
 SLOW = GPS_TXD, ISP_RXD, MCU_RXD;
@@ -101,8 +109,6 @@ FAST = C_2MHZ5, PHASE;
 [Timing Constraints]
 layer = OFF;
 fMAX_0 = 15;
-fMAX_1 = 50.0000, C_20MHZ, C_20MHZ;
-fMAX_2 = 100000.0000, C_10KHZ, C_10KHZ;
 
 [HSI Attributes]
 
@@ -127,12 +133,12 @@ fMAX_2 = 100000.0000, C_10KHZ, C_10KHZ;
 [Timing Analyzer]
 
 [ORP Bypass]
-NONE = MCU_RXD, C_2MHZ5;
+NONE = MCU_RXD, C_2MHZ5, PHASE;
 
 [PLL Assignments]
 
 [Register Powerup]
-RESET = C_2MHZ5, PHASE, GATE_TRIG, C_10MHZ;
+RESET = C_2MHZ5, PHASE, C_PPS, GATE_TRIG, C_10MHZ, PHASE_RSFF, GPS_REG, RSFF_CLK;
 SET = GPS_TXD, ISP_RXD, MCU_RXD;
 
 [global constraints list]

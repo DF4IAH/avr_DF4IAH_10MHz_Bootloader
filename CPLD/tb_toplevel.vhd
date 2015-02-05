@@ -16,6 +16,8 @@
 LIBRARY ieee;
 LIBRARY generics;
 USE ieee.std_logic_1164.ALL;
+USE ieee.std_logic_arith.all;
+USE ieee.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
 USE generics.components.ALL;
 
@@ -25,57 +27,103 @@ END testbench;
 ARCHITECTURE behavior OF testbench IS 
 
 	COMPONENT top_lev
-	PORT(
-		RESET : IN std_logic;
-		C_20MHZ : IN std_logic;
-		C_10KHZ : IN std_logic;
-		C_PPS : IN std_logic;
-		PPS : IN std_logic;
-		Sync : IN std_logic;
-		Gate : IN std_logic;          
-		C_10MHZ : OUT std_logic;
-		C_2MHZ5 : OUT std_logic;
-		GateTrig : OUT std_logic;
-		Phase : OUT std_logic
-		);
+	port (
+--		-- JTAG
+--		TDI 			: in  std_logic;
+--		TDO 			: out std_logic;
+--		TCK 			: in  std_logic;
+--		TMS 			: in  std_logic;
+
+
+		-- GLOBAL
+		RESETn 			: in  std_logic;
+
+		-- Clock Divider
+		C_20MHZ 		: in  std_logic;
+		C_10MHZ			: out std_logic;
+		C_10KHZ 		: in  std_logic;
+		C_PPS			: in  std_logic;
+		C_2MHZ5			: out std_logic;
+		
+		-- Phase Error Determination
+		SYNC  			: in  std_logic;
+		SYNC_COR		: out std_logic;
+		GATE_TRIG 		: out std_logic;
+		GATE  			: in  std_logic;
+		GATE_COR		: out std_logic;
+		PHASE_RSFF		: out std_logic;
+		PHASE 			: out std_logic;
+
+		-- Serial Communications
+		SER_GPS			: in  std_logic;
+		ISP_TXD			: in  std_logic;
+		ISP_RXD			: out std_logic;
+		GPS_RXD			: in  std_logic;
+		GPS_TXD			: out std_logic;
+		MCU_TXD			: in  std_logic;
+		MCU_RXD			: out std_logic
+	);
 	END COMPONENT;
 
-	SIGNAL RESET :  std_logic;
-	SIGNAL C_20MHZ :  std_logic;
-	SIGNAL C_10MHZ :  std_logic;
-	SIGNAL C_10KHZ :  std_logic;
-	SIGNAL C_PPS :  std_logic;
-	SIGNAL C_2MHZ5 :  std_logic;
-	SIGNAL PPS :  std_logic;
-	SIGNAL Sync :  std_logic;
-	SIGNAL GateTrig :  std_logic;
-	SIGNAL Gate :  std_logic;
-	SIGNAL Phase :  std_logic;
+	SIGNAL RESETn			:     std_logic;
+	SIGNAL C_20MHZ			:     std_logic;
+	SIGNAL C_10MHZ			:     std_logic;
+	SIGNAL C_10KHZ			:     std_logic;
+	SIGNAL C_PPS			:     std_logic;
+	SIGNAL C_2MHZ5			:     std_logic;
+
+	SIGNAL SYNC			:     std_logic;
+	SIGNAL SYNC_COR			:     std_logic;
+	SIGNAL GATE_TRIG		:     std_logic;
+	SIGNAL GATE			:     std_logic;
+	SIGNAL GATE_COR			:     std_logic;
+	SIGNAL PHASE_RSFF		:     std_logic;
+	SIGNAL PHASE			:     std_logic;
+
+	SIGNAL SER_GPS			:     std_logic;
+	SIGNAL ISP_TXD			:     std_logic;
+	SIGNAL ISP_RXD			:     std_logic;
+	SIGNAL GPS_RXD			:     std_logic;
+	SIGNAL GPS_TXD			:     std_logic;
+	SIGNAL MCU_TXD			:     std_logic;
+	SIGNAL MCU_RXD			:     std_logic;
 
 BEGIN
 
 	uut: top_lev PORT MAP(
-		RESET => RESET,
+		RESETn => RESETn,
+
 		C_20MHZ => C_20MHZ,
 		C_10MHZ => C_10MHZ,
 		C_10KHZ => C_10KHZ,
 		C_PPS => C_PPS,
 		C_2MHZ5 => C_2MHZ5,
-		PPS => PPS,
-		Sync => Sync,
-		GateTrig => GateTrig,
-		Gate => Gate,
-		Phase => Phase
+
+		SYNC => SYNC,
+		SYNC_COR => SYNC_COR,
+		GATE_TRIG => GATE_TRIG,
+		GATE => GATE,
+		GATE_COR => GATE_COR,
+		PHASE_RSFF => PHASE_RSFF,
+		PHASE => PHASE,
+
+		SER_GPS => SER_GPS,
+		ISP_TXD => ISP_TXD,
+		ISP_RXD => ISP_RXD,
+		GPS_RXD => GPS_RXD,
+		GPS_TXD => GPS_TXD,
+		MCU_TXD => MCU_TXD,
+		MCU_RXD => MCU_RXD
 	);
 
 
 
 -- *** Test Bench - User Defined Section ***
 
-	tb_RESET : PROCESS
+	tb_RESETn : PROCESS
 	BEGIN
-		RESET <= '1'; WAIT FOR 250 NS;
-		RESET <= '0';
+		RESETn <= '0'; WAIT FOR 250 NS;
+		RESETn <= '1';
 	WAIT;  -- will wait forever
 	END PROCESS;
 
@@ -93,11 +141,12 @@ BEGIN
 	tb_C_10KHZ : PROCESS
 	BEGIN
 		FOR i10k IN 0 TO 9999 LOOP
-			C_10KHZ <= '1'; WAIT FOR 12800 NS;
-			C_10KHZ <= '0'; WAIT FOR 87200 NS;
+			C_10KHZ <= '1'; WAIT FOR  1024 NS;
+			C_10KHZ <= '0'; WAIT FOR 98976 NS;
 		END LOOP;
 	WAIT;  -- will wait forever
 	END PROCESS;
+
 
 	tb_C_PPS : PROCESS
 	BEGIN
@@ -108,21 +157,53 @@ BEGIN
 	WAIT;  -- will wait forever
 	END PROCESS;
 
+
 	tb_SYNC : PROCESS
 	BEGIN
 		FOR isync IN 0 TO 99999999 LOOP
-			Sync <= '1'; WAIT FOR 33 NS;
-			Sync <= '0'; WAIT FOR 67 NS;
+			WAIT FOR 40 NS;
+			Sync <= '1'; WAIT FOR  50 NS;
+			Sync <= '0'; WAIT FOR 310 NS;
 		END LOOP;
 	WAIT;  -- will wait forever
 	END PROCESS;
 
+
 	tb_GATE : PROCESS
 	BEGIN
 		FOR igate IN 0 TO 9999 LOOP
+			WAIT FOR 40 NS;
 			Gate <= '1'; WAIT FOR   362 NS;
-			Gate <= '0'; WAIT FOR 99638 NS;
+			Gate <= '0'; WAIT FOR 99598 NS;
 		END LOOP;
+	WAIT;  -- will wait forever
+	END PROCESS;
+
+
+	tB_SER_GPS : PROCESS
+	BEGIN
+		SER_GPS <= '1';
+	WAIT;  -- will wait forever
+	END PROCESS;
+
+
+	tB_ISP_TXD : PROCESS
+	BEGIN
+		ISP_TXD <= '1';
+	WAIT;  -- will wait forever
+	END PROCESS;
+
+
+	tB_GPS_RXD : PROCESS
+	BEGIN
+		GPS_RXD <= '1';
+	WAIT;  -- will wait forever
+	END PROCESS;
+
+
+	tB_MCU_TXD : PROCESS
+	BEGIN
+		MCU_TXD <= '1';
 	WAIT;  -- will wait forever
 	END PROCESS;
 
