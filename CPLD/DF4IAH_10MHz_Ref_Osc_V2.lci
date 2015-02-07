@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 02/05/2015;
-TIME = 23:23:05;
+DATE = 02/07/2015;
+TIME = 19:44:34;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -39,7 +39,7 @@ C_2MHZ5 = Pin, 38, -, B, 15;
 C_10MHZ = Pin, 40, -, A, 0;
 C_10KHZ = Pin, 17, -, -, -;
 C_PPS = Pin, 16, -, A, 15;
-GATE_TRIG = Pin, 29, -, B, 8;
+GATE_TRIG = Pin, 25, -, B, 6;
 GPS_TXD = Pin, 7, -, A, 8;
 ISP_RXD = Pin, 3, -, A, 6;
 MCU_RXD = Pin, 8, -, A, 9;
@@ -50,10 +50,12 @@ ISP_TXD = Pin, 2, -, A, 5;
 MCU_TXD = Pin, 9, -, A, 10;
 SER_GPS = Pin, 13, -, A, 12;
 RESETn = Pin, 44, -, A, 4;
-PHASE_RSFF = Pin, 26, -, B, 7;
+PHASE_RSFF = Pin, 24, -, B, 5;
 SYNC = Pin, 37, -, B, 14;
-GPS_REG = Pin, 30, -, B, 9;
+GPS_REG = Pin, 26, -, B, 7;
 RSFF_CLK = Pin, 31, -, B, 10;
+OP_IN = Pin, 30, -, B, 9;
+OP_ENA = Pin, 29, -, B, 8;
 
 [Group Assignments]
 layer = OFF;
@@ -68,8 +70,7 @@ layer = OFF;
 [Source Constraint Option]
 
 [Fast Bypass]
-NONE = MCU_RXD, C_2MHZ5;
-FORCED = PHASE;
+NONE = MCU_RXD, C_2MHZ5, PHASE;
 
 [OSM Bypass]
 

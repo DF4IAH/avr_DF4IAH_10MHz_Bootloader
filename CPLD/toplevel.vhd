@@ -38,6 +38,8 @@ entity top_lev is
 		GPS_REG			: out std_logic;
 		PHASE_RSFF		: out std_logic;
 		PHASE 			: out std_logic;
+		OP_IN			: out std_logic;
+		OP_ENA			: out std_logic;
 
 		-- Serial Communications
 		SER_GPS			: in  std_logic;
@@ -75,7 +77,10 @@ architecture structural of top_lev is
 			GATE_TRIG	: out std_logic;
 			GPS_REG		: out std_logic;
 			PHASE_RSFF	: out std_logic;
-			PHASE		: out std_logic
+			PHASE		: out std_logic;
+
+			OP_IN		: out std_logic;
+			OP_ENA		: out std_logic
 		);
 	end component;
 
@@ -119,7 +124,10 @@ begin  --  structural description begins
 			GATE_TRIG => GATE_TRIG,
 			GPS_REG => GPS_REG,
 			PHASE_RSFF => PHASE_RSFF,
-			PHASE => PHASE
+			PHASE => PHASE,
+
+			OP_IN => OP_IN,
+			OP_ENA => OP_ENA
 		);
 
 	sercom_0 : sercom
@@ -200,7 +208,10 @@ entity capture is
 		GATE_TRIG		: out std_logic;
 		GPS_REG			: out std_logic;
 		PHASE_RSFF		: out std_logic;
-		PHASE			: out std_logic
+		PHASE			: out std_logic;
+
+		OP_IN			: out std_logic;
+		OP_ENA			: out std_logic
 	);
 end capture;
 
@@ -250,7 +261,7 @@ begin
 	    end if;
 	end process;
 
-	-- Output Enable
+	-- Output Enable	(not used anymore)
 	process (GATE, PHASE_RSFF_loc)
 	begin
 	    if GATE = '1' then
@@ -264,6 +275,8 @@ begin
 	GPS_REG	   <= GPS_REG_loc;
 	RSFF_CLK   <= RSFF_CLK_loc;
 	PHASE_RSFF <= PHASE_RSFF_loc;
+	OP_IN 	   <= PHASE_RSFF_loc;
+	OP_ENA	   <= GATE;
 end BEHAVIORAL;
 
 
