@@ -37,9 +37,7 @@ entity top_lev is
 		GATE_TRIG		: out std_logic;
 		GPS_REG			: out std_logic;
 		PHASE_RSFF		: out std_logic;
-		PHASE 			: out std_logic;
-		OP_IN			: out std_logic;
-		OP_ENA			: out std_logic;
+--		PHASE 			: out std_logic;
 
 		-- Serial Communications
 		SER_GPS			: in  std_logic;
@@ -67,8 +65,8 @@ architecture structural of top_lev is
 			RESETn		: in  std_logic;
 --			C_10MHZ		: in  std_logic;
 			C_2MHZ5		: in  std_logic;
-			C_10KHZ		: in  std_logic;
---			C_PPS		: in  std_logic;
+--			C_10KHZ		: in  std_logic;
+			C_PPS		: in  std_logic;
 			SYNC		: in  std_logic;
 			GATE		: in  std_logic;
 
@@ -76,11 +74,8 @@ architecture structural of top_lev is
 
 			GATE_TRIG	: out std_logic;
 			GPS_REG		: out std_logic;
-			PHASE_RSFF	: out std_logic;
-			PHASE		: out std_logic;
-
-			OP_IN		: out std_logic;
-			OP_ENA		: out std_logic
+			PHASE_RSFF	: out std_logic
+--			PHASE		: out std_logic
 		);
 	end component;
 
@@ -114,8 +109,8 @@ begin  --  structural description begins
 			RESETn => RESETn,
 --			C_10MHZ => C_10MHZ_loc,
 			C_2MHZ5 => C_2MHZ5_loc,
-			C_10KHZ => C_10KHZ,
---			C_PPS => C_PPS,
+--			C_10KHZ => C_10KHZ,
+			C_PPS => C_PPS,
 			SYNC => SYNC,
 			GATE => GATE,
 
@@ -123,11 +118,8 @@ begin  --  structural description begins
 
 			GATE_TRIG => GATE_TRIG,
 			GPS_REG => GPS_REG,
-			PHASE_RSFF => PHASE_RSFF,
-			PHASE => PHASE,
-
-			OP_IN => OP_IN,
-			OP_ENA => OP_ENA
+			PHASE_RSFF => PHASE_RSFF
+--			PHASE => PHASE
 		);
 
 	sercom_0 : sercom
@@ -198,8 +190,8 @@ entity capture is
 		RESETn			: in  std_logic;
 --		C_10MHZ			: in  std_logic;
 		C_2MHZ5			: in  std_logic;
-		C_10KHZ			: in  std_logic;
---		C_PPS			: in  std_logic;
+--		C_10KHZ			: in  std_logic;
+		C_PPS			: in  std_logic;
 		SYNC			: in  std_logic;
 		GATE			: in  std_logic;
 
@@ -207,11 +199,8 @@ entity capture is
 
 		GATE_TRIG		: out std_logic;
 		GPS_REG			: out std_logic;
-		PHASE_RSFF		: out std_logic;
-		PHASE			: out std_logic;
-
-		OP_IN			: out std_logic;
-		OP_ENA			: out std_logic
+		PHASE_RSFF		: out std_logic
+--		PHASE			: out std_logic
 	);
 end capture;
 
@@ -224,8 +213,8 @@ signal PHASE_RSFF_loc			:     std_logic;
 begin
 	-- async
 --	GPS <= C_PPS or C_10KHZ;	-- TODO: remove me! Global pull-down needed
-	GPS <= C_10KHZ;  		-- TODO: remove me!
---	GPS <= C_PPS;  			-- TODO: enable me!
+--	GPS <= C_10KHZ;  		-- TODO: remove me!
+	GPS <= C_PPS;  			-- TODO: enable me!
 	RSFF_CLK_loc <= GPS xor SYNC;
 
 	-- GPS_REG is the registered input of GPS
@@ -262,21 +251,19 @@ begin
 	end process;
 
 	-- Output Enable	(not used anymore)
-	process (GATE, PHASE_RSFF_loc)
-	begin
-	    if GATE = '1' then
-		PHASE <= PHASE_RSFF_loc;
-
-	    else
-		PHASE <= 'Z';
-	    end if;
-	end process;
+--	process (GATE, PHASE_RSFF_loc)
+--	begin
+--	    if GATE = '1' then
+--		PHASE <= PHASE_RSFF_loc;
+--
+--	    else
+--		PHASE <= 'Z';
+--	    end if;
+--	end process;
 
 	GPS_REG	   <= GPS_REG_loc;
 	RSFF_CLK   <= RSFF_CLK_loc;
 	PHASE_RSFF <= PHASE_RSFF_loc;
-	OP_IN 	   <= PHASE_RSFF_loc;
-	OP_ENA	   <= GATE;
 end BEHAVIORAL;
 
 
