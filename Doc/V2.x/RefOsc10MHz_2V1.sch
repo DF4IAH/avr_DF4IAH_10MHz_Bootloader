@@ -25022,9 +25022,9 @@ Out</text>
 <text x="243.84" y="129.794" size="1.778" layer="97">t=33ns</text>
 <text x="294.386" y="129.794" size="1.778" layer="97">t=362ns</text>
 <text x="305.562" y="239.776" size="1.778" layer="97">IC-Supplies</text>
-<text x="193.802" y="100.076" size="1.27" layer="97">20 MHz in</text>
-<text x="188.722" y="94.996" size="1.27" layer="97">10 MHz out</text>
-<text x="203.962" y="110.236" size="1.27" layer="97">2.5 MHz out</text>
+<text x="194.564" y="106.934" size="1.016" layer="97">20 MHz in</text>
+<text x="191.008" y="104.394" size="1.016" layer="97">10 MHz out</text>
+<text x="203.2" y="112.014" size="1.016" layer="97">2.5 MHz out</text>
 <text x="10.414" y="258.826" size="2.54" layer="97">DF4IAH  10 MHz Reference Oscillator
 V 2.1</text>
 <text x="64.516" y="110.998" size="1.778" layer="97">USB Disconnect</text>
@@ -25724,9 +25724,9 @@ V 2.1</text>
 <segment>
 <pinref part="IC1" gate="G$1" pin="PB0(ICP)"/>
 <wire x1="119.38" y1="139.7" x2="157.48" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="139.7" x2="157.48" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="157.48" y1="99.06" x2="200.66" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="200.66" y1="99.06" x2="200.66" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="139.7" x2="157.48" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="106.68" x2="200.66" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="200.66" y1="106.68" x2="200.66" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="CLK0"/>
 </segment>
 </net>
@@ -25758,14 +25758,15 @@ V 2.1</text>
 <pinref part="R131" gate="G$1" pin="S"/>
 </segment>
 </net>
-<net name="N_PWM_PULL" class="0">
+<net name="N_PWM_PULL_5V0" class="0">
 <segment>
-<wire x1="132.08" y1="116.84" x2="63.5" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="63.5" y1="116.84" x2="63.5" y2="132.08" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PD5(T1)"/>
 <wire x1="132.08" y1="149.86" x2="119.38" y2="149.86" width="0.1524" layer="91"/>
-<wire x1="132.08" y1="116.84" x2="132.08" y2="149.86" width="0.1524" layer="91"/>
-<pinref part="R151" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="101.6" x2="132.08" y2="149.86" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="IOA1"/>
+<wire x1="132.08" y1="101.6" x2="195.58" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="195.58" y1="101.6" x2="195.58" y2="88.9" width="0.1524" layer="91"/>
+<label x="183.134" y="101.854" size="1.016" layer="95"/>
 </segment>
 </net>
 <net name="AREF" class="0">
@@ -25787,7 +25788,7 @@ V 2.1</text>
 <wire x1="208.28" y1="99.06" x2="246.38" y2="99.06" width="0.1524" layer="91"/>
 <pinref part="IC3" gate="B" pin="Q"/>
 <pinref part="IC2" gate="G$1" pin="IOB13"/>
-<label x="208.28" y="99.06" size="1.016" layer="95"/>
+<label x="208.28" y="99.314" size="1.016" layer="95"/>
 </segment>
 </net>
 <net name="ADC_PHASE_SAMPLEHOLD" class="0">
@@ -25861,9 +25862,9 @@ V 2.1</text>
 <segment>
 <wire x1="139.7" y1="185.42" x2="129.54" y2="185.42" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="185.42" x2="129.54" y2="200.66" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="185.42" x2="139.7" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="139.7" y1="93.98" x2="198.12" y2="93.98" width="0.1524" layer="91"/>
-<wire x1="198.12" y1="93.98" x2="198.12" y2="88.9" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="185.42" x2="139.7" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="104.14" x2="198.12" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="104.14" x2="198.12" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="IOA0"/>
 <pinref part="R931" gate="G$1" pin="1"/>
 </segment>
@@ -25951,7 +25952,7 @@ V 2.1</text>
 <wire x1="205.74" y1="104.14" x2="205.74" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="IC3" gate="A" pin="Q"/>
 <pinref part="IC2" gate="G$1" pin="IOB14"/>
-<label x="205.74" y="104.14" size="1.016" layer="95"/>
+<label x="205.994" y="104.394" size="1.016" layer="95"/>
 </segment>
 </net>
 <net name="GPS_VBACKUP" class="0">
@@ -26262,7 +26263,7 @@ V 2.1</text>
 <wire x1="279.4" y1="121.92" x2="261.62" y2="121.92" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="121.92" x2="261.62" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="261.62" y1="60.96" x2="236.22" y2="60.96" width="0.1524" layer="91"/>
-<label x="240.03" y="61.468" size="1.016" layer="95"/>
+<label x="249.428" y="61.468" size="1.016" layer="95"/>
 </segment>
 </net>
 <net name="MCU_RXD" class="0">
@@ -26325,7 +26326,7 @@ V 2.1</text>
 <wire x1="210.82" y1="93.98" x2="210.82" y2="88.9" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="IOB12"/>
 <wire x1="210.82" y1="93.98" x2="304.8" y2="93.98" width="0.1524" layer="91"/>
-<label x="210.82" y="93.98" size="1.016" layer="95"/>
+<label x="211.074" y="94.234" size="1.016" layer="95"/>
 <pinref part="D401" gate="G$1" pin="A"/>
 </segment>
 </net>
@@ -26336,6 +26337,18 @@ V 2.1</text>
 <pinref part="U5" gate="A" pin="-IN"/>
 <pinref part="R501" gate="G$1" pin="2"/>
 <wire x1="337.82" y1="157.48" x2="314.96" y2="157.48" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N_PWM_PULL_3V3" class="0">
+<segment>
+<pinref part="R151" gate="G$1" pin="1"/>
+<wire x1="63.5" y1="116.84" x2="63.5" y2="132.08" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="116.84" x2="121.92" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="116.84" x2="121.92" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="121.92" y1="99.06" x2="193.04" y2="99.06" width="0.1524" layer="91"/>
+<pinref part="IC2" gate="G$1" pin="IOA2"/>
+<wire x1="193.04" y1="99.06" x2="193.04" y2="88.9" width="0.1524" layer="91"/>
+<label x="180.594" y="99.314" size="1.016" layer="95"/>
 </segment>
 </net>
 </nets>
