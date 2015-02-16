@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 02/09/2015;
-TIME = 18:05:55;
+DATE = 02/16/2015;
+TIME = 14:14:26;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -53,6 +53,8 @@ PHASE_RSFF = Pin, 35, -, B, 12;
 SYNC = Pin, 37, -, B, 14;
 GPS_REG = Pin, 29, -, B, 8;
 RSFF_CLK = Pin, 30, -, B, 9;
+PWM_PULL_IN = Pin, 41, -, A, 1;
+PWM_PULL_OUT = Pin, 42, -, A, 2;
 
 [Group Assignments]
 layer = OFF;
@@ -67,6 +69,7 @@ layer = OFF;
 [Source Constraint Option]
 
 [Fast Bypass]
+BYPASS = PWM_PULL_OUT;
 NONE = MCU_RXD, C_2MHZ5;
 
 [OSM Bypass]
@@ -93,6 +96,7 @@ MCU_TXD = LVCMOS33_5V, PIN, 0, -;
 SER_GPS = LVCMOS33_5V, PIN, 0, -;
 C_10MHZ = LVCMOS33, PIN, 0, -;
 SYNC = LVCMOS33_5V, PIN, 1, -;
+PWM_PULL_IN = LVCMOS33_5V, PIN, 0, -;
 
 [Pullup]
 Default = UP;

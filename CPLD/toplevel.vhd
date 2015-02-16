@@ -46,7 +46,11 @@ entity top_lev is
 		GPS_RXD			: in  std_logic;
 		GPS_TXD			: out std_logic;
 		MCU_TXD			: in  std_logic;
-		MCU_RXD			: out std_logic
+		MCU_RXD			: out std_logic;
+
+		-- PWM voltage convertion
+		PWM_PULL_IN		: in  std_logic;
+		PWM_PULL_OUT		: out std_logic
 	);
 end;
 
@@ -94,6 +98,7 @@ architecture structural of top_lev is
 -- Declaration of top_lev signals
 --	signal C_10MHZ_loc		:     std_logic;
 	signal C_2MHZ5_loc		:     std_logic;
+	signal PWM_PULL_loc		:     std_logic;
 
 begin  --  structural description begins
 	clock_div_0: clock_div 
@@ -136,6 +141,9 @@ begin  --  structural description begins
 	-- OUTPUT pins derived from OUTPUT&INPUT nets
 --	C_10MHZ <= C_10MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
+
+	PWM_PULL_loc <= PWM_PULL_IN;
+	PWM_PULL_OUT <= PWM_PULL_loc;
 end structural;
 
 
