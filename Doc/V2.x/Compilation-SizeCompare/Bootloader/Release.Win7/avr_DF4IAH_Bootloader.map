@@ -1,0 +1,536 @@
+Archive member included because of file (symbol)
+
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                              c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o (exit)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                              ./Src/usbdrv_bl/usbdrv.o (__do_copy_data)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                              ./Src/usbdrv_bl/usbdrv.o (__do_clear_bss)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega328p.o)
+                              ./Src/df4iah_bl_memory.o (__eerd_byte_m328p)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega328p.o)
+                              ./Src/df4iah_bl_memory.o (__eewr_byte_m328p)
+
+Allocating common symbols
+Common symbol       size              file
+
+usbTxBuf            0xb               ./Src/usbdrv_bl/usbdrv.o
+replyBuffer         0x8               ./Src/df4iah_bl_usb.o
+usbTxStatus1        0xc               ./Src/df4iah_bl_main.o
+prog_pagecounter    0x1               ./Src/df4iah_bl_usb.o
+usbDeviceAddr       0x1               ./Src/usbdrv_bl/usbdrv.o
+usbRxToken          0x1               ./Src/usbdrv_bl/usbdrv.o
+usbInputBufOffset   0x1               ./Src/usbdrv_bl/usbdrv.o
+prog_address        0x4               ./Src/df4iah_bl_usb.o
+usbSofCount         0x1               ./Src/usbdrv_bl/usbdrv.o
+usbMsgPtr           0x2               ./Src/usbdrv_bl/usbdrv.o
+usbRxLen            0x1               ./Src/usbdrv_bl/usbdrv.o
+prog_blockflags     0x1               ./Src/df4iah_bl_usb.o
+usbNewDeviceAddr    0x1               ./Src/usbdrv_bl/usbdrv.o
+prog_pagesize       0x2               ./Src/df4iah_bl_usb.o
+usbCurrentTok       0x1               ./Src/usbdrv_bl/usbdrv.o
+usbConfiguration    0x1               ./Src/usbdrv_bl/usbdrv.o
+usbRxBuf            0x16              ./Src/usbdrv_bl/usbdrv.o
+usbTxStatus3        0xc               ./Src/df4iah_bl_main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800100
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+Address of section .text set to 0x7000
+Address of section .df4iah_bl_memory set to 0x7900
+Address of section .df4iah_bl_probe set to 0x78b0
+Address of section .df4iah_bl_usb set to 0x7be0
+Address of section .df4iah_bl_clkpullpwm set to 0x7780
+LOAD ./Src/usbdrv_bl/oddebug.o
+LOAD ./Src/usbdrv_bl/usbdrv.o
+LOAD ./Src/usbdrv_bl/usbdrvasm.o
+LOAD ./Src/libs-device/osccal.o
+LOAD ./Src/df4iah_bl_clkPullPwm.o
+LOAD ./Src/df4iah_bl_main.o
+LOAD ./Src/df4iah_bl_memory.o
+LOAD ./Src/df4iah_bl_probe.o
+LOAD ./Src/df4iah_bl_usb.o
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00007000      0x772
+ *(.vectors)
+ .vectors       0x00007000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x00007000                __vectors
+                0x00007000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x00007068       0x8e ./Src/usbdrv_bl/usbdrv.o
+                0x000070d2                usbDescriptorDevice
+                0x00007068                usbDescriptorString0
+                0x000070c2                usbDescriptorStringSerialNumber
+                0x000070e4                usbDescriptorConfiguration
+                0x0000706c                usbDescriptorStringVendor
+                0x0000707a                usbDescriptorStringDevice
+                0x000070f6                . = ALIGN (0x2)
+                0x000070f6                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x000070f6        0x0 linker stubs
+ *(.trampolines*)
+                0x000070f6                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x000070f6                __ctors_start = .
+ *(.ctors)
+                0x000070f6                __ctors_end = .
+                0x000070f6                __dtors_start = .
+ *(.dtors)
+                0x000070f6                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x000070f6        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x000070f6                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x000070f6        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00007102       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x00007102                __do_copy_data
+ .init4         0x00007118       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00007118                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00007128        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ *(.init9)
+ *(.text)
+ .text          0x00007130        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+                0x00007130                __vector_22
+                0x00007130                __vector_24
+                0x00007130                __vector_12
+                0x00007130                __bad_interrupt
+                0x00007130                __vector_6
+                0x00007130                __vector_3
+                0x00007130                __vector_23
+                0x00007130                __vector_25
+                0x00007130                __vector_11
+                0x00007130                __vector_13
+                0x00007130                __vector_17
+                0x00007130                __vector_19
+                0x00007130                __vector_7
+                0x00007130                __vector_5
+                0x00007130                __vector_4
+                0x00007130                __vector_9
+                0x00007130                __vector_2
+                0x00007130                __vector_21
+                0x00007130                __vector_15
+                0x00007130                __vector_8
+                0x00007130                __vector_14
+                0x00007130                __vector_10
+                0x00007130                __vector_16
+                0x00007130                __vector_18
+                0x00007130                __vector_20
+ .text          0x00007134        0x0 ./Src/usbdrv_bl/oddebug.o
+ .text          0x00007134        0x0 ./Src/usbdrv_bl/usbdrv.o
+ .text          0x00007134      0x278 ./Src/usbdrv_bl/usbdrvasm.o
+                0x00007186                __vector_1
+                0x00007134                usbCrc16
+                0x0000717e                usbCrc16Append
+ .text          0x000073ac        0x0 ./Src/libs-device/osccal.o
+ .text          0x000073ac        0x0 ./Src/df4iah_bl_clkPullPwm.o
+ .text          0x000073ac        0x0 ./Src/df4iah_bl_main.o
+ .text          0x000073ac        0x0 ./Src/df4iah_bl_memory.o
+ .text          0x000073ac        0x0 ./Src/df4iah_bl_probe.o
+ .text          0x000073ac        0x0 ./Src/df4iah_bl_usb.o
+ .text          0x000073ac        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x000073ac        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x000073ac        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x000073ac        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega328p.o)
+ .text          0x000073ac        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega328p.o)
+                0x000073ac                . = ALIGN (0x2)
+ *(.text.*)
+ .text.usbInit  0x000073ac        0xe ./Src/usbdrv_bl/usbdrv.o
+                0x000073ac                usbInit
+ .text.usbPoll  0x000073ba      0x286 ./Src/usbdrv_bl/usbdrv.o
+                0x000073ba                usbPoll
+ .text.give_away
+                0x00007640        0xc ./Src/df4iah_bl_main.o
+                0x00007640                give_away
+ .text.main     0x0000764c       0xf6 ./Src/df4iah_bl_main.o
+                0x0000764c                main
+ .text.libgcc   0x00007742        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00007742        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00007742        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.avr-libc
+                0x00007742       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega328p.o)
+                0x00007742                __eerd_byte_m328p
+ .text.avr-libc
+                0x00007752       0x1c c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega328p.o)
+                0x00007752                __eewr_byte_m328p
+                0x00007754                __eewr_r18_m328p
+                0x0000776e                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x0000776e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000776e                exit
+                0x0000776e                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x0000776e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x00007772                _etext = .
+
+.data           0x00800100        0x2 load address 0x00007772
+                0x00800100                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .data          0x00800100        0x0 ./Src/usbdrv_bl/oddebug.o
+ .data          0x00800100        0x0 ./Src/usbdrv_bl/usbdrv.o
+ .data          0x00800100        0x0 ./Src/usbdrv_bl/usbdrvasm.o
+ .data          0x00800100        0x0 ./Src/libs-device/osccal.o
+ .data          0x00800100        0x0 ./Src/df4iah_bl_clkPullPwm.o
+ .data          0x00800100        0x0 ./Src/df4iah_bl_main.o
+ .data          0x00800100        0x0 ./Src/df4iah_bl_memory.o
+ .data          0x00800100        0x0 ./Src/df4iah_bl_probe.o
+ .data          0x00800100        0x0 ./Src/df4iah_bl_usb.o
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega328p.o)
+ .data          0x00800100        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega328p.o)
+ *(.data*)
+ .data.usbTxLen
+                0x00800100        0x1 ./Src/usbdrv_bl/usbdrv.o
+                0x00800100                usbTxLen
+ .data.usbMsgLen
+                0x00800101        0x1 ./Src/usbdrv_bl/usbdrv.o
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x00800102                . = ALIGN (0x2)
+                0x00800102                _edata = .
+                0x00800102                PROVIDE (__data_end, .)
+
+.bss            0x00800102       0x5e
+                0x00800102                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm328p.o
+ .bss           0x00800102        0x0 ./Src/usbdrv_bl/oddebug.o
+ .bss           0x00800102        0x0 ./Src/usbdrv_bl/usbdrv.o
+ .bss           0x00800102        0x0 ./Src/usbdrv_bl/usbdrvasm.o
+ .bss           0x00800102        0x0 ./Src/libs-device/osccal.o
+ .bss           0x00800102        0x0 ./Src/df4iah_bl_clkPullPwm.o
+ .bss           0x00800102        0x0 ./Src/df4iah_bl_main.o
+ .bss           0x00800102        0x0 ./Src/df4iah_bl_memory.o
+ .bss           0x00800102        0x0 ./Src/df4iah_bl_probe.o
+ .bss           0x00800102        0x0 ./Src/df4iah_bl_usb.o
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eerd_byte_atmega328p.o)
+ .bss           0x00800102        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(eewr_byte_atmega328p.o)
+ *(.bss*)
+ .bss.usbMsgFlags
+                0x00800102        0x1 ./Src/usbdrv_bl/usbdrv.o
+ .bss.jump_to_app
+                0x00800103        0x2 ./Src/df4iah_bl_main.o
+                0x00800103                jump_to_app
+ .bss.timer0Snapshot
+                0x00800105        0x1 ./Src/df4iah_bl_main.o
+                0x00800105                timer0Snapshot
+ .bss.mainIsJumperBlSet
+                0x00800106        0x1 ./Src/df4iah_bl_main.o
+                0x00800106                mainIsJumperBlSet
+ .bss.mainStopAvr
+                0x00800107        0x1 ./Src/df4iah_bl_main.o
+                0x00800107                mainStopAvr
+ .bss.prog_connected
+                0x00800108        0x1 ./Src/df4iah_bl_usb.o
+                0x00800108                prog_connected
+ .bss.prog_state
+                0x00800109        0x1 ./Src/df4iah_bl_usb.o
+                0x00800109                prog_state
+ .bss.prog_address_newmode
+                0x0080010a        0x1 ./Src/df4iah_bl_usb.o
+                0x0080010a                prog_address_newmode
+ .bss.prog_nbytes
+                0x0080010b        0x2 ./Src/df4iah_bl_usb.o
+                0x0080010b                prog_nbytes
+ *(COMMON)
+ COMMON         0x0080010d       0x2b ./Src/usbdrv_bl/usbdrv.o
+                0x0080010d                usbTxBuf
+                0x00800118                usbDeviceAddr
+                0x00800119                usbRxToken
+                0x0080011a                usbInputBufOffset
+                0x0080011b                usbSofCount
+                0x0080011c                usbMsgPtr
+                0x0080011e                usbRxLen
+                0x0080011f                usbNewDeviceAddr
+                0x00800120                usbCurrentTok
+                0x00800121                usbConfiguration
+                0x00800122                usbRxBuf
+ COMMON         0x00800138       0x18 ./Src/df4iah_bl_main.o
+                0x00800138                usbTxStatus1
+                0x00800144                usbTxStatus3
+ COMMON         0x00800150       0x10 ./Src/df4iah_bl_usb.o
+                0x00800150                replyBuffer
+                0x00800158                prog_pagecounter
+                0x00800159                prog_address
+                0x0080015d                prog_blockflags
+                0x0080015e                prog_pagesize
+                0x00800160                PROVIDE (__bss_end, .)
+                0x00007772                __data_load_start = LOADADDR (.data)
+                0x00007774                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00800160        0x0
+                0x00800160                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00800160                PROVIDE (__noinit_end, .)
+                0x00800160                _end = .
+                0x00800160                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(avr_DF4IAH_Bootloader.elf elf32-avr)
+LOAD linker stubs
+
+.df4iah_bl_memory
+                0x00007900      0x2bc
+ .df4iah_bl_memory
+                0x00007900      0x2bc ./Src/df4iah_bl_memory.o
+                0x00007970                memory_bl_writeFlashPage
+                0x00007900                memory_bl_eraseFlash
+                0x00007928                memory_bl_readFlashPage
+                0x00007b8a                memory_bl_readEEpromPage
+                0x00007b48                memory_bl_writeEEpromPage
+
+.df4iah_bl_probe
+                0x000078b0       0x42
+ .df4iah_bl_probe
+                0x000078b0       0x42 ./Src/df4iah_bl_probe.o
+                0x000078b0                probe_bl_init
+                0x000078e4                probe_bl_checkJumper
+                0x000078e0                probe_bl_close
+
+.df4iah_bl_usb  0x00007be0      0x3ae
+ .df4iah_bl_usb
+                0x00007be0      0x3ae ./Src/df4iah_bl_usb.o
+                0x00007c00                usbFunctionSetup
+                0x00007bf8                usb_bl_close
+                0x00007be0                usb_bl_replyContent
+                0x00007ef2                usbFunctionRead
+                0x00007f68                usb_bl_init
+                0x00007e6e                usbFunctionWrite
+
+.df4iah_bl_clkpullpwm
+                0x00007780       0x54
+ .df4iah_bl_clkpullpwm
+                0x00007780       0x54 ./Src/df4iah_bl_clkPullPwm.o
+                0x000077bc                clkPullPwm_bl_togglePin
+                0x000077b8                clkPullPwm_bl_setRatio
+                0x000077c2                clkPullPwm_bl_endlessTogglePin
+                0x000077a0                clkPullPwm_bl_close
+                0x00007780                clkPullPwm_bl_init
