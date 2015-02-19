@@ -24906,7 +24906,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="R151" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R111" library="rcl" deviceset="R-EU_" device="R0805" value="12k"/>
 <part name="R931" library="rcl" deviceset="R-EU_" device="R0805" value="51"/>
-<part name="R411" library="rcl" deviceset="R-EU_" device="R0805" value="0R"/>
+<part name="R411" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
 <part name="R141" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
 <part name="R301" library="rcl" deviceset="R-EU_" device="R0805" value="1.5k"/>
 <part name="R121" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
@@ -25763,10 +25763,10 @@ V 2.1</text>
 <pinref part="IC1" gate="G$1" pin="PD5(T1)"/>
 <wire x1="132.08" y1="149.86" x2="119.38" y2="149.86" width="0.1524" layer="91"/>
 <wire x1="132.08" y1="101.6" x2="132.08" y2="149.86" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="IOA1"/>
-<wire x1="132.08" y1="101.6" x2="195.58" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="195.58" y1="101.6" x2="195.58" y2="88.9" width="0.1524" layer="91"/>
-<label x="183.134" y="101.854" size="1.016" layer="95"/>
+<wire x1="132.08" y1="101.6" x2="193.04" y2="101.6" width="0.1524" layer="91"/>
+<label x="180.848" y="101.854" size="1.016" layer="95"/>
+<pinref part="IC2" gate="G$1" pin="IOA2"/>
+<wire x1="193.04" y1="101.6" x2="193.04" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="AREF" class="0">
@@ -26345,10 +26345,10 @@ V 2.1</text>
 <wire x1="63.5" y1="116.84" x2="63.5" y2="132.08" width="0.1524" layer="91"/>
 <wire x1="63.5" y1="116.84" x2="121.92" y2="116.84" width="0.1524" layer="91"/>
 <wire x1="121.92" y1="116.84" x2="121.92" y2="99.06" width="0.1524" layer="91"/>
-<wire x1="121.92" y1="99.06" x2="193.04" y2="99.06" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="IOA2"/>
-<wire x1="193.04" y1="99.06" x2="193.04" y2="88.9" width="0.1524" layer="91"/>
-<label x="180.594" y="99.314" size="1.016" layer="95"/>
+<wire x1="121.92" y1="99.06" x2="190.5" y2="99.06" width="0.1524" layer="91"/>
+<label x="178.308" y="99.314" size="1.016" layer="95"/>
+<pinref part="IC2" gate="G$1" pin="IOA3"/>
+<wire x1="190.5" y1="99.06" x2="190.5" y2="88.9" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
