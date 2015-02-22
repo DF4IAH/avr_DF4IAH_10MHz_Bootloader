@@ -47,8 +47,8 @@ entity top_lev is
 		SER_GPS			: in  std_logic;
 		ISP_TXD			: in  std_logic;
 		ISP_RXD			: out std_logic;
-		GPS_RXD			: in  std_logic;
-		GPS_TXD			: out std_logic;
+		GPS_RXD			: out std_logic;
+		GPS_TXD			: in  std_logic;
 		MCU_TXD			: in  std_logic;
 		MCU_RXD			: out std_logic;
 
@@ -97,8 +97,8 @@ architecture structural of top_lev is
 			SER_GPS		: in  std_logic;
 			ISP_TXD		: in  std_logic;
 			ISP_RXD		: out std_logic;
-			GPS_RXD		: in  std_logic;
-			GPS_TXD		: out std_logic;
+			GPS_RXD		: out std_logic;
+			GPS_TXD		: in  std_logic;
 			MCU_TXD		: in  std_logic;
 			MCU_RXD		: out std_logic
 		);
@@ -310,8 +310,8 @@ entity sercom is
 		SER_GPS			: in  std_logic;
 		ISP_TXD			: in  std_logic;
 		ISP_RXD			: out std_logic;
-		GPS_RXD			: in  std_logic;
-		GPS_TXD			: out std_logic;
+		GPS_RXD			: out std_logic;
+		GPS_TXD			: in  std_logic;
 		MCU_TXD			: in  std_logic;
 		MCU_RXD			: out std_logic
 	);
@@ -319,16 +319,16 @@ end sercom;
 
 architecture BEHAVIORAL of sercom is
 begin
-	process (SER_GPS, GPS_RXD, MCU_TXD, ISP_TXD)
+	process (SER_GPS, GPS_TXD, MCU_TXD, ISP_TXD)
 	begin
 		if SER_GPS = '1' then
-			MCU_RXD <= GPS_RXD;
-			GPS_TXD <= MCU_TXD;
+			MCU_RXD <= GPS_TXD;
+			GPS_RXD <= MCU_TXD;
 			ISP_RXD <= 'Z';
 		else
 			MCU_RXD <= ISP_TXD;
 			ISP_RXD <= MCU_TXD;
-			GPS_TXD <= '1';
+			GPS_RXD <= '1';
 		end if;
 	end process;
 end BEHAVIORAL;

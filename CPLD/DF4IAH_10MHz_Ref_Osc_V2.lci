@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 02/17/2015;
-TIME = 14:18:06;
+DATE = 02/20/2015;
+TIME = 22:46:11;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -82,7 +82,7 @@ NONE = C_10KHZ, C_20MHZ, C_PPS, RESETn, GATE, GPS_RXD, ISP_TXD, MCU_TXD, SER_GPS
 
 [IO Types]
 layer = OFF;
-GPS_TXD = LVCMOS33, PIN, 0, -;
+GPS_TXD = LVCMOS33_5V, PIN, 0, -;
 ISP_RXD = LVCMOS33_OD, PIN, 0, -;
 MCU_RXD = -, PIN, 0, -;
 C_2MHZ5 = LVCMOS33, PIN, 1, -;
@@ -91,7 +91,7 @@ C_20MHZ = LVCMOS33_5V, PIN, 0, -;
 C_PPS = LVCMOS33_5V, PIN, 0, -;
 RESETn = LVCMOS33_5V, PIN, 0, -;
 GATE = LVCMOS33_5V, PIN, 1, -;
-GPS_RXD = LVCMOS33_5V, PIN, 0, -;
+GPS_RXD = LVCMOS33, PIN, 0, -;
 ISP_TXD = LVCMOS33_5V, PIN, 0, -;
 MCU_TXD = LVCMOS33_5V, PIN, 0, -;
 SER_GPS = LVCMOS33_5V, PIN, 0, -;
@@ -103,7 +103,7 @@ PWM_PULL_IN = LVCMOS33_5V, PIN, 0, -;
 Default = UP;
 
 [Slewrate]
-SLOW = GPS_TXD, ISP_RXD, MCU_RXD;
+SLOW = ISP_RXD, MCU_RXD;
 FAST = C_2MHZ5;
 
 [Region]
