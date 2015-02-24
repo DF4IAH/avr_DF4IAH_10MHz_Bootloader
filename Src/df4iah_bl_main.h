@@ -17,7 +17,7 @@
 
 
 #define VERSION_HIGH 			150
-#define VERSION_LOW  			101
+#define VERSION_LOW  			224
 
 
 /* MCU frequency */

@@ -26,7 +26,7 @@ void clkPullPwm_bl_init()
 	TCNT0 = 0x00;
 
 	// set the timer-0 PWM-B compare register
-	clkPullPwm_bl_setRatio(DEFAULT_PWM_COUNT);
+	OCR0B = DEFAULT_PWM_COUNT;
 
 	// set the timer-0 mode of operation: 0x3 = Fast PWM, counting up, TOP := MAX [. . WGM01 WGM00]
 	// set the timer-0 compare-B waveform generator to: PWM, 1 at >= match, 0 else
@@ -71,15 +71,6 @@ void clkPullPwm_bl_close()
 
 	// no more power is needed for this module
 	PRR |= _BV(PRTIM0);
-}
-
-#ifdef RELEASE
-__attribute__((section(".df4iah_bl_clkpullpwm"), aligned(2)))
-#endif
-void clkPullPwm_bl_setRatio(uint8_t ratio)
-{
-	// set the OC0B compare value
-	OCR0B = ratio;
 }
 
 #ifdef RELEASE
