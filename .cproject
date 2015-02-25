@@ -76,8 +76,8 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="de.innot.avreclipse.configuration.app.release.1223594858" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<macros>
 					<stringMacro name="Bootsize" type="VALUE_TEXT" value="2048"/>
-					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7900"/>
 					<stringMacro name="MT_Bootloader_Address" type="VALUE_TEXT" value="0x7000"/>
+					<stringMacro name="MT_Bootloader_Memory" type="VALUE_TEXT" value="0x7900"/>
 					<stringMacro name="MT_Bootloader_ClkPullPwm" type="VALUE_TEXT" value="0x7780"/>
 					<stringMacro name="MT_Bootloader_Usb" type="VALUE_TEXT" value="0x7BE0"/>
 					<stringMacro name="MT_Bootloader_Probe" type="VALUE_TEXT" value="0x78C0"/>
