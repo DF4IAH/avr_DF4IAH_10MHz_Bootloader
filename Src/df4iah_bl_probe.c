@@ -8,6 +8,7 @@
 #include <avr/wdt.h>
 #include <util/delay.h>
 
+#include "df4iah_bl_main.h"
 #include "df4iah_bl_probe.h"
 
 

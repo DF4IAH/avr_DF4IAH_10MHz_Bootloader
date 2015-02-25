@@ -11,6 +11,7 @@
 #include <util/delay.h>
 
 #include "chipdef.h"
+#include "df4iah_bl_main.h"
 #include "df4iah_bl_clkPullPwm.h"
 
 
