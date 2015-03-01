@@ -1,5 +1,5 @@
 /*
- * df4iah_usbAsp.c - part of USBasp, included into DF4IAH-10MHz-Clk-Ref - Bootloader
+ * df4iah_bl_usbAsp.h - part of USBasp, included into DF4IAH-10MHz-Clk-Ref - Bootloader
  *
  * Autor..........: Thomas Fischl <tfischl@gmx.de>
  * Adapted by.....: DF4IAH, Ulrich Habel
