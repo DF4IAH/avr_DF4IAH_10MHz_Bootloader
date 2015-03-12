@@ -154,7 +154,7 @@ begin  --  structural description begins
 		);
 
 	-- OUTPUT pins derived from OUTPUT&INPUT nets
-	C_10MHZ <= C_10MHZ_loc;
+	C_10MHZ <= not C_10MHZ_loc;
 	C_5MHZ  <= C_5MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
 
