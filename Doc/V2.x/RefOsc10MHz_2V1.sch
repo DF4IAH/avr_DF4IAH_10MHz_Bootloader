@@ -23649,7 +23649,7 @@ Out</text>
 <text x="185.928" y="137.414" size="1.016" layer="97">10 MHz out</text>
 <text x="198.12" y="145.034" size="1.016" layer="97">2.5 MHz out</text>
 <text x="5.334" y="291.846" size="2.54" layer="97">DF4IAH  10 MHz Reference Oscillator
-V 2.1</text>
+V 2.1a</text>
 <text x="59.436" y="144.018" size="1.778" layer="97">USB Disconnect</text>
 <text x="102.616" y="122.936" size="1.778" layer="97">USB D-</text>
 <text x="102.616" y="116.078" size="1.778" layer="97">USB D+</text>
