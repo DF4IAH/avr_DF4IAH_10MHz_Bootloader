@@ -23571,8 +23571,8 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="GND23" library="supply1" deviceset="GND" device=""/>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
 <part name="C921" library="rcl" deviceset="CPOL-EU" device="140CLH-1010" value="0.22F"/>
-<part name="D611" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS80"/>
-<part name="D921" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS80"/>
+<part name="D611" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS08"/>
+<part name="D921" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS08"/>
 <part name="D701" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V0"/>
 <part name="R701" library="rcl" deviceset="R-EU_" device="R0805" value="68"/>
 <part name="C491" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
