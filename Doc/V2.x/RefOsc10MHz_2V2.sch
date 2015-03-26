@@ -21816,7 +21816,7 @@ Out</text>
 <text x="180.848" y="139.954" size="1.016" layer="97">10 MHz out</text>
 <text x="193.04" y="147.574" size="1.016" layer="97">2.5 MHz out</text>
 <text x="0.254" y="294.386" size="2.54" layer="97">DF4IAH  10 MHz Reference Oscillator
-V 2.2
+V 2.2a
 with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <text x="54.356" y="146.558" size="1.778" layer="97">USB Disconnect</text>
 <text x="97.536" y="125.476" size="1.778" layer="97">USB D-</text>
@@ -23389,8 +23389,8 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <approved hash="106,2,162.56,99.06,GPS_3DFIX,,,,,"/>
 <approved hash="113,1,143.264,66.04,SJ201,,,,,"/>
 <approved hash="113,1,138.184,109.22,SJ202,,,,,"/>
-<approved hash="113,1,196.053,210.431,JP941,,,,,"/>
-<approved hash="113,1,175.733,210.431,JP121,,,,,"/>
+<approved hash="113,1,196.54,210.431,JP941,,,,,"/>
+<approved hash="113,1,176.22,210.431,JP121,,,,,"/>
 <approved hash="113,1,88.2565,234.992,JP111,,,,,"/>
 <approved hash="115,1,210.82,254,GPS_ANT_PWR,,,,,"/>
 </errors>
