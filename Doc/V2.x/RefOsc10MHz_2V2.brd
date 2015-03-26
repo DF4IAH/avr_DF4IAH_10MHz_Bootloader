@@ -2811,11 +2811,11 @@ Your Eurocircuits Team
 <attribute name="NAME" x="63.5" y="43.18" size="1.016" layer="25" rot="R180"/>
 <attribute name="VALUE" x="63.498440625" y="41.676578125" size="1.016" layer="27" rot="R180"/>
 </element>
-<element name="D611" library="diode" package="SOD80C" value="CRS80" x="53.34" y="45.72" smashed="yes" rot="MR270">
+<element name="D611" library="diode" package="SOD80C" value="CRS08" x="53.34" y="45.72" smashed="yes" rot="MR270">
 <attribute name="NAME" x="54.69835" y="43.927128125" size="1.016" layer="26" rot="MR90"/>
 <attribute name="VALUE" x="51.4271875" y="43.8820125" size="0.762" layer="28" rot="MR90"/>
 </element>
-<element name="D921" library="diode" package="SOD80C" value="CRS80" x="50.8" y="52.07" smashed="yes" rot="MR270">
+<element name="D921" library="diode" package="SOD80C" value="CRS08" x="50.8" y="52.07" smashed="yes" rot="MR270">
 <attribute name="NAME" x="50.984778125" y="55.33564375" size="1.016" layer="26" rot="MR90"/>
 <attribute name="VALUE" x="48.84568125" y="50.2119375" size="0.762" layer="28" rot="MR90"/>
 </element>
