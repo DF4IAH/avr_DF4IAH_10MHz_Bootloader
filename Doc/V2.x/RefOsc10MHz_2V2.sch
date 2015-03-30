@@ -10354,17 +10354,21 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
 <rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
 </package>
-<package name="C01005">
+<package name="C1005">
 <description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
+<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
+<wire x1="-1.473" y1="0.483" x2="1.473" y2="0.483" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="0.483" x2="1.473" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="-0.483" x2="-1.473" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="-1.473" y1="-0.483" x2="-1.473" y2="0.483" width="0.0508" layer="39"/>
+<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
+<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
 <rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
-<smd name="1" x="-0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
-<smd name="2" x="0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
-<text x="-0.4" y="0.3" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.4" y="-1.6" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.2" y1="-0.1" x2="-0.075" y2="0.1" layer="51"/>
-<rectangle x1="0.075" y1="-0.1" x2="0.2" y2="0.1" layer="51"/>
-<rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
-<rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
 </package>
 </packages>
 <symbols>
@@ -12816,6 +12820,15 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="C1005" package="C1005">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 <device name="C1206" package="C1206">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
@@ -13474,15 +13487,6 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </technologies>
 </device>
 <device name="C3640" package="C3640">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="01005" package="C01005">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -21649,7 +21653,7 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="P+13" library="supply1" deviceset="VCC" device=""/>
 <part name="P+12" library="supply1" deviceset="VCC" device=""/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
-<part name="C911" library="rcl" deviceset="CPOL-EU" device="C" value="47uF"/>
+<part name="C911" library="rcl" deviceset="C-EU" device="C0805" value="47uF"/>
 <part name="D911" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
 <part name="D912" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
 <part name="D151" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
@@ -21705,7 +21709,7 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="C191" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C391" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C591" library="rcl" deviceset="C-EU" device="C0805" value="10n"/>
-<part name="C151" library="rcl" deviceset="CPOL-EU" device="B" value="10uF"/>
+<part name="C151" library="rcl" deviceset="C-EU" device="C0805" value="10uF"/>
 <part name="R612" library="rcl" deviceset="R-EU_" device="R0805" value="45.3k"/>
 <part name="R611" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
 <part name="R601" library="rcl" deviceset="R-EU_" device="R0805" value="100k"/>
@@ -21744,9 +21748,9 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="R131" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="47k"/>
 <part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.7k"/>
-<part name="C612" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
-<part name="C613" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
-<part name="C211" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
+<part name="C612" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
+<part name="C613" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
+<part name="C211" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="U8" library="df4iah_gps" deviceset="GLOBALTOP-FIREFLY1-GMM-G3" device=""/>
 <part name="GND25" library="df4iah" deviceset="GND" device=""/>
 <part name="R802" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
@@ -22016,7 +22020,7 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <wire x1="17.78" y1="167.64" x2="17.78" y2="170.18" width="0.1524" layer="91"/>
 <pinref part="D151" gate="G$1" pin="A"/>
 <pinref part="C152" gate="G$1" pin="2"/>
-<pinref part="C151" gate="G$1" pin="-"/>
+<pinref part="C151" gate="G$1" pin="2"/>
 <junction x="25.4" y="167.64"/>
 </segment>
 <segment>
@@ -22124,9 +22128,9 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <junction x="48.26" y="241.3"/>
 <pinref part="IC7" gate="&gt;NAME" pin="GND"/>
 <pinref part="D611" gate="G$1" pin="A"/>
-<pinref part="C612" gate="G$1" pin="-"/>
-<pinref part="C613" gate="G$1" pin="-"/>
-<pinref part="C211" gate="G$1" pin="-"/>
+<pinref part="C612" gate="G$1" pin="2"/>
+<pinref part="C613" gate="G$1" pin="2"/>
+<pinref part="C211" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="GND16" gate="1" pin="GND"/>
@@ -22149,7 +22153,7 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <wire x1="27.94" y1="106.68" x2="17.78" y2="106.68" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="17.78" y1="101.6" x2="17.78" y2="106.68" width="0.1524" layer="91"/>
-<pinref part="C911" gate="G$1" pin="-"/>
+<pinref part="C911" gate="G$1" pin="2"/>
 <pinref part="D911" gate="G$1" pin="A"/>
 <pinref part="D912" gate="G$1" pin="A"/>
 <wire x1="17.78" y1="106.68" x2="17.78" y2="129.54" width="0.1524" layer="91"/>
@@ -22237,7 +22241,7 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <junction x="0" y="233.68"/>
 <pinref part="L101" gate="G$1" pin="2"/>
 <pinref part="IC6" gate="A" pin="VIN"/>
-<pinref part="C211" gate="G$1" pin="+"/>
+<pinref part="C211" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="P+5" gate="VCC" pin="VCC"/>
@@ -22309,7 +22313,7 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
 <wire x1="20.32" y1="149.86" x2="20.32" y2="144.78" width="0.1524" layer="91"/>
 <junction x="20.32" y="144.78"/>
-<pinref part="C911" gate="G$1" pin="+"/>
+<pinref part="C911" gate="G$1" pin="1"/>
 <pinref part="RPOLY1" gate="G$1" pin="2"/>
 <pinref part="C912" gate="G$1" pin="1"/>
 </segment>
@@ -22361,7 +22365,7 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <wire x1="43.18" y1="177.8" x2="53.34" y2="177.8" width="0.1524" layer="91"/>
 <junction x="25.4" y="177.8"/>
 <pinref part="R151" gate="G$1" pin="2"/>
-<pinref part="C151" gate="G$1" pin="+"/>
+<pinref part="C151" gate="G$1" pin="1"/>
 <pinref part="IC7" gate="&gt;NAME" pin="VC"/>
 <pinref part="D152" gate="G$1" pin="A"/>
 <wire x1="17.78" y1="228.6" x2="17.78" y2="243.84" width="0.1524" layer="91"/>
@@ -22938,8 +22942,8 @@ with GlobalTop FireFly 1 (includes MediaTek MT3333)</text>
 <wire x1="116.84" y1="279.4" x2="124.46" y2="279.4" width="0.1524" layer="91"/>
 <junction x="116.84" y="266.7"/>
 <pinref part="R701" gate="G$1" pin="1"/>
-<pinref part="C612" gate="G$1" pin="+"/>
-<pinref part="C613" gate="G$1" pin="+"/>
+<pinref part="C612" gate="G$1" pin="1"/>
+<pinref part="C613" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="GND_SJ1" class="0">

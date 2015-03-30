@@ -10354,17 +10354,21 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
 <rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
 </package>
-<package name="C01005">
+<package name="C1005">
 <description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
+<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
+<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
+<wire x1="-1.473" y1="0.483" x2="1.473" y2="0.483" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="0.483" x2="1.473" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="1.473" y1="-0.483" x2="-1.473" y2="-0.483" width="0.0508" layer="39"/>
+<wire x1="-1.473" y1="-0.483" x2="-1.473" y2="0.483" width="0.0508" layer="39"/>
+<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
+<text x="-0.635" y="0.635" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.635" y="-1.905" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
+<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
 <rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
-<smd name="1" x="-0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
-<smd name="2" x="0.1625" y="0" dx="0.2" dy="0.25" layer="1"/>
-<text x="-0.4" y="0.3" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.4" y="-1.6" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.2" y1="-0.1" x2="-0.075" y2="0.1" layer="51"/>
-<rectangle x1="0.075" y1="-0.1" x2="0.2" y2="0.1" layer="51"/>
-<rectangle x1="-0.15" y1="0.05" x2="0.15" y2="0.1" layer="51"/>
-<rectangle x1="-0.15" y1="-0.1" x2="0.15" y2="-0.05" layer="51"/>
 </package>
 </packages>
 <symbols>
@@ -12816,6 +12820,15 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <technology name=""/>
 </technologies>
 </device>
+<device name="C1005" package="C1005">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
 <device name="C1206" package="C1206">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
@@ -13474,15 +13487,6 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </technologies>
 </device>
 <device name="C3640" package="C3640">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-<device name="01005" package="C01005">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -23484,7 +23488,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="P+13" library="supply1" deviceset="VCC" device=""/>
 <part name="P+12" library="supply1" deviceset="VCC" device=""/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
-<part name="C911" library="rcl" deviceset="CPOL-EU" device="C" value="47uF"/>
+<part name="C911" library="rcl" deviceset="C-EU" device="C0805" value="47uF"/>
 <part name="D911" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
 <part name="D912" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
 <part name="D151" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
@@ -23545,7 +23549,7 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="C191" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C391" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C591" library="rcl" deviceset="C-EU" device="C0805" value="10n"/>
-<part name="C151" library="rcl" deviceset="CPOL-EU" device="B" value="10uF"/>
+<part name="C151" library="rcl" deviceset="C-EU" device="C0805" value="10uF"/>
 <part name="R612" library="rcl" deviceset="R-EU_" device="R0805" value="45.3k"/>
 <part name="R611" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
 <part name="R601" library="rcl" deviceset="R-EU_" device="R0805" value="100k"/>
@@ -23584,9 +23588,9 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="R131" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="47k"/>
 <part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.7k"/>
-<part name="C612" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
-<part name="C613" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
-<part name="C211" library="rcl" deviceset="CPOL-EU" device="B" value="22uF"/>
+<part name="C612" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
+<part name="C613" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
+<part name="C211" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -23843,7 +23847,7 @@ V 2.1a</text>
 <wire x1="22.86" y1="165.1" x2="22.86" y2="167.64" width="0.1524" layer="91"/>
 <pinref part="D151" gate="G$1" pin="A"/>
 <pinref part="C152" gate="G$1" pin="2"/>
-<pinref part="C151" gate="G$1" pin="-"/>
+<pinref part="C151" gate="G$1" pin="2"/>
 <junction x="30.48" y="165.1"/>
 </segment>
 <segment>
@@ -23950,9 +23954,9 @@ V 2.1a</text>
 <junction x="53.34" y="238.76"/>
 <pinref part="IC7" gate="&gt;NAME" pin="GND"/>
 <pinref part="D611" gate="G$1" pin="A"/>
-<pinref part="C612" gate="G$1" pin="-"/>
-<pinref part="C613" gate="G$1" pin="-"/>
-<pinref part="C211" gate="G$1" pin="-"/>
+<pinref part="C612" gate="G$1" pin="2"/>
+<pinref part="C613" gate="G$1" pin="2"/>
+<pinref part="C211" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="GND16" gate="1" pin="GND"/>
@@ -23975,7 +23979,7 @@ V 2.1a</text>
 <wire x1="33.02" y1="104.14" x2="22.86" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="22.86" y1="99.06" x2="22.86" y2="104.14" width="0.1524" layer="91"/>
-<pinref part="C911" gate="G$1" pin="-"/>
+<pinref part="C911" gate="G$1" pin="2"/>
 <pinref part="D911" gate="G$1" pin="A"/>
 <pinref part="D912" gate="G$1" pin="A"/>
 <wire x1="22.86" y1="104.14" x2="22.86" y2="127" width="0.1524" layer="91"/>
@@ -24063,7 +24067,7 @@ V 2.1a</text>
 <junction x="5.08" y="231.14"/>
 <pinref part="L101" gate="G$1" pin="2"/>
 <pinref part="IC6" gate="A" pin="VIN"/>
-<pinref part="C211" gate="G$1" pin="+"/>
+<pinref part="C211" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="P+5" gate="VCC" pin="VCC"/>
@@ -24135,7 +24139,7 @@ V 2.1a</text>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
 <wire x1="25.4" y1="147.32" x2="25.4" y2="142.24" width="0.1524" layer="91"/>
 <junction x="25.4" y="142.24"/>
-<pinref part="C911" gate="G$1" pin="+"/>
+<pinref part="C911" gate="G$1" pin="1"/>
 <pinref part="RPOLY1" gate="G$1" pin="2"/>
 <pinref part="C912" gate="G$1" pin="1"/>
 </segment>
@@ -24187,7 +24191,7 @@ V 2.1a</text>
 <wire x1="48.26" y1="175.26" x2="58.42" y2="175.26" width="0.1524" layer="91"/>
 <junction x="30.48" y="175.26"/>
 <pinref part="R151" gate="G$1" pin="2"/>
-<pinref part="C151" gate="G$1" pin="+"/>
+<pinref part="C151" gate="G$1" pin="1"/>
 <pinref part="IC7" gate="&gt;NAME" pin="VC"/>
 <pinref part="D152" gate="G$1" pin="A"/>
 <wire x1="22.86" y1="226.06" x2="22.86" y2="241.3" width="0.1524" layer="91"/>
@@ -24764,8 +24768,8 @@ V 2.1a</text>
 <wire x1="121.92" y1="276.86" x2="129.54" y2="276.86" width="0.1524" layer="91"/>
 <junction x="121.92" y="264.16"/>
 <pinref part="R701" gate="G$1" pin="1"/>
-<pinref part="C612" gate="G$1" pin="+"/>
-<pinref part="C613" gate="G$1" pin="+"/>
+<pinref part="C612" gate="G$1" pin="1"/>
+<pinref part="C613" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="GND_SJ1" class="0">
@@ -25126,11 +25130,28 @@ V 2.1a</text>
 </sheet>
 </sheets>
 <errors>
+<approved hash="104,1,160.02,88.9,IC2,GND0,GND_SJ1,,,"/>
+<approved hash="104,1,231.14,83.82,IC2,GND1,GND_SJ1,,,"/>
+<approved hash="104,1,182.88,50.8,IC2,GND,GND_SJ1,,,"/>
+<approved hash="104,1,208.28,121.92,IC2,GND,GND_SJ1,,,"/>
+<approved hash="104,1,160.02,73.66,IC2,VCC_3V3,VCC_3V3_SJ2,,,"/>
+<approved hash="104,1,231.14,99.06,IC2,VCC_3V3,VCC_3V3_SJ2,,,"/>
+<approved hash="104,1,160.02,86.36,IC2,VCCO0,VCC_3V3_SJ2,,,"/>
+<approved hash="104,1,231.14,86.36,IC2,VCCO1,VCC_3V3_SJ2,,,"/>
 <approved hash="104,2,132.08,96.52,IC8,6,GPS_VBACKUP,,,"/>
 <approved hash="104,2,132.08,86.36,IC8,8,+3V3,,,"/>
 <approved hash="104,2,132.08,121.92,IC8,1,GND,,,"/>
 <approved hash="104,2,172.72,91.44,IC8,12,GND,,,"/>
 <approved hash="104,2,172.72,81.28,IC8,10,GND,,,"/>
+<approved hash="104,1,12.7,264.16,IC6,VIN,VCC,,,"/>
+<approved hash="104,1,81.28,251.46,IC7,VCC_3V0,+3V0,,,"/>
+<approved hash="104,1,330.2,215.9,U5,V+,VCC,,,"/>
+<approved hash="104,1,330.2,203.2,U5,V-,GND,,,"/>
+<approved hash="113,1,93.98,232.656,JP111,,,,,"/>
+<approved hash="113,1,196.604,205.74,JP941,,,,,"/>
+<approved hash="113,1,176.284,205.74,JP121,,,,,"/>
+<approved hash="113,1,148.344,63.5,SJ201,,,,,"/>
+<approved hash="113,1,143.264,106.68,SJ202,,,,,"/>
 </errors>
 </schematic>
 </drawing>
