@@ -9,6 +9,7 @@ MODULE toplevel.vhd
 MODSTYLE top_lev Normal
 MODSTYLE capture Normal
 MODSTYLE sercom Normal
+MODSTYLE pwmpull Normal
 MODSTYLE clock_div Normal
 SYNTHESIS_TOOL Synplify
 SIMULATOR_TOOL ActiveHDL

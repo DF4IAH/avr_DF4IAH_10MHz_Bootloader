@@ -95,20 +95,30 @@ architecture structural of top_lev is
 	component sercom  -- component declaration for sercom
 		port (
 			SER_GPS		: in  std_logic;
-			ISP_TXD		: in  std_logic;
-			ISP_RXD		: out std_logic;
-			GPS_RXD		: out std_logic;
+
 			GPS_TXD		: in  std_logic;
+			ISP_TXD		: in  std_logic;
 			MCU_TXD		: in  std_logic;
+
+			GPS_RXD		: out std_logic;
+			ISP_RXD		: out std_logic;
 			MCU_RXD		: out std_logic
 		);
 	end component;
+
+
+	component pwmpull -- component declaration for pwmpull
+		port (
+			PWM_PULL_IN	: in  std_logic;
+			PWM_PULL_OUT	: out std_logic
+		);
+	end component;
+
 
 -- Declaration of top_lev signals
 	signal C_10MHZ_loc		:     std_logic;
 	signal C_5MHZ_loc		:     std_logic;
 	signal C_2MHZ5_loc		:     std_logic;
-	signal PWM_PULL_loc		:     std_logic;
 
 begin  --  structural description begins
 	clock_div_0: clock_div 
@@ -145,21 +155,26 @@ begin  --  structural description begins
 	sercom_0 : sercom
 		port map (
 			SER_GPS => SER_GPS,
-			ISP_TXD => ISP_TXD,
-			ISP_RXD => ISP_RXD,
-			GPS_RXD => GPS_RXD,
+
 			GPS_TXD => GPS_TXD,
+			ISP_TXD => ISP_TXD,
 			MCU_TXD => MCU_TXD,
+
+			GPS_RXD => GPS_RXD,
+			ISP_RXD => ISP_RXD,
 			MCU_RXD => MCU_RXD
+		);
+
+	pwmpull_0 : pwmpull
+		port map (
+			PWM_PULL_IN => PWM_PULL_IN,
+			PWM_PULL_OUT => PWM_PULL_OUT
 		);
 
 	-- OUTPUT pins derived from OUTPUT&INPUT nets
 	C_10MHZ <= not C_10MHZ_loc;
 	C_5MHZ  <= C_5MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
-
-	PWM_PULL_loc <= PWM_PULL_IN;
-	PWM_PULL_OUT <= PWM_PULL_loc;
 end structural;
 
 
@@ -308,11 +323,13 @@ use ieee.std_logic_arith.all;
 entity sercom is
 	port (
 		SER_GPS			: in  std_logic;
-		ISP_TXD			: in  std_logic;
-		ISP_RXD			: out std_logic;
-		GPS_RXD			: out std_logic;
+
 		GPS_TXD			: in  std_logic;
+		ISP_TXD			: in  std_logic;
 		MCU_TXD			: in  std_logic;
+
+		GPS_RXD			: out std_logic;
+		ISP_RXD			: out std_logic;
 		MCU_RXD			: out std_logic
 	);
 end sercom;
@@ -330,6 +347,28 @@ begin
 			ISP_RXD <= MCU_TXD;
 			GPS_RXD <= '1';
 		end if;
+	end process;
+end BEHAVIORAL;
+
+
+--	-- 8< --
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+
+entity pwmpull is
+	port (
+		PWM_PULL_IN		: in  std_logic;
+		PWM_PULL_OUT		: out std_logic
+	);
+end pwmpull;
+
+architecture BEHAVIORAL of pwmpull is
+begin
+	process (PWM_PULL_IN)
+	begin
+		PWM_PULL_OUT <= PWM_PULL_IN;
 	end process;
 end BEHAVIORAL;
 
