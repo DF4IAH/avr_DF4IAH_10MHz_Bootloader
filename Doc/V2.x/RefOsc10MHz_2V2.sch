@@ -21710,8 +21710,8 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="C391" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C591" library="rcl" deviceset="C-EU" device="C0805" value="10n"/>
 <part name="C151" library="rcl" deviceset="C-EU" device="C0805" value="10uF"/>
-<part name="R612" library="rcl" deviceset="R-EU_" device="R0805" value="45.3k"/>
-<part name="R611" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R612" library="rcl" deviceset="R-EU_" device="R0805" value="68k"/>
+<part name="R611" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R601" library="rcl" deviceset="R-EU_" device="R0805" value="100k"/>
 <part name="L611" library="rcl" deviceset="L-EU" device="L5650M" value="4.7uH"/>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
@@ -21747,7 +21747,7 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="R201" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
 <part name="R131" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
 <part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="47k"/>
-<part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.7k"/>
+<part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.3k"/>
 <part name="C612" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="C613" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="C211" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
