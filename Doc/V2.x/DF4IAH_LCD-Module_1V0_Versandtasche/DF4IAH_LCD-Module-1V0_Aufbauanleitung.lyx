@@ -76,7 +76,7 @@
 \begin_body
 
 \begin_layout Title
-Aubauanleitung
+Aufbauanleitung
 \begin_inset Newline linebreak
 \end_inset
 
@@ -84,7 +84,7 @@ DF4IAH LCD-Module V1.0
 \end_layout
 
 \begin_layout Date
-2015-04-18 
+2015-04-23 
 \end_layout
 
 \begin_layout Author
@@ -327,11 +327,11 @@ Aufbau der Schaltung
 
 \begin_layout Standard
 \noindent
-Zunächst die LCD-Anzeige entpacken und sich mit der Geometrie der Bausatzleiterp
-latte vertraut machen.
+Zunächst die LCD-Anzeige entpacken und sich mit der Geometrie der Bausatz-Leiter
+platte vertraut machen.
  Die Stiftleiste wird rückseitig in die LCD-Anzeige eingelötet.
- Somit wird der breite Datenbus zur Bausatzplatine geführt.
- Die Bausatzplatine erhält eine Buchsenleiste, welche dort eingelötet wird
+ Somit wird der breite Datenbus zur Bausatz-Platine geführt.
+ Die Bausatz-Platine erhält eine Buchsenleiste, welche dort eingelötet wird
  und steht dann links von der Schrift 
 \begin_inset Quotes eld
 \end_inset
@@ -341,7 +341,7 @@ CON151
 \end_inset
 
 .
- Zur Kontrolle müssen die LCD-Anzeige auf die Bausatzplatine steck- und
+ Zur Kontrolle müssen die LCD-Anzeige auf die Bausatz-Platine steck- und
  lösbar sein.
 \begin_inset Newline newline
 \end_inset
@@ -380,8 +380,8 @@ Top
  Dazu empfiehlt es sich zuerst ein Pad etwas zu verzinnen, so dass eine
  kleine Lötkugel darauf entsteht.
  So kann man bereits alle diese Pads einseitig vorbereiten.
- Im zweiten Schritt wird das entsprechende Bauteil längs nach über die Platineno
-berfläche geschoben, bis eine Seite des SMD-Bausteins in das flüssige Lot
+ Im zweiten Schritt wird das entsprechende Bauteil längs nach über die Platinen-
+Oberfläche geschoben, bis eine Seite des SMD-Bausteins in das flüssige Lot
  eintaucht.
  Der Blick sollte dabei senkrecht von oben durch eine Lupenleuchte erfolgen
  - so habe ich bisher die besten Resultate erzielt.
@@ -542,9 +542,9 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename I2C-Kabelführung__IMAG3077.jpg
+	filename /Users/espero/Documents/MANUELL/Elektronik/Elektronik_allgemein/DF4IAH_Messgeraete/Frequenznormal-10MHz_by_DF4IAH/Docs/Developement-DF4IAH/DF4IAH_RefOsc/V2.x/DF4IAH_LCD-Module_1V0_Versandtasche/20150423_Anschluss_LCD-Modul_an_RefOsc_IMAG3079.jpg
 	lyxscale 20
-	height 50pheight%
+	width 60page%
 
 \end_inset
 
@@ -578,7 +578,7 @@ C-Kabelführung
 \end_layout
 
 \begin_layout Standard
-Somit ist der Aufbau beendet.
+Somit ist der Aufbau beendet.
 \end_layout
 
 \begin_layout Section
@@ -646,18 +646,18 @@ Die Vorgehensweise des LCD-Display zur Initialisierung wiederholt ein paar
 
 \begin_layout Itemize
 Zum Eintakten eines Datenbytes benötigt man mehrere Zwischenschritte.
- Zuerst das neue Byte setzen, danach das Datenbyte mit dem Clocksignal versehen
- und erneut senden, dann wieder ohne dieses Clocksignal.
+ Zuerst das neue Byte setzen, danach das Datenbyte mit dem Clock-Signal
+ versehen und erneut senden, dann wieder ohne dieses Clock-Signal.
  Somit ist ein sicherer Byte-Transport sichergestellt.
 \end_layout
 
 \begin_layout Itemize
-Eine Applikations-Software würde hier vierschichtig sein:
+Eine Applikationssoftware würde hier vierschichtig sein:
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Zuerst eine Applikation, die das Display beschreibt (oder auch abfrägt),
+Zuerst eine Applikation, die das Display beschreibt (oder auch abfragt),
  
 \end_layout
 
@@ -694,7 +694,7 @@ dann ein Modul, welches die Initialisierung und die Bedienung des MCP23017
 \end_layout
 
 \begin_layout Itemize
-zuletzt ein Modul, welches die Intialisierung und die Bedienung der LCD-Anzeige
+zuletzt ein Modul, welches die Initialisierung und die Bedienung der LCD-Anzeige
  vornimmt
 \end_layout
 
@@ -746,7 +746,7 @@ Uli, DF4IAH
 \end_layout
 
 \begin_layout Standard
-
+
 \end_layout
 
 \end_body
