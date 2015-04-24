@@ -1295,6 +1295,124 @@ Schaltungslayout
 
 \end_layout
 
+\begin_layout Subsection
+wichtige Fehlerkorrektur bzgl.
+ R311
+\end_layout
+
+\begin_layout Standard
+Bei den ersten Boards der Versionen V2.1, V2.2 und V2.3 lag ein Designfehler
+ vor.
+ Wegen der Falschplatzierung des Bauteils R311 und einer querschießenden
+ Leiterbahn ist ein Booten des Systems nur mit der Bootloader-Software möglich.
+ Der R311 gehört zum Monoflop IC3 und ist dort für die Haltezeit zuständig.
+ Anstatt dort, ist das Bauteil fälschlicherweise auf der Rückseite des Jumpers
+ JP121 platziert worden.
+ Dabei schließt diese Leitung von R311 diesen Jumper kurz und erdet sich
+ dabei zusätzlich.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 20150424_DF4IAH_10MHzRefOsc_V2_FehlerhaftesRouting__IMAG3083.jpg
+	lyxscale 20
+	width 79page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Leiterbahnänderungen R311 bei Versionen: V2.1, V2.2 und V2.3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Folgende Korrekturen sind nötig, damit die Schaltung wie vorgesehen funktioniert
+:
+\end_layout
+
+\begin_layout Enumerate
+Auftrennen der Schaltung mit Skalpell oder Teppichmesser.
+ Diese Vorarbeit ist bei den Bausätzen allerdings bereits erledigt:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Rückseite des JP121 
+\begin_inset Quotes gld
+\end_inset
+
+BL
+\begin_inset Quotes grd
+\end_inset
+
+ Jumpers.
+ Dort zwischen den Stiften den Kurzschluss zwischen Erde und des Boot-Selektors
+ auftrennen,
+\end_layout
+
+\begin_layout Enumerate
+ebenfalls auf der Rückseite die weit führende Leitung von R311 bis kurz
+ vor dem IC3 muss auf der Rückseite zwischen R301und C311 unterbrochen werden.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Der alte Platz für den R311 wird nicht bestückt.
+ Er befand sich direkt rückseitig über den Anschlüssen der beiden Jumper
+ JP121 und JP941.
+\end_layout
+
+\begin_layout Enumerate
+Der neue Platz für den R311 ist rückseitig bei C311, so dass der rechte
+ Anschluss des C311 einen rechten Winkel mit dem neuen R311 bildet.
+ Sie werden direkt Bauteil an Bauteil gelötet.
+\end_layout
+
+\begin_layout Enumerate
+Eine Leitung wird auf der gegenüberliegenden Seite des R311 zum oberen Anschluss
+ des C391 gelegt.
+\end_layout
+
+\begin_layout Standard
+Die obige Fotografie zeigt die Änderungen mit dem roten Farbstift.
+ Beachten sollte man, dass die Durchtrennung der Leiterbahnen sicher gemacht
+ sind und der Draht zwischen R311 und C391 stabil angelötet ist.
+\end_layout
+
+\begin_layout Standard
+Ich bitte den zusätzlichen Umstand zu entschuldigen!
+\end_layout
+
 \begin_layout Section
 Funktionstest
 \end_layout
@@ -1568,13 +1686,6 @@ M3: es liegt derzeit eine 3D-Information vor, die Zeitimpulse können ausgewerte
  werden
 \end_layout
 
-\begin_layout Date
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \end_deeper
 \begin_layout Itemize
 Der F-Wert gibt an, ob Differential-GPS-Informationen genutzt werden:
@@ -1595,7 +1706,7 @@ F2: derzeit werden DGPS-Informationen genutzt, die Zeitbasis ist dadurch
 \begin_layout Itemize
 1.2 gibt den DOP-Wert an, eine GPS relevante Größe, die eine Genauigkeitszahl
  darstellt.
- Wünschenswert ist eine Zahl von besser als 1,5 für eine ausreichend genaue
+ Wünschenswert ist eine Zahl von besser als 1.5 für eine ausreichend genaue
  Zeitinformation, der Jitter vergrößert sich auch mit dem DOP Wert.
  Hat die GPS-Antenne eine gute Sicht zum Himmel und kann auf jeden sichtbaren
  Satelliten zugreifen, so wählt sicher der GPS-Empfänger eine solche Geometrie,
@@ -1606,7 +1717,7 @@ F2: derzeit werden DGPS-Informationen genutzt, die Zeitbasis ist dadurch
  zurückgreifen, die dann zur Verfügung stehen.
  Dadurch muss eine gewisse Geometrie akzeptiert werden, die zu größeren
  Fehler führen.
- Werte von über 2,0 sagen aus, dass man sich um eine bessere Positionierung
+ Werte von über 2.0 sagen aus, dass man sich um eine bessere Positionierung
  der Empfangsantenne kümmern sollte.
 \end_layout
 
@@ -1784,13 +1895,12 @@ LCD-Module - VCTCXO Ziehspannungs-Status
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
 Für weitere Informationen gibt es diesen Link:
 \begin_inset Newline newline
 \end_inset
 
+
+\series bold
 
 \begin_inset CommandInset href
 LatexCommand href
@@ -1802,7 +1912,44 @@ target "http://bg8net.dyndns.org/p/AFu/2015/DF4IAH-10MHzRefClk-V2/Doc_LyX-TeX/"
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace bigskip
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 20150424_DF4IAH_10MHzRefOsc_V2_2x10MHzRefOsc-im-Betrieb__Oszi.png
+	width 50page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+zwei 10
+\begin_inset space ~
+\end_inset
+
+MHz-Ref-Osc Module im parallelen Betrieb
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 Vy 73
