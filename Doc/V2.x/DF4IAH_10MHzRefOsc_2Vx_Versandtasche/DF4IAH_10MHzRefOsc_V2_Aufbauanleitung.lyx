@@ -84,15 +84,38 @@ DF4IAH 10
 \begin_inset space ~
 \end_inset
 
-MHz Ref-Clk V2.x
+MHz Ref-Osc V2.x
 \end_layout
 
 \begin_layout Date
-2015-04-23 
+2015-04-24 
 \end_layout
 
 \begin_layout Author
 DF4IAH, Ulrich Habel
+\end_layout
+
+\begin_layout Abstract
+\noindent
+\align center
+\begin_inset Graphics
+	filename 20150331_ZweiModuleAufDemSchreibtisch_IMAG3037.jpg
+	lyxscale 20
+	height 20pheight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+Die vorliegende Dokumentation erläutert die Funktionsweise und den Aufbau
+ des 10
+\begin_inset space ~
+\end_inset
+
+MHz Referenz Oszillators, welcher mit Hilfe von GPS an das weltweite Atomuhren-N
+etzwerk angebunden wird.
 \end_layout
 
 \begin_layout Section
@@ -100,7 +123,7 @@ Funktionsweise der Schaltung
 \end_layout
 
 \begin_layout Standard
-Bei der vorliegenden Schaltung handelt es sich um einen Prozessorgesteuerten
+Bei der vorliegenden Schaltung handelt es sich um einen prozessorgesteuerten
  10
 \begin_inset space ~
 \end_inset
@@ -126,8 +149,7 @@ SS
 , der mit einer Gleichspannung beaufschlagt ist, um damit eine aktive GPS-Antenn
 e zu versorgen.
  Dieser Eingang darf nicht durch eine passive Antenne kurzgeschlossen werden,
- daher ist bereits eine solche Aktivantenne mit dem Bausatz mitgeliefert
- worden.
+ daher wird bereits eine solche Aktivantenne mit dem Bausatz mitgeliefert.
  Das GPS-Modul bestimmt autark seine Zeit- und Positionsinformationen und
  kommuniziert mit Hilfe von NMEA
 \begin_inset space ~
@@ -141,7 +163,7 @@ e zu versorgen.
 
 PPS-Ausgang.
  Das ist ein Sprungsignal von low nach high, welcher den Beginn einer jeden
- neuen Sekunde im GPS-System ankündigt.
+ neuen Sekunde im GPS-System anzeigt.
  Dieses Signal erfolgt weltweit zum selben Zeitpunkt und ist synchron mit
  den Atomuhren auf dieser Erde und auf den Satellitenbahnen um uns herum.
  Dieses PPS-Signal wird für 100
@@ -149,8 +171,8 @@ PPS-Ausgang.
 \end_inset
 
 ms gehalten bevor es zurückfällt.
- Je nach GPS-Chip kann diese Zeit variieren, ist also nicht relevant für
- dieses vorliegende System.
+ Je nach GPS-Chip kann diese High-Zeit variieren und ist auch nicht relevant
+ für dieses vorliegende System.
 \end_layout
 
 \begin_layout Standard
@@ -184,7 +206,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Schematic_1of3.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Schematic_1of3.png
 	lyxscale 10
 	width 79page%
 	rotateAngle 90
@@ -336,9 +358,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Schematic_2of3.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Schematic_2of3.png
 	lyxscale 10
-	width 60page%
+	width 79page%
 
 \end_inset
 
@@ -373,9 +395,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Schematic_3of3.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Schematic_3of3.png
 	lyxscale 10
-	width 25page%
+	width 35page%
 
 \end_inset
 
@@ -564,7 +586,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHz_Ref_Osc_V2__CPLD-RTL_clock_div_0.png
+	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_clock_div_0.png
 	lyxscale 20
 	width 60page%
 
@@ -602,7 +624,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHz_Ref_Osc_V2__CPLD-RTL_capture_0.png
+	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_capture_0.png
 	lyxscale 20
 	width 60page%
 
@@ -640,7 +662,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHz_Ref_Osc_V2__CPLD-RTL_sercom_0.png
+	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_sercom_0.png
 	lyxscale 20
 	width 60page%
 
@@ -872,9 +894,9 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Bestückung_Oberseite.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Bestückung_Oberseite.png
 	lyxscale 20
-	width 60page%
+	width 79page%
 
 \end_inset
 
@@ -882,12 +904,37 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bestückung: Oberseite
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Bestückung_Rückseite-gespiegelt.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Bestückung_Rückseite-gespiegelt.png
 	lyxscale 20
-	width 60page%
+	width 75page%
 
 \end_inset
 
@@ -899,7 +946,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bestückung: Oberseite und Rückseite
+Bestückung: Rückseite
 \end_layout
 
 \end_inset
@@ -1060,7 +1107,7 @@ status open
 \begin_inset Graphics
 	filename 20150423_Anschluss_LCD-Modul_an_RefOsc_IMAG3079.jpg
 	lyxscale 20
-	width 60page%
+	width 79page%
 
 \end_inset
 
@@ -1069,7 +1116,15 @@ status open
 
 \begin_layout Plain Layout
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 LCD-Module - Anschluss Flachbandkabel
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1211,7 +1266,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename Eagle-DF4IAH-Ref10MHz_Board.png
+	filename Eagle-DF4IAH-10MHzRefOsc_Board.png
 	lyxscale 20
 	height 75pheight%
 	rotateAngle 90
@@ -1222,6 +1277,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
 \align center
 \begin_inset Caption Standard
 
@@ -1626,7 +1682,7 @@ status open
 \begin_inset Graphics
 	filename 20150423_LCD-Module_3te-Info_VCTCXO_IMAG3082.jpg
 	lyxscale 20
-	width 60page%
+	width 45page%
 
 \end_inset
 
@@ -1634,8 +1690,17 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 LCD-Module - Datums-Information
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1656,7 +1721,7 @@ status open
 \begin_inset Graphics
 	filename 20150423_LCD-Module_1te-Info_Datum_IMAG3080.jpg
 	lyxscale 20
-	width 60page%
+	width 45page%
 
 \end_inset
 
@@ -1664,7 +1729,11 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 LCD-Module - Satellitenstatus
 \end_layout
 
@@ -1673,7 +1742,9 @@ LCD-Module - Satellitenstatus
 
 \end_layout
 
-\begin_layout Standard
+\end_inset
+
+
 \begin_inset Float figure
 placement H
 wide false
@@ -1686,7 +1757,7 @@ status open
 \begin_inset Graphics
 	filename 20150423_LCD-Module_2te-Info_Sat_IMAG3081.jpg
 	lyxscale 20
-	width 60page%
+	width 45page%
 
 \end_inset
 
@@ -1694,7 +1765,11 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 LCD-Module - VCTCXO Ziehspannungs-Status
 \end_layout
 
@@ -1703,7 +1778,33 @@ LCD-Module - VCTCXO Ziehspannungs-Status
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+Für weitere Informationen gibt es diesen Link:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://bg8net.dyndns.org/p/AFu/2015/DF4IAH-10MHzRefClk-V2/Doc_LyX-TeX/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
 Vy 73
 \end_layout
 
