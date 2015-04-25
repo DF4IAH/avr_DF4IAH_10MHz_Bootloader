@@ -397,7 +397,7 @@ status open
 \begin_inset Graphics
 	filename Eagle-DF4IAH-10MHzRefOsc_Schematic_3of3.png
 	lyxscale 10
-	width 35page%
+	width 45page%
 
 \end_inset
 
@@ -506,6 +506,13 @@ MHz-Taktes einrasten kann.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Für die Logikgatter wird ein CPLD von Lattice genutzt, der alle Aufgaben
  der Logik und 
 \begin_inset Quotes gld
@@ -576,6 +583,11 @@ V umgesetzt.
 \end_layout
 
 \begin_layout Standard
+Nachfolgend die auf RTL abgebildete Schaltung, die mittels VHDL in dem CPLD
+ abgebildet wurde:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -586,9 +598,10 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_clock_div_0.png
+	filename 20150425_CPLD_RTL_flat_1.png
 	lyxscale 20
-	width 60page%
+	height 80pheight%
+	rotateAngle 90
 
 \end_inset
 
@@ -600,7 +613,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-CPLD Kombinatorik - Frequenzteiler
+CPLD Kombinatorik - Frequenzteiler (ClockDiv)
 \end_layout
 
 \end_inset
@@ -624,9 +637,10 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_capture_0.png
+	filename 20150425_CPLD_RTL_flat_2.png
 	lyxscale 20
-	width 60page%
+	height 80pheight%
+	rotateAngle 90
 
 \end_inset
 
@@ -638,7 +652,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-CPLD Kombinatorik - Phasendiskriminator
+CPLD Kombinatorik - Phasendiskriminator (Capture)
 \end_layout
 
 \end_inset
@@ -662,9 +676,10 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename 20150207_DF4IAH_10MHzRefOsc_V2__CPLD-RTL_sercom_0.png
+	filename 20150425_CPLD_RTL_flat_3.png
 	lyxscale 20
-	width 60page%
+	height 80pheight%
+	rotateAngle 90
 
 \end_inset
 
@@ -676,7 +691,45 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-CPLD Kombinatorik - serielle Kommunikation
+CPLD Kombinatorik - Serielle Kommunikation (SerCom)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename 20150425_CPLD_RTL_flat_4.png
+	lyxscale 20
+	width 79page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CPLD Kombinatorik - Pegelwandlung PWM-Pull (PWM_PULL)
 \end_layout
 
 \end_inset
@@ -896,7 +949,8 @@ status open
 \begin_inset Graphics
 	filename Eagle-DF4IAH-10MHzRefOsc_Bestueckung_Oberseite.png
 	lyxscale 20
-	width 79page%
+	width 61page%
+	rotateAngle 90
 
 \end_inset
 
@@ -934,7 +988,8 @@ status open
 \begin_inset Graphics
 	filename Eagle-DF4IAH-10MHzRefOsc_Bestueckung_Rueckseite-gespiegelt.png
 	lyxscale 20
-	width 75page%
+	width 61page%
+	rotateAngle 90
 
 \end_inset
 
@@ -1268,7 +1323,7 @@ status open
 \begin_inset Graphics
 	filename Eagle-DF4IAH-10MHzRefOsc_Board.png
 	lyxscale 20
-	height 75pheight%
+	width 61page%
 	rotateAngle 90
 
 \end_inset
