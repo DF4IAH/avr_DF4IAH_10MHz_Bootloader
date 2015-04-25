@@ -14,7 +14,7 @@ Default_Device_IO_Types = LVCMOS33, -;
 [Revision]
 Parent = lc4k32v.lci;
 DATE = 04/25/2015;
-TIME = 12:28:42;
+TIME = 13:02:10;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -36,7 +36,7 @@ User_max_glb_fanin = 28;
 layer = OFF;
 C_20MHZ = Pin, 39, -, -, -;
 C_2MHZ5 = Pin, 38, -, B, 15;
-C_10MHZ = Pin, 41, -, A, 1;
+C_10MHZ = Pin, 40, -, A, 0;
 C_PPS = Pin, 16, -, A, 15;
 GATE_TRIG = Pin, 31, -, B, 10;
 GPS_TXD = Pin, 7, -, A, 8;
@@ -53,7 +53,7 @@ GPS_REG = Pin, 29, -, B, 8;
 RSFF_CLK = Pin, 30, -, B, 9;
 PWM_PULL_OUT = Pin, 43, -, A, 3;
 PWM_PULL_IN = Pin, 42, -, A, 2;
-C_1MHZ = Pin, 40, -, A, 0;
+C_1MHZ = Pin, 41, -, A, 1;
 
 [Group Assignments]
 layer = OFF;
