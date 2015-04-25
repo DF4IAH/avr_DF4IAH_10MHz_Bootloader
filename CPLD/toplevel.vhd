@@ -28,6 +28,7 @@ entity top_lev is
 		C_10MHZ			: out std_logic;
 		C_5MHZ			: out std_logic;
 		C_2MHZ5			: out std_logic;
+		C_1MHZ			: out std_logic;
 		C_10KHZ 		: in  std_logic;
 		C_PPS			: in  std_logic;
 
@@ -65,7 +66,8 @@ architecture structural of top_lev is
 			C_20MHZ		: in  std_logic;
 			C_10MHZ		: out std_logic;
 			C_5MHZ		: out std_logic;
-			C_2MHZ5		: out std_logic
+			C_2MHZ5		: out std_logic;
+			C_1MHZ		: out std_logic
 		);
 	end component;
 
@@ -119,6 +121,7 @@ architecture structural of top_lev is
 	signal C_10MHZ_loc		:     std_logic;
 	signal C_5MHZ_loc		:     std_logic;
 	signal C_2MHZ5_loc		:     std_logic;
+	signal C_1MHZ_loc		:     std_logic;
 
 begin  --  structural description begins
 	clock_div_0: clock_div 
@@ -127,7 +130,8 @@ begin  --  structural description begins
 			C_20MHZ => C_20MHZ, 
 			C_10MHZ => C_10MHZ_loc, 
 			C_5MHZ  => C_5MHZ_loc,
-			C_2MHZ5 => C_2MHZ5_loc
+			C_2MHZ5 => C_2MHZ5_loc,
+			C_1MHZ  => C_1MHZ_loc
 		);
 
 	capture_0: capture
@@ -175,6 +179,7 @@ begin  --  structural description begins
 	C_10MHZ <= not C_10MHZ_loc;
 	C_5MHZ  <= C_5MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
+	C_1MHZ  <= C_1MHZ_loc;
 end structural;
 
 
@@ -192,22 +197,41 @@ entity clock_div is
 		C_20MHZ			: in  std_logic;
 		C_10MHZ			: out std_logic;
 		C_5MHZ			: out std_logic;
-		C_2MHZ5			: out std_logic
+		C_2MHZ5			: out std_logic;
+		C_1MHZ			: out std_logic
 	);
 end clock_div;
 
 architecture BEHAVIORAL of clock_div is
 	signal UINT			: unsigned(2 downto 0);
+	signal UINT5			: unsigned(2 downto 0);
 	signal LOGCTR			: std_logic_vector(2 downto 0);
+	signal C_1MHZ_r			: std_logic;
 
 begin 
 	process (RESETn, C_20MHZ)
 	begin
 	    if RESETn = '0' then
-	        UINT <= "000";
+	        UINT <= 0;
 
 	    elsif rising_edge(C_20MHZ) then
 	        UINT <= UINT + 1;
+	    end if;
+	end process;
+
+	process (RESETn, LOGCTR(0))
+	begin
+	    if RESETn = '0' then
+		UINT5 <= 0;
+	        C_1MHZ_r <= '0';
+
+	    elsif rising_edge(LOGCTR(0)) then
+		if UINT5 = "100" then
+			UINT5 <= 0;
+			C_1MHZ_r <= not C_1MHZ_r;
+		else
+		        UINT5 <= UINT5 + 1;
+		end if;
 	    end if;
 	end process;
 
@@ -215,6 +239,7 @@ begin
 	C_10MHZ <= LOGCTR(0);
 	C_5MHZ  <= LOGCTR(1);
 	C_2MHZ5 <= LOGCTR(2);
+	C_1MHZ	<= C_1MHZ_r;
 end BEHAVIORAL;
 
 
