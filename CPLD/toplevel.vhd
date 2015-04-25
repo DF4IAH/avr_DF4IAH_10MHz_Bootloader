@@ -25,10 +25,12 @@ entity top_lev is
 
 		-- Clock Divider
 		C_20MHZ 		: in  std_logic;
-		C_10MHZ			: out std_logic;
+--		C_10MHZ			: out std_logic;
 		C_5MHZ			: out std_logic;
 		C_2MHZ5			: out std_logic;
-		C_1MHZ			: out std_logic;
+--		C_1MHZ			: out std_logic;
+		C_OUT1			: out std_logic;
+		C_OUT2			: out std_logic;
 		C_10KHZ 		: in  std_logic;
 		C_PPS			: in  std_logic;
 
@@ -176,10 +178,22 @@ begin  --  structural description begins
 		);
 
 	-- OUTPUT pins derived from OUTPUT&INPUT nets
-	C_10MHZ <= not C_10MHZ_loc;
+	-- C_10MHZ <= not C_10MHZ_loc;
 	C_5MHZ  <= C_5MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
-	C_1MHZ  <= C_1MHZ_loc;
+	-- C_1MHZ  <= C_1MHZ_loc;
+
+	-- C_10KHZ is no more used for new GPS modules, new function established.
+	process (C_10KHZ)
+	begin
+	    if C_10KHZ = '1' then
+		C_OUT1 <= not C_10MHZ_loc;
+		C_OUT2 <= C_1MHZ_loc;
+	    else
+		C_OUT1 <= C_1MHZ_loc;
+		C_OUT2 <= not C_10MHZ_loc;
+	    end if;
+	end process;
 end structural;
 
 
