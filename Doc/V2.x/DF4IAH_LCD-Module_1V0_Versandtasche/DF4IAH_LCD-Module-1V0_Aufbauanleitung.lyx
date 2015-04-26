@@ -700,14 +700,31 @@ zuletzt ein Modul, welches die Initialisierung und die Bedienung der LCD-Anzeige
 
 \end_deeper
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 Bei dem Aufbau wünsche ich viel Erfolg.
  Bei evtl.
  Problemen bitte ich darum, mich zu kontaktieren, damit wir dann eine Lösung
  finden.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für weitere Informationen gibt es diesen Link:
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+
+\begin_inset CommandInset href
+LatexCommand href
+target "http://bg8net.dyndns.org/p/AFu/2015/DF4IAH-10MHzRefOsc-V2/Doc_LyX-TeX/"
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
