@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 04/25/2015;
-TIME = 21:26:06;
+DATE = 04/28/2015;
+TIME = 19:34:51;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -55,6 +55,7 @@ PWM_PULL_IN = Pin, 42, -, A, 2;
 C_OUT1 = Pin, 40, -, A, 0;
 C_OUT2 = Pin, 41, -, A, 1;
 C_10KHZ = Pin, 17, -, -, -;
+C_5MHZ = Pin, 26, -, B, 7;
 
 [Group Assignments]
 layer = OFF;
@@ -137,7 +138,8 @@ NONE = MCU_RXD, C_2MHZ5;
 [PLL Assignments]
 
 [Register Powerup]
-RESET = C_2MHZ5, C_PPS, GATE_TRIG, PHASE_RSFF, GPS_REG, RSFF_CLK, C_OUT1;
+RESET = C_2MHZ5, C_PPS, GATE_TRIG, PHASE_RSFF, GPS_REG, RSFF_CLK, C_OUT1, C_OUT2, 
+	C_5MHZ;
 NONE = PWM_PULL_OUT;
 SET = ISP_RXD, MCU_RXD, GPS_TXD;
 

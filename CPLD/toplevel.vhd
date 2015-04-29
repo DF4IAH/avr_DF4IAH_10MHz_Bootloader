@@ -25,13 +25,13 @@ entity top_lev is
 
 		-- Clock Divider
 		C_20MHZ 		: in  std_logic;
---		C_10MHZ			: out std_logic;
+--		C_10MHZ			: out std_logic;	-- output via C_OUT1 / C_OUT2
 		C_5MHZ			: out std_logic;
 		C_2MHZ5			: out std_logic;
---		C_1MHZ			: out std_logic;
+--		C_1MHZ			: out std_logic;	-- output via C_OUT2 / C_OUT1
 		C_OUT1			: out std_logic;
 		C_OUT2			: out std_logic;
-		C_10KHZ 		: in  std_logic;
+		C_10KHZ 		: in  std_logic;	-- used for - HIGH: C_OUT1 <= C_10MHZ, C_OUT2 <= C_1MHZ / LOW: exchanged
 		C_PPS			: in  std_logic;
 
 		-- Phase Error Determination
@@ -41,10 +41,10 @@ entity top_lev is
 		RSFF_CLK		: out std_logic;
 
 		GATE_TRIG		: out std_logic;
-		GATE  			: in  std_logic;
+--		GATE  			: in  std_logic;	-- not more used for tristate driver
 
-		PHASE_RSFF		: out std_logic;
---		PHASE 			: out std_logic;
+		PHASE_RSFF		: out std_logic;	-- directly used by diode and low pass filter
+--		PHASE 			: out std_logic;	-- driver to slow for changing between Hi/Lo and Z
 
 		-- Serial Communications
 		SER_GPS			: in  std_logic;
@@ -56,8 +56,8 @@ entity top_lev is
 		MCU_RXD			: out std_logic;
 
 		-- PWM voltage convertion
-		PWM_PULL_IN		: in  std_logic;
-		PWM_PULL_OUT		: out std_logic
+		PWM_PULL_IN		: in  std_logic;	-- 5V signal in
+		PWM_PULL_OUT		: out std_logic		-- PWM_PULL low pass filter
 	);
 end;
 
@@ -89,7 +89,7 @@ architecture structural of top_lev is
 			RSFF_CLK	: out std_logic;
 
 			GATE_TRIG	: out std_logic;
-			GATE		: in  std_logic;
+--			GATE		: in  std_logic;
 
 			PHASE_RSFF	: out std_logic
 --			PHASE		: out std_logic
@@ -139,11 +139,7 @@ begin  --  structural description begins
 	capture_0: capture
 		port map (
 			RESETn => RESETn,
---			C_20MHZ => C_20MHZ,
---			C_10MHZ => C_10MHZ_loc,
---			C_5MHZ  => C_5MHZ_loc,
 			C_2MHZ5 => C_2MHZ5_loc,
---			C_10KHZ => C_10KHZ,
 			C_PPS => C_PPS,
 
 			GPS_REG => GPS_REG,
@@ -152,7 +148,7 @@ begin  --  structural description begins
 			RSFF_CLK => RSFF_CLK,
 
 			GATE_TRIG => GATE_TRIG,
-			GATE => GATE,
+--			GATE => GATE,
 
 			PHASE_RSFF => PHASE_RSFF
 --			PHASE => PHASE
@@ -178,13 +174,11 @@ begin  --  structural description begins
 		);
 
 	-- OUTPUT pins derived from OUTPUT&INPUT nets
-	-- C_10MHZ <= not C_10MHZ_loc;
 	C_5MHZ  <= C_5MHZ_loc;
 	C_2MHZ5 <= C_2MHZ5_loc;
-	-- C_1MHZ  <= C_1MHZ_loc;
 
-	-- C_10KHZ is no more used for new GPS modules, new function established.
-	process (C_10KHZ)
+	-- C_10KHZ is no more used for new GPS modules, new function established here.
+	process (C_10KHZ, C_10MHZ_loc, C_1MHZ_loc)
 	begin
 	    if C_10KHZ = '1' then
 		C_OUT1 <= not C_10MHZ_loc;
@@ -268,11 +262,7 @@ use ieee.numeric_std.ALL;
 entity capture is
 	port (
 		RESETn			: in  std_logic;
---		C_20MHZ			: in  std_logic;
---		C_10MHZ			: in  std_logic;
---		C_5MHZ			: in  std_logic;
 		C_2MHZ5			: in  std_logic;
---		C_10KHZ			: in  std_logic;
 		C_PPS			: in  std_logic;
 
 		GPS_REG			: out std_logic;
@@ -281,7 +271,7 @@ entity capture is
 		RSFF_CLK		: out std_logic;
 
 		GATE_TRIG		: out std_logic;
-		GATE			: in  std_logic;
+--		GATE			: in  std_logic;
 
 		PHASE_RSFF		: out std_logic
 --		PHASE			: out std_logic
@@ -291,15 +281,14 @@ end capture;
 architecture BEHAVIORAL of capture is
 signal GPS				:     std_logic;
 signal GPSREG_CLK_loc			:     std_logic;
-signal RSFF_CLK_loc			:     std_logic;
 signal GPS_REG_loc			:     std_logic;
-signal PHASE_RSFF_loc			:     std_logic;
+signal RSFF_CLK_loc			:     std_logic;
+signal PHASE_RSFF_A_loc			:     std_logic;
+signal PHASE_RSFF_B_loc			:     std_logic;
 
 begin
 	-- async
---	GPS <= C_PPS or C_10KHZ;	-- TODO: remove me! Global pull-down needed
---	GPS <= C_10KHZ;  		-- TODO: remove me!
-	GPS <= C_PPS;  			-- TODO: enable me!
+	GPS <= C_PPS;
 	GPSREG_CLK_loc	<= (GPS xor SYNC);
 	RSFF_CLK_loc	<= (GPS);
 
@@ -325,31 +314,52 @@ begin
 	    end if;
 	end process;
 
-	-- Phase determination
-	process (RESETn, RSFF_CLK_loc, C_2MHZ5)
-	begin
-	    if (RESETn = '0') or (C_2MHZ5 = '0') then
-		PHASE_RSFF_loc <= '0';
-
-	    elsif rising_edge(RSFF_CLK_loc) then
-		PHASE_RSFF_loc <= '1';
-	    end if;
-	end process;
-
-	-- Output Enable	(not used anymore)
---	process (GATE, PHASE_RSFF_loc)
+--	process (RESETn, RSFF_CLK_loc, C_10MHZ)
 --	begin
---	    if GATE = '1' then
---		PHASE <= PHASE_RSFF_loc;
+--	    if (RESETn = '0') then
+--		PHASE_RSFF_A_loc <= '0';
+--		PHASE_RSFF_B_loc <= '0';
 --
---	    else
---		PHASE <= 'Z';
+--	    elsif (C_10MHZ = '1') then
+--		PHASE_RSFF_A_loc <= '0';
+--
+--	    elsif (C_10MHZ = '0') then
+--		if (PHASE_RSFF_A_loc = '0') then
+--		    PHASE_RSFF_B_loc <= '0';
+--		end if;
+--
+--	    elsif rising_edge(RSFF_CLK_loc) then
+--		PHASE_RSFF_A_loc <= '1';
+--		PHASE_RSFF_B_loc <= '1';
 --	    end if;
 --	end process;
 
+	-- Phase determination A
+	process (RESETn, RSFF_CLK_loc, C_2MHZ5)
+	begin
+	    if (RESETn = '0') or (C_2MHZ5 = '0') then
+		PHASE_RSFF_A_loc <= '0';
+
+	    elsif rising_edge(RSFF_CLK_loc) then
+		PHASE_RSFF_A_loc <= '1';
+	    end if;
+	end process;
+
+	-- Phase determination B
+	process (RESETn, RSFF_CLK_loc, C_2MHZ5)
+	begin
+	    if (RESETn = '0') or (C_2MHZ5 = '1') then
+		PHASE_RSFF_B_loc <= '0';
+
+	    elsif rising_edge(RSFF_CLK_loc) then
+		PHASE_RSFF_B_loc <= '1';
+	    end if;
+	end process;
+
 	GPS_REG		<= GPS_REG_loc;
 	RSFF_CLK	<= RSFF_CLK_loc;
-	PHASE_RSFF	<= PHASE_RSFF_loc;
+--	PHASE_RSFF	<= PHASE_RSFF_B_loc;
+	PHASE_RSFF	<= PHASE_RSFF_A_loc or PHASE_RSFF_B_loc;
 end BEHAVIORAL;
 
 
