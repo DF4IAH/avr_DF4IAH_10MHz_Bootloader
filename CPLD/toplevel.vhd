@@ -181,11 +181,11 @@ begin  --  structural description begins
 	process (C_10KHZ, C_10MHZ_loc, C_1MHZ_loc)
 	begin
 	    if C_10KHZ = '1' then
-		C_OUT1 <= not C_10MHZ_loc;
+		C_OUT1 <= C_10MHZ_loc;
 		C_OUT2 <= C_1MHZ_loc;
 	    else
 		C_OUT1 <= C_1MHZ_loc;
-		C_OUT2 <= not C_10MHZ_loc;
+		C_OUT2 <= C_10MHZ_loc;
 	    end if;
 	end process;
 end structural;
@@ -314,30 +314,11 @@ begin
 	    end if;
 	end process;
 
---	process (RESETn, RSFF_CLK_loc, C_10MHZ)
---	begin
---	    if (RESETn = '0') then
---		PHASE_RSFF_A_loc <= '0';
---		PHASE_RSFF_B_loc <= '0';
---
---	    elsif (C_10MHZ = '1') then
---		PHASE_RSFF_A_loc <= '0';
---
---	    elsif (C_10MHZ = '0') then
---		if (PHASE_RSFF_A_loc = '0') then
---		    PHASE_RSFF_B_loc <= '0';
---		end if;
---
---	    elsif rising_edge(RSFF_CLK_loc) then
---		PHASE_RSFF_A_loc <= '1';
---		PHASE_RSFF_B_loc <= '1';
---	    end if;
---	end process;
 
 	-- Phase determination A
 	process (RESETn, RSFF_CLK_loc, C_2MHZ5)
 	begin
-	    if (RESETn = '0') or (C_2MHZ5 = '0') then
+	    if (RESETn = '0') or (C_2MHZ5 = '1') then
 		PHASE_RSFF_A_loc <= '0';
 
 	    elsif rising_edge(RSFF_CLK_loc) then
@@ -348,7 +329,7 @@ begin
 	-- Phase determination B
 	process (RESETn, RSFF_CLK_loc, C_2MHZ5)
 	begin
-	    if (RESETn = '0') or (C_2MHZ5 = '1') then
+	    if (RESETn = '0') or (C_2MHZ5 = '0') then
 		PHASE_RSFF_B_loc <= '0';
 
 	    elsif rising_edge(RSFF_CLK_loc) then
@@ -356,9 +337,9 @@ begin
 	    end if;
 	end process;
 
+
 	GPS_REG		<= GPS_REG_loc;
 	RSFF_CLK	<= RSFF_CLK_loc;
---	PHASE_RSFF	<= PHASE_RSFF_B_loc;
 	PHASE_RSFF	<= PHASE_RSFF_A_loc or PHASE_RSFF_B_loc;
 end BEHAVIORAL;
 
