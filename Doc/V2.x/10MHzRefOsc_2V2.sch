@@ -21746,7 +21746,7 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="D401" library="diode" deviceset="DIODE-" device="SOD123" value="1N4448"/>
 <part name="R201" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
 <part name="R131" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
-<part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="47k"/>
+<part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="51k"/>
 <part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.3k"/>
 <part name="C612" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="C613" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
