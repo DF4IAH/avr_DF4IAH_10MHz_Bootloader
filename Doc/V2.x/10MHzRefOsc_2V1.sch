@@ -16863,6 +16863,29 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <rectangle x1="-1.4732" y1="0.2032" x2="-1.3462" y2="0.3302" layer="51"/>
 <rectangle x1="-1.1176" y1="0.5842" x2="-0.9906" y2="0.7112" layer="51"/>
 </package>
+<package name="JP1">
+<description>&lt;b&gt;JUMPER&lt;/b&gt;</description>
+<wire x1="-1.016" y1="0" x2="-1.27" y2="0.254" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="0" x2="-1.27" y2="-0.254" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0" x2="1.27" y2="0.254" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="0" x2="1.27" y2="-0.254" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.254" x2="1.27" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="-2.54" x2="1.27" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="2.286" x2="1.016" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="2.286" x2="1.27" y2="0.254" width="0.1524" layer="21"/>
+<wire x1="1.016" y1="2.54" x2="-1.016" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="2.286" x2="-1.016" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="2.286" x2="-1.27" y2="0.254" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-0.254" x2="-1.27" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="-2.54" x2="-1.27" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="-1.016" y1="-2.54" x2="1.016" y2="-2.54" width="0.1524" layer="21"/>
+<pad name="1" x="0" y="-1.27" drill="0.9144" shape="long"/>
+<pad name="2" x="0" y="1.27" drill="0.9144" shape="long"/>
+<text x="-1.651" y="-2.54" size="1.27" layer="25" ratio="10" rot="R90">&gt;NAME</text>
+<text x="2.921" y="-2.54" size="1.27" layer="27" ratio="10" rot="R90">&gt;VALUE</text>
+<rectangle x1="-0.3048" y1="0.9652" x2="0.3048" y2="1.5748" layer="51"/>
+<rectangle x1="-0.3048" y1="-1.5748" x2="0.3048" y2="-0.9652" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="SJ">
@@ -16874,6 +16897,20 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <text x="-2.54" y="-3.81" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="JP2E">
+<wire x1="0" y1="0" x2="0" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.27" width="0.4064" layer="94"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="1.27" width="0.4064" layer="94"/>
+<wire x1="-0.635" y1="0" x2="3.175" y2="0" width="0.4064" layer="94"/>
+<wire x1="3.175" y1="0" x2="3.175" y2="0.635" width="0.4064" layer="94"/>
+<wire x1="3.175" y1="0.635" x2="-0.635" y2="0.635" width="0.4064" layer="94"/>
+<wire x1="-0.635" y1="0.635" x2="-0.635" y2="0" width="0.4064" layer="94"/>
+<text x="-1.27" y="0" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="5.715" y="0" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="1" x="0" y="-2.54" visible="pad" length="short" direction="pas" rot="R90"/>
+<pin name="2" x="2.54" y="-2.54" visible="pad" length="short" direction="pas" rot="R90"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -16896,6 +16933,23 @@ Source: http://www.diodes.com/datasheets/ds23001.pdf</description>
 <connects>
 <connect gate="1" pin="1" pad="1"/>
 <connect gate="1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="JP1E" prefix="JP" uservalue="yes">
+<description>&lt;b&gt;JUMPER&lt;/b&gt;</description>
+<gates>
+<gate name="A" symbol="JP2E" x="2.54" y="0"/>
+</gates>
+<devices>
+<device name="" package="JP1">
+<connects>
+<connect gate="A" pin="1" pad="1"/>
+<connect gate="A" pin="2" pad="2"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -23495,9 +23549,6 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="D152" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
 <part name="RPOLY1" library="rcl" deviceset="R-EU_" device="M1206" value="1206L025YR_0.5A"/>
 <part name="RPOLY2" library="rcl" deviceset="R-EU_" device="M1206" value="1206L012WR_0.1A"/>
-<part name="JP111" library="jumper" deviceset="SJ" device="W"/>
-<part name="JP941" library="jumper" deviceset="SJ" device="W"/>
-<part name="JP121" library="jumper" deviceset="SJ" device="W"/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="CON2" library="df4iah" deviceset="HEADER-2X5" device="SMD"/>
 <part name="IC3" library="74xx-eu" deviceset="74*221" device="D" technology="HCT"/>
@@ -23586,11 +23637,14 @@ bequeme Weise die noch nicht definierten Attribute zu generieren.&lt;p&gt;
 <part name="D401" library="diode" deviceset="DIODE-" device="SOD123" value="1N4448"/>
 <part name="R201" library="rcl" deviceset="R-EU_" device="R0805" value="2.7k"/>
 <part name="R131" library="rcl" deviceset="R-EU_" device="R0805" value="15k"/>
-<part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="47k"/>
+<part name="R132" library="rcl" deviceset="R-EU_" device="R0805" value="51k"/>
 <part name="R311" library="rcl" deviceset="R-EU_" device="R0805" value="4.3k"/>
 <part name="C612" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="C613" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
 <part name="C211" library="rcl" deviceset="C-EU" device="C0805" value="22uF"/>
+<part name="JP941" library="jumper" deviceset="JP1E" device=""/>
+<part name="JP121" library="jumper" deviceset="JP1E" device=""/>
+<part name="JP111" library="jumper" deviceset="JP1E" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -23653,7 +23707,7 @@ Out</text>
 <text x="185.928" y="137.414" size="1.016" layer="97">10 MHz out</text>
 <text x="198.12" y="145.034" size="1.016" layer="97">2.5 MHz out</text>
 <text x="5.334" y="291.846" size="2.54" layer="97">DF4IAH  10 MHz Reference Oscillator
-V 2.1a</text>
+V 2.1b</text>
 <text x="59.436" y="144.018" size="1.778" layer="97">USB Disconnect</text>
 <text x="102.616" y="122.936" size="1.778" layer="97">USB D-</text>
 <text x="102.616" y="116.078" size="1.778" layer="97">USB D+</text>
@@ -23724,9 +23778,6 @@ V 2.1a</text>
 <attribute name="NAME" x="216.662" y="254.4826" size="1.778" layer="95"/>
 <attribute name="VALUE" x="218.948" y="248.158" size="1.778" layer="96"/>
 </instance>
-<instance part="JP111" gate="1" x="93.98" y="231.14"/>
-<instance part="JP941" gate="1" x="198.12" y="205.74" rot="R90"/>
-<instance part="JP121" gate="1" x="177.8" y="205.74" rot="R90"/>
 <instance part="GND6" gate="1" x="170.18" y="149.86"/>
 <instance part="CON2" gate="G$1" x="205.74" y="248.92"/>
 <instance part="IC3" gate="A" x="243.84" y="172.72"/>
@@ -23828,6 +23879,12 @@ V 2.1a</text>
 <instance part="C612" gate="G$1" x="30.48" y="246.38"/>
 <instance part="C613" gate="G$1" x="40.64" y="246.38"/>
 <instance part="C211" gate="G$1" x="12.7" y="246.38"/>
+<instance part="JP941" gate="A" x="203.2" y="208.28" rot="R270"/>
+<instance part="JP121" gate="A" x="182.88" y="208.28" rot="R270"/>
+<instance part="JP111" gate="A" x="96.52" y="233.68" smashed="yes">
+<attribute name="NAME" x="93.98" y="237.49" size="1.778" layer="95"/>
+<attribute name="VALUE" x="102.235" y="233.68" size="1.778" layer="96" rot="R90"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -23866,10 +23923,12 @@ V 2.1a</text>
 </segment>
 <segment>
 <pinref part="GND10" gate="1" pin="GND"/>
-<pinref part="JP121" gate="1" pin="1"/>
 <wire x1="165.1" y1="200.66" x2="177.8" y2="200.66" width="0.1524" layer="91"/>
 <junction x="165.1" y="200.66"/>
 <pinref part="R141" gate="G$1" pin="1"/>
+<wire x1="177.8" y1="200.66" x2="177.8" y2="205.74" width="0.1524" layer="91"/>
+<pinref part="JP121" gate="A" pin="2"/>
+<wire x1="177.8" y1="205.74" x2="180.34" y2="205.74" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND14" gate="1" pin="GND"/>
@@ -24145,8 +24204,9 @@ V 2.1a</text>
 </segment>
 <segment>
 <pinref part="P+4" gate="VCC" pin="VCC"/>
-<pinref part="JP941" gate="1" pin="2"/>
-<wire x1="198.12" y1="213.36" x2="198.12" y2="210.82" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="213.36" x2="198.12" y2="208.28" width="0.1524" layer="91"/>
+<pinref part="JP941" gate="A" pin="1"/>
+<wire x1="198.12" y1="208.28" x2="200.66" y2="208.28" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="P+6" gate="VCC" pin="VCC"/>
@@ -24327,20 +24387,21 @@ V 2.1a</text>
 <pinref part="IC1" gate="G$1" pin="PC6(/RESET)"/>
 <wire x1="66.04" y1="218.44" x2="60.96" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="218.44" x2="60.96" y2="231.14" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="231.14" x2="88.9" y2="231.14" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="231.14" x2="96.52" y2="231.14" width="0.1524" layer="91"/>
 <junction x="60.96" y="231.14"/>
-<pinref part="JP111" gate="1" pin="1"/>
 <pinref part="R111" gate="G$1" pin="2"/>
+<pinref part="JP111" gate="A" pin="1"/>
 </segment>
 </net>
 <net name="ISP_VTARGET" class="0">
 <segment>
-<pinref part="JP941" gate="1" pin="1"/>
 <pinref part="CON4" gate="G$1" pin="2"/>
-<wire x1="198.12" y1="167.64" x2="198.12" y2="200.66" width="0.1524" layer="91"/>
+<wire x1="198.12" y1="167.64" x2="198.12" y2="205.74" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="160.02" x2="170.18" y2="160.02" width="0.1524" layer="91"/>
 <wire x1="170.18" y1="160.02" x2="170.18" y2="167.64" width="0.1524" layer="91"/>
 <wire x1="170.18" y1="167.64" x2="198.12" y2="167.64" width="0.1524" layer="91"/>
+<pinref part="JP941" gate="A" pin="2"/>
+<wire x1="198.12" y1="205.74" x2="200.66" y2="205.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="C_20MHZ" class="0">
@@ -24450,14 +24511,15 @@ V 2.1a</text>
 </net>
 <net name="INT1" class="0">
 <segment>
-<wire x1="177.8" y1="210.82" x2="177.8" y2="218.44" width="0.1524" layer="91"/>
+<wire x1="177.8" y1="208.28" x2="177.8" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="218.44" x2="160.02" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="218.44" x2="160.02" y2="198.12" width="0.1524" layer="91"/>
 <wire x1="160.02" y1="198.12" x2="119.38" y2="198.12" width="0.1524" layer="91"/>
 <pinref part="IC1" gate="G$1" pin="PD3(INT1)"/>
 <wire x1="119.38" y1="198.12" x2="119.38" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="187.96" x2="114.3" y2="187.96" width="0.1524" layer="91"/>
-<pinref part="JP121" gate="1" pin="2"/>
+<pinref part="JP121" gate="A" pin="1"/>
+<wire x1="177.8" y1="208.28" x2="180.34" y2="208.28" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GPS_ANT_PWR" class="2">
@@ -24680,7 +24742,6 @@ V 2.1a</text>
 </net>
 <net name="JTAG_SRST" class="0">
 <segment>
-<pinref part="JP111" gate="1" pin="2"/>
 <wire x1="99.06" y1="231.14" x2="167.64" y2="231.14" width="0.1524" layer="91"/>
 <wire x1="149.86" y1="167.64" x2="167.64" y2="167.64" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="231.14" x2="167.64" y2="167.64" width="0.1524" layer="91"/>
@@ -24701,6 +24762,7 @@ V 2.1a</text>
 <pinref part="CON4" gate="G$1" pin="5"/>
 <wire x1="167.64" y1="157.48" x2="177.8" y2="157.48" width="0.1524" layer="91"/>
 <junction x="167.64" y="157.48"/>
+<pinref part="JP111" gate="A" pin="2"/>
 </segment>
 </net>
 <net name="+3V3" class="1">
@@ -25147,11 +25209,11 @@ V 2.1a</text>
 <approved hash="104,1,81.28,251.46,IC7,VCC_3V0,+3V0,,,"/>
 <approved hash="104,1,330.2,215.9,U5,V+,VCC,,,"/>
 <approved hash="104,1,330.2,203.2,U5,V-,GND,,,"/>
-<approved hash="113,1,93.98,232.656,JP111,,,,,"/>
-<approved hash="113,1,196.604,205.74,JP941,,,,,"/>
-<approved hash="113,1,176.284,205.74,JP121,,,,,"/>
 <approved hash="113,1,148.344,63.5,SJ201,,,,,"/>
 <approved hash="113,1,143.264,106.68,SJ202,,,,,"/>
+<approved hash="113,1,204.16,207.891,JP941,,,,,"/>
+<approved hash="113,1,183.84,207.891,JP121,,,,,"/>
+<approved hash="113,1,98.0729,233.341,JP111,,,,,"/>
 </errors>
 </schematic>
 </drawing>
