@@ -4,7 +4,7 @@ NOTE  ispLEVER Classic 1.8.00.04.29.14JEDEC Compatible Fuse File.*
 NOTE Copyright (C), 1992-2015, Lattice Semiconductor Corporation.*
 NOTE All Rights Reserved.     :*
 NOTE DESIGN NAME         :df4iah_10mhz_ref_osc_v2*
-NOTE DATE CREATED        :Wed Apr 29 16:13:37 2015*
+NOTE DATE CREATED        :Mon May 11 23:38:16 2015*
 NOTE DEVICE NAME         :LC4032V-75T44I*
 NOTE DEVICE TEMPLATE     :M4S_32_30*
 NOTE PIN ASSIGNMENTS*
@@ -347,4 +347,4 @@ L00000
 111101111111
 *
 CEC2D*
-8D05
+8D0C

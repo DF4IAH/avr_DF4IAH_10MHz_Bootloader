@@ -10,7 +10,7 @@
 -- NOTE Copyright (C), 1992-2015, Lattice Semiconductor Corporation.
 -- NOTE All Rights Reserved.     :
 -- NOTE DESIGN NAME         :df4iah_10mhz_ref_osc_v2
--- NOTE DATE CREATED        :Wed Apr 29 16:13:37 2015
+-- NOTE DATE CREATED        :Mon May 11 23:38:16 2015
 -- NOTE DEVICE NAME         :LC4032V-75T44I
 -- NOTE DEVICE TEMPLATE     :M4S_32_30
 -- NOTE PIN ASSIGNMENTS
@@ -49,7 +49,7 @@
 
 IEEE_1532_Data (
 	Header		(	STD_Version STD_1532_2001
-				Creation_Date 20150429.1614
+				Creation_Date 20150511.2338
 				Creator  "Universal File Writer V2.48"
 				Entity 	LC4032V_B, 
 						LC4032V_XXT44, 
@@ -187,4 +187,4 @@ IEEE_1532_Data (
    )
  )
 )
-212A
+01C0
