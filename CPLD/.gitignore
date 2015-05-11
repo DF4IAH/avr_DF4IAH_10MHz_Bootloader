@@ -43,7 +43,6 @@ synwork
 *.jid
 *.l0
 *.lco
-*.lct
 *.log
 *.mod
 *.nrp
@@ -53,7 +52,6 @@ synwork
 *.rpt
 *.sdf
 *.sif
-*.stamp
 *.STY
 *.svl
 *.tcl

@@ -1,0 +1,184 @@
+
+[Device]
+Family = lc4k;
+PartNumber = LC4032V-75T44I;
+Package = 44TQFP;
+PartType = LC4032V;
+Speed = -7.5;
+Operating_condition = IND;
+Status = Production;
+EN_PinGLB = No;
+EN_PinMacrocell = No;
+Default_Device_IO_Types = LVCMOS33, -;
+
+[Revision]
+Parent = lc4k32v.lci;
+DATE = 04/28/2015;
+TIME = 19:34:51;
+Source_Format = Schematic_VHDL;
+Synthesis = Synplify;
+
+[Ignore Assignments]
+
+[Clear Assignments]
+
+[Backannotate Assignments]
+Pin_Block = NO;
+Pin_Macrocell_Block = YES;
+Pin_Assignments = NO;
+IO_Types = YES;
+
+[Global Constraints]
+Zero_hold_time = Yes;
+User_max_glb_fanin = 28;
+
+[Location Assignments]
+layer = OFF;
+C_20MHZ = Pin, 39, -, -, -;
+C_2MHZ5 = Pin, 38, -, B, 15;
+C_PPS = Pin, 16, -, A, 15;
+GATE_TRIG = Pin, 31, -, B, 10;
+GPS_TXD = Pin, 7, -, A, 8;
+ISP_RXD = Pin, 22, -, B, 4;
+MCU_RXD = Pin, 8, -, A, 9;
+GPS_RXD = Pin, 4, -, A, 7;
+ISP_TXD = Pin, 21, -, B, 3;
+MCU_TXD = Pin, 9, -, A, 10;
+SER_GPS = Pin, 13, -, A, 12;
+RESETn = Pin, 44, -, A, 4;
+PHASE_RSFF = Pin, 35, -, B, 12;
+SYNC = Pin, 37, -, B, 14;
+GPS_REG = Pin, 29, -, B, 8;
+RSFF_CLK = Pin, 30, -, B, 9;
+PWM_PULL_OUT = Pin, 43, -, A, 3;
+PWM_PULL_IN = Pin, 42, -, A, 2;
+C_OUT1 = Pin, 40, -, A, 0;
+C_OUT2 = Pin, 41, -, A, 1;
+C_10KHZ = Pin, 17, -, -, -;
+C_5MHZ = Pin, 26, -, B, 7;
+
+[Group Assignments]
+layer = OFF;
+
+[Resource Reservations]
+layer = OFF;
+
+[Fitter Report Format]
+
+[Power]
+
+[Source Constraint Option]
+
+[Fast Bypass]
+NONE = MCU_RXD, PWM_PULL_OUT, C_2MHZ5;
+
+[OSM Bypass]
+
+[Input Registers]
+NONE = C_20MHZ, C_PPS, RESETn, GPS_RXD, ISP_TXD, MCU_TXD, SER_GPS, C_10KHZ;
+
+[Netlist/Delay Format]
+
+[IO Types]
+layer = OFF;
+ISP_RXD = LVCMOS33_OD, PIN, 1, -;
+MCU_RXD = -, PIN, 0, -;
+PWM_PULL_OUT = LVCMOS33, PIN, 0, -;
+C_2MHZ5 = LVCMOS33, PIN, 1, -;
+C_20MHZ = LVCMOS33_5V, PIN, 0, -;
+C_PPS = LVCMOS33_5V, PIN, 0, -;
+RESETn = LVCMOS33_5V, PIN, 0, -;
+GPS_RXD = LVCMOS33, PIN, 0, -;
+ISP_TXD = LVCMOS33_5V, PIN, 1, -;
+MCU_TXD = LVCMOS33_5V, PIN, 0, -;
+SER_GPS = LVCMOS33_5V, PIN, 0, -;
+GPS_TXD = LVCMOS33_5V, PIN, 0, -;
+SYNC = LVCMOS33_5V, PIN, 1, -;
+PWM_PULL_IN = LVCMOS33_5V, PIN, 0, -;
+C_10KHZ = LVCMOS33_5V, PIN, 1, -;
+
+[Pullup]
+Default = UP;
+
+[Slewrate]
+SLOW = ISP_RXD, MCU_RXD;
+FAST = PWM_PULL_OUT, C_2MHZ5;
+
+[Region]
+
+[Timing Constraints]
+layer = OFF;
+fMAX_0 = 15;
+
+[HSI Attributes]
+
+[Input Delay]
+
+[Pin attributes list]
+
+[Attributes list setting]
+
+[Power Guard]
+
+[opt global constraints list]
+
+[Explorer User Settings]
+
+[LOCATION ASSIGNMENTS LIST]
+
+[RESOURCE RESERVATIONS LIST]
+
+[individual constraints list]
+
+[Timing Analyzer]
+
+[ORP Bypass]
+NONE = MCU_RXD, C_2MHZ5;
+
+[PLL Assignments]
+
+[Register Powerup]
+RESET = C_2MHZ5, C_PPS, GATE_TRIG, PHASE_RSFF, GPS_REG, RSFF_CLK, C_OUT1, C_OUT2, 
+	C_5MHZ;
+NONE = PWM_PULL_OUT;
+SET = ISP_RXD, MCU_RXD, GPS_TXD;
+
+[global constraints list]
+
+[Global Constraints Process Update]
+
+[Explorer Results]
+
+[VHDL synplify constraints]
+
+[VHDL spectrum constraints]
+
+[verilog synplify constraints]
+
+[verilog spectrum constraints]
+
+[VHDL synplify constraints list]
+
+[VHDL spectrum constraints list]
+
+[verilog synplify constraints list]
+
+[verilog spectrum constraints list]
+
+[OSCTIMER Assignments]
+layer = OFF;
+
+[Constraint Version]
+version = 1.0;
+
+[Node attribute]
+layer = OFF;
+
+[SYMBOL/MODULE attribute]
+layer = OFF;
+
+[ORP ASSIGNMENTS]
+layer = OFF;
+
+[Nodal Constraints]
+layer = OFF;
