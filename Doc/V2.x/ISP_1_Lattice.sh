@@ -1,4 +1,4 @@
 #!/bin/sh
 
-Lattice_LC3240V_Programmer &
+jtag ISP_1_Lattice.jtag
 
