@@ -19,7 +19,7 @@
 				<BScanVal>0</BScanVal>
 			</Bypass>
 			<File>//psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.jed</File>
-			<FileTime>05/11/15 23:38:16</FileTime>
+			<FileTime>05/12/15 14:36:14</FileTime>
 			<JedecChecksum>0xEC2D</JedecChecksum>
 			<Operation>Erase,Program,Verify</Operation>
 			<Option>

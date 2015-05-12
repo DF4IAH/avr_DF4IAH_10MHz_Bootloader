@@ -3,12 +3,12 @@
 ! Lattice Semiconductor Corp.
 ! Serial Vector Format (.SVF) File.
 ! User information:
-! File name: Z:\Documents\Eclipse_workspace\avr_DF4IAH_Bootloader\CPLD\df4iah_10mhz_ref_osc_v2.svf
+! File name: Z:\Documents\Eclipse_workspace\avr_DF4IAH_Bootloader\CPLD\DF4IAH_10MHZ_REF_OSC_V2.SVF
 ! CREATED BY:    ispVM System Version 18.1
-! CREATION DATE: Tue May 12 00:02:51 2015
+! CREATION DATE: Tue May 12 14:40:55 2015
 ! Device: LC4032V  Erase,Program,Verify //psf/Home/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.jed
 ! LATTICE_NOTE "Device" "LC4032V"
-! LATTICE_NOTE "Checksum" "F80C"
+! LATTICE_NOTE "Checksum" "EC2D"
 
 
 
@@ -17,7 +17,7 @@
 ! NOTE Copyright (C), 1992-2015, Lattice Semiconductor Corporation.
 ! NOTE All Rights Reserved.     :
 ! NOTE DESIGN NAME         :df4iah_10mhz_ref_osc_v2
-! NOTE DATE CREATED        :Mon May 11 23:38:16 2015
+! NOTE DATE CREATED        :Tue May 12 14:36:13 2015
 ! NOTE DEVICE NAME         :LC4032V-75T44I
 ! NOTE DEVICE TEMPLATE     :M4S_32_30
 ! NOTE PIN ASSIGNMENTS
