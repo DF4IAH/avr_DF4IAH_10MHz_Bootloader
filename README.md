@@ -16,15 +16,15 @@ The author is Ulrich Habel (DF4IAH) with the idea having a low-cost and low-powe
 - __Eagle drawings__: oscillator and LCD - the schematics and boards for all variants of V2.x
 
 ### Additional information
-The idea behind that project was to get a local oscillator in phase of the GPS clock system.
+The idea behind that project was to craft a local oscillator being in phase of the GPS clock system.
 The device shall have a frequency and phase locked loop.
-When the local frequency is trimmed to the reference GPS clock the phase locked loop gets in place of the frequency control.
+When the local frequency is trimmed to be equal to the reference GPS clock the phase locked loop gets in place of the frequency control.
 Whenever the phase gets out of the secured boundaries, the system switches back to the frequency correction mode.
-Due to its nature the device has to keep the local clock in the secured boundaries.
+Due to its nature the device has to keep itself earnestly in the secured boundaries.
 Only then the high quality stability of the GPS clock system can be delivered to the user.
 For this reason when the local clock gets more out of balance and to one of its boundaries, a phase correction impulse is added to the local system to find the balance, again.
-When running long this is fine and gave good results for the user.
-On the other hand when the GPS signals are poor, the almanac data poor or the temperature variance at the VC-TCXO increasing, that local error-signal has to be corrected sometimes with sharp corrections.
+When still running a longer time this pulses are fine grained and the performance is very well for the user.
+On the other hand when the GPS signals are poor, the almanac data old or the temperature variance at the VC-TCXO increasing, that local error-signal has to be corrected sometimes with sharp corrections.
 So be warned to keep the device running in an air-locked container and a good GPS antenna position is a __must__ to get good results.
 
 There are three different kinds of GPS units used by this project.
