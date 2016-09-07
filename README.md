@@ -9,7 +9,7 @@ An optional LCD module can be connected to the I²C compatible bus for a stand-a
 The author is Ulrich Habel (DF4IAH) with the idea having a low-cost and low-power device for a module to generate a 10 MHz signal at 3.3V TTL, that is adjusted to the GPS/Glonass satellite clock system. By this the local clock is kept in its boundaries to satisfy the long-term stability of the GPS/Glonass system. The negative aspect on it (I want to inform, also) with the use of a low power consuming VC-TCXO is, that the short-term variance is much higher than the variance of the devices using a temperature controlled oscillator like a rubidium lightwave controlled one.
 
 ### Contents of this repository
-- __AVR ATmega 328P__: MPU for master control and USB communications, bootloader for programming via USB - sources and binaries 
+- __AVR ATmega 328P__: MPU containing a bootloader for programming the firmware itself via the USB interface by emulating an USBasp device 
 
 - __Lattice LC4032V__: CPLD for containing a phase detection unit - source and binary
 
