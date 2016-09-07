@@ -37,7 +37,7 @@ The only work-around for this is to use a more selective GPS-antenna that filter
 
 The author has his reference clocks running for month without any problems, the firmware is stable - __use on your own risk, only!__
 
-If you find this project nice you are welcomed to spawn of.
+If you find this project nice you are welcomed to clone from it and run your optimizations or having a start point for a fresh project.
 
 Any new modifications may result to harm this behavior.
 Make your own decisions, be warned.
