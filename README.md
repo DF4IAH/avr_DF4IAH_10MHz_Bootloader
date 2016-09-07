@@ -23,24 +23,24 @@ Whenever the phase gets out of the secured boundaries, the system switches back 
 Due to its nature the device has to keep the local clock in the secured boundaries.
 Only then the high quality stability of the GPS clock system can be delivered to the user.
 For this reason when the local clock gets more out of balance and to one of its boundaries, a phase correction impulse is added to the local system to find the balance, again.
-When running long this is fine and gived good results for the user.
-On the other hand when the GPS receiption is bad, the almanac data poor or the temperature variance at the VC-TCXO increasing, that local error-signal has to be corrected sometimes whith sharp corrections.
+When running long this is fine and gave good results for the user.
+On the other hand when the GPS signals are poor, the almanac data poor or the temperature variance at the VC-TCXO increasing, that local error-signal has to be corrected sometimes with sharp corrections.
 So be warned to keep the device running in an air-locked container and a good GPS antenna position is a __must__ to get good results.
 
 There are three different kinds of GPS units used by this project.
 Each of them are utilizing the __MediaTek MT3333__ chipset, but each of the manufacturer is running its own configuration on it.
 By this, some minor differences occur.
 All of this GPS devices are able to track on GPS (western satellites) and Glonass/BeiDou (eastern satellites) signals.
-Later at the works the author found out that the parallel receiption of GPS and Glonass can result to interrupted functionality.
-With NMEA programming the GPS device receives the command to ignore the Glonass signals but not all of them do honour that and start up tracking of all received signals.
+Later at the works the author found out that the parallel processing of GPS and Glonass can result to interrupted functionality.
+With NMEA programming the GPS device receives the command to ignore the Glonass signals but not all of them do honor that and start up tracking of all received signals.
 The only work-around for this is to use a more selective GPS-antenna that filters out the Glonass signals away from the single GPS frequency.
 
-The author have his reference clocks running for month without any problems, the firmware is stable - __use on your own risk, only!__
+The author has his reference clocks running for month without any problems, the firmware is stable - __use on your own risk, only!__
 
-If you find this project nice you are welcommed to spawn of.
+If you find this project nice you are welcomed to spawn of.
 
-Any new modifications may result to harm this behaviour.
-Make your own decitions, be warned.
+Any new modifications may result to harm this behavior.
+Make your own decisions, be warned.
 
 ### Credits
 I like to thank these following programmers and groups:
@@ -48,19 +48,22 @@ I like to thank these following programmers and groups:
 - __VUSB__ This code helped me to have USB communication on an ATmega, that does not support USB communication on its own.
 All is done by interrupt software, many parts are assembly language based code.
 Due to this nature all code in the bootloader as well as the firmware are very sensitive to changes on the code.
-Only a very short interrupt time is allowed for the firmware avoiding the USB communication.
+Only a very short interrupt time is allowed for the firmware avoiding the USB communication to fade out.
 Find more about it: https://www.obdev.at/products/vusb/index.html
 
-- __xxx__ The xxx company reserves a valid USB address to be used by the community.
-I like to thank for this, also.
-xxx
+- __Wouter van Ooijen__ That person has reserved a valid USB address to be used by the community.
+I like to thank him, that I am a part of this open source development community.
 
-- __avrdude__ The base idea of the circuit as well as the bootloader code is reflected of the avrdude software and the AVR programmer, that is controlled by the avrdude software.
+- __USBasp__ The base idea of the circuit is a reflection of this AVR programmer device.
+The clou of it, it can communicate at the USB: http://www.fischl.de/usbasp/
+
+- __avrdude__ The bootloader code of avrdude gave ideas how to set-up a USB communication server.
+The avrdude software can be found, here: http://www.nongnu.org/avrdude/
 
 - __HF-Messzwerg__ When the author got in contact with the team of this device, he started to learn about SMD soldering and USB communication in relation with an ATmega.
-Communication done is with the help of an USB/serial converter, there.
+Communication done is with the help of an USB/serial converter, there: http://ukw-tagung.org/2016/preistraeger-2/
 
-I wish you a nice expirience with this product.
+I wish you a nice experience with this product.
 Fell free and enjoy it.
 
 Cheers
