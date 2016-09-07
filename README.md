@@ -55,13 +55,14 @@ Find more about it: https://www.obdev.at/products/vusb/index.html
 I like to thank him, that I am a part of this open source development community.
 
 - __USBasp__ The base idea of the circuit is a reflection of this AVR programmer device.
-The clou of it, it can communicate at the USB: http://www.fischl.de/usbasp/
+The clou of it, it can communicate at the USB bus by itself: http://www.fischl.de/usbasp/
 
 - __avrdude__ The bootloader code of avrdude gave ideas how to set-up a USB communication server.
-The avrdude software can be found, here: http://www.nongnu.org/avrdude/
+The avrdude software can be found there: http://www.nongnu.org/avrdude/
 
 - __HF-Messzwerg__ When the author got in contact with the team of this device, he started to learn about SMD soldering and USB communication in relation with an ATmega.
-Communication done is with the help of an USB/serial converter, there: http://ukw-tagung.org/2016/preistraeger-2/
+Communication is done with the help of an USB/serial converter.
+More about that project can be found there: http://ukw-tagung.org/2016/preistraeger-2/
 
 I wish you a nice experience with this product.
 Fell free and enjoy it.
