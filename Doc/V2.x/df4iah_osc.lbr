@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.2.0">
+<eagle version="7.7.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="1.25" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.125" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="yes"/>
@@ -45,11 +45,11 @@
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
-<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="no" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="50" name="dxf" color="7" fill="1" visible="no" active="no"/>
-<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="no" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="no" active="yes"/>
 <layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
 <layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
@@ -73,39 +73,43 @@
 <packages>
 <package name="CFPT-126">
 <description>&lt;b&gt;3.3V CMOS Clock Oscillator&lt;/b&gt;</description>
-<wire x1="-3.5" y1="-2.5" x2="3.5" y2="-2.5" width="0.2032" layer="51"/>
-<wire x1="3.5" y1="-2.5" x2="3.5" y2="2.5" width="0.2032" layer="51"/>
-<wire x1="3.5" y1="2.5" x2="-3.5" y2="2.5" width="0.2032" layer="51"/>
-<wire x1="-3.5" y1="2.5" x2="-3.5" y2="-2.5" width="0.2032" layer="51"/>
-<wire x1="-1.368" y1="-2.5" x2="1.368" y2="-2.5" width="0.2032" layer="21"/>
-<wire x1="-3.5" y1="0.876" x2="-3.5" y2="-0.876" width="0.2032" layer="21"/>
-<wire x1="1.368" y1="2.5" x2="-1.368" y2="2.5" width="0.2032" layer="21"/>
-<wire x1="3.5" y1="-0.876" x2="3.5" y2="0.876" width="0.2032" layer="21"/>
-<circle x="-2.794" y="-0.762" radius="0.254" width="0" layer="21"/>
-<smd name="1" x="-2.54" y="-2.1" dx="1.2" dy="1.5" layer="1" rot="R90"/>
-<smd name="2" x="2.54" y="-2.1" dx="1.2" dy="1.5" layer="1" rot="R90"/>
-<smd name="3" x="2.54" y="2.1" dx="1.2" dy="1.5" layer="1" rot="R270"/>
-<smd name="4" x="-2.54" y="2.1" dx="1.2" dy="1.5" layer="1" rot="R270"/>
-<text x="-3.81" y="-2.54" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-<text x="5.007890625" y="-2.55013125" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<wire x1="-2.5" y1="3.5" x2="-2.5" y2="-3.5" width="0.2032" layer="51"/>
+<wire x1="-2.5" y1="-3.5" x2="2.5" y2="-3.5" width="0.2032" layer="51"/>
+<wire x1="2.5" y1="-3.5" x2="2.5" y2="3.5" width="0.2032" layer="51"/>
+<wire x1="2.5" y1="3.5" x2="-2.5" y2="3.5" width="0.2032" layer="51"/>
+<wire x1="-2.5" y1="1.368" x2="-2.5" y2="-1.368" width="0.2032" layer="21"/>
+<wire x1="0.876" y1="3.5" x2="-0.876" y2="3.5" width="0.2032" layer="21"/>
+<wire x1="2.5" y1="-1.368" x2="2.5" y2="1.368" width="0.2032" layer="21"/>
+<wire x1="-0.876" y1="-3.5" x2="0.876" y2="-3.5" width="0.2032" layer="21"/>
+<circle x="-3.302" y="3.429" radius="0.254" width="0" layer="21"/>
+<smd name="1" x="-2.1" y="2.54" dx="1.2" dy="1.5" layer="1"/>
+<smd name="2" x="-2.1" y="-2.54" dx="1.2" dy="1.5" layer="1"/>
+<smd name="3" x="2.1" y="-2.54" dx="1.2" dy="1.5" layer="1" rot="R180"/>
+<smd name="4" x="2.1" y="2.54" dx="1.2" dy="1.5" layer="1" rot="R180"/>
+<text x="-2.54" y="3.81" size="1.27" layer="25">&gt;NAME</text>
+<text x="-2.55013125" y="-5.007890625" size="1.27" layer="27">&gt;VALUE</text>
 </package>
 <package name="CFPT-141">
 <description>&lt;b&gt;3.0V CMOS Clock Oscillator&lt;/b&gt;</description>
-<wire x1="-2.5" y1="-1.6" x2="2.5" y2="-1.6" width="0.2032" layer="51"/>
-<wire x1="2.5" y1="-1.6" x2="2.5" y2="1.6" width="0.2032" layer="51"/>
-<wire x1="2.5" y1="1.6" x2="-2.5" y2="1.6" width="0.2032" layer="51"/>
-<wire x1="-2.5" y1="1.6" x2="-2.5" y2="-1.6" width="0.2032" layer="51"/>
-<wire x1="-1.368" y1="-1.6" x2="1.368" y2="-1.6" width="0.2032" layer="21"/>
-<wire x1="-2.5" y1="0.876" x2="-2.5" y2="-0.876" width="0.2032" layer="21"/>
-<wire x1="1.368" y1="1.6" x2="-1.368" y2="1.6" width="0.2032" layer="21"/>
-<wire x1="2.5" y1="-0.876" x2="2.5" y2="0.876" width="0.2032" layer="21"/>
-<circle x="-1.814053125" y="-0.946890625" radius="0.254" width="0" layer="21"/>
-<smd name="1" x="-1.9" y="-1.15" dx="0.9" dy="1.4" layer="1" rot="R90"/>
-<smd name="2" x="1.9" y="-1.15" dx="0.9" dy="1.4" layer="1" rot="R90"/>
-<smd name="3" x="1.9" y="1.15" dx="0.9" dy="1.4" layer="1" rot="R270"/>
-<smd name="4" x="-1.9" y="1.15" dx="0.9" dy="1.4" layer="1" rot="R270"/>
-<text x="-2.887103125" y="-1.7212" size="1.27" layer="25" rot="R90">&gt;NAME</text>
-<text x="4.184525" y="-1.74833125" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<wire x1="-1.6" y1="2.5" x2="-1.6" y2="-2.5" width="0.2032" layer="51"/>
+<wire x1="-1.6" y1="-2.5" x2="1.6" y2="-2.5" width="0.2032" layer="51"/>
+<wire x1="1.6" y1="-2.5" x2="1.6" y2="2.5" width="0.2032" layer="51"/>
+<wire x1="1.6" y1="2.5" x2="-1.6" y2="2.5" width="0.2032" layer="51"/>
+<wire x1="1.7272" y1="2.7432" x2="1.0922" y2="2.7432" width="0.2032" layer="21"/>
+<wire x1="1.7272" y1="2.1082" x2="1.7272" y2="2.7432" width="0.2032" layer="21"/>
+<smd name="1" x="-1.15" y="1.9" dx="0.9" dy="1.4" layer="1"/>
+<smd name="2" x="-1.15" y="-1.9" dx="0.9" dy="1.4" layer="1"/>
+<smd name="3" x="1.15" y="-1.9" dx="0.9" dy="1.4" layer="1" rot="R180"/>
+<smd name="4" x="1.15" y="1.9" dx="0.9" dy="1.4" layer="1" rot="R180"/>
+<text x="-1.7212" y="2.887103125" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.74833125" y="-4.184525" size="1.27" layer="27">&gt;VALUE</text>
+<wire x1="1.7272" y1="-2.7432" x2="1.7272" y2="-2.1082" width="0.2032" layer="21"/>
+<wire x1="1.7272" y1="-2.7432" x2="1.0922" y2="-2.7432" width="0.2032" layer="21"/>
+<wire x1="-1.7272" y1="-2.7432" x2="-1.7272" y2="-2.1082" width="0.2032" layer="21"/>
+<wire x1="-1.7272" y1="2.1082" x2="-1.7272" y2="2.4932" width="0.2032" layer="21"/>
+<wire x1="-1.0922" y1="-2.7432" x2="-1.7272" y2="-2.7432" width="0.2032" layer="21"/>
+<wire x1="-1.0922" y1="2.7432" x2="-1.5" y2="2.75" width="0.2032" layer="21"/>
+<wire x1="-1.5" y1="2.75" x2="-1.7272" y2="2.4932" width="0.2032" layer="21"/>
 </package>
 <package name="8-PIN">
 <description>&lt;b&gt;8-Pin PCB Land Pattern&lt;/b&gt;&lt;p&gt;
@@ -158,6 +162,7 @@ Source: si750.pdf</description>
 <vertex x="-2.1" y="-3.15"/>
 <vertex x="-2.95" y="-3.15" curve="-90"/>
 </polygon>
+<circle x="-5.08" y="-3.81" radius="0.381" width="0" layer="21"/>
 </package>
 <package name="QFP-7X7-48">
 <description>&lt;b&gt;TQFP48&lt;/b&gt; 7x7&lt;p&gt;
@@ -397,26 +402,26 @@ Source: www.analog.com/UploadedFiles/Data_Sheets/33830397585263AD9859_0.pdf</des
 </symbol>
 <symbol name="CFPT-141">
 <description>&lt;b&gt;3.0V CMOS Clock Oscillator&lt;/b&gt;</description>
-<wire x1="-7.62" y1="5.08" x2="12.7" y2="5.08" width="0.254" layer="94"/>
-<wire x1="12.7" y1="5.08" x2="12.7" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="12.7" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
-<wire x1="2.54" y1="-0.508" x2="2.54" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="2.54" y1="-1.27" x2="2.54" y2="-2.032" width="0.127" layer="94"/>
-<wire x1="1.524" y1="-1.27" x2="2.54" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="3.048" y1="-0.762" x2="3.556" y2="-0.762" width="0.127" layer="94"/>
-<wire x1="3.556" y1="-0.762" x2="3.556" y2="-1.778" width="0.127" layer="94"/>
-<wire x1="3.556" y1="-1.778" x2="3.048" y2="-1.778" width="0.127" layer="94"/>
-<wire x1="3.048" y1="-1.778" x2="3.048" y2="-0.762" width="0.127" layer="94"/>
-<wire x1="4.064" y1="-0.508" x2="4.064" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="4.064" y1="-1.27" x2="4.064" y2="-2.032" width="0.127" layer="94"/>
-<wire x1="5.08" y1="-1.27" x2="4.064" y2="-1.27" width="0.127" layer="94"/>
-<text x="-7.62" y="5.842" size="1.778" layer="95">&gt;NAME</text>
-<text x="-7.62" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="VCC_3V0" x="-10.16" y="2.54" length="short" direction="pwr"/>
-<pin name="VC" x="-10.16" y="0" length="short" direction="in"/>
-<pin name="GND" x="-10.16" y="-2.54" length="short" direction="pwr"/>
-<pin name="OUT" x="15.24" y="2.54" length="short" direction="out" rot="R180"/>
+<wire x1="-10.16" y1="5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="0" y1="-0.508" x2="0" y2="-1.27" width="0.127" layer="94"/>
+<wire x1="0" y1="-1.27" x2="0" y2="-2.032" width="0.127" layer="94"/>
+<wire x1="-1.016" y1="-1.27" x2="0" y2="-1.27" width="0.127" layer="94"/>
+<wire x1="0.508" y1="-0.762" x2="1.016" y2="-0.762" width="0.127" layer="94"/>
+<wire x1="1.016" y1="-0.762" x2="1.016" y2="-1.778" width="0.127" layer="94"/>
+<wire x1="1.016" y1="-1.778" x2="0.508" y2="-1.778" width="0.127" layer="94"/>
+<wire x1="0.508" y1="-1.778" x2="0.508" y2="-0.762" width="0.127" layer="94"/>
+<wire x1="1.524" y1="-0.508" x2="1.524" y2="-1.27" width="0.127" layer="94"/>
+<wire x1="1.524" y1="-1.27" x2="1.524" y2="-2.032" width="0.127" layer="94"/>
+<wire x1="2.54" y1="-1.27" x2="1.524" y2="-1.27" width="0.127" layer="94"/>
+<text x="-10.16" y="5.842" size="1.778" layer="95">&gt;NAME</text>
+<text x="-10.16" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="VCC_3V0" x="-12.7" y="2.54" length="short" direction="pwr"/>
+<pin name="VC" x="-12.7" y="0" length="short" direction="in"/>
+<pin name="GND" x="-12.7" y="-2.54" length="short" direction="pwr"/>
+<pin name="OUT" x="12.7" y="2.54" length="short" direction="out" rot="R180"/>
 </symbol>
 <symbol name="SI570">
 <wire x1="-10.16" y1="10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
@@ -532,8 +537,8 @@ Source: www.analog.com/UploadedFiles/Data_Sheets/33830397585263AD9859_0.pdf</des
 </device>
 </devices>
 </deviceset>
-<deviceset name="CFPT-141" prefix="IC">
-<description>TCXO, 3.0V</description>
+<deviceset name="CFPT-141" prefix="U">
+<description>VCTCXO, 3.0V</description>
 <gates>
 <gate name="&gt;NAME" symbol="CFPT-141" x="0" y="0"/>
 </gates>
@@ -546,11 +551,11 @@ Source: www.analog.com/UploadedFiles/Data_Sheets/33830397585263AD9859_0.pdf</des
 <connect gate="&gt;NAME" pin="VCC_3V0" pad="4"/>
 </connects>
 <technologies>
-<technology name="">
-<attribute name="MF" value="IQD-FREQUENCY-PRODUCTS"/>
-<attribute name="MPN" value="LFTVXO022175"/>
-<attribute name="OC_FARNELL" value="1100745"/>
-<attribute name="OC_NEWARK" value="-"/>
+<technology name="-20MHZ">
+<attribute name="MF" value="IQD-FREQUENCY-PRODUCTS" constant="no"/>
+<attribute name="MPN" value="LFTVXO022175" constant="no"/>
+<attribute name="OC_FARNELL" value="1100745" constant="no"/>
+<attribute name="OC_NEWARK" value="" constant="no"/>
 </technology>
 </technologies>
 </device>
