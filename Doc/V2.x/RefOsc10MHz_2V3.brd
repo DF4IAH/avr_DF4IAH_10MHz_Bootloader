@@ -152,7 +152,7 @@
 <wire x1="0" y1="70" x2="0" y2="0" width="0" layer="20"/>
 <text x="75.940734375" y="65.306415625" size="1.27" layer="26" font="vector" ratio="18" distance="61" rot="MR0" align="center-left">DF4IAH
 10 MHz Ref.-Osc.
-V 2.3d</text>
+V 2.3e</text>
 <text x="6.35" y="10.16" size="1.27" layer="16" font="vector" ratio="20" distance="40" rot="MR0">Bot</text>
 <text x="2.54" y="10.16" size="1.27" layer="1" font="vector" ratio="20" distance="40">Top</text>
 <text x="43.363509375" y="67.406209375" size="1.27" layer="21" font="vector" ratio="20" distance="40">GPS-TPs</text>
@@ -2758,7 +2758,7 @@ MT3333</text>
 <wire x1="53.375" y1="38.5" x2="53.218178125" y2="38.5418" width="0.508" layer="16"/>
 <via x="54" y="36.625" extent="1-16" drill="0.35"/>
 <via x="13.875" y="23.625" extent="1-16" drill="0.35"/>
-<via x="26.7599625" y="44.339309375" extent="1-16" drill="0.6"/>
+<via x="26.7599625" y="44.339309375" extent="1-16" drill="0.35"/>
 <wire x1="27.82" y1="42.54" x2="29.21" y2="42.54" width="0.508" layer="1"/>
 <wire x1="26.7599625" y1="44.339309375" x2="27.82" y2="42.54" width="0.508" layer="1"/>
 <via x="47.239075" y="43.87203125" extent="1-16" drill="0.35"/>
