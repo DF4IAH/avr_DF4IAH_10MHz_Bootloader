@@ -1,2 +1,4 @@
-Release
-Debug
+Doc
+*.d
+*.o
+

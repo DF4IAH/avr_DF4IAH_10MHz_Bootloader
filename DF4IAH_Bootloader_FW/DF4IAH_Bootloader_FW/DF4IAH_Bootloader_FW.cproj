@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATmega328P</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>DF4IAH_Bootloader_FW</AssemblyName>
+    <Name>DF4IAH_Bootloader_FW</Name>
+    <RootNamespace>DF4IAH_Bootloader_FW</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>false</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.32.0" />
+  </dependencies>
+</framework-data>
+    </AsfFrameworkConfig>
+    <avrtool>com.atmel.avrdbg.tool.avrdragon</avrtool>
+    <avrtoolserialnumber>00A200055788</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1E950F</avrdeviceexpectedsignature>
+    <com_atmel_avrdbg_tool_avrdragon>
+      <ToolOptions>
+        <InterfaceProperties>
+          <IspClock>125000</IspClock>
+        </InterfaceProperties>
+        <InterfaceName>HVPP</InterfaceName>
+      </ToolOptions>
+      <ToolType>com.atmel.avrdbg.tool.avrdragon</ToolType>
+      <ToolNumber>00A200055788</ToolNumber>
+      <ToolName>AVR Dragon</ToolName>
+    </com_atmel_avrdbg_tool_avrdragon>
+    <avrtoolinterface>HVPP</avrtoolinterface>
+    <avrtoolinterfaceclock>125000</avrtoolinterfaceclock>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+      <Value>RELEASE</Value>
+      <Value>F_CPU=20000</Value>
+      <Value>USB_CFG_CLOCK_KHZ=20000</Value>
+      <Value>BOOTSIZE=2048</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.memorysettings.Flash>
+    <ListValues>
+      <Value>.df4iah_bl_clkpullpwm=0x3bc0</Value>
+      <Value>.df4iah_bl_probe=0x3c60</Value>
+      <Value>.df4iah_bl_memory=0x3c80</Value>
+      <Value>.df4iah_bl_usb=0x3df0</Value>
+    </ListValues>
+  </avrgcc.linker.memorysettings.Flash>
+  <avrgcc.linker.miscellaneous.LinkerFlags>-Ttext=0x7000</avrgcc.linker.miscellaneous.LinkerFlags>
+  <avrgcc.assembler.general.AssemblerFlags>-DUSB_CFG_CLOCK_KHZ=20000</avrgcc.assembler.general.AssemblerFlags>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+</AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega328p -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=20000000</Value>
+      <Value>USB_CFG_CLOCK_KHZ=20000</Value>
+      <Value>BOOTSIZE=1024</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.assembler.general.AssemblerFlags>-DUSB_CFG_CLOCK_KHZ=20000</avrgcc.assembler.general.AssemblerFlags>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+</AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="chipdef.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_clkPullPwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_clkPullPwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_main.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_memory.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_memory.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_probe.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_probe.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_usb.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_usb.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="df4iah_bl_usbAsp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega128.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega128can.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega16.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega162.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega169.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega32.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega324p.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega64.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega644.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega644p.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mega8.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="megaxx4p.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\oddebug.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\oddebug.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\usbconfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\usbdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\usbdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\usbdrvasm.S">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="usbdrv_bl\usbportability.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="usbdrv_bl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="usbdrv_bl\usbdrvasm.asm">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm12.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm128.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm15.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm16.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm165.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm18-crc.inc">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="usbdrv_bl\usbdrvasm20.inc">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
