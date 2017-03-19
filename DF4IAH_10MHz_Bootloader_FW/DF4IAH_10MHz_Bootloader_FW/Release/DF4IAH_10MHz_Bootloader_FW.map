@@ -565,12 +565,12 @@ Address of section .text set to 0x7000
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x7e2
+.debug_info     0x00000000      0x7f4
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4       0x96 usbdrv_bl/usbdrvasm.o
- .debug_info    0x0000068a       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
- .debug_info    0x00000736       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eewr_byte.o)
+ .debug_info    0x000005f4       0xa8 usbdrv_bl/usbdrvasm.o
+ .debug_info    0x0000069c       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+ .debug_info    0x00000748       0xac C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eewr_byte.o)
 
 .debug_abbrev   0x00000000      0x5de
  *(.debug_abbrev)
@@ -619,7 +619,7 @@ Address of section .text set to 0x7000
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(DF4IAH_Bootloader_FW.elf elf32-avr)
+OUTPUT(DF4IAH_10MHz_Bootloader_FW.elf elf32-avr)
 LOAD linker stubs
 
 .df4iah_bl_clkpullpwm

@@ -94,9 +94,9 @@ usbdrv_bl/oddebug.d \
 usbdrv_bl/usbdrv.d \
 usbdrv_bl/usbdrvasm.d
 
-OUTPUT_FILE_PATH +=DF4IAH_Bootloader_FW.elf
+OUTPUT_FILE_PATH +=DF4IAH_10MHz_Bootloader_FW.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=DF4IAH_Bootloader_FW.elf
+OUTPUT_FILE_PATH_AS_ARGS +=DF4IAH_10MHz_Bootloader_FW.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -176,13 +176,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="DF4IAH_Bootloader_FW.map" -Wl,--start-group  -Wl,--end-group -Wl,--gc-sections -Wl,-section-start=.df4iah_bl_clkpullpwm=0x7780 -Wl,-section-start=.df4iah_bl_probe=0x78c0 -Wl,-section-start=.df4iah_bl_memory=0x7900 -Wl,-section-start=.df4iah_bl_usb=0x7be0  -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p" -Ttext=0x7000  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="DF4IAH_10MHz_Bootloader_FW.map" -Wl,--start-group  -Wl,--end-group -Wl,--gc-sections -Wl,-section-start=.df4iah_bl_clkpullpwm=0x7780 -Wl,-section-start=.df4iah_bl_probe=0x78c0 -Wl,-section-start=.df4iah_bl_memory=0x7900 -Wl,-section-start=.df4iah_bl_usb=0x7be0  -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega328p" -Ttext=0x7000  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "DF4IAH_Bootloader_FW.elf" "DF4IAH_Bootloader_FW.hex"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "DF4IAH_Bootloader_FW.elf" "DF4IAH_Bootloader_FW.eep" || exit 0
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "DF4IAH_Bootloader_FW.elf" > "DF4IAH_Bootloader_FW.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "DF4IAH_Bootloader_FW.elf" "DF4IAH_Bootloader_FW.srec"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "DF4IAH_Bootloader_FW.elf"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "DF4IAH_10MHz_Bootloader_FW.elf" "DF4IAH_10MHz_Bootloader_FW.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "DF4IAH_10MHz_Bootloader_FW.elf" "DF4IAH_10MHz_Bootloader_FW.eep" || exit 0
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "DF4IAH_10MHz_Bootloader_FW.elf" > "DF4IAH_10MHz_Bootloader_FW.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "DF4IAH_10MHz_Bootloader_FW.elf" "DF4IAH_10MHz_Bootloader_FW.srec"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "DF4IAH_10MHz_Bootloader_FW.elf"
 	
 	
 
@@ -194,5 +194,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "DF4IAH_Bootloader_FW.elf" "DF4IAH_Bootloader_FW.a" "DF4IAH_Bootloader_FW.hex" "DF4IAH_Bootloader_FW.lss" "DF4IAH_Bootloader_FW.eep" "DF4IAH_Bootloader_FW.map" "DF4IAH_Bootloader_FW.srec" "DF4IAH_Bootloader_FW.usersignatures"
+	rm -rf "DF4IAH_10MHz_Bootloader_FW.elf" "DF4IAH_10MHz_Bootloader_FW.a" "DF4IAH_10MHz_Bootloader_FW.hex" "DF4IAH_10MHz_Bootloader_FW.lss" "DF4IAH_10MHz_Bootloader_FW.eep" "DF4IAH_10MHz_Bootloader_FW.map" "DF4IAH_10MHz_Bootloader_FW.srec" "DF4IAH_10MHz_Bootloader_FW.usersignatures"
 	
