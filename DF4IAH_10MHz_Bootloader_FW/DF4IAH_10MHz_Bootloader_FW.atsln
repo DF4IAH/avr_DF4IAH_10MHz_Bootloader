@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "DF4IAH_10MHz_Bootloader_FW", "DF4IAH_10MHz_Bootloader_FW\DF4IAH_10MHz_Bootloader_FW.cproj", "{91E6128D-21B7-4213-A264-889F3D47E721}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91E6128D-21B7-4213-A264-889F3D47E721}.Debug|AVR.ActiveCfg = Debug|AVR
+		{91E6128D-21B7-4213-A264-889F3D47E721}.Debug|AVR.Build.0 = Debug|AVR
+		{91E6128D-21B7-4213-A264-889F3D47E721}.Release|AVR.ActiveCfg = Release|AVR
+		{91E6128D-21B7-4213-A264-889F3D47E721}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

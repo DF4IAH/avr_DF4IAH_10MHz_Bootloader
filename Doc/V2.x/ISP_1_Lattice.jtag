@@ -1,8 +1,0 @@
-# DF4IAH - CPLD configuration programmer
-
-cable flyswatter
-detect
-
-svf /home/espero/Documents/Eclipse_workspace/avr_DF4IAH_Bootloader/CPLD/df4iah_10mhz_ref_osc_v2.svf stop progress
-
-quit
