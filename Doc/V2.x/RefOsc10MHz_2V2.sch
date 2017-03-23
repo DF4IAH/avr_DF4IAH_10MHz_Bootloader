@@ -21620,6 +21620,7 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <attributes>
 </attributes>
 <variantdefs>
+<variantdef name="2015-05-23"/>
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0" drill="0">
@@ -21632,7 +21633,9 @@ data entry: 2015-03-17 by DF4IAH.</description>
 </class>
 </classes>
 <parts>
-<part name="IC1" library="atmel" deviceset="MEGA8-P" device="" value="ATmega328-P"/>
+<part name="IC1" library="atmel" deviceset="MEGA8-P" device="" value="ATmega328-P">
+<variant name="2015-05-23" value="MEGA8-P"/>
+</part>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
@@ -21654,10 +21657,18 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="P+12" library="supply1" deviceset="VCC" device=""/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
 <part name="C911" library="rcl" deviceset="C-EU" device="C0805" value="47uF"/>
-<part name="D911" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
-<part name="D912" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
-<part name="D151" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
-<part name="D152" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6"/>
+<part name="D911" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6">
+<variant name="2015-05-23" value="BZX84CSMD"/>
+</part>
+<part name="D912" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6">
+<variant name="2015-05-23" value="BZX84CSMD"/>
+</part>
+<part name="D151" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6">
+<variant name="2015-05-23" value="BZX84CSMD"/>
+</part>
+<part name="D152" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V6">
+<variant name="2015-05-23" value="BZX84CSMD"/>
+</part>
 <part name="RPOLY1" library="rcl" deviceset="R-EU_" device="M1206" value="1206L025YR_0.5A"/>
 <part name="RPOLY2" library="rcl" deviceset="R-EU_" device="M1206" value="1206L012WR_0.1A"/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
@@ -21702,7 +21713,9 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="C611" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C102" library="rcl" deviceset="C-EU" device="C0805" value="100p"/>
 <part name="C411" library="rcl" deviceset="C-EU" device="C0805" value="100p"/>
-<part name="C301" library="rcl" deviceset="C-EU" device="C0805" value="0p"/>
+<part name="C301" library="rcl" deviceset="C-EU" device="C0805" value="0p">
+<variant name="2015-05-23" populate="no"/>
+</part>
 <part name="C311" library="rcl" deviceset="C-EU" device="C0805" value="33p"/>
 <part name="C291" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="C292" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
@@ -21736,8 +21749,12 @@ data entry: 2015-03-17 by DF4IAH.</description>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
 <part name="C921" library="rcl" deviceset="CPOL-EU" device="140CLH-1010" value="0.22F"/>
 <part name="D611" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS08"/>
-<part name="D921" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS08"/>
-<part name="D701" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V0"/>
+<part name="D921" library="diode" deviceset="ZENER-DIODE" device="SOD80C" value="CRS08">
+<variant name="2015-05-23" populate="no"/>
+</part>
+<part name="D701" library="diode" deviceset="BZX84CSMD" device="" value="BZX84-C3V0">
+<variant name="2015-05-23" value="BZX84CSMD"/>
+</part>
 <part name="R701" library="rcl" deviceset="R-EU_" device="R0805" value="68"/>
 <part name="C491" library="rcl" deviceset="C-EU" device="C0805" value="100n"/>
 <part name="U5" library="df4iah_opamp" deviceset="OPA354" device=""/>

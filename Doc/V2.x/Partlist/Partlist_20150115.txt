@@ -1,0 +1,50 @@
+BILL OF MATERIAL FROM TEST_WIDERSTAENDE_AUS_RCL.SCH, 29 PARTS, GROUPED BY VALUES, AS OF 05.10.2010 16:00:00
+
+Part					Value			Device			Package			Description						Description2				Qty	Place_YES/NO	Povided_by_customer_YES/NO	Distributor	Ordernumber	Weblink														Remarks_customer	Unit_price	Total_price	REMARKS_BETA	OPTION1		OPTION2		OPTION3
+C1					47uF			CPOL-EUC		PANASONIC_C		POLARIZED CAPACITOR, European symbol			 					1
+C2, C21, C31, C203, C1101		100n			C-EUC0805		C0805			CAPACITOR, European symbol				Kondensator, 0805, Z5U, 50V, 0,1µF	5	 		 				Beta		2644422P	http://uk.rs-online.com/web/search/searchBrowseAction.html?method=searchProducts&searchTerm=2644422P&x=26&y=20
+C22					10uF			CPOL-EUB		PANASONIC_B		POLARIZED CAPACITOR, European symbol			 					1
+C32					100p			C-EUC0805		C0805			CAPACITOR, European symbol				Kondensator, COG, 0805, 100V, 100pF	1	 		 				Beta		2989258P	http://uk.rs-online.com/web/search/searchBrowseAction.html?method=searchProducts&searchTerm=2989258P&x=0&y=0
+C51, C911, C921, C922, C931, C951	10n			C-EUC0805		C0805			CAPACITOR, European symbol				 					6
+C71					10p			C-EUC0805		C0805			CAPACITOR, European symbol				 					1
+C72					33p			C-EUC0805		C0805			CAPACITOR, European symbol				 					1
+C81					0.22F			CPOL-EUC		PANASONIC_C		POLARIZED CAPACITOR, European symbol			 					1
+C211, C212, C213			22uF			CPOL-EUA/3216-18W	A/3216-18W		POLARIZED CAPACITOR, European symbol			 					3
+CON1					 			USB-B-S			USB-B-SMT		USB Connectors						 					1
+CON2					HEADER-2X5SMD		HEADER-2X5SMD		2X5SMD			Header 2X5 2.54mm ISP, JTAG, ...			 					1
+CON3					1-227161-0		1-227161-0		AMP_227161		JACK,  RIGHT ANGLE, 50 OHM, PCB, BNC			 					1
+CON4					AVR-ISP-10SMD		AVR-ISP-10SMD		2X5SMD			AVR ISP-10 Serial Programming Header			 					1
+CON5					AVR-JTAG-10SMD		AVR-JTAG-10SMD		2X5SMD			AVR JTAG Debug/Programming Header			 					1
+CON11					MCX-J-P-X-RA-SM1	MCX-J-P-X-RA-SM1	MCX-J-P-X-RA-SM1	FEMALE SMA CONNECTOR					 					1
+D1, D2, D81				BZX84-C3V6		BZX84CSMD		TO236			Z DIODE							 					3
+D4					BAS70-04		BAS70-04		SOT23			Silicon Schottky Diodes					 					1
+D201, D202				BZX84-C2V7		BZX84CSMD		TO236			Z DIODE							 					2
+D211					CRS08			ZENER-DIODESOT23	SOT23			Z-Diode							 					1
+IC1					ATmega328-P		MEGA8-P			DIL28-3			MICROCONTROLLER						 					1
+IC2					LC4032V_XXT44		LC4032V_XXT44		TQFP44			bsdliscispmach4032v44pintqfp				 					1
+IC3					74HCT221D		74HCT221D		SO16			Dual Monostable MULTIVIBRATOR, schmitt trigger inputs	 					1
+IC5					LMH6645MF		LMH6645MF		SOT95P280X145-5N	Wideband, Fixed Gain, JFET-Input AMPLIFIER		 					1
+IC6					LM2831YMF		LM2831YMF		SOT95P280X145-5N	HIGH-EFFICIENCY, SOT23 STEP-DOWN, DC-DC CONVERTER	 					1
+IC11					712-RXM-GNSS-TM-B	712-RXM-GNSS-TM-B	712-RXM-GNSS-TM-B	Linx TM-Series 712-RXM-GNSS-TM-B			 					1
+IC202					CFPT-126		CFPT-126		SM77H			 							 					1
+JP1, JP2, JP3				 			SJW			SJW			SMD solder JUMPER					 					3
+L31					10uH			L-EUL1812		L1812			INDUCTOR, European symbol				 					1
+L211					4.7uH			L-EUL5650M		L5650M			INDUCTOR, European symbol				 					1
+LFP1101					WE-CBF_300R		L-EUL3216C		L3216C			INDUCTOR, European symbol				 					1
+R1, R2					68			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			2	 		 				Beta		6979971		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6979971
+R3, R71					1.5k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			2	 		 				Beta		6980084		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980084
+R4					1M			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.25W, 1%			1	 		 				Beta		6183729		http://de.rs-online.com/web/search/searchBrowseAction.html?method=searchProducts&searchTerm=6183729&x=0&y=0
+R13					15k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			1	 		 				Beta		6980163		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980163
+R21, R22, R23, R24			2.7k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			4	 		 				Beta		6980107		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980107
+R31					50k			R-TRIMMTS63Y		RTRIMTS63Y		Trimm resistor						 					1
+R41					12k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			1	 		 				Beta		6980151		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980151
+R51, R52, R81				1k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			3	 		 				Beta		6980075		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980075
+R61					47			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			1	 		 				Beta		6979961		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6979961
+R72					10k			R-TRIMMTS63Y		RTRIMTS63Y		Trimm resistor						 					1
+R211, R212				10k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			2	 		 				Beta		6980154		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980154
+R213					100k			R-EU_R0805		R0805			RESISTOR, European symbol				RESISTOR, 0.125W, 1%			1	 		 				Beta		6980233		http://uk.rs-online.com/web/search/searchBrowseAction.html?method=getProduct&R=6980233
+RPOLY1					1206L025YR_0.5A		R-EU_M1206		M1206			RESISTOR, European symbol				 					1
+RPOLY2					1206L012WR_0.1A		R-EU_M1206		M1206			RESISTOR, European symbol				 					1
+SJ21, SJ22				 			SJ			SJ			SMD solder JUMPER					 					2
+
+
