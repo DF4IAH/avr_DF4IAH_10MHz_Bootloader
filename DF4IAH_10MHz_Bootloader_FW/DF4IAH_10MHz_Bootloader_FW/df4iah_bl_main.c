@@ -186,7 +186,7 @@ static inline void app_startup_check()
 		// check for jumper-setting and for a valid jump-table entry
 		uint16_t code =  0;
 		memory_bl_readFlashPage((uint8_t*) &code, sizeof(code), 0x0000);
-		if ((!mainIsJumperBlSet) && (code == 0x940c)) {		// JMP instruction
+		if ((!mainIsJumperBlSet) && (code != 0xffff)) {		// is programmed
 			probe_bl_close();
 			cli();
 			jump_to_app();									// jump to firmware section

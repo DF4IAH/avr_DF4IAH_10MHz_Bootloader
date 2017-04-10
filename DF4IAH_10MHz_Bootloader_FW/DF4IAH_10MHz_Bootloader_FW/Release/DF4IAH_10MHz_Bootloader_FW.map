@@ -261,7 +261,7 @@ Address of section .text set to 0x7000
 .rela.plt
  *(.rela.plt)
 
-.text           0x00007000      0x726
+.text           0x00007000      0x724
  *(.vectors)
  .vectors       0x00007000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00007000                __vector_default
@@ -373,24 +373,24 @@ Address of section .text set to 0x7000
                 0x000073a6        0x6 df4iah_bl_main.o
                 0x000073a6                give_away
  .text.startup.main
-                0x000073ac       0xcc df4iah_bl_main.o
+                0x000073ac       0xca df4iah_bl_main.o
                 0x000073ac                main
- .text.usbPoll  0x00007478      0x270 usbdrv_bl/usbdrv.o
-                0x00007478                usbPoll
- .text.usbInit  0x000076e8        0xe usbdrv_bl/usbdrv.o
-                0x000076e8                usbInit
+ .text.usbPoll  0x00007476      0x270 usbdrv_bl/usbdrv.o
+                0x00007476                usbPoll
+ .text.usbInit  0x000076e6        0xe usbdrv_bl/usbdrv.o
+                0x000076e6                usbInit
  .text.avr-libc
-                0x000076f6       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
-                0x000076f6                eeprom_read_byte
+                0x000076f4       0x10 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eerd_byte.o)
+                0x000076f4                eeprom_read_byte
  .text.avr-libc
-                0x00007706       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eewr_byte.o)
-                0x00007706                eeprom_write_byte
-                0x00007708                eeprom_write_r18
-                0x00007722                . = ALIGN (0x2)
+                0x00007704       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega328p/avr5\libatmega328p.a(eewr_byte.o)
+                0x00007704                eeprom_write_byte
+                0x00007706                eeprom_write_r18
+                0x00007720                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00007722        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00007722                _exit
-                0x00007722                exit
+ .fini9         0x00007720        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00007720                _exit
+                0x00007720                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -409,11 +409,11 @@ Address of section .text set to 0x7000
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00007722        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00007720        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00007726                _etext = .
+                0x00007724                _etext = .
 
-.data           0x00800100        0x2 load address 0x00007726
+.data           0x00800100        0x2 load address 0x00007724
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -482,8 +482,8 @@ Address of section .text set to 0x7000
                 0x00800149                usbConfiguration
                 0x0080014a                usbRxBuf
                 0x00800160                PROVIDE (__bss_end, .)
-                0x00007726                __data_load_start = LOADADDR (.data)
-                0x00007728                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00007724                __data_load_start = LOADADDR (.data)
+                0x00007726                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800160        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
