@@ -13,8 +13,8 @@ Default_Device_IO_Types = LVCMOS33, -;
 
 [Revision]
 Parent = lc4k32v.lci;
-DATE = 04/28/2015;
-TIME = 19:34:51;
+DATE = 04/11/2017;
+TIME = 21:58:47;
 Source_Format = Schematic_VHDL;
 Synthesis = Synplify;
 
@@ -35,7 +35,6 @@ User_max_glb_fanin = 28;
 [Location Assignments]
 layer = OFF;
 C_20MHZ = Pin, 39, -, -, -;
-C_2MHZ5 = Pin, 38, -, B, 15;
 C_PPS = Pin, 16, -, A, 15;
 GATE_TRIG = Pin, 31, -, B, 10;
 GPS_TXD = Pin, 7, -, A, 8;
@@ -55,7 +54,7 @@ PWM_PULL_IN = Pin, 42, -, A, 2;
 C_OUT1 = Pin, 40, -, A, 0;
 C_OUT2 = Pin, 41, -, A, 1;
 C_10KHZ = Pin, 17, -, -, -;
-C_5MHZ = Pin, 26, -, B, 7;
+C_250KHZ = Pin, 38, -, B, 15;
 
 [Group Assignments]
 layer = OFF;
@@ -70,7 +69,7 @@ layer = OFF;
 [Source Constraint Option]
 
 [Fast Bypass]
-NONE = MCU_RXD, PWM_PULL_OUT, C_2MHZ5;
+NONE = MCU_RXD, PWM_PULL_OUT;
 
 [OSM Bypass]
 
@@ -84,7 +83,6 @@ layer = OFF;
 ISP_RXD = LVCMOS33_OD, PIN, 1, -;
 MCU_RXD = -, PIN, 0, -;
 PWM_PULL_OUT = LVCMOS33, PIN, 0, -;
-C_2MHZ5 = LVCMOS33, PIN, 1, -;
 C_20MHZ = LVCMOS33_5V, PIN, 0, -;
 C_PPS = LVCMOS33_5V, PIN, 0, -;
 RESETn = LVCMOS33_5V, PIN, 0, -;
@@ -102,7 +100,7 @@ Default = UP;
 
 [Slewrate]
 SLOW = ISP_RXD, MCU_RXD;
-FAST = PWM_PULL_OUT, C_2MHZ5;
+FAST = PWM_PULL_OUT;
 
 [Region]
 
@@ -133,15 +131,14 @@ fMAX_0 = 15;
 [Timing Analyzer]
 
 [ORP Bypass]
-NONE = MCU_RXD, C_2MHZ5;
+NONE = MCU_RXD;
 
 [PLL Assignments]
 
 [Register Powerup]
-RESET = C_2MHZ5, C_PPS, GATE_TRIG, PHASE_RSFF, GPS_REG, RSFF_CLK, C_OUT1, C_OUT2, 
-	C_5MHZ;
+RESET = C_PPS, GATE_TRIG, PHASE_RSFF, GPS_REG, RSFF_CLK, C_OUT1, C_OUT2, C_250KHZ;
 NONE = PWM_PULL_OUT;
-SET = ISP_RXD, MCU_RXD, GPS_TXD;
+SET = ISP_RXD, MCU_RXD, GPS_RXD, GPS_TXD;
 
 [global constraints list]
 
