@@ -21503,25 +21503,25 @@ data entry: 2017-01-30 by DF4IAH.</description>
 <text x="10.414" y="115.062" size="1.778" layer="94">USB-B</text>
 <text x="243.84" y="203.2" size="1.27" layer="96" font="fixed">AVR - PINs:
 
-- PB0  20 MHz Clock Out             (ICP)
-- PB1  USB Disconnect               (DigOut)
-- PB2  ISP SS                       (SS)
-- PB3  ISP MOSI                     (MOSI)
-- PB4  ISP MISO                     (MISO)
-- PB5  ISP SCK                      (SCK)
-- PB6  Crystal 20 MHz In            (XTAL1)
-- PB7  Crystal 20 MHz Out           (XTAL2)
-- PC0  ADC0 Pull Voltage            (ADC0)
-- PC1  ADC1  Phase Error            (ADC1)
-- PC2  USB D+                       (DigIn/DigOut)
-- PC3  USB D-                       (DigIn/DigOut)
-- PC4  reserved                     (I2C SDA)
-- PC5  reserved                     (I2C SCL)
-- PD0  GPS Data In                  (RXD)
-- PD1  GPS Data Out                 (TXD)
-- PD2  USB D-                       (INT0)
-- PD3  Bootloader JP3               (DigIn)
-- PD4  GPS PPS                      (T0)
+- PB0  20 MHz Clock Out           (ICP)
+- PB1  USB Disconnect             (DigOut)
+- PB2  ISP SS                     (SS)
+- PB3  ISP MOSI                   (MOSI)
+- PB4  ISP MISO                   (MISO)
+- PB5  ISP SCK                    (SCK)
+- PB6  Crystal 20 MHz In           (XTAL1)
+- PB7  Crystal 20 MHz Out          (XTAL2)
+- PC0  ADC0 Pull Voltage           (ADC0)
+- PC1  ADC1  Phase Error          (ADC1)
+- PC2  USB D+                    (DigIn/DigOut)
+- PC3  USB D-                    (DigIn/DigOut)
+- PC4  reserved                   (I2C SDA)
+- PC5  reserved                   (I2C SCL)
+- PD0  GPS Data In                (RXD)
+- PD1  GPS Data Out               (TXD)
+- PD2  USB D-                    (INT0)
+- PD3  Bootloader JP3             (DigIn)
+- PD4  GPS PPS                   (T0)
 - PD5  PWM Pull for Ref.-Osc.       (OC0B)
 - PD6  +  Comparator for RefClk In  (AIN0)
 - PD7  -  Comparator for RefClk In  (AIN1)</text>
@@ -21535,12 +21535,12 @@ Out</text>
 
  1 GND
  2 V_BAT, Memory Supply, Goldcap
- 3 VCC 5V
- 4 V_ANT 5V, fused
+ 3 VCC 3V3
+ 4 V_ANT 3V3, fused
  5 GPS NMEA RX
  6 GPS NMEA TX
  7 PPS (1 Hz)
- 8 Ref. 10 kHz
+ 8 D.C. (was Ref. 10 kHz)
  9 GND
 10 GND</text>
 <text x="322.072" y="133.096" size="1.778" layer="97">S &amp; H</text>
